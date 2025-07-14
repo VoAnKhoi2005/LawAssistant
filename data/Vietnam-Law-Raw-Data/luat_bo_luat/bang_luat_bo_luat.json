@@ -1,0 +1,2591 @@
+[
+  {
+    "STT": "1",
+    "LUẬT CÒN HIỆU LỰC": "Luật Hôn nhân và Gia đình 2014",
+    "Số hiệu": [
+      "52/2014/QH13",
+      "https://luatvietnam.vn/hon-nhan-gia-dinh/luat-hon-nhan-va-gia-dinh-2014-87930-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-hon-nhan-va-gia-dinh-10-diem-noi-bat-nhat-2019-230-17384-article.html"
+    ]
+  },
+  {
+    "STT": "2",
+    "LUẬT CÒN HIỆU LỰC": "Bộ luật Lao động 2019",
+    "Số hiệu": [
+      "45/2019/QH14",
+      "https://luatvietnam.vn/lao-dong/bo-luat-lao-dong-2019-179015-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/lao-dong-tien-luong/diem-moi-cua-bo-luat-lao-dong-2019-562-22946-article.html"
+    ]
+  },
+  {
+    "STT": "3",
+    "LUẬT CÒN HIỆU LỰC": "Luật Cơ yếu năm 2011",
+    "Số hiệu": [
+      "05/2011/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-co-yeu-2011-66680-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "4",
+    "LUẬT CÒN HIỆU LỰC": "Bộ luật Dân sự 2015",
+    "Số hiệu": [
+      "91/2015/QH13",
+      "https://luatvietnam.vn/dan-su/bo-luat-dan-su-2015-moi-nhat-so-91-2015-qh13-101333-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/noi-dung-co-ban-cua-bo-luat-dan-su-2015-230-16934-article.html"
+    ]
+  },
+  {
+    "STT": "5",
+    "LUẬT CÒN HIỆU LỰC": "Luật Đấu thầu 2023",
+    "Số hiệu": [
+      "22/2023/QH15",
+      "https://luatvietnam.vn/dau-thau/luat-dau-thau-moi-nhat-2023-so-22-2023-qh15-259737-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-dang-chu-y-cua-luat-dau-thau-2023-883-94852-article.html"
+    ]
+  },
+  {
+    "STT": "6",
+    "LUẬT CÒN HIỆU LỰC": "Luật Khám bệnh, chữa bệnh 2023",
+    "Số hiệu": [
+      "15/2023/QH15",
+      "https://luatvietnam.vn/y-te/luat-15-2023-qh15-242305-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-luat-kham-chua-benh-2023-883-92943-article.html"
+    ]
+  },
+  {
+    "STT": "7",
+    "LUẬT CÒN HIỆU LỰC": "Luật Lưu trữ năm 2011",
+    "Số hiệu": [
+      "01/2011/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-luu-tru-2011-66488-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "8",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phòng, chống bạo lực gia đình 2022",
+    "Số hiệu": [
+      "13/2022/QH15",
+      "https://luatvietnam.vn/hon-nhan-gia-dinh/luat-phong-chong-bao-luc-gia-dinh-so-13-2022-qh15-238397-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dan-su/diem-moi-luat-bao-luc-gia-dinh-2022-568-92524-article.html"
+    ]
+  },
+  {
+    "STT": "9",
+    "LUẬT CÒN HIỆU LỰC": "Luật Dầu khí 2022",
+    "Số hiệu": [
+      "12/2022/QH15",
+      "https://luatvietnam.vn/cong-nghiep/luat-dau-khi-moi-nhat-so-12-2022-qh15-238396-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "10",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thực hiện dân chủ ở cơ sở 2022",
+    "Số hiệu": [
+      "10/2022/QH15",
+      "https://luatvietnam.vn/chinh-sach/luat-thuc-hien-dan-chu-o-co-so-10-2022-qh15-238305-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "11",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi, bổ sung một số điều của Luật Tần số vô tuyến điện",
+    "Số hiệu": [
+      "09/2022/QH15",
+      "https://luatvietnam.vn/thong-tin/luat-sua-doi-bo-sung-mot-so-dieu-cua-luat-tan-so-vo-tuyen-dien-so-09-2022-qh15-238304-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "12",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phòng, chống rửa tiền 2022",
+    "Số hiệu": [
+      "14/2022/QH15",
+      "https://luatvietnam.vn/tai-chinh/luat-14-2022-qh15-237800-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-luat-phong-chong-rua-tien-2022-883-92474-article.html"
+    ]
+  },
+  {
+    "STT": "13",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thanh tra 2022",
+    "Số hiệu": [
+      "11/2022/QH15",
+      "https://luatvietnam.vn/hanh-chinh/luat-11-2022-qh15-237611-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-van-ban-moi/quy-dinh-moi-ve-thanh-lap-thanh-tra-so-tai-luat-thanh-tra-2022-186-92451-article.html"
+    ]
+  },
+  {
+    "STT": "14",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thi đua, khen thưởng 2022",
+    "Số hiệu": [
+      "06/2022/QH15",
+      "https://luatvietnam.vn/thi-dua/luat-06-2022-qh15-224109-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "15",
+    "LUẬT CÒN HIỆU LỰC": "Luật Kinh doanh bảo hiểm 2022",
+    "Số hiệu": [
+      "08/2022/QH15",
+      "https://luatvietnam.vn/bao-hiem/luat-kinh-doanh-bao-hiem-2022-moi-nhat-dang-ap-dung-224108-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/bao-hiem/phan-tich-luat-kinh-doanh-bao-hiem-563-90591-article.html"
+    ]
+  },
+  {
+    "STT": "16",
+    "LUẬT CÒN HIỆU LỰC": "Luật Cảnh sát cơ động 2022",
+    "Số hiệu": [
+      "04/2022/QH15",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-canh-sat-co-dong-so-04-2022-qh15-224106-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "17",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi, bổ sung một số điều của Luật Sở hữu trí tuệ",
+    "Số hiệu": [
+      "07/2022/QH15",
+      "https://luatvietnam.vn/so-huu-tri-tue/luat-sua-doi-bo-sung-mot-so-dieu-cua-luat-so-huu-tri-tue-so-07-2022-qh15-224105-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/doanh-nghiep/diem-moi-cua-luat-so-huu-tri-tue-2022-ve-nhan-hieu-561-92153-article.html"
+    ]
+  },
+  {
+    "STT": "18",
+    "LUẬT CÒN HIỆU LỰC": "Luật Điện ảnh",
+    "Số hiệu": [
+      "05/2022/QH15",
+      "https://luatvietnam.vn/van-hoa/luat-05-2022-qh15-223927-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "19",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phòng, chống mua bán người năm 2011",
+    "Số hiệu": [
+      "66/2011/QH12",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-phong-chong-mua-ban-nguoi-2011-60917-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "20",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi, bổ sung Bộ luật Tố tụng hình sự 2021",
+    "Số hiệu": [
+      "02/2021/QH15",
+      "https://luatvietnam.vn/hinh-su/luat-02-2021-qh15-213366-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-cua-bo-luat-to-tung-hinh-su-sua-doi-2021-230-34256-article.html"
+    ]
+  },
+  {
+    "STT": "21",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phòng, chống ma túy 2021",
+    "Số hiệu": [
+      "73/2021/QH14",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-phong-chong-ma-tuy-2021-luat-so-73-2021-qh14-201171-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "22",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thỏa thuận quốc tế 2020",
+    "Số hiệu": [
+      "70/2020/QH14",
+      "https://luatvietnam.vn/ngoai-giao/luat-thoa-thuan-quoc-te-cua-quoc-hoi-70-2020-qh14-195561-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "23",
+    "LUẬT CÒN HIỆU LỰC": "Luật Cư trú 2020",
+    "Số hiệu": [
+      "68/2020/QH14",
+      "https://luatvietnam.vn/tu-phap/luat-cu-tru-nam-2020-195560-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/hanh-chinh/diem-moi-cua-luat-cu-tru-2020-570-27597-article.html"
+    ]
+  },
+  {
+    "STT": "24",
+    "LUẬT CÒN HIỆU LỰC": "Luật phòng chống HIV/AIDS sửa đổi 2020",
+    "Số hiệu": [
+      "71/2020/QH14",
+      "https://luatvietnam.vn/y-te/luat-phong-chong-nhiem-vi-rut-gay-ra-hoi-chung-suy-giam-mien-dich-mac-phai-o-nguoi-sua-doi-195562-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "25",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thuế bảo vệ môi trường",
+    "Số hiệu": [
+      "57/2010/QH12",
+      "https://luatvietnam.vn/thue/luat-thue-bao-ve-moi-truong-2010-57540-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "26",
+    "LUẬT CÒN HIỆU LỰC": "Luật Biên phòng Việt Nam 2020",
+    "Số hiệu": [
+      "66/2020/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-bien-phong-viet-nam-cua-quoc-hoi-so-66-2020-qh14-195558-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "27",
+    "LUẬT CÒN HIỆU LỰC": "Luật Người lao động Việt Nam đi làm việc ở nước ngoài theo hợp đồng 2020",
+    "Số hiệu": [
+      "69/2020/QH14",
+      "https://luatvietnam.vn/lao-dong/luat-nguoi-lao-dong-viet-nam-di-lam-viec-o-nuoc-ngoai-theo-hop-dong-2020-195185-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/lao-dong-tien-luong/diem-moi-cua-luat-nguoi-lao-dong-viet-nam-lam-viec-o-nuoc-ngoai-562-27609-article.html"
+    ]
+  },
+  {
+    "STT": "28",
+    "LUẬT CÒN HIỆU LỰC": "Luật Giám định tư pháp sửa đổi 2020",
+    "Số hiệu": [
+      "56/2020/QH14",
+      "https://luatvietnam.vn/tu-phap/luat-giam-dinh-tu-phap-sua-doi-2020-186275-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm nổi bật",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-luat-sua-doi-luat-giam-dinh-tu-phap-230-25540-article.html"
+    ]
+  },
+  {
+    "STT": "29",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thanh niên 2020",
+    "Số hiệu": [
+      "57/2020/QH14",
+      "https://luatvietnam.vn/chinh-sach/luat-thanh-nien-2020-186274-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "30",
+    "LUẬT CÒN HIỆU LỰC": "Luật Hòa giải, đối thoại tại tòa án 2020",
+    "Số hiệu": [
+      "58/2020/QH14",
+      "https://luatvietnam.vn/tu-phap/luat-hoa-giai-doi-thoai-tai-toa-an-2020-186273-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "31",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi Luật Phòng, chống thiên tai và Luật Đê điều 2020",
+    "Số hiệu": [
+      "60/2020/QH14",
+      "https://luatvietnam.vn/tai-nguyen/luat-sua-doi-luat-phong-chong-thien-tai-va-luat-de-dieu-2020-186271-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "32",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thuế sử dụng đất phi nông nghiệp năm 2010",
+    "Số hiệu": [
+      "48/2010/QH12",
+      "https://luatvietnam.vn/dat-dai/luat-thue-dat-phi-nong-nghiep-2010-53467-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "33",
+    "LUẬT CÒN HIỆU LỰC": "Luật Bưu chính 2010",
+    "Số hiệu": [
+      "49/2010/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-buu-chinh-2010-53466-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "34",
+    "LUẬT CÒN HIỆU LỰC": "Luật Nuôi con nuôi 2010",
+    "Số hiệu": [
+      "52/2010/QH12",
+      "https://luatvietnam.vn/linh-vuc-khac/luat-nuoi-con-nuoi-2010-53463-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "35",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi Luật Xuất nhập cảnh và Luật Xuất nhập cảnh, quá cảnh, cư trú của người nước ngoài 2023",
+    "Số hiệu": [
+      "23/2023/QH15",
+      "https://luatvietnam.vn/xuat-nhap-canh/luat-xuat-nhap-canh-sua-doi-2023-ap-dung-tu-15-8-2023-259731-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/hanh-chinh/diem-moi-cua-luat-sua-doi-luat-xuat-nhap-canh-2023-570-94839-article.html"
+    ]
+  },
+  {
+    "STT": "36",
+    "LUẬT CÒN HIỆU LỰC": "Luật Xây dựng sửa đổi 2020",
+    "Số hiệu": [
+      "62/2020/QH14",
+      "https://luatvietnam.vn/xay-dung/luat-xay-dung-sua-doi-nam-2020-186269-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dat-dai-nha-o/diem-moi-luat-xay-dung-567-25899-article.html"
+    ]
+  },
+  {
+    "STT": "37",
+    "LUẬT CÒN HIỆU LỰC": "Luật Ban hành văn bản quy phạm pháp luật sửa đổi 2020",
+    "Số hiệu": [
+      "63/2020/QH14",
+      "https://luatvietnam.vn/tu-phap/luat-ban-hanh-van-ban-quy-pham-phap-luat-sua-doi-2020-186268-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-luat-ban-hanh-van-ban-quy-pham-phap-luat-230-25628-article.html"
+    ]
+  },
+  {
+    "STT": "38",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tổ chức Quốc hội sửa đổi 2020",
+    "Số hiệu": [
+      "65/2020/QH14",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-to-chuc-quoc-hoi-sua-doi-2020-186266-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-luat-to-chuc-quoc-hoi-sua-doi-230-25560-article.html"
+    ]
+  },
+  {
+    "STT": "39",
+    "LUẬT CÒN HIỆU LỰC": "Luật Trọng tài thương mại 2010",
+    "Số hiệu": [
+      "54/2010/QH12",
+      "https://luatvietnam.vn/doanh-nghiep/luat-trong-tai-thuong-mai-2010-53461-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "40",
+    "LUẬT CÒN HIỆU LỰC": "Luật Người cao tuổi 2009",
+    "Số hiệu": [
+      "39/2009/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-nguoi-cao-tuoi-2009-48483-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "41",
+    "LUẬT CÒN HIỆU LỰC": "Luật Hoạt động chữ thập đỏ 2008",
+    "Số hiệu": [
+      "11/2008/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-hoat-dong-chu-thap-do-2008-36126-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "42",
+    "LUẬT CÒN HIỆU LỰC": "Luật tương trợ tư pháp năm 2007",
+    "Số hiệu": [
+      "08/2007/QH12",
+      "https://luatvietnam.vn/tu-phap/luat-tuong-tro-tu-phap-2007-33917-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "43",
+    "LUẬT CÒN HIỆU LỰC": "Luật Bình đẳng giới 2006",
+    "Số hiệu": [
+      "73/2006/QH11",
+      "https://luatvietnam.vn/chinh-sach/luat-binh-dang-gioi-2006-moi-nhat-dang-ap-dung-year-29203-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "44",
+    "LUẬT CÒN HIỆU LỰC": "Luật hiến, lấy, ghép mô, bộ phận cơ thể người và hiến, lấy xác năm 2006",
+    "Số hiệu": [
+      "75/2006/QH11",
+      "https://luatvietnam.vn/y-te/luat-hien-ghep-mo-2006-29197-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "45",
+    "LUẬT CÒN HIỆU LỰC": "Luật Các công cụ chuyển nhượng 2005",
+    "Số hiệu": [
+      "49/2005/QH11",
+      "https://luatvietnam.vn/tai-chinh/luat-49-2005-qh11-quoc-hoi-18069-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "46",
+    "LUẬT CÒN HIỆU LỰC": "Luật Giao dịch điện tử",
+    "Số hiệu": [
+      "51/2005/QH11",
+      "https://luatvietnam.vn/thuong-mai/luat-51-2005-qh11-quoc-hoi-18068-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-cua-luat-giao-dich-dien-tu-2023-883-94841-article.html"
+    ]
+  },
+  {
+    "STT": "47",
+    "LUẬT CÒN HIỆU LỰC": "Luật An ninh Quốc gia 2004",
+    "Số hiệu": [
+      "32/2004/QH11",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-32-2004-qh11-quoc-hoi-16765-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "48",
+    "LUẬT CÒN HIỆU LỰC": "Luật Giáo dục Đại học sửa đổi 2018",
+    "Số hiệu": [
+      "34/2018/QH14",
+      "https://luatvietnam.vn/giao-duc/luat-giao-duc-dai-hoc-sua-doi-nam-2018-169346-d1.html#noidung"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-giao-duc-dai-hoc-sua-doi-2018-co-gi-moi-230-18317-article.html"
+    ]
+  },
+  {
+    "STT": "49",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thuế Sử dụng Đất Nông nghiệp 1993",
+    "Số hiệu": [
+      "23-L/CTN",
+      "https://luatvietnam.vn/nong-nghiep/luat-thue-su-dung-dat-nong-nghiep-2591-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "50",
+    "LUẬT CÒN HIỆU LỰC": "Luật Bảo vệ sức khoẻ nhân dân",
+    "Số hiệu": [
+      "21-LCT/HĐNN8",
+      "https://luatvietnam.vn/y-te/luat-21-lct-hdnn8-quoc-hoi-1806-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "51",
+    "LUẬT CÒN HIỆU LỰC": "Luật Chế độ báo chí 1956",
+    "Số hiệu": [
+      "100 SL/L.002",
+      "https://luatvietnam.vn/linh-vuc-khac/luat-che-do-bao-chi-1956-930-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "52",
+    "LUẬT CÒN HIỆU LỰC": "Luật quyền lập hội năm 1957",
+    "Số hiệu": [
+      "102-SL/L-004",
+      "https://luatvietnam.vn/dan-su/luat-quyen-lap-hoi-1957-van-dang-ap-dung-year-928-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "53",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thư viện 2019",
+    "Số hiệu": [
+      "46/2019/QH14",
+      "https://luatvietnam.vn/giao-duc/luat-thu-vien-2019-luat-thu-vien-moi-nhat-so-46-2019-qh14-179058-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-cua-luat-thu-vien-230-22948-article.html"
+    ]
+  },
+  {
+    "STT": "54",
+    "LUẬT CÒN HIỆU LỰC": "Luật Dân quân tự vệ 2019",
+    "Số hiệu": [
+      "48/2019/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-dan-quan-tu-ve-2019-179057-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-cua-luat-dan-quan-tu-ve-sua-doi-230-22981-article.html"
+    ]
+  },
+  {
+    "STT": "55",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quản lý, sử dụng vũ khí, vật liệu nổ và công cụ hỗ trợ sửa đổi",
+    "Số hiệu": [
+      "50/2019/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-quan-ly-su-dung-vu-khi-vat-lieu-no-va-cong-cu-ho-tro-sua-doi-2019-179055-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "56",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tổ chức Chính phủ và Luật Tổ chức chính quyền địa phương sửa đổi 2019",
+    "Số hiệu": [
+      "47/2019/QH14",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-to-chuc-chinh-phu-va-luat-to-chuc-chinh-quyen-dia-phuong-sua-doi-2019-179054-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-luat-sua-doi-luat-to-chuc-chinh-phu-luat-to-chuc-chinh-quyen-dia-phuong-230-22975-article.html"
+    ]
+  },
+  {
+    "STT": "57",
+    "LUẬT CÒN HIỆU LỰC": "Luật Lực lượng dự bị động viên 2019",
+    "Số hiệu": [
+      "53/2019/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-luc-luong-du-bi-dong-vien-2019-179052-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "58",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi Luật Cán bộ, công chức và Luật Viên chức 2019",
+    "Số hiệu": [
+      "52/2019/QH14",
+      "https://luatvietnam.vn/can-bo/luat-can-bo-cong-chuc-va-luat-vien-chuc-sua-doi-2019-179051-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/can-bo-cong-chuc/diem-moi-cua-luat-sua-doi-luat-can-bo-cong-chuc-va-luat-vien-chuc-566-23026-article.html"
+    ]
+  },
+  {
+    "STT": "59",
+    "LUẬT CÒN HIỆU LỰC": "Luật Chứng khoán 2019",
+    "Số hiệu": [
+      "54/2019/QH14",
+      "https://luatvietnam.vn/chung-khoan/luat-chung-khoan-2019-179050-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/nhung-diem-moi-cua-luat-chung-khoan-2019-230-23043-article.html"
+    ]
+  },
+  {
+    "STT": "60",
+    "LUẬT CÒN HIỆU LỰC": "Luật Kiểm toán Nhà nước sửa đổi 2019",
+    "Số hiệu": [
+      "55/2019/QH14",
+      "https://luatvietnam.vn/ke-toan/luat-kiem-toan-nha-nuoc-sua-doi-2019-179049-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "61",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thi hành án hình sự 2019",
+    "Số hiệu": [
+      "41/2019/QH14",
+      "https://luatvietnam.vn/hinh-su/luat-thi-hanh-an-hinh-su-2019-175008-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/hinh-su/luat-thi-hanh-an-hinh-su-569-21591-article.html"
+    ]
+  },
+  {
+    "STT": "62",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phòng, chống tác hại của rượu, bia 2019",
+    "Số hiệu": [
+      "44/2019/QH14",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-phong-chong-tac-hai-ruou-bia-2019-175006-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/6-diem-moi-cua-luat-phong-chong-tac-hai-cua-ruou-bia-2019-230-21587-article.html"
+    ]
+  },
+  {
+    "STT": "63",
+    "LUẬT CÒN HIỆU LỰC": "Luật Giáo dục 2019",
+    "Số hiệu": [
+      "43/2019/QH14",
+      "https://luatvietnam.vn/giao-duc/luat-giao-duc-2019-so-43-2019-qh14-175003-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/7-diem-moi-cua-luat-giao-duc-dang-chu-y-nhat-230-21588-article.html"
+    ]
+  },
+  {
+    "STT": "64",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quản lý thuế 2019",
+    "Số hiệu": [
+      "38/2019/QH14",
+      "https://luatvietnam.vn/thue/luat-quan-ly-thue-2019-so-38-2019-qh14-moi-nhat-174969-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "65",
+    "LUẬT CÒN HIỆU LỰC": "Luật Giáo dục Đại học sửa đổi 2018",
+    "Số hiệu": [
+      "34/2018/QH14",
+      "https://luatvietnam.vn/giao-duc/luat-giao-duc-dai-hoc-sua-doi-nam-2018-169346-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-giao-duc-dai-hoc-sua-doi-2018-co-gi-moi-230-18317-article.html"
+    ]
+  },
+  {
+    "STT": "66",
+    "LUẬT CÒN HIỆU LỰC": "Luật Cảnh sát biển Việt Nam 2018",
+    "Số hiệu": [
+      "33/2018/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-canh-sat-bien-viet-nam-2018-169345-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-canh-sat-bien-viet-nam-2018-toan-bo-nhung-diem-moi-nhat-230-18402-article.html"
+    ]
+  },
+  {
+    "STT": "67",
+    "LUẬT CÒN HIỆU LỰC": "Luật Chăn nuôi 2018",
+    "Số hiệu": [
+      "32/2018/QH14",
+      "https://luatvietnam.vn/nong-nghiep/luat-chan-nuoi-2018-169344-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-chan-nuoi-2018-nhung-diem-moi-noi-bat-nhat-230-18406-article.html"
+    ]
+  },
+  {
+    "STT": "68",
+    "LUẬT CÒN HIỆU LỰC": "Luật Trồng trọt năm 2018",
+    "Số hiệu": [
+      "31/2018/QH14",
+      "https://luatvietnam.vn/nong-nghiep/luat-trong-trot-2018-169343-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "69",
+    "LUẬT CÒN HIỆU LỰC": "Luật Đặc xá năm 2018",
+    "Số hiệu": [
+      "30/2018/QH14",
+      "https://luatvietnam.vn/tu-phap/luat-dac-xa-2018-169342-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-dac-xa-2018-toan-bo-nhung-diem-moi-nhat-230-18321-article.html"
+    ]
+  },
+  {
+    "STT": "70",
+    "LUẬT CÒN HIỆU LỰC": "Luật Bảo vệ bí mật Nhà nước 2018",
+    "Số hiệu": [
+      "29/2018/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-bao-ve-bi-mat-nha-nuoc-2018-169341-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "71",
+    "LUẬT CÒN HIỆU LỰC": "Luật Đo đạc và bản đồ năm 2018",
+    "Số hiệu": [
+      "27/2018/QH14",
+      "https://luatvietnam.vn/tai-nguyen/luat-do-dac-va-ban-do-nam-2018-164914-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "72",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thể dục, thể thao sửa đổi năm 2018",
+    "Số hiệu": [
+      "26/2018/QH14",
+      "https://luatvietnam.vn/van-hoa/luat-the-duc-the-thao-sua-doi-nam-2018-164909-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "73",
+    "LUẬT CÒN HIỆU LỰC": "Luật An ninh mạng 2018",
+    "Số hiệu": [
+      "24/2018/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-an-ninh-mang-2018-164904-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/chi-tiet-8-noi-dung-dang-chu-y-nhat-cua-luat-an-ninh-mang-2018-230-17130-article.html"
+    ]
+  },
+  {
+    "STT": "74",
+    "LUẬT CÒN HIỆU LỰC": "Luật Cạnh tranh 2018",
+    "Số hiệu": [
+      "23/2018/QH14",
+      "https://luatvietnam.vn/dau-thau/luat-canh-tranh-nam-2018-164727-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/toan-bo-diem-moi-cua-luat-canh-tranh-2018-230-16919-article.html"
+    ]
+  },
+  {
+    "STT": "75",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quốc phòng 2018",
+    "Số hiệu": [
+      "22/2018/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-quoc-phong-nam-2018-164725-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "76",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quản lý nợ công 2017",
+    "Số hiệu": [
+      "20/2017/QH14",
+      "https://luatvietnam.vn/tai-chinh/luat-quan-ly-no-cong-2017-118857-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "77",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi Luật Cơ quan đại diện Việt Nam ở nước ngoài 2017",
+    "Số hiệu": [
+      "19/2017/QH14",
+      "https://luatvietnam.vn/ngoai-giao/luat-sua-doi-co-quan-dai-dien-nuoc-chxhcn-vn-118856-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "78",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi Luật Các tổ chức tín dụng 2017",
+    "Số hiệu": [
+      "17/2017/QH14",
+      "https://luatvietnam.vn/tai-chinh/luat-sua-doi-cac-to-chuc-tin-dung-118854-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-dang-chu-y-cua-luat-cac-to-chuc-tin-dung-2024-883-96694-article.html"
+    ]
+  },
+  {
+    "STT": "79",
+    "LUẬT CÒN HIỆU LỰC": "Luật Lâm nghiệp 2017",
+    "Số hiệu": [
+      "16/2017/QH14",
+      "https://luatvietnam.vn/nong-nghiep/luat-lam-nghiep-2017-118853-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "80",
+    "LUẬT CÒN HIỆU LỰC": "Luật Cảnh vệ 2017 của Quốc hội",
+    "Số hiệu": [
+      "13/2017/QH14",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-canh-ve-2017-115521-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "81",
+    "LUẬT CÒN HIỆU LỰC": "Luật Trợ giúp pháp lý 2017",
+    "Số hiệu": [
+      "11/2017/QH14",
+      "https://luatvietnam.vn/tu-phap/luat-tro-giup-phap-ly-2017-115520-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "82",
+    "LUẬT CÒN HIỆU LỰC": "Luật Trách nhiệm bồi thường của Nhà nước 2017",
+    "Số hiệu": [
+      "10/2017/QH14",
+      "https://luatvietnam.vn/hanh-chinh/luat-trach-nhiem-boi-thuong-2017-115519-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "83",
+    "LUẬT CÒN HIỆU LỰC": "Luật Du lịch 2017",
+    "Số hiệu": [
+      "09/2017/QH14",
+      "https://luatvietnam.vn/van-hoa/luat-du-lich-2017-115518-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "84",
+    "LUẬT CÒN HIỆU LỰC": "Luật Chuyển giao công nghệ 2017",
+    "Số hiệu": [
+      "07/2017/QH14",
+      "https://luatvietnam.vn/khoa-hoc/luat-07-2017-qh14-quoc-hoi-115516-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "85",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quản lý ngoại thương 2017",
+    "Số hiệu": [
+      "05/2017/QH14",
+      "https://luatvietnam.vn/ngoai-giao/luat-quan-ly-ngoai-thuong-115514-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "86",
+    "LUẬT CÒN HIỆU LỰC": "Bộ luật Hình sự sửa đổi 2017",
+    "Số hiệu": [
+      "12/2017/QH14",
+      "https://luatvietnam.vn/hinh-su/bo-luat-hinh-su-sua-doi-2017-115503-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "87",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tín ngưỡng, tôn giáo 2016",
+    "Số hiệu": [
+      "02/2016/QH14",
+      "https://luatvietnam.vn/chinh-sach/luat-tin-nguong-ton-giao-2016-111021-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "88",
+    "LUẬT CÒN HIỆU LỰC": "Luật Đấu giá tài sản 2016",
+    "Số hiệu": [
+      "01/2016/QH14",
+      "https://luatvietnam.vn/tai-chinh/luat-dau-gia-tai-san-2016-111020-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "89",
+    "LUẬT CÒN HIỆU LỰC": "Luật Điều ước quốc tế 2016",
+    "Số hiệu": [
+      "108/2016/QH13",
+      "https://luatvietnam.vn/ngoai-giao/luat-dieu-uoc-quoc-te-2016-104852-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "90",
+    "LUẬT CÒN HIỆU LỰC": "Luật Thuế xuất khẩu, thuế nhập khẩu 2016",
+    "Số hiệu": [
+      "107/2016/QH13",
+      "https://luatvietnam.vn/thue/luat-107-2016-qh13-quoc-hoi-104851-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "91",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tiếp cận thông tin 2016",
+    "Số hiệu": [
+      "104/2016/QH13",
+      "https://luatvietnam.vn/thong-tin/luat-tiep-can-thong-tin-104848-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "92",
+    "LUẬT CÒN HIỆU LỰC": "Luật Trưng cầu ý dân 2015",
+    "Số hiệu": [
+      "96/2015/QH13",
+      "https://luatvietnam.vn/chinh-sach/luat-trung-cau-y-dan-2015-101328-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "93",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quân nhân chuyên nghiệp, công nhân và viên chức Quốc phòng năm 2015",
+    "Số hiệu": [
+      "98/2015/QH13",
+      "https://luatvietnam.vn/quoc-phong/luat-98-2015-qh13-quoc-hoi-101326-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "94",
+    "LUẬT CÒN HIỆU LỰC": "Luật Bầu cử đại biểu Quốc hội và đại biểu Hội đồng nhân dân 2015",
+    "Số hiệu": [
+      "85/2015/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-bau-cu-96367-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "95",
+    "LUẬT CÒN HIỆU LỰC": "Luật Mặt trận Tổ quốc Việt Nam 2015",
+    "Số hiệu": [
+      "75/2015/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-mat-tran-to-quoc-viet-nam-2015-96360-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "96",
+    "LUẬT CÒN HIỆU LỰC": "Luật An toàn, vệ sinh lao động 2015",
+    "Số hiệu": [
+      "84/2015/QH13",
+      "https://luatvietnam.vn/lao-dong/luat-an-toan-ve-sinh-lao-dong-2015-96265-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "97",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi, bổ sung Luật Sĩ quan Quân đội 2014",
+    "Số hiệu": [
+      "72/2014/QH13",
+      "https://luatvietnam.vn/quoc-phong/luat-sua-doi-si-quan-91374-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "98",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi, bổ sung một số điều của Luật Hàng không dân dụng Việt Nam năm 2014",
+    "Số hiệu": [
+      "61/2014/QH13",
+      "https://luatvietnam.vn/giao-thong/luat-sua-dong-hang-khong-91373-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "99",
+    "LUẬT CÒN HIỆU LỰC": "Luật Hộ tịch 2014",
+    "Số hiệu": [
+      "60/2014/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-ho-tich-2014-91356-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-ho-tich-8-diem-noi-bat-nhat-230-17958-article.html"
+    ]
+  },
+  {
+    "STT": "100",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tổ chức Viện kiểm sát nhân dân 2014",
+    "Số hiệu": [
+      "63/2014/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-to-chuc-vien-kiem-sat-91351-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "101",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tổ chức Tòa án nhân dân 2014",
+    "Số hiệu": [
+      "62/2014/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-62-2014-qh13-quoc-hoi-91350-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "102",
+    "LUẬT CÒN HIỆU LỰC": "Luật Quốc tịch Việt Nam sửa đổi 2014",
+    "Số hiệu": [
+      "56/2014/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-sua-doi-quoc-tich-87934-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "103",
+    "LUẬT CÒN HIỆU LỰC": "Luật Tiếp công dân năm 2013",
+    "Số hiệu": [
+      "42/2013/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-tiep-cong-dan-2013-83383-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "104",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phòng cháy và chữa cháy sửa đổi",
+    "Số hiệu": [
+      "40/2013/QH13",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-sua-doi-phong-chay-2013-83381-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dat-dai-nha-o/quy-dinh-moi-ve-phong-chay-chua-chay-cho-nha-va-cong-trinh-567-96091-article.html"
+    ]
+  },
+  {
+    "STT": "105",
+    "LUẬT CÒN HIỆU LỰC": "Luật Việc làm năm 2013",
+    "Số hiệu": [
+      "38/2013/QH13",
+      "https://luatvietnam.vn/lao-dong/luat-38-2013-qh13-quoc-hoi-83318-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "106",
+    "LUẬT CÒN HIỆU LỰC": "Luật Hòa giải ở cơ sở 2013",
+    "Số hiệu": [
+      "35/2013/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-hoa-giai-co-so-2013-79380-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "107",
+    "LUẬT CÒN HIỆU LỰC": "Luật Hợp tác xã năm 2012",
+    "Số hiệu": [
+      "23/2012/QH13",
+      "https://luatvietnam.vn/doanh-nghiep/luat-hop-tac-xa-2012-luat-so-23-2012-qh13-75400-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/doanh-nghiep/diem-moi-noi-bat-luat-hop-tac-xa-2023-561-94843-article.html"
+    ]
+  },
+  {
+    "STT": "108",
+    "LUẬT CÒN HIỆU LỰC": "Luật Biển Việt Nam năm 2012",
+    "Số hiệu": [
+      "18/2012/QH13",
+      "https://luatvietnam.vn/hang-hai/luat-bien-viet-nam-2012-71746-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "109",
+    "LUẬT CÒN HIỆU LỰC": "Luật Phổ biến, giáo dục pháp luật năm 2012",
+    "Số hiệu": [
+      "14/2012/QH13",
+      "https://luatvietnam.vn/giao-duc/luat-pho-bien-giao-duc-phap-luat-2012-71743-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "110",
+    "LUẬT CÒN HIỆU LỰC": "Luật Công đoàn 2012",
+    "Số hiệu": [
+      "12/2012/QH13",
+      "https://luatvietnam.vn/lao-dong/luat-cong-doan-2012-71694-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "STT": "111",
+    "LUẬT CÒN HIỆU LỰC": "Luật sửa đổi Phụ lục Danh mục chỉ tiêu thống kê quốc gia tại Luật Thống kê",
+    "Số hiệu": [
+      "01/2021/QH15",
+      "https://luatvietnam.vn/tai-chinh/luat-01-2021-qh15-213373-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "112",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Biên giới Quốc gia năm 2003",
+    "Số hiệu": [
+      "06/2003/QH11",
+      "https://luatvietnam.vn/linh-vuc-khac/luat-06-2003-qh11-quoc-hoi-15150-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "113",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật sửa đổi, bổ sung một số điều của Luật Công an nhân dân",
+    "Số hiệu": [
+      "21/2023/QH15",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-cong-an-nhan-dan-sua-doi-bo-sung-nam-2023-259739-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/can-bo-cong-chuc/diem-moi-luat-sua-doi-luat-cong-an-nhan-dan-2023-566-94838-article.html"
+    ]
+  },
+  {
+    "II": "114",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Đo lường 2011",
+    "Số hiệu": [
+      "04/2011/QH13",
+      "https://luatvietnam.vn/khoa-hoc/luat-do-luong-2011-66491-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "115",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Bảo vệ môi trường 2020",
+    "Số hiệu": [
+      "72/2020/QH14",
+      "https://luatvietnam.vn/tai-nguyen/luat-bao-ve-moi-truong-2020-195564-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "116",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Xử lý vi phạm hành chính sửa đổi 2020",
+    "Số hiệu": [
+      "67/2020/QH14",
+      "https://luatvietnam.vn/vi-pham-hanh-chinh/luat-sua-doi-bo-sung-luat-xu-ly-vi-pham-hanh-chinh-2020-195559-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/hanh-chinh/diem-moi-cua-luat-xu-ly-vi-pham-hanh-chinh-570-27571-article.html"
+    ]
+  },
+  {
+    "II": "117",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Ngân hàng Nhà nước Việt Nam 2010",
+    "Số hiệu": [
+      "46/2010/QH12",
+      "https://luatvietnam.vn/tai-chinh/luat-ngan-hang-nha-nuoc-2010-53469-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "118",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Doanh nghiệp 2020",
+    "Số hiệu": [
+      "59/2020/QH14",
+      "https://luatvietnam.vn/doanh-nghiep/luat-doanh-nghiep-2020-186272-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/doanh-nghiep/26-diem-moi-cua-luat-doanh-nghiep-2020-so-voi-luat-doanh-nghiep-2014-561-29622-article.html"
+    ]
+  },
+  {
+    "II": "119",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Các tổ chức tín dụng 2010",
+    "Số hiệu": [
+      "47/2010/QH12",
+      "https://luatvietnam.vn/tai-chinh/luat-to-chuc-tin-dung-2010-53468-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "120",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật An toàn thực phẩm 2010",
+    "Số hiệu": [
+      "55/2010/QH12",
+      "https://luatvietnam.vn/y-te/luat-an-toan-thuc-pham-2010-53460-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "121",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thuế tài nguyên 2009",
+    "Số hiệu": [
+      "45/2009/QH12",
+      "https://luatvietnam.vn/thue/luat-thue-tai-nguyen-nam-2009-48489-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "122",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Sở hữu trí tuệ sửa đổi 2009",
+    "Số hiệu": [
+      "36/2009/QH12",
+      "https://luatvietnam.vn/so-huu-tri-tue/luat-sua-doi-luat-so-huu-tri-tue-2009-43414-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "123",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Sĩ quan Quân đội nhân dân Việt Nam sửa đổi 2008",
+    "Số hiệu": [
+      "19/2008/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-sua-doi-si-quan-2008-36134-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "124",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật năng lượng nguyên tử năm 2008",
+    "Số hiệu": [
+      "18/2008/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-nang-luong-nguyen-tu-2008-36133-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "125",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Sĩ quan Quân đội nhân dân Việt Nam năm 1999",
+    "Số hiệu": [
+      "16/1999/QH10",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-16-1999-qh10-quoc-hoi-10173-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "126",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Xuất cảnh, nhập cảnh của công dân Việt Nam 2019",
+    "Số hiệu": [
+      "49/2019/QH14",
+      "https://luatvietnam.vn/xuat-nhap-canh/luat-xuat-canh-nhap-canh-cua-cong-dan-viet-nam-2019-179056-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "127",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Nhập cảnh, xuất cảnh, quá cảnh, cư trú của người nước ngoài tại Việt Nam sửa đổi 2019",
+    "Số hiệu": [
+      "51/2019/QH14",
+      "https://luatvietnam.vn/xuat-nhap-canh/luat-nhap-canh-xuat-canh-qua-canh-cu-tru-cua-nguoi-nuoc-ngoai-tai-viet-nam-2019-179053-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "128",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Công an nhân dân 2018",
+    "Số hiệu": [
+      "37/2018/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-cong-an-nhan-dan-2018-169349-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "129",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Tố cáo năm 2018",
+    "Số hiệu": [
+      "25/2018/QH14",
+      "https://luatvietnam.vn/khieu-nai/luat-to-cao-nam-2018-164912-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/rat-nhieu-diem-moi-cua-luat-to-cao-2018-can-biet-230-16974-article.html"
+    ]
+  },
+  {
+    "II": "130",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thủy sản 2017",
+    "Số hiệu": [
+      "18/2017/QH14",
+      "https://luatvietnam.vn/nong-nghiep/luat-thuy-san-2017-118855-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "131",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Quản lý, sử dụng vũ khí, vật liệu nổ và công cụ hỗ trợ 2017",
+    "Số hiệu": [
+      "14/2017/QH14",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-quan-ly-su-dung-vu-khi-2017-115522-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "132",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Đường sắt 2017",
+    "Số hiệu": [
+      "06/2017/QH14",
+      "https://luatvietnam.vn/giao-thong/luat-duong-sat-2017-115515-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "133",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Báo chí 2016",
+    "Số hiệu": [
+      "103/2016/QH13",
+      "https://luatvietnam.vn/chinh-sach/luat-bao-chi-2016-104847-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "134",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Trẻ em 2016",
+    "Số hiệu": [
+      "102/2016/QH13",
+      "https://luatvietnam.vn/lao-dong/luat-tre-em-2016-104818-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-tre-em-9-diem-dang-chu-y-nhat-230-18194-article.html"
+    ]
+  },
+  {
+    "II": "135",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Kế toán năm 2015",
+    "Số hiệu": [
+      "88/2015/QH13",
+      "https://luatvietnam.vn/ke-toan/luat-ke-toan-2015-101336-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "136",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thống kê 2015",
+    "Số hiệu": [
+      "89/2015/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-thong-ke-2015-101335-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "137",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Tố tụng hành chính 2015",
+    "Số hiệu": [
+      "93/2015/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-to-tung-hanh-chinh-2015-101331-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "138",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thi hành tạm giữ, tạm giam 2015",
+    "Số hiệu": [
+      "94/2015/QH13",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-thi-hanh-tam-giu-tam-giam-2015-101330-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "140",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thú y 2015",
+    "Số hiệu": [
+      "79/2015/QH13",
+      "https://luatvietnam.vn/y-te/luat-thu-y-2015-96363-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "141",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Nghĩa vụ quân sự 2015",
+    "Số hiệu": [
+      "78/2015/QH13",
+      "https://luatvietnam.vn/quoc-phong/luat-nghia-vu-quan-su-2015-so-78-2015-qh13-moi-nhat-96362-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "142",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Tổ chức Chính phủ 2015",
+    "Số hiệu": [
+      "76/2015/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-to-chuc-chinh-phu-2015-96361-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "143",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Ngân sách Nhà nước 2015",
+    "Số hiệu": [
+      "83/2015/QH13",
+      "https://luatvietnam.vn/tai-chinh/luat-ngan-sach-nha-nuoc-2015-96260-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "144",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Căn cước công dân 2014",
+    "Số hiệu": [
+      "59/2014/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-can-cuoc-cong-dan-91372-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "145",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thuế tiêu thụ đặc biệt sửa đổi 2014",
+    "Số hiệu": [
+      "70/2014/QH13",
+      "https://luatvietnam.vn/thue/luat-sua-doi-thue-tieu-thu-dac-biet-91361-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "146",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Quản lý, sử dụng vốn Nhà nước đầu tư vào sản xuất, kinh doanh tại doanh nghiệp 2014",
+    "Số hiệu": [
+      "69/2014/QH13",
+      "https://luatvietnam.vn/tai-chinh/luat-quan-ly-su-dung-von-91360-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "147",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Thi hành án dân sự sửa đổi 2014",
+    "Số hiệu": [
+      "64/2014/QH13",
+      "https://luatvietnam.vn/dan-su/luat-sua-doi-thi-hanh-an-dan-su-91357-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "148",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Phá sản 2014",
+    "Số hiệu": [
+      "51/2014/QH13",
+      "https://luatvietnam.vn/doanh-nghiep/luat-pha-san-2014-87929-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "149",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Bảo hiểm y tế sửa đổi 2014",
+    "Số hiệu": [
+      "46/2014/QH13",
+      "https://luatvietnam.vn/y-te/luat-sua-doi-bo-sung-luat-bao-hiem-y-te-2014-87909-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "150",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Đất đai 2013",
+    "Số hiệu": [
+      "45/2013/QH13",
+      "https://luatvietnam.vn/dat-dai/luat-dat-dai-2013-83386-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/nhung-diem-moi-co-loi-cho-dan-nhat-trong-luat-dat-dai-2013-230-16946-article.html"
+    ]
+  },
+  {
+    "II": "151",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Bảo vệ và kiểm dịch thực vật năm 2013",
+    "Số hiệu": [
+      "41/2013/QH13",
+      "https://luatvietnam.vn/y-te/luat-bao-ve-thuc-vat-2013-83382-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "152",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Giáo dục quốc phòng và an ninh 2013",
+    "Số hiệu": [
+      "30/2013/QH13",
+      "https://luatvietnam.vn/giao-duc/luat-giao-duc-quoc-phong-an-ninh-2013-79376-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "153",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Phòng, chống khủng bố 2013",
+    "Số hiệu": [
+      "28/2013/QH13",
+      "https://luatvietnam.vn/ngoai-giao/luat-phong-chong-khung-bo-2013-79375-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "154",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Dự trữ quốc gia 2012",
+    "Số hiệu": [
+      "22/2012/QH13",
+      "https://luatvietnam.vn/chinh-sach/luat-du-tru-quoc-gia-2012-75399-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "155",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Xuất bản 2012",
+    "Số hiệu": [
+      "19/2012/QH13",
+      "https://luatvietnam.vn/van-hoa/luat-xuat-ban-2012-75396-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "156",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Giá năm 2012",
+    "Số hiệu": [
+      "11/2012/QH13",
+      "https://luatvietnam.vn/thuong-mai/luat-gia-2012-71733-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "II": "157",
+    "LUẬT ĐÃ BỊ SỬA ĐỔI": "Luật Quảng cáo 2012",
+    "Số hiệu": [
+      "16/2012/QH13",
+      "https://luatvietnam.vn/thuong-mai/luat-quang-cao-2012-71732-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "158",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Khiếu nại 2011",
+    "Số hiệu": [
+      "02/2011/QH13",
+      "https://luatvietnam.vn/khieu-nai/luat-khieu-nai-2011-so-02-2011-qh13-moi-nhat-66489-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "159",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Bộ luật Tố tụng dân sự 2015",
+    "Số hiệu": [
+      "92/2015/QH13",
+      "https://luatvietnam.vn/hanh-chinh/bo-luat-to-tung-dan-su-nam-2015-luat-so-92-2015-qh13-101332-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dan-su/luu-y-khi-khoi-kien-theo-bo-luat-to-tung-dan-su-2015-568-20218-article.html"
+    ]
+  },
+  {
+    "III": "160",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Bộ luật Hàng hải 2015",
+    "Số hiệu": [
+      "95/2015/QH13",
+      "https://luatvietnam.vn/giao-thong/bo-luat-hang-hai-viet-nam-2015-101329-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "161",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Bộ luật Tố tụng hình sự 2015",
+    "Số hiệu": [
+      "101/2015/QH13",
+      "https://luatvietnam.vn/hanh-chinh/bo-luat-to-tung-hinh-su-nam-2015-101322-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "162",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Bộ luật Hình sự 2015",
+    "Số hiệu": [
+      "100/2015/QH13",
+      "https://luatvietnam.vn/hinh-su/bo-luat-hinh-su-2015-101324-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "163",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Kiểm toán độc lập 2011",
+    "Số hiệu": [
+      "67/2011/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-kiem-toan-doc-lap-2011-60918-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "164",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Khoáng sản 2010",
+    "Số hiệu": [
+      "60/2010/QH12",
+      "https://luatvietnam.vn/tai-nguyen/luat-khoang-san-moi-nhat-so-60-2010-qh12-57543-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "165",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi Luật Đầu tư công, Luật Đầu tư theo phương thức đối tác công tư, Luật Đầu tư, Luật Nhà ở, Luật Đấu thầu, Luật Điện lực, Luật Doanh nghiệp, Luật Thuế tiêu thụ đặc biệt, Luật Thi hành án dân sự",
+    "Số hiệu": [
+      "03/2022/QH15",
+      "https://luatvietnam.vn/dau-tu/luat-sua-doi-luat-dau-tu-cong-luat-dau-tu-theo-phuong-thuc-doi-tac-cong-tu-2022-216275-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "166",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Bảo vệ quyền lợi người tiêu dùng 2010",
+    "Số hiệu": [
+      "59/2010/QH12",
+      "https://luatvietnam.vn/y-te/luat-bao-ve-quyen-loi-2010-57542-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "167",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Viên chức 2010",
+    "Số hiệu": [
+      "58/2010/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-vien-chuc-2010-57541-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-vien-chuc-8-diem-dang-chu-y-vien-chuc-can-biet-trong-nam-2019-230-17450-article.html"
+    ]
+  },
+  {
+    "III": "168",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Đầu tư 2020",
+    "Số hiệu": [
+      "61/2020/QH14",
+      "https://luatvietnam.vn/dau-tu/luat-dau-tu-2020-186270-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-moi-cua-luat-dau-tu-sua-doi-230-25529-article.html"
+    ]
+  },
+  {
+    "III": "169",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Sử dụng năng lượng tiết kiệm và hiệu quả 2010",
+    "Số hiệu": [
+      "50/2010/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-su-dung-nang-luong-tiet-kiem-2010-53465-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "170",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Đầu tư theo phương thức đối tác công tư 2020",
+    "Số hiệu": [
+      "64/2020/QH14",
+      "https://luatvietnam.vn/dau-tu/luat-dau-tu-theo-phuong-thuc-doi-tac-cong-tu-2020-186267-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/diem-noi-bat-luat-dau-tu-theo-phuong-thuc-doi-tac-cong-tu-230-25646-article.html"
+    ]
+  },
+  {
+    "III": "171",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Người khuyết tật 2010",
+    "Số hiệu": [
+      "51/2010/QH12",
+      "https://luatvietnam.vn/y-te/luat-nguoi-khuyet-tat-2010-53464-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "172",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tần số vô tuyến điện năm 2009",
+    "Số hiệu": [
+      "42/2009/QH12",
+      "https://luatvietnam.vn/thong-tin/luat-tan-so-vo-tuyen-dien-2009-48486-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "173",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Viễn thông 2009",
+    "Số hiệu": [
+      "41/2009/QH12",
+      "https://luatvietnam.vn/thong-tin/luat-vien-thong-2009-48485-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "174",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Di sản văn hóa sửa đổi 2009",
+    "Số hiệu": [
+      "32/2009/QH12",
+      "https://luatvietnam.vn/van-hoa/luat-sua-doi-di-san-2009-43420-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "175",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Quy hoạch đô thị 2009",
+    "Số hiệu": [
+      "30/2009/QH12",
+      "https://luatvietnam.vn/dat-dai/luat-30-2009-qh12-quoc-hoi-43419-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "176",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Cơ quan đại diện nước Cộng hòa xã hội chủ nghĩa Việt Nam ở nước ngoài 2009",
+    "Số hiệu": [
+      "33/2009/QH12",
+      "https://luatvietnam.vn/ngoai-giao/luat-co-quan-dai-dien-2009-43418-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "177",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Lý lịch tư pháp 2009",
+    "Số hiệu": [
+      "28/2009/QH12",
+      "https://luatvietnam.vn/tu-phap/luat-ly-lich-tu-phap-2009-43412-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "178",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thuế tiêu thụ đặc biệt 2008",
+    "Số hiệu": [
+      "27/2008/QH12",
+      "https://luatvietnam.vn/thue/luat-thue-tieu-thu-dac-biet-2008-39055-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "179",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thi hành án dân sự",
+    "Số hiệu": [
+      "26/2008/QH12",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-thi-hanh-an-dan-su-2008-39054-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "180",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Bảo hiểm y tế 2008",
+    "Số hiệu": [
+      "25/2008/QH12",
+      "https://luatvietnam.vn/y-te/luat-bao-hiem-y-te-2008-39053-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "181",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Quốc tịch 2008",
+    "Số hiệu": [
+      "24/2008/QH12",
+      "https://luatvietnam.vn/cu-tru/luat-quoc-tich-2008-39052-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "182",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Giao thông đường bộ",
+    "Số hiệu": [
+      "23/2008/QH12",
+      "https://luatvietnam.vn/giao-thong/luat-giao-thong-duong-bo-2008-39051-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/giao-thong/thay-doi-quan-trong-tai-luat-giao-thong-sua-doi-863-94820-article.html"
+    ]
+  },
+  {
+    "III": "183",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Cán bộ, công chức 2008",
+    "Số hiệu": [
+      "22/2008/QH12",
+      "https://luatvietnam.vn/can-bo/luat-can-bo-cong-chuc-2008-39050-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "184",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Công nghệ cao 2008",
+    "Số hiệu": [
+      "21/2008/QH12",
+      "https://luatvietnam.vn/khoa-hoc/luat-cong-nghe-cao-2008-39049-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "185",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Đa dạng sinh học",
+    "Số hiệu": [
+      "20/2008/QH12",
+      "https://luatvietnam.vn/tai-nguyen/luat-20-2008-qh12-quoc-hoi-39048-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "186",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Trưng mua, trưng dụng tài sản năm 2008",
+    "Số hiệu": [
+      "15/2008/QH12",
+      "https://luatvietnam.vn/chinh-sach/luat-trung-mua-tai-san-2008-36130-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "187",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thuế thu nhập doanh nghiệp 2008",
+    "Số hiệu": [
+      "14/2008/QH12",
+      "https://luatvietnam.vn/thue/luat-thue-thu-nhap-doanh-nghiep-2008-36129-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "188",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thuế giá trị gia tăng 2008",
+    "Số hiệu": [
+      "13/2008/QH12",
+      "https://luatvietnam.vn/thue/luat-thue-gia-tri-gia-tang-2008-36128-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "189",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật chất lượng, sản phẩm hàng hóa năm 2007",
+    "Số hiệu": [
+      "05/2007/QH12",
+      "https://luatvietnam.vn/thuong-mai/luat-chat-luong-san-pham-2007-33966-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "190",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật hóa chất 2007",
+    "Số hiệu": [
+      "06/2007/QH12",
+      "https://luatvietnam.vn/y-te/luat-hoa-chat-2007-33915-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "191",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thuế thu nhập cá nhân 2007",
+    "Số hiệu": [
+      "04/2007/QH12",
+      "https://luatvietnam.vn/thue/luat-thue-thu-nhap-ca-nhan-2007-33914-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "192",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phòng, chống bệnh truyền nhiễm 2007",
+    "Số hiệu": [
+      "03/2007/QH12",
+      "https://luatvietnam.vn/y-te/luat-phong-chong-benh-truyen-nhiem-2007-33913-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "193",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thể dục, Thể thao năm 2006",
+    "Số hiệu": [
+      "77/2006/QH11",
+      "https://luatvietnam.vn/van-hoa/luat-the-duc-the-thao-2006-29199-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "194",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Đê điều 2006",
+    "Số hiệu": [
+      "79/2006/QH11",
+      "https://luatvietnam.vn/linh-vuc-khac/luat-de-dieu-2006-29020-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "195",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tiêu chuẩn và Quy chuẩn kỹ thuật",
+    "Số hiệu": [
+      "68/2006/QH11",
+      "https://luatvietnam.vn/khoa-hoc/luat-tieu-chuan-ky-thuat-2006-18869-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "196",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Công nghệ thông tin 2006",
+    "Số hiệu": [
+      "67/2006/QH11",
+      "https://luatvietnam.vn/khoa-hoc/luat-cong-nghe-thong-tin-2006-18868-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "197",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Hàng không dân dụng Việt Nam năm 2006",
+    "Số hiệu": [
+      "66/2006/QH11",
+      "https://luatvietnam.vn/giao-thong/luat-hang-khong-2006-18867-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "198",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Luật sư 2006",
+    "Số hiệu": [
+      "65/2006/QH11",
+      "https://luatvietnam.vn/tu-phap/luat-luat-su-2006-18865-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "199",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phòng, chống nhiễm vi rút gây ra hội chứng suy giảm miễn dịch mắc phải ở người (HIV/AIDS) 2006",
+    "Số hiệu": [
+      "64/2006/QH11",
+      "https://luatvietnam.vn/y-te/luat-phong-chong-hiv-2006-18864-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "200",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Sở hữu trí tuệ năm 2005",
+    "Số hiệu": [
+      "50/2005/QH11",
+      "https://luatvietnam.vn/so-huu-tri-tue/luat-so-huu-tri-tue-2005-luat-so-50-2005-qh11-18077-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-so-huu-tri-tue-8-noi-dung-noi-bat-nam-2018-230-18098-article.html"
+    ]
+  },
+  {
+    "III": "201",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thương mại 2005",
+    "Số hiệu": [
+      "36/2005/QH11",
+      "https://luatvietnam.vn/chinh-sach/luat-thuong-mai-2005-17473-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "202",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Điện lực 2004",
+    "Số hiệu": [
+      "28/2004/QH11",
+      "https://luatvietnam.vn/cong-nghiep/luat-dien-luc-2004-16761-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "203",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Giao thông đường thủy nội địa 2004",
+    "Số hiệu": [
+      "23/2004/QH11",
+      "https://luatvietnam.vn/giao-thong/luat-23-2004-qh11-quoc-hoi-16292-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "204",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật di sản văn hoá 2001",
+    "Số hiệu": [
+      "28/2001/QH10",
+      "https://luatvietnam.vn/chinh-sach/luat-28-2001-qh10-quoc-hoi-12034-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "205",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phòng cháy và chữa cháy",
+    "Số hiệu": [
+      "27/2001/QH10",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-phong-chay-va-chua-chay-nam-2001-12031-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dat-dai-nha-o/quy-dinh-moi-ve-phong-chay-chua-chay-cho-nha-va-cong-trinh-567-96091-article.html"
+    ]
+  },
+  {
+    "III": "206",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Kiến trúc 2019",
+    "Số hiệu": [
+      "40/2019/QH14",
+      "https://luatvietnam.vn/xay-dung/luat-kien-truc-2019-175009-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "207",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Đầu tư công 2019",
+    "Số hiệu": [
+      "39/2019/QH14",
+      "https://luatvietnam.vn/dau-tu/luat-dau-tu-cong-2019-175007-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-dau-tu-cong-2019-va-nhung-noi-dung-moi-noi-bat-nhat-230-21599-article.html"
+    ]
+  },
+  {
+    "III": "208",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi Luật Kinh doanh bảo hiểm, Luật Sở hữu trí tuệ 2019",
+    "Số hiệu": [
+      "42/2019/QH14",
+      "https://luatvietnam.vn/so-huu-tri-tue/luat-sua-doi-luat-kinh-doanh-bao-hiem-luat-so-huu-tri-tue-2019-175004-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "209",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi 37 Luật có liên quan đến quy hoạch 2018",
+    "Số hiệu": [
+      "35/2018/QH14",
+      "https://luatvietnam.vn/dat-dai/luat-sua-doi-37-luat-co-lien-quan-den-quy-hoach-nam-2018-169347-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/nhung-diem-moi-cua-luat-sua-doi-37-luat-lien-quan-den-quy-hoach-2018-230-18419-article.html"
+    ]
+  },
+  {
+    "III": "210",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi, bổ sung 11 Luật có liên quan đến quy hoạch 2018",
+    "Số hiệu": [
+      "28/2018/QH14",
+      "https://luatvietnam.vn/xay-dung/luat-sua-doi-bo-sung-11-luat-co-lien-quan-den-quy-hoach-2018-164913-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "211",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Quy hoạch 2017",
+    "Số hiệu": [
+      "21/2017/QH14",
+      "https://luatvietnam.vn/xay-dung/luat-quy-hoach-2017-118858-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/luat-quy-hoach-toan-bo-nhung-diem-moi-nhat-230-18489-article.html"
+    ]
+  },
+  {
+    "III": "212",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Quản lý, sử dụng tài sản công 2017",
+    "Số hiệu": [
+      "15/2017/QH14",
+      "https://luatvietnam.vn/tai-chinh/luat-quan-ly-su-dung-tai-san-cong-2017-115523-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "213",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thủy lợi 2017",
+    "Số hiệu": [
+      "08/2017/QH14",
+      "https://luatvietnam.vn/nong-nghiep/luat-thuy-loi-2017-115517-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "214",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Hỗ trợ doanh nghiệp nhỏ và vừa 2017",
+    "Số hiệu": [
+      "04/2017/QH14",
+      "https://luatvietnam.vn/doanh-nghiep/luat-ho-tro-doanh-nghiep-nho-va-vua-nam-2017-115513-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "215",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi Luật Thuế GTGT, Luật Thuế tiêu thụ đặc biệt, Luật Quản lý thuế 2016",
+    "Số hiệu": [
+      "106/2016/QH13",
+      "https://luatvietnam.vn/thue/luat-106-2016-qh13-quoc-hoi-104850-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "216",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Dược 2016",
+    "Số hiệu": [
+      "105/2016/QH13",
+      "https://luatvietnam.vn/y-te/luat-duoc-2016-so-105-2016-qh13-moi-nhat-104849-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "217",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật An toàn thông tin mạng 2015",
+    "Số hiệu": [
+      "86/2015/QH13",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-an-toan-thong-tin-mang-2015-101338-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "218",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Khí tượng thủy văn 2015",
+    "Số hiệu": [
+      "90/2015/QH13",
+      "https://luatvietnam.vn/tai-nguyen/luat-khi-tuong-thuy-van-2015-101334-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "219",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Hoạt động giám sát của Quốc hội và Hội đồng nhân dân 2015",
+    "Số hiệu": [
+      "87/2015/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-hoat-dong-giam-sat-101337-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "220",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phí và Lệ phí 2015",
+    "Số hiệu": [
+      "97/2015/QH13",
+      "https://luatvietnam.vn/thue/luat-phi-va-le-phi-2015-101327-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "221",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tổ chức cơ quan điều tra hình sự 2015",
+    "Số hiệu": [
+      "99/2015/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-to-chuc-co-quan-dieu-tra-hinh-su-2015-101325-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "222",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tổ chức chính quyền địa phương 2015",
+    "Số hiệu": [
+      "77/2015/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-to-chuc-chinh-quyen-dia-phuong-2015-96368-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "223",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tài nguyên, môi trường biển và hải đảo 2015",
+    "Số hiệu": [
+      "82/2015/QH13",
+      "https://luatvietnam.vn/hang-hai/luat-tai-nguyen-moi-truong-bien-hai-dao-2015-96366-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "224",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Kiểm toán Nhà nước 2015",
+    "Số hiệu": [
+      "81/2015/QH13",
+      "https://luatvietnam.vn/ke-toan/luat-kiem-toan-nha-nuoc-2015-96365-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "225",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Ban hành văn bản quy phạm pháp luật 2015",
+    "Số hiệu": [
+      "80/2015/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-ban-hanh-van-ban-quy-pham-phap-luat-2015-96364-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "226",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tổ chức Quốc hội 2014",
+    "Số hiệu": [
+      "57/2014/QH13",
+      "https://luatvietnam.vn/co-cau-to-chuc/luat-to-chuc-quoc-hoi-91371-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "227",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Giáo dục nghề nghiệp 2014",
+    "Số hiệu": [
+      "74/2014/QH13",
+      "https://luatvietnam.vn/giao-duc/luat-giao-duc-nghe-nghiep-2014-91362-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "228",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Kinh doanh bất động sản",
+    "Số hiệu": [
+      "66/2014/QH13",
+      "https://luatvietnam.vn/dat-dai/luat-kinh-doanh-bat-dong-san-2014-91353-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dat-dai-nha-o/diem-moi-cua-luat-kinh-doanh-bat-dong-san-567-96340-article.html"
+    ]
+  },
+  {
+    "III": "229",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Nhà ở 2014",
+    "Số hiệu": [
+      "65/2014/QH13",
+      "https://luatvietnam.vn/dat-dai/luat-nha-o-2014-91352-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "230",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Bảo hiểm xã hội 2014",
+    "Số hiệu": [
+      "58/2014/QH13",
+      "https://luatvietnam.vn/bao-hiem/luat-bao-hiem-xa-hoi-2014-91349-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/tong-hop-diem-noi-bat-cua-luat-bao-hiem-xa-hoi-moi-nhat-230-16880-article.html"
+    ]
+  },
+  {
+    "III": "231",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi, bổ sung một số điều của các Luật về thuế năm 2014",
+    "Số hiệu": [
+      "71/2014/QH13",
+      "https://luatvietnam.vn/thue/luat-sua-doi-ve-thue-2014-91242-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "232",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Hải quan 2014",
+    "Số hiệu": [
+      "54/2014/QH13",
+      "https://luatvietnam.vn/xuat-nhap-khau/luat-hai-quan-2014-87932-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "233",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Công chứng 2014",
+    "Số hiệu": [
+      "53/2014/QH13",
+      "https://luatvietnam.vn/hanh-chinh/luat-cong-chung-2014-87931-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "234",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Xây dựng 2014",
+    "Số hiệu": [
+      "50/2014/QH13",
+      "https://luatvietnam.vn/xay-dung/luat-xay-dung-2014-87928-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "235",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi, bổ sung Luật Giao thông đường thủy nội địa 2014",
+    "Số hiệu": [
+      "48/2014/QH13",
+      "https://luatvietnam.vn/giao-thong/luat-sua-doi-giao-thong-duong-thuy-87926-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "236",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Nhập cảnh, xuất cảnh, quá cảnh, cư trú của người nước ngoài",
+    "Số hiệu": [
+      "47/2014/QH13",
+      "https://luatvietnam.vn/xuat-nhap-canh/luat-xuat-nhap-canh-2014-87925-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "237",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thực hành tiết kiệm, chống lãng phí 2013",
+    "Số hiệu": [
+      "44/2013/QH13",
+      "https://luatvietnam.vn/tiet-kiem/luat-thuc-hanh-tiet-kiem-2013-83385-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "238",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Khoa học và công nghệ 2013",
+    "Số hiệu": [
+      "29/2013/QH13",
+      "https://luatvietnam.vn/khoa-hoc/luat-khoa-hoc-cong-nghe-2013-79401-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "239",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phòng chống thiên tai 2013",
+    "Số hiệu": [
+      "33/2013/QH13",
+      "https://luatvietnam.vn/tai-nguyen/luat-phong-chong-thien-tai-2013-79379-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "240",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi, bổ sung Luật Thuế thu nhập doanh nghiệp 2013",
+    "Số hiệu": [
+      "32/2013/QH13",
+      "https://luatvietnam.vn/thue/luat-sua-doi-thue-thu-nhap-doanh-nghiep-2013-79378-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "241",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi, bổ sung Luật Thuế giá trị gia tăng 2013",
+    "Số hiệu": [
+      "31/2013/QH13",
+      "https://luatvietnam.vn/thue/luat-31-2013-qh13-quoc-hoi-79377-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "242",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật sửa đổi, bổ sung Luật Thuế thu nhập cá nhân 2012",
+    "Số hiệu": [
+      "26/2012/QH13",
+      "https://luatvietnam.vn/thue/luat-sua-doi-bo-sung-luat-thue-thu-nhap-ca-nhan-2012-75403-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "243",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Thủ đô năm 2012",
+    "Số hiệu": [
+      "25/2012/QH13",
+      "https://luatvietnam.vn/chinh-sach/luat-thu-do-2012-75402-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "244",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Điện lực sửa đổi 2012",
+    "Số hiệu": [
+      "24/2012/QH13",
+      "https://luatvietnam.vn/cong-nghiep/luat-sua-doi-bo-sung-luat-dien-luc-2012-75401-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "245",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Luật sư sửa đổi 2012",
+    "Số hiệu": [
+      "20/2012/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-luat-su-sua-doi-2012-75397-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "246",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Tài nguyên nước 2012",
+    "Số hiệu": [
+      "17/2012/QH13",
+      "https://luatvietnam.vn/tai-nguyen/luat-tai-nguyen-nuoc-2012-71745-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "247",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Xử lý vi phạm hành chính 2012",
+    "Số hiệu": [
+      "15/2012/QH13",
+      "https://luatvietnam.vn/vi-pham-hanh-chinh/luat-xu-ly-vi-pham-hanh-chinh-2012-71744-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "248",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Giám định tư pháp 2012",
+    "Số hiệu": [
+      "13/2012/QH13",
+      "https://luatvietnam.vn/tu-phap/luat-giam-dinh-tu-phap-2012-71742-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "249",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phòng chống tác hại của thuốc lá 2012",
+    "Số hiệu": [
+      "09/2012/QH13",
+      "https://luatvietnam.vn/y-te/luat-09-2012-qh13-quoc-hoi-71741-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "250",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Giáo dục đại học 2012",
+    "Số hiệu": [
+      "08/2012/QH13",
+      "https://luatvietnam.vn/giao-duc/luat-giao-duc-dai-hoc-2012-71740-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "251",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Bảo hiểm tiền gửi 2012",
+    "Số hiệu": [
+      "06/2012/QH13",
+      "https://luatvietnam.vn/tai-chinh/luat-bao-hiem-tien-gui-moi-nhat-so-06-2012-qh13-71730-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "III": "252",
+    "LUẬT HẾT HIỆU LỰC MỘT PHẦN": "Luật Phòng, chống tham nhũng",
+    "Số hiệu": [
+      "36/2018/QH14",
+      "https://luatvietnam.vn/tiet-kiem/luat-phong-chong-tham-nhung-2018-so-36-2018-qh14-169348-d1.html#noidung"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/tin-phap-luat/toan-van-diem-moi-cua-luat-phong-chong-tham-nhung-2018-230-18297-article.html"
+    ]
+  },
+  {
+    "IV": "253",
+    "LUẬT SẮP ÁP DỤNG": "Luật Các tổ chức tín dụng 2024",
+    "Số hiệu": [
+      "32/2024/QH15",
+      "https://luatvietnam.vn/tai-chinh/luat-cac-to-chuc-tin-dung-2024-moi-nhat-so-32-2024-qh15-296639-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-dang-chu-y-cua-luat-cac-to-chuc-tin-dung-2024-883-96694-article.html"
+    ]
+  },
+  {
+    "IV": "254",
+    "LUẬT SẮP ÁP DỤNG": "Luật Đất đai 2024",
+    "Số hiệu": [
+      "31/2024/QH15",
+      "https://luatvietnam.vn/dat-dai/luat-dat-dai-2024-moi-nhat-so-31-2024-qh15-296638-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dat-dai-nha-o/diem-moi-cua-luat-dat-dai-2024-567-96662-article.html"
+    ]
+  },
+  {
+    "IV": "255",
+    "LUẬT SẮP ÁP DỤNG": "Luật Quản lý, bảo vệ công trình Quốc phòng và khu quân sự 2023",
+    "Số hiệu": [
+      "25/2023/QH15",
+      "https://luatvietnam.vn/xay-dung/luat-quan-ly-bao-ve-cong-trinh-quoc-phong-va-khu-quan-su-2023-285312-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "IV": "256",
+    "LUẬT SẮP ÁP DỤNG": "Luật Lực lượng tham gia bảo vệ an ninh, trật tự ở cơ sở",
+    "Số hiệu": [
+      "30/2023/QH15",
+      "https://luatvietnam.vn/an-ninh-trat-tu/luat-luc-luong-tham-gia-bao-ve-an-ninh-trat-tu-o-co-so-so-30-2023-qh15-284805-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/can-bo-cong-chuc/diem-dang-chu-y-ve-luc-luong-bao-ve-trat-tu-o-co-so-566-96469-article.html"
+    ]
+  },
+  {
+    "IV": "257",
+    "LUẬT SẮP ÁP DỤNG": "Luật Tài nguyên nước 2023",
+    "Số hiệu": [
+      "28/2023/QH15",
+      "https://luatvietnam.vn/tai-nguyen/luat-tai-nguyen-nuoc-moi-nhat-2023-so-28-2023-qh15-284804-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-cua-luat-tai-nguyen-nuoc-nam-2023-883-96321-article.html"
+    ]
+  },
+  {
+    "IV": "258",
+    "LUẬT SẮP ÁP DỤNG": "Luật Căn cước 2023",
+    "Số hiệu": [
+      "26/2023/QH15",
+      "https://luatvietnam.vn/tu-phap/luat-can-cuoc-moi-nhat-2023-so-26-2023-qh15-284802-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/hanh-chinh/diem-moi-luat-can-cuoc-570-96255-article.html"
+    ]
+  },
+  {
+    "IV": "259",
+    "LUẬT SẮP ÁP DỤNG": "Luật Nhà ở 2023",
+    "Số hiệu": [
+      "27/2023/QH15",
+      "https://luatvietnam.vn/dat-dai/luat-nha-o-moi-nhat-2023-so-27-2023-qh15-284800-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm nổi bật",
+      "https://luatvietnam.vn/dat-dai-nha-o/diem-moi-cua-luat-nha-o-2023-567-96362-article.html"
+    ]
+  },
+  {
+    "IV": "260",
+    "LUẬT SẮP ÁP DỤNG": "Luật Kinh doanh bất động sản 2023",
+    "Số hiệu": [
+      "29/2023/QH15",
+      "https://luatvietnam.vn/dat-dai/luat-kinh-doanh-bat-dong-san-moi-nhat-2023-so-29-2023-qh15-284798-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/dat-dai-nha-o/diem-moi-cua-luat-kinh-doanh-bat-dong-san-567-96340-article.html"
+    ]
+  },
+  {
+    "IV": "261",
+    "LUẬT SẮP ÁP DỤNG": "Luật Viễn thông 2023",
+    "Số hiệu": [
+      "24/2023/QH15",
+      "https://luatvietnam.vn/thong-tin/luat-vien-thong-moi-nhat-2023-ap-dung-tu-01-07-2024-284795-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "IV": "262",
+    "LUẬT SẮP ÁP DỤNG": "Luật Giao dịch điện tử 2023",
+    "Số hiệu": [
+      "20/2023/QH15",
+      "https://luatvietnam.vn/thuong-mai/luat-giao-dich-dien-tu-moi-nhat-2023-so-20-2023-qh15-259738-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-cua-luat-giao-dich-dien-tu-2023-883-94841-article.html"
+    ]
+  },
+  {
+    "IV": "263",
+    "LUẬT SẮP ÁP DỤNG": "Luật Bảo vệ quyền lợi người tiêu dùng",
+    "Số hiệu": [
+      "19/2023/QH15",
+      "https://luatvietnam.vn/thuong-mai/luat-bao-ve-quyen-loi-nguoi-tieu-dung-moi-nhat-2023-so-19-2023-qh15-259732-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/diem-moi-cua-luat-bao-ve-quyen-loi-nguoi-tieu-dung-883-94849-article.html"
+    ]
+  },
+  {
+    "IV": "264",
+    "LUẬT SẮP ÁP DỤNG": "Luật Phòng thủ dân sự 2023",
+    "Số hiệu": [
+      "18/2023/QH15",
+      "https://luatvietnam.vn/an-ninh-quoc-gia/luat-phong-thu-dan-su-moi-nhat-2023-so-18-2023-qh15-259730-d1.html"
+    ],
+    "Bài viết liên quan": ""
+  },
+  {
+    "IV": "265",
+    "LUẬT SẮP ÁP DỤNG": "Luật Hợp tác xã 2023",
+    "Số hiệu": [
+      "17/2023/QH15",
+      "https://luatvietnam.vn/doanh-nghiep/luat-hop-tac-xa-moi-nhat-2023-so-17-2023-qh15-259729-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/doanh-nghiep/diem-moi-noi-bat-luat-hop-tac-xa-2023-561-94843-article.html"
+    ]
+  },
+  {
+    "IV": "266",
+    "LUẬT SẮP ÁP DỤNG": "Luật Giá 2023",
+    "Số hiệu": [
+      "16/2023/QH15",
+      "https://luatvietnam.vn/tai-chinh/luat-gia-moi-nhat-so-16-2023-qh15-259728-d1.html"
+    ],
+    "Bài viết liên quan": [
+      "Tổng hợp điểm mới",
+      "https://luatvietnam.vn/linh-vuc-khac/tong-hop-diem-moi-dang-chu-y-cua-luat-gia-2023-883-94840-article.html"
+    ]
+  }
+]
