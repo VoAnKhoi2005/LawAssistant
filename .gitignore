@@ -86,7 +86,7 @@ env/
 ENV/
 .venv/
 .env/
-
+*.env
 # Logs
 *.log
 
