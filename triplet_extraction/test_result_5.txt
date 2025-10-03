@@ -1,0 +1,79 @@
+Bạn là một trợ lý AI chuyên về phân tích văn bản pháp luật Việt Nam.
+Nhiệm vụ: trích xuất các thực thể (entities) và quan hệ (relations) từ văn bản pháp luật.
+Bỏ đi các thành phần câu như trạng từ, giới từ, liên từ, thán từ, phó từ.
+
+Định nghĩa và quy tắc chung:
+1. Thực thể (Concept): danh từ hoặc cụm danh từ, hoặc tính từ kết hợp với danh từ — đại diện cho đối tượng, sự vật, khái niệm trong văn bản pháp luật.
+2. Quan hệ (Relation):
+   - Là động từ hoặc cụm động từ mô tả hành động, trạng thái hoặc mối liên hệ giữa hai thực thể.
+   - Giữ cả cụm nếu động từ kết hợp với giới từ hoặc bổ ngữ quan trọng cho nghĩa pháp luật.
+   - Luôn nằm giữa Concept1 và Concept2 trong triplet.
+3. Mỗi triplet có định dạng: ["Concept1", "Relation", "Concept2"].
+4. Mỗi thực thể và quan hệ phải là đơn vị nhỏ nhất có thể chia được nhưng vẫn bảo toàn ý nghĩa pháp lý.
+5. Không được thêm, sửa, hoặc thay thế bất kỳ từ/ký tự nào ngoài token đã cung cấp.
+6. Nếu văn bản không đủ thông tin để tạo triplet theo quy tắc, trả về ["Thiếu thông tin"].
+7. Tránh giải thích, bổ sung, hoặc suy đoán ngoài văn bản.
+8. Trả lời chỉ dưới dạng một danh sách JSON các triplet — không kèm chú thích, chữ ngoài JSON, hoặc dòng trạng thái.
+9. Được phép ghép các token gần nhau. Luôn giữ thứ tự xuất hiện ban đầu của các token khi ghép thành thực thể lớn hơn (chỉ được ghép các token kề nhau).
+
+
+Ngữ cảnh: Bộ luật số 36/2024/QH15 trong luật Việt Nam
+Câu gốc: "Giấy phép lái xe được chia thành nhiều hạng, trong đó có hạng CE được cấp cho người lái các loại xe ô tô quy định dành cho giấy phép lái xe hạng C. Đối tượng của hạng CE là những chiếc xe có khả năng kéo rơ moóc với khối lượng toàn bộ theo thiết kế trên 750kg, bao gồm xe ô tô đầu kéo và xe sơ mi rơ moóc."
+Từ đã được trích xuất (giữ nguyên, có dấu gạch dưới): ['giấy_phép', 'lái_xe', 'được', 'chia', 'thành', 'nhiều', 'hạng', 'có_hạng', 'ce', 'được', 'cấp', 'người', 'lái', 'loại', 'xe', 'ô_tô', 'quy_định', 'dành', 'giấy_phép', 'lái_xe', 'hạng', 'c', 'đối_tượng', 'hạng', 'ce', 'là', 'chiếc', 'xe', 'có', 'khả_năng', 'kéo', 'rơ', 'moóc', 'khối_lượng', 'theo', 'thiết_kế', '750kg', 'bao_gồm', 'xe', 'ô_tô', 'đầu', 'kéo', 'xe', 'sơ_mi', 'rơ', 'moóc']
+
+Nhiệm vụ: Tạo danh sách các triplet ở dạng ["Concept1", "Relation", "Concept2"] dựa trên câu gốc và danh sách token. Có thể sử dụng một concept nhiều lần nhưng không được thay đổi ý nghĩa của câu.
+
+- gpt-4o:
+```json
+[
+    ["giấy_phép", "được", "chia"],
+    ["nhiều_hạng", "có_hạng", "ce"],
+    ["hạng_ce", "được_cấp", "người_lái"],
+    ["người_lái", "lái", "loại_xe_ô_tô"],
+    ["loại_xe_ô_tô", "quy_định", "giấy_phép_lái_xe_hạng_c"],
+    ["đối_tượng", "là", "chiếc_xe"],
+    ["chiếc_xe", "có", "khả_năng_kéo"],
+    ["khả_năng_kéo", "kéo", "rơ_moóc"],
+    ["rơ_moóc", "khối_lượng", "750kg"],
+    ["khối_lượng", "theo", "thiết_kế"],
+    ["khối_lượng", "bao_gồm", "xe_ô_tô_đầu_kéo"],
+    ["khối_lượng", "bao_gồm", "xe_sơ_mi_rơ_moóc"]
+]
+```
+
+- gpt-4:
+[
+    ["giấy_phép lái_xe", "được chia thành", "nhiều hạng"],
+    ["có_hạng ce", "được cấp cho", "người lái loại xe ô_tô"],
+    ["có_hạng ce", "quy_định dành cho", "giấy_phép lái_xe hạng c"],
+    ["đối_tượng của hạng ce", "là", "chiếc xe có khả_năng kéo rơ moóc"],
+    ["rơ moóc", "có", "khối_lượng theo thiết_kế 750kg"],
+    ["chiếc xe", "bao_gồm", "xe ô_tô đầu kéo và xe sơ_mi rơ moóc"]
+]
+
+[
+    ["Giấy phép lái xe", "được chia thành", "nhiều hạng"],
+    ["hạng CE", "được cấp cho", "người lái loại xe ô tô"],
+    ["loại xe ô tô", "quy định dành cho", "giấy phép lái xe hạng C"],
+    ["đối tượng của hạng CE", "là", "chiếc xe có khả năng kéo rơ moóc"],
+    ["chiếc xe có khả năng kéo rơ moóc", "với", "khối lượng toàn bộ theo thiết kế trên 750kg"],
+    ["chiếc xe có khả năng kéo rơ moóc", "bao gồm", "xe ô tô đầu kéo và xe sơ mi rơ moóc"]
+]
+
+- gpt-5-mini:
+[
+    ["giấy_phép_lái_xe", "được_chia_thành", "nhiều_hạng"],
+    ["có_hạng_ce", "được_cấp", "người_lái_loại_xe_ô_tô_quy_định_dành_giấy_phép_lái_xe_hạng_c"],
+    ["đối_tượng_hạng_ce", "là", "chiếc_xe_có_khả_năng_kéo_rơ_moóc_khối_lượng_theo_thiết_kế_750kg"],
+    ["chiếc_xe_có_khả_năng_kéo_rơ_moóc_khối_lượng_theo_thiết_kế_750kg", "bao_gồm", "xe_ô_tô_đầu_kéo"],
+    ["chiếc_xe_có_khả_năng_kéo_rơ_moóc_khối_lượng_theo_thiết_kế_750kg", "bao_gồm", "xe_sơ_mi_rơ_moóc"]
+]
+
+- gpt-5-nano:
+[
+    ["giấy_phép_lái_xe","được_chia_thành","nhiều_hạng"],
+    ["hạng_ce","được_cấp_cho","người_lái"],
+    ["đối_tượng","là","chiếc_xe_có_khả_năng_kéo_rơ_moóc"],
+    ["chiếc_xe_có_khả_năng_kéo_rơ_moóc","bao_gồm","xe_ô_tô_đầu_kéo"],
+    ["chiếc_xe_có_khả_năng_kéo_rơ_moóc","bao_gồm","xe_sơ_mi_rơ_moóc"]
+]
