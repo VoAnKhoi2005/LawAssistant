@@ -14,7 +14,7 @@ def extract_pdf_text(pdf_path):
     return "\n\n".join(full_text) if full_text else ""
 
 
-def extract_pdf_images(api_key, pdf_path):
+def extract_pdf_images_llama(api_key, pdf_path):
     """Extract text from PDF using OCR via LlamaParse."""
     parser = LlamaParse(
         api_key=api_key,
@@ -29,11 +29,10 @@ def extract_pdf_images(api_key, pdf_path):
         output_text += doc.text + "\n"
     return output_text
 
-
-def extract_text_from_pdf(api_key, pdf_path, force_ocr=False):
+def extract_text_from_pdf_llama(api_key, pdf_path, force_ocr=False):
     if force_ocr:
         # Always use OCR when forced
-        return extract_pdf_images(api_key, pdf_path)
+        return extract_pdf_images_llama(api_key, pdf_path)
 
     # Try extracting text directly first
     text = extract_pdf_text(pdf_path)
@@ -42,4 +41,4 @@ def extract_text_from_pdf(api_key, pdf_path, force_ocr=False):
         return text
     else:
         # No text found, fall back to OCR
-        return extract_pdf_images(api_key, pdf_path)
+        return extract_pdf_images_llama(api_key, pdf_path)
