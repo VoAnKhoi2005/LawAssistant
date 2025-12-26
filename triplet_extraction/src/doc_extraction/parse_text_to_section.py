@@ -22,7 +22,7 @@ def collect_content(output_text, start_index):
         i += 1
     return "\n".join(content_lines).strip() or None, i
 
-def parse_document(output_text, so_hieu, cursor, conn):
+def parse_document(output_text, so_hieu):
     """
     Parse Vietnamese legal document structure and store in database.
     Handles hierarchy: Chương (Chapter) -> Mục (Section) -> Điều (Article)

@@ -1,19 +1,32 @@
 import hashlib
 import os
+from pathlib import Path
+
 import win32com.client as win32
 
 def convert_doc_to_docx(input_path, output_path=None):
-    word = win32.gencache.EnsureDispatch("Word.Application")
-    doc = word.Documents.Open((os.path.abspath(input_path)))
+    input_path = Path(input_path)
 
+    word = win32.Dispatch("Word.Application")
+    word.Visible = False
+
+    doc = word.Documents.Open(str(input_path.resolve()))
+
+    # Nếu output_path là THƯ MỤC → tạo filename
     if output_path is None:
-        output_path = os.path.splitext(input_path)[0] + ".docx"
+        output_file = input_path.with_suffix(".docx")
+    else:
+        output_path = Path(output_path)
+        if output_path.is_dir():
+            output_file = output_path / input_path.with_suffix(".docx").name
+        else:
+            output_file = output_path
 
-    doc.SaveAs(output_path, FileFormat=16)  # 16 = wdFormatXMLDocument (.docx)
-    doc.Close()
+    doc.SaveAs(str(output_file), FileFormat=16)  # wdFormatXMLDocument
+    doc.Close(False)
     word.Quit()
 
-    return output_path
+    return output_file
 
 def clean_content(text):
     """Remove extra whitespace from content."""

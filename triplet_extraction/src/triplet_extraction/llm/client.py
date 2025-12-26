@@ -7,7 +7,7 @@ def init_gpt() -> OpenAI:
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        raise EnvironmentError("OPENAI_API_KEY not found in environment or .env file.")
+        raise EnvironmentError("OPENAI_API_KEY not found in environment or .env files.")
     client = OpenAI(api_key=api_key)
     return client
 

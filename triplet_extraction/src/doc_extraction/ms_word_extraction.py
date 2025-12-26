@@ -5,7 +5,7 @@ from docx.oxml.text.paragraph import CT_P
 from docx.text.paragraph import Paragraph
 
 def extract_text_from_docx(docx_path):
-    """Extract text from DOCX file, preserving document structure."""
+    """Extract text from DOCX files, preserving document structure."""
     doc = Document(docx_path)
     output_text = []
     for child in doc.element.body.iterchildren():

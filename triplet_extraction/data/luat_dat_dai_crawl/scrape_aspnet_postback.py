@@ -258,7 +258,7 @@ class ASPNetChinhPhuScraper:
             attachments = []
             doc_files_div = abstract_col.find('div', {'class': 'bl-doc-files'})
             if doc_files_div:
-                file_divs = doc_files_div.find_all('div', {'class': 'bl-doc-file'})
+                file_divs = doc_files_div.find_all('div', {'class': 'bl-doc-files'})
                 for file_div in file_divs:
                     link = file_div.find('a')
                     if link:

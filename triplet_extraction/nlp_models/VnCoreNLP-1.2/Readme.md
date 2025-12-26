@@ -43,7 +43,7 @@ model = py_vncorenlp.VnCoreNLP(save_dir='/absolute/path/to/vncorenlp')
 # Equivalent to: model = py_vncorenlp.VnCoreNLP(annotators=["wseg", "pos", "ner", "parse"], save_dir='/absolute/path/to/vncorenlp')
 
 # Annotate a raw corpus
-model.annotate_file(input_file="/absolute/path/to/input/file", output_file="/absolute/path/to/output/file")
+model.annotate_file(input_file="/absolute/path/to/input/files", output_file="/absolute/path/to/output/files")
 
 # Annotate a raw text
 model.print_out(model.annotate_text("Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."))

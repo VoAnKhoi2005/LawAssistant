@@ -1,6 +1,6 @@
 """
 Example script to extract table data from search results with filters and pagination
-This demonstrates how to parse the saved HTML file and extract structured data from the table.
+This demonstrates how to parse the saved HTML files and extract structured data from the table.
 """
 
 from bs4 import BeautifulSoup
@@ -20,10 +20,10 @@ class TableSearchExtractor:
     
     def __init__(self, html_file_path: str):
         """
-        Initialize the extractor with HTML file path
+        Initialize the extractor with HTML files path
         
         Args:
-            html_file_path: Path to the HTML file containing search results
+            html_file_path: Path to the HTML files containing search results
         """
         self.html_file_path = html_file_path
         with open(html_file_path, 'r', encoding='utf-8') as f:
@@ -127,7 +127,7 @@ class TableSearchExtractor:
         
         doc_files_div = col.find('div', {'class': 'bl-doc-files'})
         if doc_files_div:
-            file_divs = doc_files_div.find_all('div', {'class': 'bl-doc-file'})
+            file_divs = doc_files_div.find_all('div', {'class': 'bl-doc-files'})
             for file_div in file_divs:
                 link = file_div.find('a')
                 if link:
@@ -267,11 +267,11 @@ class TableSearchExtractor:
     
     def export_to_csv(self, documents: List[Dict], output_file: str):
         """
-        Export documents to CSV file
+        Export documents to CSV files
         
         Args:
             documents: List of document dictionaries
-            output_file: Output CSV file path
+            output_file: Output CSV files path
         """
         df = self.to_dataframe(documents)
         df.to_csv(output_file, index=False, encoding='utf-8-sig')
@@ -284,7 +284,7 @@ def example_usage():
     """
     import os
     
-    # Path to the HTML file
+    # Path to the HTML files
     current_dir = os.path.dirname(os.path.abspath(__file__))
     html_file = os.path.join(current_dir, "Hệ thống văn bản.html")
     

@@ -12,7 +12,7 @@ def main():
     print(f"Working directory: {current_dir}")
     print(f"Base directory set to: {base_dir}\n")
 
-    # === Define file paths relative to base directory ===
+    # === Define files paths relative to base directory ===
     sqlite_path = os.path.join(base_dir, "graph", "jupyter", "GTVT_law.db")
     vncorenlp_dir = os.path.join(base_dir, "graph", "nlp_models", "VnCoreNLP-1.2")
     phonlp_dir = os.path.join(base_dir, "graph", "nlp_models", "phonlp")

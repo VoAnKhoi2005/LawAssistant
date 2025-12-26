@@ -1,7 +1,6 @@
 import pdfplumber
 from llama_cloud_services import LlamaParse
 
-
 def extract_pdf_text(pdf_path):
     """Extract text directly from PDF using pdfplumber."""
     full_text = []

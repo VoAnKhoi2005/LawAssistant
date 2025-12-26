@@ -60,7 +60,7 @@ def normalize_term(term, synonym_dict):
 
 
 def load_stopwords(stopword_file):
-    """Load stopwords from CSV file"""
+    """Load stopwords from CSV files"""
     stopwords = set()
     try:
         with open(stopword_file, 'r', encoding='utf-8') as f:
@@ -94,7 +94,7 @@ def setup_logger(
     file_path=None
 ):
     """
-    Sets up a logger for .py files or notebooks with optional file and console output.
+    Sets up a logger for .py files or notebooks with optional files and console output.
 
     Returns a tuple: (logger, console_handler, file_handler)
     """
@@ -123,7 +123,7 @@ def setup_logger(
         )
         logger.addHandler(file_handler)
 
-        logger.info(f"Logging to file: {file_path}")
+        logger.info(f"Logging to files: {file_path}")
 
     return logger, console_handler, file_handler
 
