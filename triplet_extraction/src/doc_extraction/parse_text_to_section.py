@@ -10,16 +10,26 @@ def collect_content(output_text, start_index):
     """
     content_lines = []
     i = start_index
+    in_quotes = False
+    
     while i < len(output_text):
         next_line = output_text[i].strip()
-        # Check for structural markers that indicate a new section
-        # Use stricter patterns to avoid matching references
-        if (re.match(r"^điều\s+[ivxlcdm\d]+[.:]", next_line.lower())  # Article header with dot or colon
-                or re.match(r"^chương\s+[ivxlcdm\d]+", next_line.lower())  # Chapter header
-                or re.match(r"^mục\s+[ivxlcdm\d]+", next_line.lower())  # Section header
-                or re.match(r"^\d+\.\s+", next_line)  # Clause (numbered item)
-                or re.match(r"^[a-zA-ZđĐ]\)\s+", next_line)):  # Point (lettered item)
-            break
+        
+        # Track if we're inside quotes
+        # Count quotes in current content to determine if we're in a quoted section
+        full_content = "\n".join(content_lines + [next_line])
+        quote_count = full_content.count('"') + full_content.count('"') + full_content.count('"')
+        in_quotes = (quote_count % 2) == 1
+        
+        # If not in quotes, check for structural markers that indicate a new section
+        if not in_quotes:
+            if (re.match(r"^điều\s+[ivxlcdm\d]+[.:]", next_line.lower())  # Article header with dot or colon
+                    or re.match(r"^chương\s+[ivxlcdm\d]+", next_line.lower())  # Chapter header
+                    or re.match(r"^mục\s+[ivxlcdm\d]+", next_line.lower())  # Section header
+                    or re.match(r"^\d+\.\s+", next_line)  # Clause (numbered item)
+                    or re.match(r"^[a-zA-ZđĐ]\)\s+", next_line)):  # Point (lettered item)
+                break
+        
         if next_line:
             content_lines.append(next_line)
         i += 1
@@ -41,6 +51,7 @@ def parse_document(input_text, so_hieu):
     # Track current parent IDs and titles for hierarchy
     chuong_id = muc_id = dieu_id = khoan_id = None
     chuong_title = muc_title = dieu_title = khoan_title = ""
+    is_in_amendment_context = False  # Track if we're in an amendment article
 
     while index < len(text):
         line = text[index].strip()
@@ -79,6 +90,7 @@ def parse_document(input_text, so_hieu):
             chuong_title = title
             muc_id = dieu_id = khoan_id = None
             muc_title = dieu_title = khoan_title = ""
+            is_in_amendment_context = False  # Reset amendment context
             continue
 
         # ---- Mục (Section) ----
@@ -114,6 +126,7 @@ def parse_document(input_text, so_hieu):
             muc_title = title
             dieu_id = khoan_id = None
             dieu_title = khoan_title = ""
+            is_in_amendment_context = False  # Reset amendment context
             continue
 
         # ---- Điều (Article) ----
@@ -132,6 +145,11 @@ def parse_document(input_text, so_hieu):
             # Split at first dot or colon after article number to get content
             parts = re.split(r"^điều\s+[ivxlcdm\d]+[.:]\s*", line.lower(), maxsplit=1)
             content = parts[1].strip() if len(parts) > 1 else ""
+            
+            # Check if this is an amendment article (e.g., "Sửa đổi, bổ sung")
+            # If so, we'll treat numbered items as sub-sections of the amendment, not clauses
+            is_amendment = bool(re.search(r"sửa đổi|bổ sung|bãi bỏ|thay thế", content.lower()))
+            
             extra_content, index = collect_content(text, index + 1)
             if extra_content:
                 content = f"{content}\n{extra_content}" if content else extra_content
@@ -156,11 +174,13 @@ def parse_document(input_text, so_hieu):
                 "content": content,
                 "parent_id": parent_id,
                 "so_hieu": so_hieu,
-                "full_path": full_path
+                "full_path": full_path,
+                "is_amendment": is_amendment  # Flag for amendment articles
             }
 
             # Update path and reset child levels
             dieu_title = title
+            is_in_amendment_context = is_amendment  # Set context flag
             khoan_id = None
             khoan_title = ""
             continue
@@ -169,8 +189,15 @@ def parse_document(input_text, so_hieu):
         if re.match(r"^\d+\.", line):
             parts = re.split(r"\.", line, maxsplit=1)
             title_num = parts[0].strip()
-            title = f"khoản {title_num}"
             content = parts[1].strip() if len(parts) > 1 else ""
+            
+            # In amendment context, these are amendment sub-sections, not regular clauses
+            # Check if the content describes an amendment to another article
+            if is_in_amendment_context and re.search(r"(sửa đổi|bổ sung|bãi bỏ|thay thế).*điều\s+\d+", content.lower()):
+                title = f"khoản {title_num} (sửa đổi)"
+            else:
+                title = f"khoản {title_num}"
+            
             extra_content, index = collect_content(text, index + 1)
             if extra_content:
                 content = f"{content}\n{extra_content}" if content else extra_content
@@ -204,9 +231,15 @@ def parse_document(input_text, so_hieu):
         match = re.match(r"^([^\W\d_])\)", line, re.UNICODE)
         if match:
             letter = match.group(1)
-            title = f"điểm {letter}"
             parts = re.split(r"\)", line, maxsplit=1)
             content = parts[1].strip() if len(parts) > 1 else ""
+            
+            # In amendment context, these describe specific amendments
+            if is_in_amendment_context and re.search(r"sửa đổi|bổ sung|bãi bỏ|thay thế", content.lower()):
+                title = f"điểm {letter} (sửa đổi)"
+            else:
+                title = f"điểm {letter}"
+            
             extra_content, index = collect_content(text, index + 1)
             if extra_content:
                 content = f"{content}\n{extra_content}" if content else extra_content

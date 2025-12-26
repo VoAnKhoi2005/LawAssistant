@@ -23,7 +23,7 @@ def extract_pdf_images(api_key, pdf_path):
         language="vi",
     )
     result = parser.parse(pdf_path)
-    text_documents = result.get_text_documents(split_by_page=True)
+    text_documents = result.get_markdown_documents(split_by_page=False)
     output_text = ""
     for doc in text_documents:
         output_text += doc.text + "\n"

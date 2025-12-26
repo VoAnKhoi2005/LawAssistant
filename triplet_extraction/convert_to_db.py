@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 from triplet_extraction.src.db import init_mongo
 from triplet_extraction.src.doc_extraction.parse_text_to_section import parse_document
-from triplet_extraction.src.doc_extraction.utils import clean_title
+from triplet_extraction.src.doc_extraction.utils import clean_title, strip_markdown_formatting
 import pandas as pd
 from pathlib import Path
 
@@ -48,6 +48,9 @@ def main():
         effective_date = row["effective_date"]
         source_files = row["source_files"]
         combined_text = row["combined_text"]
+        
+        # Strip markdown formatting if present
+        combined_text = strip_markdown_formatting(combined_text)
 
         # Check if document already exists in database
         existing_count = sections_collection.count_documents({"so_hieu": so_hieu})

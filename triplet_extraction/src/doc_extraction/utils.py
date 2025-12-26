@@ -50,3 +50,39 @@ def clean_content(text):
 def generate_id(full_path_title):
     """Generate unique ID from full path title using SHA256."""
     return hashlib.sha256(full_path_title.encode('utf-8')).hexdigest()
+
+
+def strip_markdown_formatting(text):
+    """
+    Strip markdown formatting from text without changing content.
+    Removes markdown syntax but preserves the actual text content.
+    """
+    if not text:
+        return text
+
+    # Remove bold/italic markers (**text**, *text*, __text__, _text_)
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # **bold**
+    text = re.sub(r'__([^_]+)__', r'\1', text)  # __bold__
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)  # *italic*
+    text = re.sub(r'_([^_]+)_', r'\1', text)  # _italic_
+
+    # Remove headers (# Header) but keep the text
+    text = re.sub(r'^#{1,6}\s+(.+)$', r'\1', text, flags=re.MULTILINE)
+
+    # Remove links [text](url) but keep the text
+    text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
+
+    # Remove inline code markers `code`
+    text = re.sub(r'`([^`]+)`', r'\1', text)
+
+    # Remove horizontal rules (---, ***, ___)
+    text = re.sub(r'^[\*\-_]{3,}$', '', text, flags=re.MULTILINE)
+
+    # Remove blockquote markers (> text)
+    text = re.sub(r'^>\s+', '', text, flags=re.MULTILINE)
+
+    # Remove list markers (-, *, +, 1.) but preserve indent structure
+    text = re.sub(r'^[\s]*[-\*\+]\s+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^[\s]*\d+\.\s+(?![^\s])', '', text, flags=re.MULTILINE)
+
+    return text
