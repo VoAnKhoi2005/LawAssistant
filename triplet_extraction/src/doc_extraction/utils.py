@@ -1,5 +1,6 @@
 import hashlib
 import os
+import re
 from pathlib import Path
 
 import win32com.client as win32
@@ -27,6 +28,18 @@ def convert_doc_to_docx(input_path, output_path=None):
     word.Quit()
 
     return output_file
+
+def clean_title(raw: str) -> str:
+    # Remove quotes
+    text = raw.replace('"', '')
+
+    # Replace newlines & multiple spaces
+    text = re.sub(r'\s+', ' ', text).strip()
+
+    # Normalize uppercase -> title case (Vietnamese friendly)
+    text = text.lower().capitalize()
+
+    return text
 
 def clean_content(text):
     """Remove extra whitespace from content."""
