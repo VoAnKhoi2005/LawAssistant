@@ -1,0 +1,45 @@
+.LinkSlide .block-row p {
+        margin: 0;
+        padding: 20px 15px !important;
+        height: 60px;
+        position: relative;
+}
+.LinkSlide .block-row p::before {
+        content: '\25A0';
+        color: #da251c;
+        margin-right: 7px;
+        font-size: 13px;
+        position: absolute;
+        left: 0;
+        top: 22px;
+}
+.LinkSlide .block-row p>a{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 19px;
+        color: #3B4E68;
+}
+.LinkSlide {
+        min-height: unset !important;
+        line-height: unset;
+        display: block;
+        height: 35px;
+		max-width:1170px;
+}
+.LinkSlide .Title:hover {
+        text-decoration: none;
+}
+.LinkSlide marquee .block-row{
+        align-items: center;
+        height: 35px;
+}
+.LinkSlide>marquee {
+        height: 100%;
+}
+@media only screen and (max-width: 768px){
+        .LinkSlide {
+                display: none;
+        }
+}

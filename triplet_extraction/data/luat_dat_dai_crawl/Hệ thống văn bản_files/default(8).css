@@ -1,0 +1,274 @@
+.UIFooterControl {
+        color: #fff;
+        margin: 0 auto;
+        width: 1170px;
+        padding: 0;
+}
+.UIFooterControl .CopyRight {
+        font: 12px arial;
+        margin: 0 auto;
+        padding: 10px;
+        width: 100%;
+        color: #fff;
+}
+.UIFooterControl a {
+        color: #fff;
+        font-size: 13px;
+        font-family: 'Merriweather', serif;
+}
+.UIFooterControl .Design {
+        margin-right: 30px;
+        text-align: right;
+}
+.UIFooterControl .footer-contain {
+        padding-top: 25px;
+}
+.UIFooterControl .footer-contain h2 {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #FFFFFF;
+        margin-bottom: 2px;
+}
+.UIFooterControl .footer-contain .left p {
+        margin: auto;
+        padding: 0;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 25px;
+        /* or 179% */
+        color: rgba(255, 255, 255, 0.8);
+}
+.UIFooterControl .footer-contain hr {
+        background-color: rgba(255, 255, 255, 0.4);
+        margin: 0;
+        margin-top: 30px;
+        margin-bottom: 10px;
+}
+.UIFooterControl .footer-contain h5 {
+        font-size: 13px;
+        font-weight: 500;
+        font-family: Roboto;
+        font-style: normal;
+        line-height: 19px;
+        /* or 146% */
+        text-transform: uppercase;
+        color: #FFFFFF;
+        margin: 0;
+}
+.UIFooterControl .footer-contain .link,
+.UIFooterControl .footer-contain .download {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        display: flex;
+}
+.UIFooterControl .footer-contain .row.link.right .col-3 {
+        padding: 0 10px;
+}
+.UIFooterControl .footer-contain .app {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+}
+.UIFooterControl .footer-contain .download .col-6 {
+        flex-grow: 1;
+        max-width: unset;
+}
+.UIFooterControl .footer-contain .link .col-3 img {
+        width: 20px !important;
+        margin-bottom: 10px;
+}
+.UIFooterControl .footer-contain .link div.col-3, .link div.col-3 a {
+        width: calc(50vw - 10px) !important;
+        /* flex-grow: 1 !important; */
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 16px;
+        color: #FFFFFF;
+        text-align: center;
+        text-decoration: none;
+        align-items: center;
+        justify-content: flex-start;
+}
+.UIFooterControl .footer-contain .download .col-3 img {
+        width: 120px !important;
+        margin-top: 5px;
+}
+.UIFooterControl .footer-contain .col-12 p {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 15px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 10px;
+        margin-bottom: 15px;
+}
+.UIFooterControl .footer-contain .head {
+        display: flex;
+        align-items: stretch;
+        gap: 18px;
+        margin-bottom: 29px;
+}
+.UIFooterControl .footer-contain .head > div > img {
+        width: 105px;
+}
+.UIFooterControl .footer-contain .head > div h2 {
+        margin: 0;
+}
+.UIFooterControl .footer-contain .head strong {
+        font-size: 15px;
+        font-weight: 500;
+        text-shadow: none;
+        font-family: Roboto;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 25px;
+        color: rgba(255, 255, 255, 0.8);
+}
+@media only screen and (max-width: 768px) {
+        div.UIFooterControl > div.footer-contain .link .col-3 > a > img {
+                max-width: 16px !important;
+                width: 16px !important;
+                min-width: unset !important;
+                height: auto !important;
+                min-height: unset;
+                margin-top: 8px !important;
+                margin-bottom: 10px !important;
+        }
+        div.UIFooterControl > div.footer-contain .link {
+                align-items: flex-start !important;
+                margin-top: 23px !important;
+                margin-bottom: 23px !important;
+        }
+        .UIFooterControl .footer-contain div.col-7 * {
+                text-align: left !important;
+                justify-content: flex-start !important;
+                align-items: flex-start !important;
+                width: auto !important;
+        }
+        .UIFooterControl .footer-contain div.col-7 {
+                padding: 15px !important;
+                align-items: flex-start;
+        }
+        .UIFooterControl .footer-contain div.col-7 > h2 {
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 22px;
+                /* or 122% */
+                color: #FFFFFF;
+                margin-bottom: 16px !important;
+        }
+        .row > div.col-5 > div.link {
+                margin: 0 !important;
+                padding: 15px !important;
+                border: none !important;
+                align-items: stretch !important;
+                background: transparent !important;
+                padding-top: 0 !important;
+        }
+        .UIFooterControl .footer-contain .link div.col-3 {
+                border: none !important;
+                width: calc(50vw - 28px) !important;
+                outline: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 10px !important;
+                align-items: flex-start !important;
+                margin: 0 !important;
+                background: rgba(255, 255, 255, 0.04);
+                min-height: 25vw;
+                justify-content: flex-start;
+                margin-right: 1px !important;
+                margin-bottom: 1px !important;
+        }
+        .UIFooterControl .footer-contain .link div.col-3 p > a {
+                width: 30vw !important;
+        }
+        .UIFooterControl .footer-contain .link div.col-3, .link div.col-3 a {
+                flex-grow: unset;
+        }
+        .row.download .col-6 * {
+                align-items: flex-start !important;
+                text-align: left !important;
+        }
+        .row.download .col-6 {
+                padding: 0 15px !important;
+        }
+        .row .col-12 * {
+                text-align: left !important;
+                align-items: flex-start !important;
+        }
+        .row .col-12 {
+                padding: 20px !important;
+                padding-bottom: 10px !important;
+        }
+        .UIFooterControl .footer-contain hr {
+                background-color: rgba(255, 255, 255, 0.15);
+        }
+        .UIFooterControl .footer-contain .download {
+                display: flex !important;
+                flex-direction: row !important;
+                padding: 0 20px !important;
+        }
+        .UIFooterControl .footer-contain .head > div > img {
+                width: 125px !important;
+                /* display: none !important; */
+                padding: 0 20px !important;
+        }
+        .UIFooterControl .footer-contain .app {
+                display: flex !important;
+                flex-grow: 1;
+                width: 30vw !important;
+                gap: 0;
+        }
+        .UIFooterControl .footer-contain .head {
+                /* padding: 0 20px !important; */
+        }
+        .UIFooterControl .footer-contain .head * {
+                text-align: left !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+        }
+        .UIFooterControl .footer-contain .left > .col-6:nth-child(1) p {
+                text-align: left !important;
+                align-items: center !important;
+                padding: 0 20px !important;
+                flex-direction: row !important;
+                justify-content: flex-start;
+        }
+        .UIFooterControl .footer-contain .head > div h2 {
+                padding: 0 20px !important;
+        }
+        .UIFooterControl .footer-contain .head strong {
+                width: unset !important;
+                max-width: unset !important;
+                margin-left: 10px !important;
+        }
+        .UIFooterControl .footer-contain .head, .UIFooterControl .footer-contain .head * {
+                margin: 0 !important;
+        }
+        .UIFooterControl .footer-contain .download .col-6 {
+                padding: 0 !important;
+        }
+        .row.link.right {
+                padding: 0 20px !important;
+                border: none !important;
+                background: transparent !important;
+        }
+        .UIFooterControl > .footer-contain > .row:last-child {
+                padding-bottom: 70px !important;
+        }
+        .yhy-append-wrap {
+                position: inherit;
+                background: #0066bc;
+                margin-top: -90px;
+        }
+}

@@ -1,0 +1,115 @@
+.SingleSearch {
+        height: 42px;
+        position: relative;
+        text-align: center;
+        flex: 1;
+}
+.SingleSearch .SearchBox {
+        width: 100%;
+        height: 100%;
+}
+.SingleSearch .SearchBox .Text {
+        background: #F6F6F6;
+        margin: 0;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 2px;
+        padding: 13px 16px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: unset;
+        color: #99A5B5;
+        height: 42px;
+}
+.SingleSearch .SearchBox .Button {
+        background: rgba(0, 0, 0, 0) url("images/timkiem.png") no-repeat scroll center center;
+        position: absolute;
+        right: 13px;
+        bottom: 50%;
+        width: 16px;
+        height: 16px;
+        transform: translateY(50%);
+}
+::-webkit-input-placeholder {
+        /* Edge */
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #99A5B5;
+}
+:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #99A5B5;
+}
+::placeholder {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #99A5B5;
+}
+@media only screen and (max-width: 768px){
+        div.SingleSearch {
+                height: auto;
+                margin: 0 !important;
+                padding: 0 !important;
+        }
+        .SingleSearch div.SearchBox {
+                height: auto;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                border-left: 1px solid #eeeeee;
+        }
+        .SingleSearch .SearchBox input.Text {
+                margin-bottom: 0;
+                border-radius: 0;
+        }
+        div.SingleSearch {
+                flex: unset;
+                width: auto;
+                order: 3;
+                display: inline-block;
+                height: 25px;
+        }
+        .SingleSearch .SearchBox input.Text {
+                color: transparent !important;
+                border: none !important;
+                background: transparent;
+                height: auto;
+                padding: 0;
+                margin: 0px;
+                border-left: 1px solid #ebebeb!important;
+                display: none;
+        }
+        .SingleSearch .SearchBox input.Text::placeholder {
+                color: transparent;
+        }
+        .SingleSearch .SearchBox a.Button {
+                /* top: 50%; */
+                /* transform: translate(-50%,-50%); */
+                bottom: unset !important;
+                margin-left: 0 !important;
+                margin-right: auto;
+                right: unset !important;
+                /* left: 58%; */
+                position: static !important;
+                padding: 0 21px;
+                /* border-left: 1px solid #eeeeee; */
+                border-radius: 0;
+                transform: unset;
+                opacity: 1;
+                background-size: 13px;
+        }
+}

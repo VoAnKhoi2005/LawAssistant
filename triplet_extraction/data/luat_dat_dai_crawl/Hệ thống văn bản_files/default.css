@@ -1,0 +1,63 @@
+*{
+        text-rendering:geometricprecision}
+body{
+        margin:0 auto;
+        padding:0}
+a{
+        color:#424242;
+        font-size:14px;
+        text-decoration:none}
+img{
+        border:medium none}
+.MainStructure .TopBanner{
+        background:#fff none repeat scroll 0 0;
+        margin:0 auto;
+        width:1170px}
+.MainStructure .TopBar{
+        background:#fff none repeat scroll 0 0;
+        display:inline-block;
+        /* margin-bottom:5px; */
+        text-align:justify;
+        width:1170px;
+        border-bottom: 4px double #C3D0E0;
+}
+.MainStructure .ContentBanner{
+        display:inline-block;
+        position:relative;
+        width:100%;
+        z-index:1}
+.MainStructure .ContentBar{
+        max-width: 1170px;
+}
+.MainStructure .ContentBar td{
+        max-width: 1170px;
+}
+.MainStructure .MainContent,.MainStructure .bottom-content{
+        background:#fff none repeat scroll 0 0;
+        margin:0 auto;
+        padding:2px 10px 10px;
+        vertical-align:top;
+        width:1170px}
+.MainStructure .FooterBanner {
+    margin: 0 auto;
+    text-align: center;
+    background: #0066bc;
+    
+}
+.MainStructure .FooterBar{
+        background:#0066BC  none repeat scroll 0 0;
+        display:inline-block;
+        text-align:justify;
+        width:100%}
+@media only screen and (max-width:768px){
+        .MainStructure .TopBar{
+                margin-bottom:0}
+        .MainStructure .FooterBanner {
+                margin-bottom: 0 !important;
+        }
+}
+@media only screen and (max-width:1200px){
+        .MainStructure .FooterBanner {
+                width: 1200px;
+        }
+}

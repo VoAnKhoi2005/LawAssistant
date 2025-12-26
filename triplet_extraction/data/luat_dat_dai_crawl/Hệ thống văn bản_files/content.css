@@ -1,0 +1,104 @@
+.MenuNavigation {
+        background: #fff none repeat scroll 0 0;
+        height: 48px;
+        border-bottom: 1px solid #eeeeee;
+}
+.MenuNavigation .NavContainer {
+        /* border-bottom: 1px solid #eeeeee; */
+        display: inline-flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+}
+.MenuNavigation .NavContainer li {
+        /* float: left; */
+        padding: 0 10px 0 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+}
+.MenuNavigation li.Item {
+        /* background: transparent url("images/li_icon.png") no-repeat scroll 0 16px; */
+        padding-left: 15px;
+        position: relative;
+}
+.MenuNavigation li.Item:before {
+        content: '/';
+        position: absolute;
+        top:  50%;
+        left: 0;
+        transform: translateY(-50%);
+        /* Grey 3 */
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-transform: uppercase;
+        /* Grey 3 */
+        color: #3B4E68;
+}
+.MenuNavigation .NavContainer li .wrap {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        white-space: nowrap;
+}
+.MenuNavigation .NavContainer .Home .wrap .Image {
+        background: transparent url("images/Home.png") no-repeat scroll center center;
+        display: inline-block;
+}
+.MenuNavigation .NavContainer li a {
+        display: inline-block;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #3B4E68;
+        font-family: 'ROBOTO';
+        white-space: nowrap;
+}
+.MenuNavigation .NavContainer li:last-child a {
+        color: #0084F3;
+        font-weight: 500;
+}
+.MenuNavigation .BoxSearch {
+        float: right;
+}
+.MenuNavigation .BoxSearch .text {
+}
+.MenuNavigation .BoxSearch .image {
+}
+.MenuNavigation .BoxSearch .SubmitSearch {
+        background-color: #4d90fe;
+        color: White;
+}
+.MenuNavigation span.text {
+        height: 100%;
+        display: flex;
+        align-items: center;
+}
+@media only screen and (max-width: 768px){
+        div.MenuNavigation {
+                display: flex;
+                align-items: center;
+                padding: 5px 20px;
+                border-bottom: none;
+                min-height: 48px;
+                height: 48px;
+        }
+        .MenuNavigation .NavContainer {
+                padding: 15px 0;
+                border-bottom: 1px solid #dddddd;
+                white-space: nowrap;
+                max-width: 100%;
+                overflow: auto;
+                display: inline-flex;
+        }
+        .MenuNavigation .NavContainer li a{
+                font-size: 13px;
+        }
+}

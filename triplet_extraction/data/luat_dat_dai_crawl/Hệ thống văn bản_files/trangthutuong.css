@@ -1,0 +1,467 @@
+.document-list-control {
+	background: #fff none repeat scroll 0 0;
+	/* padding: 0px 15px 0px; */
+	/* margin-top: 20px; */
+	margin-bottom: 36px;
+}
+
+.document-list-control .document-search .document-search-title {
+	font-family: Merriweather;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 23px;
+	/* identical to box height, or 153% */
+	text-transform: uppercase;
+	/* Grey 1 */
+	color: #031739;
+	margin-bottom: 16px;
+}
+
+.document-list-control .document-search .document-search-input .table .input select {
+	/* width: 200px; */
+}
+
+.document-list-control .header {
+	border-top: 3px solid #ce0000;
+	text-transform: uppercase;
+	white-space: nowrap;
+	font-size: 17px;
+	font-family: "Merriweather";
+	color: #031739;
+	font-weight: 700;
+}
+
+.document-list-control .content .document-title::before {
+	content: "\25A0";
+	color: red;
+	margin-right: 10px;
+}
+
+.document-list-control .content a {
+	color: #222222;
+	text-decoration: none;
+}
+
+.document-list-control .content .document-title {
+	padding-top: 0;
+	font-weight: 600;
+	display: inline-block;
+	font-family: Merriweather;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 23px;
+	color: #031739;
+}
+
+.document-list-control .content .document-dateofissued {
+	text-align: right;
+}
+
+.document-list-control .content .document-title:hover {
+	color: #00458a;
+}
+
+.document-list-control .content .active {
+	background-color: #cccccc;
+}
+
+.document-list-control .content {
+	align-items: flex-start;
+	border-bottom: 1px solid #eeeeee !important;
+}
+
+.document-list-control .document-search {
+	padding: 20px 24px;
+	background: #f9f9f9;
+	margin: 0;
+	margin-bottom: 36px;
+}
+
+.document-list-control .col-in-mobile {
+	display: none;
+	font-size: 16px;
+	font-family: 'Merriweather';
+	font-weight: 400;
+}
+
+.document-list-control .document-search-input td {
+	border: none;
+	padding: 10px 0;
+}
+
+.document-list-control .document-search-input .label {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	/* identical to box height, or 136% */
+	/* Grey 3 */
+	color: #3b4e68;
+	margin-bottom: 8px;
+}
+
+.document-list-control .document-search-input .input>select,
+.document-search-input .input>input {
+	background: rgba(255, 255, 255, 0.6);
+	border: 1px solid #e9e9e9;
+	box-sizing: border-box;
+	border-radius: 6px;
+	padding: 9px 13px;
+	width: 250px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 19px;
+	/* identical to box height, or 136% */
+	/* Grey 3 */
+	color: #3b4e68;
+}
+
+.document-list-control .document-search-input .input>input[type="submit"] {
+	margin-left: 30px;
+	width: unset;
+	/* Primary color 2 */
+	background: #0084f3;
+	border-radius: 3px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 17px;
+	line-height: 20px;
+	/* identical to box height */
+	text-align: center;
+	color: #ffffff;
+	border: none;
+}
+
+.document-content-title {
+	font-family: Merriweather;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 21px;
+	text-transform: uppercase;
+	/* Grey 1 */
+	color: #031739;
+	margin-bottom: 16px;
+}
+
+.document-content td,
+th:not(.th-detail) {
+	padding: 24px 12px !important;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 21px;
+	/* identical to box height, or 140% */
+	/* Grey 2 */
+	color: #182940;
+	border: 1px solid #eeeeee;
+	min-width: 145px;
+	text-align: center;
+}
+
+th.th-detail {
+	all: revert;
+}
+
+th.th-detail span {
+	font-weight: normal;
+}
+
+div#document_page_info {
+	text-align: center;
+}
+
+.document-content table>tbody>tr:nth-child(1)>th:not(.th-detail) {
+	background: #f6f6f6;
+	padding: 12px !important;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	/* Grey 3 */
+	color: #3b4e68;
+	text-align: center !important;
+}
+
+.document-content table>tbody>tr>td:nth-child(3) {
+	text-align: left !important;
+}
+
+.document-content a {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 21px;
+	/* or 140% */
+	/* Grey 2 */
+	color: #182940;
+}
+
+.document-content tr:nth-child(odd)>td {
+	background: #f9f9f9;
+}
+
+.document-content table>tbody>tr:nth-child(1)>td:nth-child(3) {
+	text-align: center !important;
+}
+
+.document-list-control .document-search-input td+td {
+	padding-left: 21px;
+}
+
+.document-content table {
+	width: 100%;
+	border: none !important;
+}
+
+.document-content .grid-pager {
+	background-color: #ffffff !important;
+	border: #ffffff;
+}
+
+.document-content .grid-pager table tr td {
+	width: 45px !important;
+}
+
+.document-content .grid-pager table {
+	margin: 30px auto 0px;
+	width: auto;
+}
+
+.document-content .grid-pager table tr {
+	border: 0;
+}
+
+.document-content .grid-pager table td * {
+	width: 40px;
+	height: 40px;
+	background-color: #f6f6f6;
+	display: block;
+	line-height: 30px;
+	font-size: 15px;
+	color: #666666;
+	text-align: center;
+	font-weight: 400;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 5px;
+}
+
+.document-content .grid-pager table td {
+	background-color: #fff !important;
+	border: none;
+}
+
+.document-content .grid-pager table td span {
+	color: #fff;
+	background-color: #0084f3;
+}
+
+.document-content .grid-pager td {
+	padding: 0 !important;
+	min-width: 0 !important;
+	border: none;
+}
+.document-list-control .bl-doc-files .bl-doc-file{
+	background: rgba(241,243,247,.5);
+    width: fit-content;
+    padding: 5px;
+}
+.document-list-control .bl-doc-files > .bl-doc-file + .bl-doc-file{
+	margin-top: 5px;
+}
+.document-list-control .bl-doc-files a{
+	font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    color: #005594 !important;   
+    padding: 5px 8px;
+    padding-left: 25px;
+    background: url(images/file.png) no-repeat left 6px;
+    background-size: 14px;
+	border-radius: 4px;
+}
+.document-list-control .bl-doc-files {
+    margin-top: 10px;
+}
+.document-list-control span.issued-date-inside, .document-content span.issue-v2 {
+	display: none;
+}
+
+@media only screen and (max-width: 768px) {
+	.document-list-control .document-search {
+		width: 100vw;
+	}
+	.document-list-control .document-search-input td {
+		padding: 10px 0 !important;
+	}
+	.document-list-control .document-search-input .input>select,
+	.document-search-input .input>input {
+		width: 100%;
+	}
+	.document-content table>tbody>tr:nth-child(1)>th:not(.th-detail) {
+		font-size: 17px;
+	}
+	.document-list-control .document-search-input .input>input[type="submit"] {
+		margin-top: 32px;
+		margin-left: 50%;
+		transform: translateX(-50%);
+	}
+	.document-content {
+		width: 100vw;
+		padding: 0 20px;
+	}
+	.document-content table>tbody>tr:nth-child(1)>td {
+		display: none !important;
+	}
+	.document-content td th {
+		border: none;
+		padding: 12px !important;
+	}
+	.document-content tr td:not(:nth-child(2)) {
+		display: table-cell;
+	}
+	.document-content td:nth-child(2) {
+		display: none;
+	}
+	.document-content td:nth-child(3) {
+		display: block !important;
+	}
+	.document-content tr:not(.grid-pager) td:nth-child(1) {
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 19px;
+		color: #3b4e68;
+		min-width: 100px;
+		max-width: 100px;
+		border-right: 1px solid #eeeeee;
+		width: unset !important;
+	}
+	.document-content a {
+		font-family: Roboto;
+		font-style: normal;
+		font-size: 15px;
+		line-height: 20px;
+		/* or 133% */
+		/* Grey 2 */
+		color: #182940;
+	}
+	span.issued-date.issued-date-inside {
+		font-size: 14px;
+		line-height: 150%;
+		color: rgba(10,36,88,.7);
+		font-family: 'Merriweather';
+		margin-top: 10px;
+	}
+	.document-content table tbody tr:first-child th {
+		background: #f6f6f6 !important;
+		color: #3b4e68 !important;
+	}
+	.document-content table>tbody>tr:nth-child(1)>th:not(.th-detail) {
+		padding: 15px !important;
+		border: none;
+	}
+	.document-list-control span.issued-date-inside {
+		/* display: inherit; */
+	}
+	.document-content table {
+		border: 1px solid #dddddd;
+		margin: 0;
+	}
+	.document-content table>tbody>tr:nth-child(1)>th:nth-child(2) {
+		display: none;
+	}
+		.document-content table > tbody > tr:nth-child(1) > th:nth-child(1) {
+			width: 30%;
+			border-top-left-radius: 12px;
+			border-right: 1px solid;
+			border-right-color: #eeeeee;
+		}
+	.document-content table>tbody>tr:nth-child(1)>th:nth-child(3) {
+		max-width: 40px;
+		/* min-width: 230px; */
+		border-top-right-radius: 12px;
+		padding-top: 23px !important;
+	}
+	.document-content td {
+		border: none;
+		padding-top: 12px !important;
+		padding-bottom: 0 !important;
+	}
+	.document-content table>tbody>tr>td:nth-child(3) {
+		padding-top: 4px !important;
+		padding-bottom: 12px !important;
+	}
+	.document-content table>tbody>tr+tr {
+		border: 1px solid #eeeeee;
+	}
+	.document-content .grid-pager {
+		width: 100%;
+	}
+	.document-content .grid-pager table {
+		width: 100%;
+		border: none;
+	}
+	.document-content .grid-pager td {
+		width: 100% !important;
+		padding: 12px 0 !important;
+	}
+	.document-content .grid-pager td>table {
+		width: 100% !important;
+		margin: 0;
+		/* height: 50px; */
+	}
+	.document-content .grid-pager table tr {
+		align-items: center;
+		justify-content: center;
+	}
+	.document-content .grid-pager table>tbody>tr>td {
+		display: table-cell !important;
+		padding: 0 !important;
+	}
+	.document-content th.th-detail {
+		display: none;
+	}
+	.document-content tr:nth-child(odd)>td {
+		background: inherit;
+	}
+	.document-content > div > table{
+		/* table-layout: fixed; */
+	}
+	div#document_page_info {
+		display: inherit !important;
+	}
+	.document-content span.issue-v2 {
+		font-size: 14px;
+		line-height: 150%;
+		color: rgba(10,36,88,.7);
+		font-family: 'Merriweather';
+		margin-top: 10px;
+		display: inherit !important;
+	}
+	.document-content span.code {
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		line-height: 18px;
+		color: #0084F3;
+		word-break: break-all;
+	}
+}

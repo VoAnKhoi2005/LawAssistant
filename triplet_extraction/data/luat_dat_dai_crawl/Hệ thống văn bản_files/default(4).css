@@ -1,0 +1,51 @@
+.UIClockSystem {
+        position: absolute;
+        top: 96px;
+        left: 49.6%;
+        transform: translateX(-50%);
+}
+.UIClockSystem .clock {
+        display: inline-block;
+        margin: 10px 0 0 10px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 15px;
+        /* Grey 2 */
+        color: #182940;
+}
+@media only screen and (max-width: 768px){
+        .UIClockSystem span.clock {
+                /* Grey 4 */
+                padding-top: 0px !important;
+                padding-bottom: 0px !important;
+                padding: 0 8px !important;
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px !important;
+                line-height: 14px;
+                /* identical to box height */
+                /* Grey 4 */
+                color: #62748D;
+        }
+        div.UIClockSystem {
+                position: static !important;
+                padding: 0px 0px !important;
+                margin-top: 0 !important;
+                order: 2;
+                display: inline-block;
+                height: 25px !important;
+                border-left: 1px solid #eeeeee;
+                min-width: 100px;
+                /* display: none; */
+                transform: unset;
+        }
+}
+@media only screen and (max-width: 1200px){
+	.UIClockSystem {
+		transform: translateX(60%);
+		left: 52%;
+	}
+}

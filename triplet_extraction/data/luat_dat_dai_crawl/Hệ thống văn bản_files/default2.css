@@ -1,0 +1,96 @@
+.GroupControl {
+        border: 1px solid #eeeeee;
+        border-top: 2px solid #DA251C;
+        margin-bottom: 16px;
+}
+.GroupControl .Title a{
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 23px;
+        /* identical to box height, or 153% */
+        /* Primary color 2 */
+        color: #031739;
+        padding: 11px 15px;
+        display: inline-block;
+        margin-bottom: 7px;
+        background: #F6F6F6;
+        width: 100%;
+        text-decoration: none;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+}
+.GroupControl .UserItem a {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        /* identical to box height, or 153% */
+        /* Grey 1 */
+        color: #031739;
+        padding: 7px 15px;
+        text-decoration: none;
+        display: flex;
+        align-items: flex-start;
+}
+.GroupControl td.ItemStyle ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+}
+.GroupControl td.ItemStyle ul li a {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        /* Grey 3 */
+        color: #3B4E68;
+        padding: 7px 34px;
+        display: inline-block;
+        text-decoration: none;
+}
+.GroupControl .Detail table {
+        width: 100%;
+}
+.GroupControl .Detail table tr:last-child .ItemStyle .Title a {
+        margin: 0;
+        border-bottom: 0;
+}
+.GroupControl .Detail table td {
+        padding: 0;
+}
+.GroupControl .Detail table tr:first-child .ItemStyle .Title a {
+        border-top: 0;
+}
+.GroupControl .UserItem a:before {
+}
+.GroupControl .UserItem a:before {
+        content: '\25A0';
+        color: #99A5B5;
+        margin-right: 10px;
+        font-size: 13px;
+}
+.GroupControl .Title a span {
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 23px;
+        /* identical to box height, or 153% */
+        /* Primary color 2 */
+        color: #0084F3;
+}
+@media only screen and (max-width: 768px){
+        .GroupControl {
+                display: block;
+                width: 100vw;
+                padding: 0 20px;
+                border: none;
+                margin-bottom: 36px;
+        }
+        .GroupControl .Detail {
+                border: 1px solid #eeeeee;
+        }
+}

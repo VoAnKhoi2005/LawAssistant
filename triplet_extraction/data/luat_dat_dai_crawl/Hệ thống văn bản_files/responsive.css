@@ -1,0 +1,2849 @@
+/* ALL */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+.yhy-append-wrap{
+    bottom: 0;
+    position: fixed;
+    z-index: 2;
+}
+* {
+    line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    scrollbar-width: thin;
+    -webkit-appearance: none;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.layout-flex > div {
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+}
+
+    .layout-flex > div > div.zone {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .layout-flex > div > div.zone > .PageControl:nth-child(1) {
+            width: 100%;
+        }
+
+        .layout-flex > div > div.zone > .PageControl:nth-child(2) {
+            flex-grow: 1;
+        }
+
+        .layout-flex > div > div.zone .placeHolder {
+            width: 100%;
+        }
+/*--------------------------------------View more button ------------------------------*/
+.ViewMore {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #7D92AE;
+    padding: 7px;
+    border: 1px solid #eeeeee;
+    background: #F9F9F9;
+}
+
+    .ViewMore a {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: #7D92AE;
+    }
+/*--------------------------------------Scroll bar ------------------------------*/
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F0F0F0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CCCCCC;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+/*--------------------------------------End scrollbar ------------------------------*/
+img {
+    padding: 0;
+    max-width: 100%;
+}
+
+    img[src=""] {
+        position: relative;
+        /* border: 1px solid silver; */
+        border-radius: 2px;
+        min-width: 20px;
+        min-height: 20px;
+        display: inline-block;
+    }
+
+        img[src=""]::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background: whitesmoke;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-weight: bold;
+        }
+
+iframe {
+    border: none;
+}
+
+.row {
+    margin: 0;
+}
+
+#form1 {
+    margin: 0;
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    padding: 0;
+}
+.AdvertContent .img-desktop img {
+    width: 100% !important;
+	margin-bottom: 2px;
+}
+.AdvertContent .img-mobile img {
+    display:none !important;
+	margin-bottom: 2px;
+}
+@media only screen and (min-width: 0px) {
+    .ListControl .List tr:last-child > td[colspan="4"] > table > tbody > tr > td {
+        border: none;
+        padding: 5px;
+        text-align: left;
+    }
+
+    .ListControl .List tr:last-child > td[colspan="4"] > table {
+        width: auto;
+    }
+
+    .SingleTab .Wrap .first p {
+        color: #757575;
+        font-size: 13px;
+    }
+
+    .ArticleFeedbackControl .FeedbackForm {
+        width: 100%;
+        background: none;
+    }
+
+    .ArticleFeedbackControl table td input,
+    .ArticleFeedbackControl table td textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 5px !important;
+        min-height: 25px;
+        border: 1px solid silver;
+    }
+
+    .ArticleFeedbackControl {
+        width: 100% !important;
+        padding: 30px 5px 10px 5px !important;
+    }
+
+        .ArticleFeedbackControl .PanelButton {
+            text-align: center;
+        }
+
+            .ArticleFeedbackControl .PanelButton input[type='submit'] {
+                border: none;
+                padding: 4px 20px;
+                background: #e4e4e4;
+                font-size: 13px;
+            }
+
+        .ArticleFeedbackControl .ColRight input.Verifier {
+            width: 100px !important;
+            margin-left: 5px;
+        }
+
+        .ArticleFeedbackControl table td.ColRight {
+            display: flex;
+            align-items: center;
+        }
+    /* .MainStructure .FooterBar { */
+    /* overflow: hidden; */
+    /* } */
+    .SingleArticle {
+        padding: 10px;
+        width: 100%;
+    }
+
+        .SingleArticle .title {
+            text-align: left;
+            font-family: Merriweather;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 26px;
+            line-height: 33px;
+            color: #031739;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+    .ArticleDetailControl .ArticleContent {
+        clear: both;
+        text-align: justify;
+        /* margin-bottom: 30px; */
+        line-height: 30px;
+    }
+
+    .ArticleInMenu .ArticleCatName {
+        min-height: 27px;
+        padding: 0;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+
+    .ArticleInMenu .boxsearch {
+        padding: 5px;
+    }
+
+        .ArticleInMenu .boxsearch input {
+            margin: 5px 0 !important;
+            border: 1px solid #ddd !important;
+            padding: 5px !important;
+            height: 30px !important;
+        }
+
+            .ArticleInMenu .boxsearch input[type='submit'] {
+                border: none !important;
+                background: #0b3f72;
+                font-size: 13px;
+                font-weight: bold;
+                color: #fff;
+                padding: 5px 20px !important;
+                margin: 5px !important;
+                float: right;
+            }
+
+    .ArticleInMenu .boxsearch__expan {
+        padding: 5px;
+        color: #424242;
+        font-size: 14px;
+    }
+
+        .ArticleInMenu .boxsearch__expan > span {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 13px;
+            transition: all 300ms;
+        }
+
+    .ServiceCategory ul {
+        height: auto;
+    }
+
+    .YoutubeVideoList .ListVideo > span {
+        float: none;
+    }
+
+    .WebLink .Content {
+        width: 100%;
+    }
+
+    .SingleTab {
+        height: auto;
+    }
+
+    .MultipleTabExt .Wrap .LeftCol .next li {
+        padding: 5px 0;
+    }
+
+    .HotnewsControl .HotnewsList {
+        padding: 5px;
+    }
+
+    .ArticleDetailControl .UISocialShare {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100% !important;
+        /* margin-bottom: 20px !important; */
+        /* margin-top: 20px !important; */
+        float: none;
+        gap: 10px;
+    }
+
+        .ArticleDetailControl .UISocialShare > div {
+            margin: 0 !important;
+            float: none !important;
+        }
+
+            .ArticleDetailControl .UISocialShare > div.twitter {
+                margin-right: 10px !important;
+            }
+
+        .ArticleDetailControl .UISocialShare .facebook {
+            margin-bottom: 0px !important;
+        }
+
+    .SingleTab .Wrap .next {
+        margin-left: 0px;
+    }
+
+    .SingleTab .Wrap {
+        height: auto;
+    }
+
+    .UIArticleListContent {
+        height: auto;
+    }
+
+        .UIArticleListContent ul.ulArticle {
+            margin-left: 10px;
+        }
+
+    .ImageSlideShow .image-item {
+        width: 100% !important;
+    }
+
+    .SingleArticle img {
+        max-width: 100% !important;
+        object-fit: cover;
+    }
+
+    .UIBannerControl {
+        width: 100%;
+    }
+
+    span.ListPollItem {
+        display: flex;
+        margin: 5px 5px;
+        align-items: center;
+    }
+
+        span.ListPollItem * {
+            margin: 0;
+        }
+
+    .PollControl td.td-result {
+        display: flex;
+        justify-content: center;
+    }
+
+        .PollControl td.td-result > a {
+            margin: 5px !important;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    .DetailControl .Content > table {
+        width: 100%;
+    }
+
+    .MultiFunctionControl marquee {
+        table-layout: fixed;
+        display: table;
+    }
+
+    .MultipleTabDefault {
+        height: auto;
+    }
+
+    .HotnewsControl .HotnewsList .HotnewsItem {
+        padding: 21px 0px;
+        width: 100%;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .NewSteeringControl .item ul {
+        list-style: none;
+        line-height: 1.4;
+        padding: 0px;
+        margin: 0;
+    }
+
+    .ListControl .List table th {
+        font-size: 14px;
+    }
+
+    .ListControl span {
+        font-size: 13px;
+    }
+
+    .ListControl .view-count {
+        font-size: 13px;
+        color: #757575;
+    }
+
+    .ListControl .Search .ExTitle h1 {
+        font-size: 16px !important;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .ListControl .Search .ExTitle {
+        display: block;
+        min-height: 26px;
+        margin-top: 10px;
+        height: auto;
+        padding: 0;
+    }
+
+    .MultipleTabDefault .Wrap .first .title {
+        font-size: 13px;
+    }
+
+    .QuestionSiteMenuControl .detail {
+        margin-left: 10px;
+    }
+
+    .RssTree > a {
+        display: none !important;
+    }
+
+    .UIListArticleOfSite > div:nth-child(2) {
+        height: auto !important;
+    }
+
+    .SingleSearch .SearchBox {
+        display: flex;
+        align-items: center;
+    }
+
+    .ServiceCategory ul li {
+        width: 100%;
+        margin-left: 5px;
+        padding-right: 5px;
+    }
+
+        .ServiceCategory ul li img {
+            display: none;
+        }
+
+    .UIProtalList .lvwContent .tb-content .tr-row .td-item img {
+        display: none;
+    }
+
+    .MultipleTabDefault .Wrap {
+        height: auto;
+    }
+
+    .ShortArticle marquee .block-row {
+        position: static !important;
+        display: flex;
+    }
+
+    .LinkSlide marquee .block-row {
+        position: static !important;
+        display: flex;
+    }
+
+    .SliderFeature .LeftPanel > a {
+        color: transparent;
+    }
+
+    .ArticleInMenu .ArticleViewCount {
+        position: static !important;
+    }
+
+    .ArticleInMenu .ArticleCat {
+        padding: 5px 0;
+    }
+
+    .UIListArticleOfSite .lvwContent {
+        padding: 5px;
+    }
+
+    .MultipleTabDefault .Wrap .first p {
+        color: #757575;
+    }
+
+    .ArticleInMenu .col-lg-10 > p {
+        font-size: 14px;
+        color: #757575;
+        height: auto;
+        width: 100%;
+    }
+
+    .ServiceCategory .Content {
+        padding: 0 5px;
+    }
+
+    .OnlineCounter ul {
+        padding: 5px;
+        font-size: 13px;
+    }
+
+    .HSliderScroll .Header span.Pages {
+        display: none;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: 5px;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #0b60a4;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0 !important;
+    }
+
+    .page-item.active .page-link {
+        z-index: 3;
+        color: #fff;
+        background-color: #0b60a4;
+        border-color: #0b60a4;
+    }
+
+    .ArticleInMenu ul {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .ArticleInMenu .col-lg-2 {
+        width: 220px;
+        height: 145px;
+        background: #e4e4e4;
+        padding: 0;
+        max-width: 100%;
+        flex: none;
+        margin-right: 15px;
+    }
+
+    .ArticleInMenu .col-lg-10 {
+        flex: 1;
+        padding-right: 5px;
+        max-width: 100%;
+    }
+
+    .ArticleInMenu .Title {
+        width: 100%;
+    }
+
+    .ArticleInMenu .col-lg-2 img {
+        width: 100%;
+        height: 100%;
+        background: #e4e4e4;
+        padding: 1px;
+        margin: 0;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .ArticleInMenu li.row {
+        margin: 0;
+        display: flex;
+        border-bottom: 1px dotted #e4e4e4;
+        padding: 5px 0px;
+        height: auto;
+    }
+
+    .btn-left img {
+        padding: 5px;
+        background: aliceblue;
+        margin: 5px;
+    }
+
+    .btn-right img {
+        padding: 5px;
+        background: aliceblue;
+        margin: 5px;
+    }
+
+    .btn-center img {
+        padding: 5px;
+        background: aliceblue;
+        margin: 5px;
+    }
+
+    .DropdownMenu .navbar-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: #2196F3;
+    }
+
+        .DropdownMenu .navbar-button span {
+            background: white;
+            width: 50%;
+            height: 4px;
+            margin: 2px;
+            border-radius: 1px;
+            transition: 300ms;
+        }
+
+    .DropdownMenu .navbar-button {
+        display: none;
+    }
+
+    .HotnewsControl .HotnewsScroll {
+        min-height: 300px;
+    }
+
+    .ArticleInMenu .pagination {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .ArticleInMenu .pagination li {
+            width: auto !important;
+            padding: 0;
+        }
+
+    li.LanguageMenu {
+        padding-left: 5px;
+        padding-right: 5px;
+        align-items: center;
+        justify-content: center;
+        top: -26px;
+        right: 0;
+        height: 23px;
+        vertical-align: bottom;
+        list-style-type: none;
+        display: inline-flex;
+    }
+
+    .DropdownMenu .navbar-button {
+        display: none;
+    }
+}
+/* WEB */
+@media only screen and (min-width: 769px) {
+    .DropdownMenu .MenuList {
+        display: block;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+}
+/* MOBILE */
+@media only screen and (max-width: 768px) {
+    .table-3-col td {
+        display: block;
+        width: 100% !important;
+    }
+
+    .MainStructure .ContentBar {
+        padding: 0;
+    }
+
+    .MainStructure .LeftBar {
+        padding: 0;
+    }
+
+    .MainStructure .fixed {
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 10;
+        bottom: 0;
+        padding: 0px 0px !important;
+        overflow-y: scroll;
+        background: white;
+        height: 100vh !important;
+        width: 100vw !important;
+        box-shadow: 0 0 10px #444444;
+        padding-top: 5px !important;
+    }
+
+    .fixed-left {
+        left: 0;
+    }
+
+    .fixed-right {
+        right: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .ShortArticle {
+        width: 100vw;
+    }
+
+    .LinkSlide {
+        width: 100vw;
+    }
+
+    .ArticleInMenu .SingleArticle {
+        padding: 0;
+    }
+
+        .ArticleInMenu .SingleArticle img {
+            max-width: 100% !important;
+            height: auto !important;
+            object-fit: cover;
+        }
+
+    .vanbanquypham .RadPicker {
+        width: 100% !important;
+        display: flex !important;
+    }
+
+        .vanbanquypham .RadPicker table.rcTable {
+            width: 100% !important;
+        }
+
+            .vanbanquypham .RadPicker table.rcTable > tbody > tr {
+                display: flex;
+                align-items: center;
+            }
+
+                .vanbanquypham .RadPicker table.rcTable > tbody > tr > td:nth-child(1) {
+                    flex-grow: 1;
+                }
+
+                .vanbanquypham .RadPicker table.rcTable > tbody > tr > td:nth-child(2) {
+                    width: 30px !important;
+                }
+
+    .UIArticleListContent .Wrap {
+        text-align: justify;
+        flex-direction: column;
+    }
+
+        .UIArticleListContent .Wrap .first-box {
+            width: 100%;
+        }
+
+        .UIArticleListContent .Wrap .second-box {
+            width: 100%;
+        }
+
+    .UIArticleListContent ul.first-box li.item {
+        margin: 0;
+    }
+
+    .VideoShowControl {
+        width: 100vw !important;
+        padding: 5px;
+    }
+
+    .UIArticleListContent .Wrap .third-box li {
+        margin-left: 10px;
+    }
+
+    .snv__front > em {
+        background-color: #126ead !important;
+        padding: 20px !important;
+        width: 80px !important;
+        height: 80px !important;
+        color: #FFF !important;
+        text-align: center !important;
+        border-radius: 50% !important;
+        line-height: 40px !important;
+        margin-bottom: 10px !important;
+        font-size: 29px !important;
+        margin-top: 10px !important;
+    }
+
+    .SingleTab .Wrap .first {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .snv__behind {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .snv__desc {
+        color: #369 !important;
+    }
+
+    .MainStructure .TopBar > table:first-child {
+        height: auto !important;
+    }
+
+    .SliderFeature .LeftCol .text div {
+        text-align: justify;
+        padding: 0;
+    }
+
+    .SliderFeature .ArticleList li {
+        text-align: justify;
+    }
+
+    .MultipleTabDefault .Wrap .next li {
+        text-align: justify !important;
+        margin-left: 10px;
+    }
+
+    .MultipleTabDefault .Wrap .first .title a {
+        text-align: justify;
+        letter-spacing: 0;
+        font-size: 20px;
+    }
+
+    .UITabArticle_Secondary .MultipleTabDefault .Wrap .first .title a {
+        font-size: 16px;
+    }
+
+    .MenuListofSite {
+        width: 100vw !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto !important;
+    }
+
+    .VerticalMenuControl .MenuList li.top:last-child {
+        border-radius: 0;
+    }
+
+    .MenuListofSite ul.parent {
+        width: 100% !important;
+        align-items: center;
+        display: flex !important;
+        position: static !important;
+        height: auto !important;
+        flex-direction: column;
+    }
+
+        .MenuListofSite ul.parent li {
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 5px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+    .MenuListofSite .parent > li .columns li {
+        padding-left: 20px !important;
+    }
+
+    .NewSteeringControl .ListItem .item {
+        width: 100%;
+    }
+
+    .VerticalMenuControl {
+        padding: 5px !important;
+        margin: 0;
+        width: 100vw;
+        background: transparent;
+    }
+
+        .VerticalMenuControl .Menulist {
+            padding: 5px;
+            background: white;
+        }
+
+    .UIContactUs input[type="text"], .UIContactUs textarea {
+        padding: 3px 0;
+        border: 1px solid silver;
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 100% !important;
+    }
+
+    .YoutubeVideoTab ul.VideoList li {
+        width: 100%;
+    }
+
+        .YoutubeVideoTab ul.VideoList li .Image {
+            width: 100% !important;
+        }
+
+    .UIContactUs .FormContact {
+        width: 100%;
+    }
+
+    .QuestionList .DetailQuestion .Title .header {
+        height: auto;
+        font-weight: bold;
+        padding: 5px 10px 5px 40px;
+        margin-bottom: 5px;
+    }
+
+    .WebLink {
+        padding: 5px;
+        margin: 0;
+        width: 100vw;
+    }
+
+    .OnlineCounter {
+        padding: 5px;
+        margin: 0;
+        position: static;
+    }
+
+    .LoginControl {
+        padding: 5px;
+        margin: 0px;
+    }
+
+    .QuestionList .DetailQuestion .Title .back {
+        margin: 0px !important;
+        padding-left: 40px;
+    }
+
+    .QuestionList .DetailQuestion .Content .blockTitle .divFirst {
+        padding: 5px 10px 5px 40px;
+        display: inline-block;
+        height: auto !important;
+        margin-top: 10px;
+    }
+
+    .QuestionList .DetailQuestion .Content .blockanswer .blockTitleanswer {
+        height: auto !important;
+    }
+
+        .QuestionList .DetailQuestion .Content .blockanswer .blockTitleanswer span {
+            font-size: 13px;
+            line-height: 1.3 !important;
+        }
+
+        .QuestionList .DetailQuestion .Content .blockanswer .blockTitleanswer .divFirst, .divSecond, .divThird, .divFourth {
+            height: auto !important;
+        }
+
+    .QuestionList .DetailQuestion .Content .blockTitle span {
+        font-size: 13px;
+    }
+
+    .QuestionList .DetailQuestion .Content .blockTitle .divFirst span {
+        line-height: 1.3 !important
+    }
+
+    .UIDanhSachGopY .Title {
+        padding-left: 0;
+        background-position: 10px;
+    }
+
+    .UIArticleListContent {
+        margin: 0 !important;
+        padding: 0 5px;
+        border: none;
+        width: 100vw;
+        background: transparent;
+        margin-bottom: 5px !important;
+    }
+
+        .UIArticleListContent .WrapAll {
+            background: white;
+        }
+
+    .YoutubeVideoTab {
+        padding: 5px;
+        width: 100vw;
+    }
+
+    .UIProtalList {
+        padding: 5px;
+        width: 100vw;
+    }
+
+    table.DanhSachVanBan {
+        margin-top: 10px !important;
+    }
+
+        table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr:last-child td {
+            display: table-cell !important;
+        }
+
+        table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr:last-child table {
+            margin: auto;
+        }
+
+    .SingleArticle * {
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .SingleArticle iframe {
+        margin: 0 !important;
+        width: 100%
+    }
+
+    .UIDanhSachVanBan .DanhSachVanBan .search {
+        display: flex;
+        align-items: center;
+    }
+
+    .UIDanhSachVanBan .DanhSachVanBan table.ChildGrid {
+        margin: 10px 0 !important;
+        width: 100%;
+    }
+
+    table.DanhSachVanBan .title {
+        padding: 10px 5px !important;
+        height: auto !important;
+        background-position: 10px center !important;
+        background-size: 30px 30px !important;
+    }
+
+    table.DanhSachVanBan td,
+    table.DanhSachVanBan th {
+        border: none !important;
+        padding: 5px !important;
+        font-size: 13px;
+        text-align: left;
+    }
+
+    table.DanhSachVanBan th {
+        display: none;
+    }
+
+    table.DanhSachVanBan table {
+        border: none !important;
+    }
+
+    table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr,
+    table.DanhSachVanBan > tbody > tr:nth-child(3) > td > div > table > tbody > tr {
+        border-bottom: 1px dotted silver;
+    }
+
+        table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr > td:nth-child(1)[align="center"],
+        table.DanhSachVanBan > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(1)[align="center"] {
+            display: none !important;
+        }
+
+        table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr > td:nth-child(4),
+        table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr > td:nth-child(5),
+        table.DanhSachVanBan > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(4),
+        table.DanhSachVanBan > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(5) {
+            float: right;
+            display: inline-block;
+            width: auto !important;
+            padding: 5px !important;
+            vertical-align: top;
+        }
+
+            table.DanhSachVanBan > tbody > tr:nth-child(5) > td > div > table > tbody > tr > td:nth-child(4) > div,
+            table.DanhSachVanBan > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(4) > div {
+                display: flex !important;
+            }
+
+    .QuestionLaoCai table td input[type="text"],
+    .QuestionLaoCai table td select {
+        width: 100% !important;
+        padding: 3px 0;
+        border: 1px solid silver;
+        border-radius: 5px;
+    }
+
+    .QuestionLaoCai .td-Header,
+    .QuestionLaoCai .td-Address,
+    .QuestionLaoCai .td-Phone,
+    .QuestionLaoCai .td-Email,
+    .QuestionLaoCai .td-Title,
+    .QuestionLaoCai .td-Content {
+        padding: 10px 5px;
+        font-size: 13px !important;
+    }
+
+    .QuestionLaoCai table td input[type='file'] {
+        border: none !important;
+    }
+
+    .QuestionList td,
+    .QuestionList th {
+        border: none !important;
+        padding: 5px !important;
+        font-size: 13px;
+    }
+
+    .QuestionList th {
+        display: none;
+    }
+
+    .QuestionList table {
+        border: none !important;
+    }
+
+    .QuestionList tr {
+        border-bottom: 1px dotted silver;
+    }
+
+    .QuestionList td:nth-child(1) {
+        display: none;
+    }
+
+    .QuestionLaoCai .RadEditor {
+        height: auto !important;
+        overflow: auto !important;
+    }
+
+    .ArticleDetailControl {
+        padding: 10px !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+
+    .SimilarArticleControl ul.ArticleList {
+        margin-left: 0px !important;
+        margin-top: 10px !important;
+        list-style: none;
+    }
+
+    .SimilarArticleControl .ArticleList .ListItem .ArticlePostDate {
+        margin-left: 5px;
+    }
+
+    .SimilarArticleControl .ArticleTitle {
+        padding: 5px;
+        text-align: justify !important;
+    }
+
+    .MultiFunctionControl style, .AdvertContent style {
+        display: none !important;
+    }
+
+    .MainStructure .FooterBanner {
+        display: flex;
+        flex-direction: column;
+        height: auto !important;
+        width: auto !important;
+        text-align: center !important;
+        justify-content: center;
+        align-items: center;
+        min-width: 30px !important;
+        margin: 3px 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        border-right: 0 !important;
+        border-left: 0 !important;
+        position: static;
+        line-height: 1.5;
+    }
+
+    .MultiFunctionControl *,
+    .AdvertContent *,
+    .FooterBanner * {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        max-width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 1px 0 !important;
+        padding: 0 !important;
+        position: static;
+        width: 100% !important;
+        max-width: 100% !important;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .MultiFunctionControl br,
+    .AdvertContent br,
+    .FooterBanner br,
+    .MultiFunctionControl script,
+    .AdvertContent script,
+    .FooterBanner script,
+    .MultiFunctionControl style,
+    .AdvertContent style,
+    .FooterBanner style {
+        height: 0px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: none !important;
+    }
+
+    .MultiFunctionControl img,
+    .AdvertContent img,
+    .FooterBanner img,
+    .MultiFunctionControl .fa,
+    .AdvertContent .fa,
+    .FooterBanner .fa {
+        max-width: 100% !important;
+        min-width: 30px !important;
+        min-height: 28px;
+        line-height: 1.5;
+    }
+
+    .FooterBanner .social {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+
+        .FooterBanner .social li {
+            display: inline-block !important;
+            width: auto !important;
+            margin: 5px !important;
+        }
+
+    .ptt-row .ptt-img {
+        width: 85px !important;
+        border-radius: 50%;
+        border: 1px solid #EEEEEE;
+        order: 1;
+        margin-bottom: 10px;
+    }
+
+    .ppt-text {
+        order: 2;
+    }
+
+    .ptt-row {
+        flex-direction: row !important;
+        border: none;
+    }
+
+    .ppt-item {
+        border: 1px solid #EEEEEE;
+        margin: 10px !important;
+        padding: 10px 2px !important;
+    }
+
+    div#ptt-header > p {
+        /* margin-top: 20px !important; */
+    }
+
+    .thongke_wrapper * {
+        flex-grow: 1;
+    }
+
+    .thongke_wrapper > div {
+        margin-bottom: 5px !important;
+    }
+
+    .thongke_wrapper .thongke_bieudo {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .YoutubeVideoTab ul.Tabs {
+        height: auto !important;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .YoutubeVideoTab ul.VideoList {
+        list-style: outside none none !important;
+        padding: 0px !important;
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: calc(50% - (25px * 1/4)) calc(50% - (25px * 1/4)) !important;
+        grid-column-gap: 10px !important;
+    }
+
+    .TopBar, .TopBanner {
+        /* overflow: auto !important; */
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        border: none !important;
+    }
+
+    .SliderFeature .LeftCol {
+        padding: 0 !important;
+        margin-bottom: 10px;
+    }
+
+    .SliderFeature .RightCol {
+        padding: 0 !important;
+    }
+
+    .SliderFeature .LeftPanel {
+        height: 80vw !important;
+    }
+
+    .SliderFeature .LeftCol .LeftPanel img {
+        object-fit: cover;
+    }
+
+    .MenuList > li:nth-child(1) > a > img {
+        margin: 0;
+        padding: 0;
+        display: none;
+        object-fit: cover;
+    }
+
+    .MenuList > li:nth-child(1) > a > span {
+        display: inline-block;
+    }
+
+    .MenuList > li > a {
+        display: block;
+        line-height: 1.5 !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
+
+    .DropdownMenu * {
+        text-align: left;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+    }
+
+    .DropdownMenu {
+        position: fixed !important;
+        top: 0;
+        right: 0;
+        z-index: 10001;
+        height: 0%;
+        width: 100% !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0;
+        background: transparent;
+    }
+
+        .DropdownMenu .MenuList {
+            display: none;
+            background: white;
+            margin-top: 0px !important;
+            height: calc(100vh - 0px) !important;
+            width: calc(100vw - 40px) !important;
+            overflow: hidden;
+            overflow-y: auto;
+            padding: 5px !important;
+            margin-left: 0 !important;
+            box-shadow: 0 0 10px #444444;
+        }
+
+            .DropdownMenu .MenuList li {
+                display: block !important;
+                float: none !important;
+                border: none !important;
+                padding: 8px 10px !important;
+            }
+
+        .DropdownMenu .navbar-button {
+            display: flex !important;
+            background: #2196F3;
+        }
+
+        .DropdownMenu .Dropdown {
+            display: block !important;
+            position: static !important;
+        }
+
+        .DropdownMenu .TopMenu,
+        .DropdownMenu .TopMenuActive {
+            height: auto !important;
+        }
+
+        .DropdownMenu ul.Dropdown,
+        .DropdownMenu ul.Popup {
+            background: transparent !important;
+            box-shadow: none !important;
+            height: auto !important;
+            display: block !important;
+            position: static !important;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+
+            .DropdownMenu ul.Dropdown .sub,
+            .DropdownMenu ul.Popup .sub {
+                display: block !important;
+                width: auto !important;
+                height: auto !important
+            }
+
+        .DropdownMenu li.TopMenu,
+        .DropdownMenu li.TopMenuActive {
+            padding: 5px !important;
+            height: auto !important;
+            margin: 0 !important;
+        }
+
+            .DropdownMenu li.TopMenu > a,
+            .DropdownMenu li.TopMenuActive > a {
+                padding: 2px !important;
+                height: auto !important;
+                color: #444 !important;
+                line-height: 1.4 !important;
+            }
+
+            .DropdownMenu li.TopMenuActive > a {
+                color: #444 !important;
+                padding: 2px !important;
+            }
+
+        .DropdownMenu ul.Popup {
+            display: block !important;
+            width: 100% !important;
+        }
+
+            .DropdownMenu ul.Popup .sub a {
+                padding: 0 20px !important;
+            }
+
+        .DropdownMenu .MenuList .TopMenu:hover {
+            background: #fff !important;
+        }
+
+        .DropdownMenu .MenuList .Dropdown .sub:hover a {
+            color: #444444 !important;
+        }
+
+        .DropdownMenu .MenuList .Dropdown .sub:hover {
+            background: #fff none repeat-x scroll left top !important;
+            color: #444444 !important;
+            cursor: pointer;
+        }
+
+        .DropdownMenu .MenuList .Popup .sub:hover a {
+            color: #444444 !important;
+        }
+
+    .ArticleInMenu {
+        padding: 5px !important;
+        max-width: 100vw;
+        overflow: auto;
+    }
+
+    .ServiceCategory .Title {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .nam_banner_vb a .khung {
+        width: 100% !important;
+        border: none !important;
+        margin: 0 !important;
+    }
+
+    .nam_banner_vb a {
+        width: 100% !important;
+    }
+
+        .nam_banner_vb a .text {
+            width: 100% !important;
+            padding: 5px 0 !important;
+            border: none;
+            margin: 0 !important;
+            text-align: center;
+        }
+
+    tr.rcbReadOnly {
+        display: flex !important;
+        width: 100%;
+        align-items: center !important;
+    }
+
+        tr.rcbReadOnly > td:nth-child(1) {
+            flex-grow: 1;
+            height: auto !important;
+            padding-bottom: 3px !important;
+        }
+
+        tr.rcbReadOnly > td:nth-child(2) {
+            width: 18px !important;
+        }
+
+    .MultiFunctionControl .SingleTab * {
+        width: 100% !important;
+    }
+
+    .HSliderScroll {
+        height: auto !important;
+    }
+
+        .HSliderScroll .ItemPanel ul.ItemContainer {
+            padding: 5px 0 !important;
+            /* width: auto !important; */
+            display: flex;
+            /* flex-wrap: wrap; */
+            left: 0 !important;
+        }
+
+            .HSliderScroll .ItemPanel ul.ItemContainer .Item {
+                padding: 0;
+                width: calc(50vw - 10px) !important;
+                margin: 5px !important;
+                display: inline-block !important;
+                float: none;
+                flex-grow: 1;
+            }
+
+        .HSliderScroll .ItemContainer .Item .image {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+    .TabArticleControl {
+        padding: 0px;
+    }
+
+        .TabArticleControl .Container {
+            padding: 5px !important;
+            width: 100% !important;
+            display: flex !important;
+            flex-wrap: wrap;
+        }
+
+            .TabArticleControl .Container .Item {
+                width: 100% !important;
+            }
+
+                .TabArticleControl .Container .Item a {
+                    display: flex;
+                }
+
+                    .TabArticleControl .Container .Item a .item_title {
+                        flex: 1;
+                        text-align: left;
+                    }
+
+                    .TabArticleControl .Container .Item a img {
+                        width: 100px !important;
+                        height: 70px !important;
+                        margin-right: 10px;
+                        object-fit: cover;
+                    }
+
+    .UIContactUs {
+        padding: 5px !important;
+        padding-top: 10px !important;
+        width: 100vw;
+        margin-bottom: 5px;
+    }
+
+        .UIContactUs .FormBody label,
+        .UIContactUs .FormBody .col-sm-10 {
+            padding: 5px !important;
+            margin: 0 !important;
+        }
+
+        .UIContactUs .form-group {
+            margin-bottom: 5px !important;
+        }
+
+    .addressbook {
+        display: flex;
+        flex-direction: column;
+        padding: 5px !important;
+        width: 100vw;
+    }
+
+        .addressbook .left {
+            width: 100% !important;
+            padding: 0;
+            margin: 0;
+        }
+
+            .addressbook .left .RadTreeView, .addressbook .right {
+                width: 100% !important;
+            }
+
+                .addressbook .right .department-info .row table tr > td:nth-child(2) .name {
+                    padding: 0 !important;
+                    color: red
+                }
+
+            .addressbook .left ul {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+        .addressbook .department-name {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            text-align: center !important;
+            padding: 10px !important;
+        }
+
+        .addressbook .right .contact-viewer-header-row td {
+            display: none !important;
+        }
+
+        .addressbook .right tr {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .addressbook .right td {
+            border: none !important;
+            text-align: left !important;
+        }
+
+            .addressbook .right td:nth-child(1) {
+                display: none;
+            }
+
+        .addressbook .right .row {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+    .VideoPanel {
+        width: 100% !important;
+        height: auto;
+    }
+
+    .SingleSearch {
+        min-height: 20px !important;
+        width: 100vw;
+        padding: 5px;
+        margin: 0 !important;
+        position: static !important;
+        margin-top: 5px !important;
+        margin-bottom: 5px;
+        max-width: 100%;
+    }
+
+        .SingleSearch .SearchBox {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            width: 100%;
+            position: relative;
+        }
+
+            .SingleSearch .SearchBox .Text {
+                /*height: 25px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                flex-grow: 1;
+                width: auto !important;*/
+                margin-bottom: 10px;
+            }
+
+            .SingleSearch .SearchBox .Button {
+                margin-right: 0px;
+                margin-left: 5px;
+                border-radius: 5px;
+                width: 25px !important;
+                height: 25px !important;
+            }
+
+    .SimilarArticleControl {
+        padding: 10px !important;
+        margin: 0 !important;
+        width: 100vw;
+    }
+
+    .ArticleInMenu li img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+
+    .ArticleInMenu .Ngaydang {
+        font-size: 11px !important;
+    }
+
+    .ArticleInMenu span.cssView {
+        font-size: 11px !important;
+    }
+
+    .UIClockSystem .clock {
+        margin: 0 !important;
+        font-size: 11px !important;
+        position: static !important;
+        padding: 5px;
+    }
+
+    .Wrap .first .image {
+        /* width: 158px !important;
+                height: 99px !important; */
+    }
+
+    .SingleTab {
+        overflow: hidden;
+    }
+
+    .ArticleDetailControl .ArticleContent img {
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        margin: 10px 0 !important;
+        object-fit: cover;
+    }
+
+    .UIProtalList .ul-tab {
+        height: auto !important;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .MultiFunctionControl {
+        padding: 0 5px;
+        width: 100vw;
+        background: transparent;
+    }
+
+    .AdvertisementBottomRight {
+        padding: 0 5px;
+        width: 100vw;
+    }
+
+    .ArticleSlider {
+        margin-bottom: 5px;
+        padding: 0 5px !important;
+        width: 100vw;
+    }
+
+    .SliderFeature {
+        margin: 0 !important;
+        padding: 5px;
+    }
+
+    .TabArticleControl {
+        padding: 0 5px;
+        width: 100vw;
+        margin-bottom: 5px;
+    }
+
+    .SingleTab {
+        margin: 0;
+    }
+
+    .ImageSlideShow {
+        padding: 5px;
+        width: 100vw;
+    }
+
+        .ImageSlideShow .SlideShowItem,
+        .ImageSlideShow .SlideShowItem img {
+            height: 200px !important;
+            object-fit: cover;
+        }
+
+    .MainContent {
+        min-height: unset !important;
+    }
+
+    .HSliderScroll {
+        margin: 0;
+        width: 100%;
+    }
+
+        .HSliderScroll .ItemPanel {
+            width: 100% !important;
+            height: 200px;
+        }
+
+    .ArticleDetailControl * {
+        max-width: 100vw;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        text-indent: 0 !important;
+    }
+
+    .ArticleDetailControl td {
+        display: table-cell !important;
+        width: auto !important;
+    }
+
+    .SingleArticle td {
+        display: table-cell !important;
+        width: auto !important;
+    }
+
+    .ArticleContent, .ArticleSummary {
+        text-align: justify;
+    }
+
+        .ArticleContent iframe,
+        .ArticleSummary iframe {
+            width: 100% !important;
+            margin: 0 !important;
+        }
+
+    .ArticleDetailControl .tool .print {
+        width: 30px;
+    }
+
+    .QuestionList {
+        padding: 5px;
+    }
+
+    .QuestionLaoCai > table > tbody > tr:nth-child(3) {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .AdvertisementCenter {
+        padding: 5px;
+        width: 100vw;
+    }
+
+    .UIClockSystem {
+        padding: 5px;
+        position: static;
+        display: flex;
+        margin: 0 !important;
+        align-items: center;
+        height: 30px;
+        margin-top: 5px !important;
+    }
+
+    .HotnewsControl {
+        width: 100vw;
+        margin-top: 90px;
+    }
+
+    .ServiceCategory {
+        padding: 5px;
+    }
+
+    .UIFooterControl {
+        padding: 5px !important;
+    }
+
+    .list_menu_footer li {
+        border: none !important;
+    }
+
+    .YoutubePlayer, .YoutubeVideoList {
+        padding: 5px;
+        margin: 0;
+        width: 100vw;
+    }
+
+    .UIMultiFunction_btn .MultiFunctionControl .Header {
+        height: 30px !important;
+    }
+
+    .YoutubePlayer iframe {
+        width: 100% !important;
+        height: 230px !important;
+    }
+
+    .ListControl .Search .ExTitle h1 {
+        font-size: 16px;
+        padding-top: 5px;
+        font-weight: bold;
+    }
+
+    .ListControl .List table th {
+        display: none;
+    }
+
+    .ListControl .List table td {
+        border: none;
+        text-align: left !important;
+        padding: 5px 5px !important;
+        text-align: justify !important;
+        font-size: 13px;
+        width: auto !important;
+    }
+
+        .ListControl .List table td a {
+            font-weight: bold;
+        }
+
+    .ListControl .List table {
+        border: none;
+    }
+
+    .ListControl .List tr {
+        border-bottom: 1px dotted silver;
+    }
+
+        .ListControl .List tr:last-child {
+            /* display: flex; */
+            /* align-items: center; */
+        }
+
+    .DetailControl td {
+        display: block !important;
+        height: auto !important;
+        min-height: 30px;
+    }
+
+    .DetailControl {
+        padding: 5px;
+        margin: 0;
+    }
+
+        .DetailControl .Content td {
+            border-right: none !important;
+            line-height: 1.5;
+            text-align: justify;
+            border-bottom: 1px dotted silver;
+            padding: 5px 0 !important;
+            margin: 0 !important;
+        }
+
+        .DetailControl .Content table {
+            width: 100%;
+        }
+
+    .AskQuestion {
+        padding: 5px;
+        margin: 0;
+    }
+
+        .AskQuestion input[type="text"],
+        .AskQuestion select {
+            width: 100% !important;
+            padding: 3px 0;
+            border: 1px solid silver;
+            border-radius: 5px;
+        }
+
+    .QuestionControl,
+    .QuestionControl .col-lg-6 {
+        padding: 5px;
+        margin: 0;
+    }
+
+        .QuestionControl input[type="text"],
+        .QuestionControl select {
+            width: 100% !important;
+            padding: 3px 0;
+            border: 1px solid silver;
+            border-radius: 5px;
+        }
+
+    .ListControl .col-md-3,
+    .ListControl .col-md-9 {
+        padding: 5px 0 !important;
+        max-width: 100%;
+    }
+
+    .ListControl .mb-2 {
+        margin: 0 !important;
+    }
+
+    .ListControl input[type="text"],
+    .ListControl select {
+        width: 100% !important;
+        padding: 3px 0;
+        border: 1px solid silver;
+        border-radius: 5px;
+    }
+
+    .ListControl input.Search,
+    .ListControl input.Cancel {
+        margin-top: 10px !important;
+    }
+
+    .MultipleTabDefault {
+        margin: 0;
+        padding: 0px 10px;
+    }
+
+    .UITabArticle_Primary .MultipleTabDefault {
+        border-right: none;
+        margin-right: none;
+        padding-right: 0;
+    }
+
+    .UIImageSlideShow {
+        padding: 5px;
+        width: 100vw;
+        background: white;
+    }
+
+        .UIImageSlideShow img {
+            width: 100% !important;
+            object-fit: cover;
+        }
+
+    .UIContactUs .SubmitForm .btnSubmit {
+        margin: 0;
+    }
+
+    .UIContactUs .SubmitForm {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .MenuListofSite ul.parent li a.expan {
+        width: 15px !important;
+        height: 15px !important;
+        display: inline-block !important;
+        background: red;
+    }
+
+    .MenuListofSite ul.parent li a {
+        width: 100% !important;
+        padding: 0 !important;
+        text-align: left;
+        height: 100% !important;
+        line-height: 1.4 !important;
+    }
+
+    .MenuListofSite ul.parent li ul {
+        width: 100vw !important;
+        height: 100% !important;
+        padding: 0 10px !important;
+        position: static !important;
+        column-count: 1 !important;
+        top: 100%;
+        left: 0;
+        margin-top: 5px;
+        z-index: 9999;
+    }
+
+    .MultipleTabDefault .Wrap {
+        padding: 5px;
+        overflow: auto;
+        display: block;
+        width: 100%;
+    }
+
+        .MultipleTabDefault .Wrap .next {
+            margin: 0;
+            width: 100%;
+        }
+
+        .MultipleTabDefault .Wrap .first {
+            width: 100%;
+            margin: 0;
+            height: auto !important;
+        }
+
+    .UIBannerControl img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .UIBannerControl .div-logo {
+        height: 100%;
+        width: 100%;
+    }
+
+    .ArticleDetailControl .ArticleHeader {
+        text-align: justify;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .ArticleDetailControl .tool {
+        height: auto !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .ListControl {
+        padding-top: 10px;
+    }
+
+    .phu {
+        height: 30px !important;
+    }
+
+    .DropdownMenu .MenuList .Dropdown .sub a span {
+        height: auto !important;
+    }
+
+    .NewSteeringControl {
+        padding: 5px 15px;
+        height: auto !important;
+        width: 100vw;
+    }
+
+    .ImageCategory {
+        padding: 5px;
+        width: 100vw;
+    }
+
+        .ImageCategory .LibraryList {
+            margin: 0;
+            padding-top: 10px;
+        }
+
+    .MultipleTabExt .Wrap .LeftCol {
+        padding: 0px 10px;
+        text-align: justify;
+    }
+
+    .MultipleTabExt .Wrap .RightCol {
+        padding: 0px 10px;
+        text-align: justify;
+    }
+
+    .MultipleTabExt .Wrap .LeftCol .next {
+        margin: 0px 0 10px 15px;
+        text-align: justify;
+    }
+
+    .MultipleTabExt .Wrap .RightCol ul {
+        margin: 0px 0 10px 15px;
+        text-align: justify;
+    }
+
+    .ArticleInMenu .Title {
+        text-align: justify;
+        margin-top: 10px;
+    }
+
+    .ArticleInMenu .ArticleCatName {
+        margin: 0;
+    }
+
+    .thongke1 {
+        padding: 5px !important;
+    }
+
+    .ArticleInMenu .ArticleOfCat li {
+        overflow: hidden;
+        text-align: justify;
+    }
+
+    .ArticleInMenu li {
+        overflow: hidden;
+        text-align: justify;
+    }
+
+    .DropdownMenu .MenuList .TopMenu .HasChildren,
+    .TopMenuActive .HasChildren {
+        height: auto !important;
+    }
+
+    .DropdownMenu .MenuList .Popup .sub a span {
+        display: inline-block !important;
+    }
+
+    .SingleTab .Wrap .first .title {
+        text-align: justify;
+    }
+
+    .SingleTab .Wrap {
+        padding: 5px;
+    }
+
+        .SingleTab .Wrap .next li a {
+            text-align: justify;
+        }
+
+        .SingleTab .Wrap .next li {
+            text-align: justify;
+            margin-left: 0;
+        }
+
+    .MultipleTabDefault .Wrap .first .title {
+        text-align: justify;
+    }
+
+    .calendar-container td {
+        display: table-cell !important;
+        width: auto !important;
+    }
+
+    .SearchResults input[type='text'], select {
+        width: 100%;
+        border: 1px solid silver;
+        margin: 0 !important;
+        border-radius: 5px;
+    }
+
+    .SearchResults {
+        padding: 5px !important;
+        text-align: justify;
+    }
+
+        .SearchResults table {
+            width: 100% !important;
+        }
+
+            .SearchResults table td {
+                padding: 5px;
+                display: flex;
+                width: 100% !important;
+            }
+
+                .SearchResults table td div {
+                    width: 100%;
+                    margin: 0 !important;
+                }
+
+        .SearchResults .ResultList .Item .Image {
+            width: 80px !important;
+            height: 60px !important;
+        }
+
+        .SearchResults .BeginDate > div {
+            width: 100% !important;
+        }
+
+            .SearchResults .BeginDate > div > table > tbody > tr {
+                display: flex;
+            }
+
+    .DropdownMenu .MenuList .Dropdown .sub a {
+        height: auto !important;
+        padding: 0 5px;
+    }
+
+    .SearchResults .EndDate > div {
+        width: 100% !important;
+    }
+
+        .SearchResults .EndDate > div > table > tbody > tr {
+            display: flex;
+        }
+
+    .SearchResults .BeginDate > div > table > tbody > tr > td:nth-child(2) {
+        width: 30px !important;
+    }
+
+    .SearchResults .EndDate > div > table > tbody > tr > td:nth-child(2) {
+        width: 30px !important;
+    }
+
+    .SearchResults .SearchPane .SearchButton {
+        width: 100%;
+        padding: 3px !important;
+        line-height: 1.5 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vanbanquypham {
+        padding: 5px !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+
+        .vanbanquypham .Search .ExTitle > span {
+            color: transparent;
+            display: inline-block;
+            font: bold 12px Arial;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .vanbanquypham table {
+            width: 100% !important;
+        }
+
+        .vanbanquypham .ExContent td {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .vanbanquypham .ExContent tr:nth-child(1) td:nth-child(2) {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .vanbanquypham .ExContent tr td:nth-child(1) {
+            margin: 3px 0 !important;
+            color: dimgray;
+        }
+
+        .vanbanquypham .ExContent td select,
+        .vanbanquypham .ExContent td input {
+            width: 100% !important;
+            display: block !important;
+            box-sizing: border-box !important;
+            padding: 3px !important;
+            border: 1px solid #ddd;
+            height: auto !important;
+            border-radius: 5px;
+        }
+
+        .vanbanquypham input.Search,
+        .vanbanquypham input.Cancel {
+            height: 30px !important;
+            width: auto !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            border: none !important;
+            font-weight: bold;
+            font-size: 12px !important;
+            margin-top: 5px !important;
+            display: inline-block !important;
+        }
+
+        .vanbanquypham input.Search {
+            flex-grow: 5 !important;
+            margin-right: 5px !important;
+        }
+
+        .vanbanquypham input.Cancel {
+            flex-grow: 1 !important;
+            background: silver !important;
+        }
+
+        .vanbanquypham .ExContent > table > tbody > tr:last-child > td:nth-child(1) {
+            display: none !important;
+        }
+
+        .vanbanquypham .ExContent > table > tbody > tr:last-child > td:nth-child(2) > div {
+            display: flex !important;
+        }
+
+        .vanbanquypham .List > div > table,
+        .vanbanquypham .List > div > table > tbody > tr > td,
+        .vanbanquypham .List > div > table > tbody > tr > th {
+            border: none !important;
+            padding: 5px 0px !important;
+        }
+
+            .vanbanquypham .List > div > table > tbody > tr > th {
+                display: none !important;
+            }
+
+            .vanbanquypham .List > div > table > tbody > tr {
+                position: relative !important;
+                border-bottom: 1px solid #e5e5e5 !important;
+            }
+
+                .vanbanquypham .List > div > table > tbody > tr > td:nth-child(1),
+                .vanbanquypham .List > div > table > tbody > tr > td:nth-child(2) {
+                    display: inline-block !important;
+                }
+
+                .vanbanquypham .List > div > table > tbody > tr > td {
+                    display: block !important;
+                    text-align: left !important;
+                }
+
+                    .vanbanquypham .List > div > table > tbody > tr > td:nth-child(1),
+                    .vanbanquypham .List > div > table > tbody > tr > td:nth-child(3) * {
+                        font-weight: bold !important;
+                        margin-right: 10px !important;
+                    }
+
+                    .vanbanquypham .List > div > table > tbody > tr > td:nth-child(2) * {
+                        font-style: italic !important;
+                        font-size: 11px !important;
+                    }
+
+                    .vanbanquypham .List > div > table > tbody > tr > td:nth-child(4) {
+                        text-align: right;
+                    }
+
+        .vanbanquypham .ListControl .List > div > table > tbody > tr > td:nth-child(4) > a {
+            background: #b80002;
+            padding: 2px 10px;
+            border-radius: 2px;
+            color: white;
+            font-size: 11px !important;
+        }
+
+    li.TopMenuActive {
+    }
+
+    .VerticalMenuControl .MenuList .second {
+        width: 100% !important;
+    }
+
+        .VerticalMenuControl .MenuList .second li.sub {
+            width: 100% !important;
+        }
+
+    .QuestionList .DetailQuestion {
+        padding: 0;
+    }
+
+        .QuestionList .DetailQuestion .Content .blockQues fieldset legend {
+            width: auto !important;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .QuestionList .DetailQuestion .Content .blockQues {
+            text-align: justify;
+        }
+
+        .QuestionList .DetailQuestion .Content .blockanswer fieldset legend {
+            width: auto !important;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .QuestionList .DetailQuestion .Content .blockanswer .detail {
+            text-align: justify;
+        }
+
+            .QuestionList .DetailQuestion .Content .blockanswer .detail *,
+            .QuestionList .DetailQuestion .Content .blockQues * {
+                font-size: 13px !important;
+                line-height: 1.3 !important
+            }
+
+    .UIChiTiet fieldset table {
+        width: 100%;
+    }
+
+    .UIChiTiet .txtSearch {
+        width: 100% !important;
+        border: 1px solid silver;
+        border-radius: 5px;
+    }
+
+    .UIChiTiet .ddCoQuan, .ddLinhVuc {
+        width: 100% !important;
+    }
+
+    .UIChiTiet {
+        padding: 5px;
+    }
+
+        .UIChiTiet fieldset {
+            padding: 5px;
+        }
+
+            .UIChiTiet fieldset > legend {
+                width: auto !important;
+                margin: 5px;
+            }
+
+    .NewSteeringControl .DetailScroll {
+        z-index: 9999;
+    }
+
+    .ArticleDetailControl video {
+        width: 100%;
+    }
+
+    .UIGopYVanBan .view {
+        padding: 5px !important;
+    }
+
+    .UIGopYVanBan .form-gop-y {
+        padding: 5px !important;
+    }
+
+    .UIGopYVanBan .view a {
+        margin: 5px 0;
+        display: block;
+    }
+
+    .navbar-overlay {
+        position: fixed !important;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        height: 100vh !important;
+        width: 100vw !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0;
+        background: rgba(0, 0, 0, 0.3);
+        display: none;
+    }
+
+    .SliderArticleImage {
+        margin: 0 !important;
+    }
+
+        .SliderArticleImage .ItemPanel img {
+            width: 100% !important;
+            height: auto !important;
+            object-fit: cover;
+        }
+
+    .SingleTab .Wrap .next {
+        padding-left: 0;
+    }
+
+    .CalendarTableWrapper {
+        width: 100%;
+        overflow: auto;
+    }
+
+    .UIWeekCalendar {
+        padding: 5px;
+        width: 100vw;
+    }
+
+        .UIWeekCalendar td {
+            display: table-cell !important;
+        }
+
+        .UIWeekCalendar .CellPrevious, .CellNext {
+            width: 150px !important;
+        }
+
+    .UIChiTiet th {
+        display: none;
+    }
+
+    .UIChiTiet td, .UIChiTiet table {
+        border: none !important;
+    }
+
+    .UIChiTiet tr {
+        border-bottom: 1px dotted #e4e4e4;
+    }
+
+    .UIChiTiet td:last-child > table > tbody > tr {
+        display: flex !important;
+    }
+
+    .UIArticleListContent .second-box .item {
+        height: auto !important;
+        width: 100% !important;
+        min-height: 60px;
+        display: flex;
+        padding: 0;
+    }
+
+    .UIArticleListContent .Wrap .second-box .item .image {
+        margin-right: 10px;
+    }
+
+    .ArticleInMenu .col-lg-2 {
+        padding: 0 !important;
+        margin-right: 0;
+        flex: none;
+        max-width: 100%;
+        width: 100% !important;
+        height: 60vw;
+    }
+
+    .ArticleInMenu .col-lg-10 {
+        padding: 0;
+        flex: 1;
+    }
+
+    .ArticleInMenu .row {
+        flex-direction: row;
+    }
+
+    .UIImageDetail ul.list li.item img {
+        width: 100px !important;
+        height: 100px !important;
+        box-shadow: 2px 2px 5px #aaa !important;
+        border-radius: 3px !important;
+        object-fit: cover;
+    }
+
+    .UIImageDetail ul.list li.item {
+        padding: 5px;
+    }
+
+    .ImageCategory .LibraryItem {
+        width: 100%;
+        margin: 0;
+        padding: 0px;
+    }
+
+    .ImageCategory img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .ArticleDetailControl .UISocialShare {
+        display: flex;
+        align-items: center;
+    }
+
+        .ArticleDetailControl .UISocialShare * {
+            height: 25px !important;
+        }
+
+    .UIImageDetail ul.list {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100vw;
+        align-content: center;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+    }
+
+    div.layout-background {
+        display: none;
+    }
+
+    .tv-container {
+        flex-direction: column;
+    }
+
+    .tv-category {
+        width: 100%;
+    }
+
+    .tv-docs {
+        width: 100vw;
+        padding: 0;
+    }
+
+    .tv-filter * {
+        font-size: 12px !important;
+    }
+
+    .tv-list table tr {
+        flex-direction: column;
+    }
+
+        .tv-list table tr td > a {
+            width: 100%;
+        }
+
+        .tv-list table tr td + td {
+            padding: 0 10px;
+        }
+
+        .tv-list table tr td {
+            padding: 0 10px;
+        }
+
+    .btn-paging a {
+        width: auto;
+    }
+
+    .tv-more {
+        flex-direction: column;
+    }
+
+        .tv-more div:nth-last-child(2) {
+            width: 100%;
+        }
+
+        .tv-more div:nth-last-child(1) {
+            width: 100%;
+            margin: 0;
+        }
+
+        .tv-more ul {
+            width: 100%;
+        }
+
+            .tv-more ul * {
+                box-sizing: border-box;
+            }
+
+            .tv-more ul li {
+                margin: 0;
+            }
+
+    .MenuNavigation {
+        padding: 10px;
+        margin: 0;
+        width: 100vw;
+    }
+
+    .UIMedicalSpecialistSearching .item.col-sm-12 {
+        max-width: 45%;
+    }
+
+    .UIMedicalSpecialistSearching .avatar img {
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .UIMedicalSpecialistSearching .condition {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+        .UIMedicalSpecialistSearching .condition > div {
+            width: 100%;
+        }
+
+            .UIMedicalSpecialistSearching .condition > div + div {
+                margin: 0;
+                margin-top: 10px;
+            }
+
+    .UIMedicalSpecialistSearching .RadDropDownList {
+        width: 100%;
+    }
+
+    .UIMedicalSpecialistSearching {
+        width: 100vw;
+    }
+
+    .SliderArticleImage .Item {
+        width: 100%;
+    }
+
+    .FieldControl .Detail table tr td.ItemStyle .UserItem {
+        width: 100%;
+    }
+
+    .FieldControl .Detail table tr {
+        width: 100%;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .TabList ul.HeaderWrap {
+        height: auto;
+        display: inline-block;
+    }
+
+    .MultipleTabExt .Header .HeadWraper ul li {
+        margin: 2px !important;
+    }
+
+    .MultipleTabExt .Header {
+        height: auto;
+    }
+
+        .MultipleTabExt .Header .HeadWraper ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+    .DropdownMenu ul.MenuList li a {
+        display: flex;
+        align-items: center;
+    }
+
+        .DropdownMenu ul.MenuList li a span {
+            display: inline-block !important;
+            flex: 1;
+        }
+
+    .DetailControl .detail-file {
+        padding: 0;
+    }
+
+    .ThreeTab.row {
+        flex-direction: column;
+    }
+
+    .ThreeTab .col {
+        margin: 0 !important;
+        margin-bottom: 10px !important;
+        padding: 0 10px;
+    }
+
+        .ThreeTab .col img {
+            margin-right: 10px;
+        }
+}
+
+.footer__nav-fixed  {
+    display: none;
+}
+@media only screen and (max-width: 768px){
+	.footer__nav-fixed {
+    position: fixed !important;
+    width: 100% !important;
+    left: 0;
+    z-index: 11;
+    bottom: -1px;
+    background: #fff;
+    box-shadow: 0 -5px 6px rgba(0,0,0,.04);
+    transition: .4s;
+}
+
+img.footer-icon-sticky-mobile {
+    width: 16px !important;
+    min-width: 5px !important;
+    min-height: 5px !important;
+}
+
+a.item-sticky {
+    position: relative;
+    display: block !important;
+    height: 36px !important;
+}
+
+    a.item-sticky .navbar-button span {
+        background: red !important;
+        width: 14px !important;
+        height: 2px !important;
+        margin: 2px !important;
+        color: red;
+    }
+
+    a.item-sticky .navbar-button {
+        top: -1px;
+    }
+
+        a.item-sticky .navbar-button.show {
+            position: absolute;
+            top: 10px;
+        }
+
+        a.item-sticky .navbar-button span[style="margin: -2px; transform: rotate(45deg);"] {
+            background: red !important;
+            height: 2px;
+            margin: -3px !important;
+            width: 20px !important;
+            margin-bottom: -4px !important;
+        }
+
+        a.item-sticky .navbar-button span[style="display: none;"] {
+            display: none !important;
+        }
+
+        a.item-sticky .navbar-button span[style="margin: -2px; transform: rotate(-45deg);"] {
+            background: red !important;
+            height: 2px;
+            width: 20px !important;
+        }
+
+        a.item-sticky .navbar-button span {
+            background: white;
+            width: 50%;
+            height: 4px;
+            margin: 2px;
+            border-radius: 1px;
+            transition: 300ms;
+        }
+
+.footer__nav-fixed .text {
+    color: #333;
+    z-index: 12;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    display: block;
+    color: #333;
+    margin-top: 3px !important;
+    position: absolute;
+    bottom: -3px;
+}
+
+.footer__nav-fixed .icon {
+    position: absolute;
+}
+
+.footer__nav-fixed div.items-sticky {
+    flex-direction: row !important;
+    padding: 8px 0 8px 0 !important;
+    justify-content: space-evenly;
+    height: 50px !important
+}
+
+.footer__nav-fixed a.item-sticky img.footer-icon-sticky-mobile.home, .footer__nav-fixed a.item-sticky img.footer-icon-sticky-mobile.document {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+	.footer__nav-fixed a.item-sticky img.footer-icon-sticky-mobile.hotnew {
+		width: 17px !important;
+	}
+        .AdvertContent .img-desktop img {
+		display:none !important;
+	}
+	.AdvertContent .img-mobile img {
+		display:block !important;
+		width: 100%;
+	}
+}

@@ -1,0 +1,71 @@
+/*DoiMauHeader
+.MainStructure .TopBanner img {
+    filter: grayscale(1);
+}
+*/
+.UIBannerControl {
+        margin: 0 auto;
+        width: 100%;
+}
+.UIBannerControl .div-logo {
+        text-align: center;
+        /* height: 140px; */
+        width: 540px;
+        margin: 15px auto;
+        margin-bottom: 24px;
+}
+/*TrangDen html {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%);
+} */
+.UIBannerControl  .lang {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-left: 120px;
+}
+.UIBannerControl  .lang>div>a {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 12px;
+        /* identical to box height */
+        /* Grey 2 */
+        color: #182940;
+        padding: 0 8px;
+        border-left: 0.808989px solid #CCCCCC;
+}
+@media only screen and (max-width: 768px){
+        .UIBannerControl .div-logo {
+                margin: 0 auto !important;
+                width: 80vw !important;
+        }
+        .UIBannerControl >div{
+                padding: 0 !important;
+        }
+        .UIBannerControl  img {
+                max-width: 80vw;
+                height: auto;
+                padding: 10px 30px;
+        }
+        .UIBannerControl .lang {
+                top: 14vw;
+                width: auto;
+                margin: 0;
+                left: 55%;
+				transform: translateX(-50%) !important;
+        }
+        .UIBannerControl .lang .en a {
+                border: none;
+        }
+}
+@media only screen and (max-width: 1200px){
+	.UIBannerControl  .lang {
+		transform: translateX(125%);
+	}
+}

@@ -1,0 +1,139 @@
+.UIWeatherForcast {
+        position: relative;
+        margin-left: 16px;
+        order: 4;
+}
+.UIWeatherForcast .main {
+        width: 200px;
+        height: 42px;
+        background-color: #F6F6F6;
+        border: 1px solid #EEEEEE;
+        line-height: 42px;
+        text-align: left;
+        padding: 0px;
+        margin: 0px;
+        cursor: pointer;
+}
+.UIWeatherForcast .info-name {
+        font-size: 13px;
+        font-style: normal;
+        font-family: 'Merriweather';
+        line-height: 16px;
+        color: #3B4E68;
+        margin-left: 14px;
+}
+.UIWeatherForcast .info-temp {
+        font-size: 14px;
+        font-weight: 500;
+        font-style: normal;
+        font-family: 'Roboto';
+        color: #62748D;
+        margin-left: 10px;
+}
+.UIWeatherForcast  .info-icon {
+        width: 18px;
+        height: 18px;
+        margin-left: 7px;
+}
+.UIWeatherForcast .info-a:hover {
+        text-decoration: none;
+}
+.UIWeatherForcast  .more-info {
+        width: 250px;
+        padding: 10px;
+        border: 1px solid #EEEEEE;
+        border-radius: 5px;
+        margin-top: 8px;
+        position: absolute;
+        background-color: #FFF;
+        max-height: 500px;
+        z-index: 9999;
+}
+.UIWeatherForcast .div-more-info {
+        max-height: 400px;
+        overflow: auto;
+        margin-top: 10px;
+}
+.UIWeatherForcast  .temperature-search {
+        font-size: 14px;
+        font-weight: 400;
+        color: #3B4E68;
+        padding: 8px 10px;
+        border: 1px solid #D9D9D9;
+        width: 100%;
+        border-radius: 5px;
+        line-height: 16px;
+}
+.UIWeatherForcast  .list-temperature {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+}
+.UIWeatherForcast  .list-temperature li {
+        padding: 3px 0px;
+}
+.UIWeatherForcast .list-temperature img.info-icon {
+        float: right;
+        margin-right: 10px;
+        margin-top: 5px;
+}
+.UIWeatherForcast  i.fa.fa-caret-down {
+    color: #7D92AE;
+    /* margin-left: 16px; */
+    float: right;
+    margin-top: 12px;
+    margin-right: 5px;
+}
+@media only screen and (max-width: 768px){
+        .UIWeatherForcast {
+                order: 1;
+                margin-right: 10px;
+                margin-left: 10px;
+                flex: 1;
+                overflow: auto;
+                position: static;
+        }
+        .UIWeatherForcast .more-info {
+                left: 0;
+        }
+        .UIWeatherForcast .main {
+                width: unset;
+                border: none;
+                display: inline-flex;
+                align-items: center;
+                height: unset;
+        }
+        .UIWeatherForcast .info-name {
+                margin: 0;
+                font-family: Merriweather;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 11px;
+                line-height: 16px;
+                text-transform: capitalize;
+                /* Grey 4 */
+                color: #62748D;
+        }
+        .UIWeatherForcast .info-temp {
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 11px;
+			line-height: 14px;
+			text-transform: capitalize;
+			color: #62748D;
+			margin-left: 3px;
+			margin-top: 2px;
+		}
+        .UIWeatherForcast .info-icon {
+                width: 12px;
+                height: 12px;
+                margin: 0 5px;
+        }
+        .UIWeatherForcast i.fa.fa-caret-down {
+                color: #7D92AE;
+                font-size: 12px;
+                margin-left: 5px;
+				margin-top: 0;
+        }
+}

@@ -1,0 +1,474 @@
+
+.AdvertisementTopLeft {
+        left: 10px;
+        position: absolute;
+        z-index: 5;
+}
+.AdvertisementTopRight {
+        position: absolute;
+        right: 10px;
+        z-index: 5;
+}
+.AdvertisementCenter {
+        position: relative;
+        top: 0!important;
+        left: 0!important;
+}
+.AdvertisementBG {
+        width: 0!important;
+        height: 0!important;
+}
+/* Ben phai thanh tim kiem*/
+.AdvertContent .gtcp {
+        background-color: #F9F9F9;
+        display: flex;
+        width: 300px;
+        height: 42px;
+        box-sizing: border-box;
+        border: 1px solid #E8E8E8;
+        margin-left: 16px;
+}
+.AdvertContent  .intro {
+        display: flex;
+        align-items: center;
+}
+.AdvertContent .weather {
+        margin-left: 16px;
+        height: 42px;
+        width: 200px;
+}
+.AdvertContent .gtcp a {
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+		position: relative;
+}
+.AdvertContent .gtcp a img {
+        width: 24px;
+        margin-right: 10px;
+}
+
+.AdvertContent .gtcp a span {
+        /*font-family: Merriweather;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 11px;
+        line-height: 14px;
+        /* Grey 3 */
+        /*color: #3B4E68;*/
+            font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+    color: #182940;
+}
+.AdvertContent .gtcp a + a:before {
+        height: 30px;
+        content: '';
+        width: 0px;
+        top: 50%;
+        left: 0;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        border-left: 1px solid #E8E8E8;
+}
+.qc-vanban {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 36px;
+}
+.qc-vanban img {
+        width: 100%;
+}
+.qc-vanban a {
+        display: inline-block;
+}
+.UIFooterControl .footer-contain .head>div h2 span {
+        text-transform: uppercase;
+}
+div#ptt-header p.mobile {
+        display: none;
+}
+.simple-ads {
+        margin-bottom: 36px;
+}
+@media only screen and (max-width: 768px) {
+        .AdvertContent .gtcp {
+                flex-direction: row !important;
+                margin-top: 10px !important;
+                display: none !important;
+        }
+        .AdvertContent .weather svg {
+                margin: 0 !important;
+        }
+        div.simple-ads {
+                margin-bottom: 36px !important;
+                padding: 0 20px !important;
+        }
+}
+/* Tiêu đề */
+.AdvertContent .Header {
+        padding: 12px 0px;
+        border-top: 2px solid #DA251C;
+        border-bottom: 1px solid #eeeeee;
+        border-radius: 2px 2px 0 0;
+}
+.AdvertContent .Header span {
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 17px;
+        line-height: 21px;
+        text-transform: uppercase;
+        color: #031739;
+}
+@media only screen and (max-width: 768px) {
+        .AdvertContent .Header {
+                padding: 12px 0px !important;
+                text-align: left !important;
+                margin: 0 20px !important;
+                width: auto !important;
+        }
+        .AdvertContent .Header span {
+                justify-content: left;
+				align-items: flex-start;
+        }
+}
+/* Ban do hanh chinh */
+.AdvertContent  .bandohc {
+        width: 100%;
+        text-align:center;
+        float: right;
+        margin-top: 0;
+        background: #F9F9F9;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        border-top: 0;
+}
+.AdvertContent .bandohc .header {
+        padding: 17px;
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 17px;
+        line-height: 21px;
+        text-align: center;
+        text-transform: uppercase;
+        /* Grey 2 */
+        color: #182940;
+        border-bottom: 1px solid #eeeeee80;
+}
+.AdvertContent .bandohc .footer {
+        padding: 12px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 15px;
+        text-align: center;
+        /* Grey 3 */
+        color: #3B4E68;
+}
+@media only screen and (max-width: 768px) {
+        .AdvertContent .bandohc {
+                /* display: none !important; */
+			padding: 20px !important;
+        }
+}
+/*Thu tuong chinh phu*/
+.AdvertContent .mobile-ttcp {
+        display: none;
+}
+img.desktop-ttcp {
+        margin-bottom: 36px;
+}
+@media only screen and (max-width: 768px) {
+        .AdvertContent .mobile-ttcp {
+                display: none !important;
+                border-radius: 10px 10px 0 0;
+                margin-top: 20px !important;
+                margin-bottom: 0 !important;
+        }
+        .AdvertContent .desktop-ttcp {
+                /* display: none !important; */
+				padding: 20px !important;
+        }
+        div.AdvertisementBottomRight {
+                padding: 0;
+        }
+}
+/*Pho thu tuong*/
+div#ptt-header {
+        margin: 0 auto;
+        text-align: center;
+        /* margin-top: 20px; */
+        padding-top: 14px;
+        border-top: 1px solid #C3D0E0;
+        margin-bottom: 10px;
+}
+div#ptt-header p {
+        font-size: 14px;
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 18px;
+        /* identical to box height */
+        text-transform: uppercase;
+        /* Grey 2 */
+        color: #182940;
+}
+#ptt {
+        display: flex;
+        margin-bottom: 36px;
+}
+.ptt-row {
+        display: flex;
+        border-bottom: 1px solid #C3D0E0;
+        /* flex: 1; */
+        width: 100%;
+        gap: 16px;
+}
+.ppt-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        flex-grow: 1;
+        padding-right: 22px;
+}
+.ppt-item:last-child{
+        padding-right:0}
+.ppt-item p {
+        margin: 0;
+        padding: 0;
+        text-align: right;
+        padding-right: 20px;
+}
+.ppt-item p.name {
+        font-family: Merriweather;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 19px;
+        text-transform: uppercase;
+        /* Grey 2 */
+        color: #182940;
+}
+.ppt-item p.role {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        /* Grey 4 */
+        color: #62748D;
+        margin-top: 3px;
+}
+.ptt-row:last-child .ppt-item:last-child {
+        margin-right: 0;
+}
+.ppt-text {
+        /* margin-right: 5px; */
+        flex: 1;
+        width: 80%;
+}
+.ptt-img {
+        /* height: 85px; */
+        overflow: hidden;
+        width: 95px;
+        height: 93px;
+}
+/*Dich vu cong*/
+.AdvertContent .dvc {
+        width:100%;
+        text-align:center;
+}
+.AdvertContent .dvc img {
+        border: 1px solid #eeeeee;
+}
+.AdvertContent .list-dvc {
+        display: flex;
+        flex-direction: row !important;
+        gap: 12px;
+}
+.AdvertContent .list-dvc a{
+        width: calc(100%/4 - 9px);
+}
+.hop-bao.qc-chuyentrang img {
+        padding: 0 !important;
+}
+.hop-bao.qc-chuyentrang .row {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+}
+.hop-bao.qc-chuyentrang .row>div {
+        flex: 1;
+}
+.qc-chinhphu {
+        margin: 0 0 36px !important;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        border-top: 4px double #E0E5EF;
+        border-bottom: 4px double #E0E5EF;
+        padding: 24px 0;
+}
+.qc-chinhphu>div {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+}
+.qc-chinhphu>div>div {
+        width: calc(100%/4 - 22px) !important;
+}
+.bar-cong-dan a {
+        flex: 1;
+}
+iframe#cong-bao-iframe {
+        margin: 23px 0px;
+        height: 315px !important;
+        margin-top: 0px;
+}
+@media only screen and (max-width: 768px) {
+        .AdvertContent .list-dvc {
+                margin: 20px 0px !important;
+        }
+        .AdvertContent .dvc {
+                padding: 10px !important;
+        }
+}
+/*Gui phan anh*/
+.AdvertContent .gui-phan-anh {
+        background-color: #DA251C;
+        height: 36px !important;
+        width: 288px !important;
+        border-radius: 50px;
+        color: #ffffff;
+        text-align: center;
+        flex-direction: row !important;
+        margin-bottom: 10px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.01em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 36px;
+}
+.AdvertContent  .gui-phan-anh-main {
+        padding-top: 16px;
+        border-top: 1px solid #eeeeee;
+}
+.AdvertContent .gui-phan-anh label{
+        margin: 0;
+}
+@media only screen and (max-width: 768px) {
+        .AdvertContent .gui-phan-anh {
+                margin-bottom: 20px !important;
+                margin-left: 10px;
+                margin-top: 16px !important;
+        }
+        .AdvertContent .gui-phan-anh label {
+                width: 200px !important;
+        }
+        .AdvertContent .gui-phan-anh em {
+                width: 20px !important;
+        }
+        .AdvertContent .weather {
+                width: auto !important;
+                background: transparent;
+                padding: 0px 10px !important;
+                order: 1;
+                margin: 0 !important;
+                height: 25px !important;
+        }
+        .layout-flex * {
+                width: unset;
+                height: unset;
+        }
+        .layout-flex .AdvertisementBottomRight {
+                flex: 1;
+                height: 25px;
+                display: none;
+        }
+        .layout-flex {
+                background: #F9F9F9;
+                margin-top: 5px;
+                padding: 10px 0;
+        }
+        .bar-cong-dan {
+                gap: 15px !important;
+        }
+        .bar-cong-dan img {
+                width: 100% !important;
+        }
+        div.qc-chuyentrang {
+                padding: 0 20px !important;
+                gap: 20px !important;
+                padding-top: 30px !important;
+                margin-bottom: 36px !important;
+        }
+        iframe#cong-bao-iframe {
+                /* display: none !important; */
+				height: 600px !important;
+        }
+        div.qc-chinhphu-wrap {
+                width: 100vw !important;
+                padding: 0 20px !important;
+                margin: 36px 0 !important;
+                margin-top: 0 !important;
+        }
+        div.qc-chinhphu {
+                width: 100% !important;
+                max-width: unset !important;
+                gap: 20px;
+                align-items: flex-start !important;
+                overflow: auto;
+                padding: 24px 0 !important;
+        }
+        .qc-chinhphu>div {
+                /* display: flex !important; */
+                /* flex-direction: row !important; */
+                /* width: unset !important; */
+                max-width: unset !important;
+                gap: 20px;
+        }
+        .qc-chinhphu>div>div {
+                width: 70vw !important;
+        }
+        .hop-bao.qc-chuyentrang .row {
+                gap: 20px;
+        }
+        .AdvertContent iframe:not(#cong-bao-iframe) {
+			min-height: 80vw;
+			padding: 0 10px !important;
+		}
+        div.vbdt-ads {
+                padding: 0 20px !important;
+                margin-bottom: 36px !important;
+        }
+        div.qc-vanban {
+                padding: 0 20px !important;
+                margin-bottom: 36px !important;
+        }
+    iframe.iframelink {
+        display: none !important;
+    }
+}
+.void-15 {
+        margin: 10px 0 0px;
+        padding: 0px;
+}
+.bar-cong-dan {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 36px;
+}
