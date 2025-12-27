@@ -4,6 +4,8 @@ import re
 from pathlib import Path
 
 import win32com.client as win32
+from bson import ObjectId
+
 
 def convert_doc_to_docx(input_path, output_path=None):
     input_path = Path(input_path)
@@ -49,8 +51,8 @@ def clean_content(text):
 
 def generate_id(full_path_title):
     """Generate unique ID from full path title using SHA256."""
-    return hashlib.sha256(full_path_title.encode('utf-8')).hexdigest()
-
+    # return hashlib.sha256(full_path_title.encode('utf-8')).hexdigest()
+    return ObjectId()
 
 def strip_markdown_formatting(text):
     """
