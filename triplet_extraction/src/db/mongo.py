@@ -106,7 +106,7 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
     relations_collection = db["relations"]
     triplets_collection = db["triplets"]
 
-    document_id = metadata['document_id']
+    section_id = metadata['section_id']
     document_number = metadata['document_number']
 
     triplets_to_insert = []
@@ -120,9 +120,9 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
             continue
 
         # Get or create concept and relation IDs
-        subject_id = get_or_create_concept(concepts_collection, c1_name, document_id, document_number, synonym_dict)
-        relation_id = get_or_create_relation(relations_collection, r_name, document_id, document_number, synonym_dict)
-        object_id = get_or_create_concept(concepts_collection, c2_name, document_id, document_number, synonym_dict)
+        subject_id = get_or_create_concept(concepts_collection, c1_name, section_id, document_number, synonym_dict)
+        relation_id = get_or_create_relation(relations_collection, r_name, section_id, document_number, synonym_dict)
+        object_id = get_or_create_concept(concepts_collection, c2_name, section_id, document_number, synonym_dict)
 
         # Create triplet with names
         triplet_doc = {
@@ -133,7 +133,7 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
             "subject_name": c1_name,
             "relation_name": r_name,
             "object_name": c2_name,
-            "document_id": document_id,
+            "section_id": section_id,
             "document_number": document_number
         }
         triplets_to_insert.append(triplet_doc)
@@ -143,6 +143,14 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
 
     return len(triplets_to_insert)
 
+def extract_all_from_mongo_collection(collection):
+    """Returns a cursor that yields documents one at a time"""
+    projection = {
+        'section_id': 1,
+        'so_hieu': 1,
+        'content': 1
+    }
+    return collection.find({}, projection)
 
 def delete_all_mongo(db):
     """Delete all documents from all collections"""

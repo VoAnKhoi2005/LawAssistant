@@ -1,5 +1,5 @@
-from graph.src.triplet_extraction.utils import is_valid_term, clean_text
-from graph.src.triplet_extraction import parsing_result
+from triplet_extraction.src.triplet_extraction.utils import is_valid_term, clean_text
+from triplet_extraction.src.triplet_extraction import parsing_result
 
 def parse_dataframe_to_tokens(df):
     """Convert DataFrame to a list of token dicts"""
