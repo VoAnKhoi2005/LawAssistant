@@ -24,80 +24,58 @@ def get_or_create_concept(concepts_collection, name, document_id, document_numbe
     """Get existing concept or create new one, adding document reference
     Also checks synonyms to find existing concepts"""
 
-    # First try to find by exact name
-    concept = concepts_collection.find_one({"name": name})
-
-    # If not found, try to find by synonym
-    if not concept:
-        concept = concepts_collection.find_one({"synonym": name})
-
     doc_ref = {"document_id": document_id, "document_number": document_number}
+    
+    # Get synonyms list from synonym_dict if available
+    synonyms = []
+    if synonym_dict and 'synonyms' in synonym_dict and name in synonym_dict['synonyms']:
+        synonyms = synonym_dict['synonyms'][name]
 
-    if concept:
-        # Update existing concept: add document if not already present
-        concepts_collection.update_one(
-            {"_id": concept["_id"]},
-            {
-                "$addToSet": {"documents": doc_ref}
+    # Use upsert with $setOnInsert to avoid race conditions and reduce DB calls
+    result = concepts_collection.find_one_and_update(
+        {"$or": [{"name": name}, {"synonym": name}]},
+        {
+            "$addToSet": {"documents": doc_ref},
+            "$setOnInsert": {
+                "name": name,
+                "synonym": synonyms,
+                "description": None
             }
-        )
-        return concept["_id"]
-    else:
-        # Get synonyms list from synonym_dict if available
-        synonyms = []
-        if synonym_dict and 'synonyms' in synonym_dict and name in synonym_dict['synonyms']:
-            synonyms = synonym_dict['synonyms'][name]
-
-        # Create new concept
-        new_concept = {
-            "_id": ObjectId(),
-            "name": name,
-            "documents": [doc_ref],
-            "synonym": synonyms,
-            "description": None
-        }
-        concepts_collection.insert_one(new_concept)
-        return new_concept["_id"]
+        },
+        upsert=True,
+        return_document=pymongo.ReturnDocument.AFTER
+    )
+    
+    return result["_id"]
 
 
 def get_or_create_relation(relations_collection, name, document_id, document_number, synonym_dict=None):
     """Get existing relation or create new one, adding document reference
     Also checks synonyms to find existing relations"""
 
-    # First try to find by exact name
-    relation = relations_collection.find_one({"name": name})
-
-    # If not found, try to find by synonym
-    if not relation:
-        relation = relations_collection.find_one({"synonym": name})
-
     doc_ref = {"document_id": document_id, "document_number": document_number}
+    
+    # Get synonyms list from synonym_dict if available
+    synonyms = []
+    if synonym_dict and 'synonyms' in synonym_dict and name in synonym_dict['synonyms']:
+        synonyms = synonym_dict['synonyms'][name]
 
-    if relation:
-        # Update existing relation: add document if not already present
-        relations_collection.update_one(
-            {"_id": relation["_id"]},
-            {
-                "$addToSet": {"documents": doc_ref}
+    # Use upsert with $setOnInsert to avoid race conditions and reduce DB calls
+    result = relations_collection.find_one_and_update(
+        {"$or": [{"name": name}, {"synonym": name}]},
+        {
+            "$addToSet": {"documents": doc_ref},
+            "$setOnInsert": {
+                "name": name,
+                "synonym": synonyms,
+                "description": None
             }
-        )
-        return relation["_id"]
-    else:
-        # Get synonyms list from synonym_dict if available
-        synonyms = []
-        if synonym_dict and 'synonyms' in synonym_dict and name in synonym_dict['synonyms']:
-            synonyms = synonym_dict['synonyms'][name]
-
-        # Create new relation
-        new_relation = {
-            "_id": ObjectId(),
-            "name": name,
-            "documents": [doc_ref],
-            "synonym": synonyms,
-            "description": None
-        }
-        relations_collection.insert_one(new_relation)
-        return new_relation["_id"]
+        },
+        upsert=True,
+        return_document=pymongo.ReturnDocument.AFTER
+    )
+    
+    return result["_id"]
 
 
 def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
@@ -144,13 +122,14 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
     return len(triplets_to_insert)
 
 def extract_all_from_mongo_collection(collection):
-    """Returns a cursor that yields documents one at a time"""
+    """Returns a cursor that yields documents one at a time.
+    Uses batch_size to prevent memory overflow."""
     projection = {
         'section_id': 1,
         'so_hieu': 1,
         'content': 1
     }
-    return collection.find({}, projection)
+    return collection.find({}, projection).batch_size(100)
 
 def delete_all_mongo(db):
     """Delete all documents from all collections"""

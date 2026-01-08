@@ -237,12 +237,8 @@ def extract_verbs(vp_tokens):
     }], filtered_tokens
 
 def extract_objects(vp_tokens, verb_token):
-    # Remove verb tokens from vp_tokens
-    for v in verb_token:
-        for t in vp_tokens:
-            if t['id'] == v['id']:
-                vp_tokens.remove(t)
-                break
+    # Remove verb tokens from vp_tokens (make a copy to avoid modifying during iteration)
+    vp_tokens = [t for t in vp_tokens if t['id'] not in [v['id'] for v in verb_token]]
 
     if not vp_tokens:
         return []
@@ -392,24 +388,30 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
 
     for subj, verb, obj in triplets:
         # Refine subject
-        subj_annotation = phoNLP_model.annotate(text=subj)
-        df_subj = parsing_result(subj_annotation)
-        refined_subj_triplets = process_sentence(df_subj, logger)
-        if refined_subj_triplets:
-            # Replace subject with first refined subject
-            subj_refined = refined_subj_triplets[0][0]
-        else:
+        try:
+            subj_annotation = phoNLP_model.annotate(text=subj)
+            df_subj = parsing_result(subj_annotation)
+            refined_subj_triplets = process_sentence(df_subj, logger)
+            if refined_subj_triplets and len(refined_subj_triplets) > 0 and len(refined_subj_triplets[0]) > 0:
+                subj_refined = refined_subj_triplets[0][0]
+            else:
+                subj_refined = subj
+        except (IndexError, Exception):
             subj_refined = subj
+            refined_subj_triplets = []
 
         # Refine object
-        obj_annotation = phoNLP_model.annotate(text=obj)
-        df_obj = parsing_result(obj_annotation)
-        refined_obj_triplets = process_sentence(df_obj, logger)
-        if refined_obj_triplets:
-            # Replace object with first refined object
-            obj_refined = refined_obj_triplets[0][0]
-        else:
+        try:
+            obj_annotation = phoNLP_model.annotate(text=obj)
+            df_obj = parsing_result(obj_annotation)
+            refined_obj_triplets = process_sentence(df_obj, logger)
+            if refined_obj_triplets and len(refined_obj_triplets) > 0 and len(refined_obj_triplets[0]) > 0:
+                obj_refined = refined_obj_triplets[0][0]
+            else:
+                obj_refined = obj
+        except (IndexError, Exception):
             obj_refined = obj
+            refined_obj_triplets = []
 
         all_triplets.append((subj_refined, verb, obj_refined))
         all_triplets.extend(refined_subj_triplets)
