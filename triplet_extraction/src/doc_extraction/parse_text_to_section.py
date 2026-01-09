@@ -6,6 +6,7 @@ from triplet_extraction.src.doc_extraction.utils import clean_content, generate_
 PHAN_PATTERN = r"^phần\s+thứ"
 CHUONG_PATTERN = r"^chương\s+[ivxlcdm\d]+"
 MUC_PATTERN = r"^mục\s+[ivxlcdm\d]+"
+TIEU_MUC_PATTERN = r"^tiểu\s+mục\s+\d+"
 DIEU_PATTERN = r"^điều\s+[ivxlcdm\d]+\s*[.:]?"
 PHU_LUC_PATTERN = r"^(phụ\s+lục)(?:\s+([ivxlcdm\d]+))?(?:[.\s]+(.*))?$"
 
@@ -14,6 +15,7 @@ MARKER_PATTERNS = [
     PHAN_PATTERN,
     CHUONG_PATTERN,
     MUC_PATTERN,
+    TIEU_MUC_PATTERN,
     PHU_LUC_PATTERN,
     r"^\d+\.\s+",
     r"^[a-zA-ZđĐ]\)\s+",
@@ -46,6 +48,7 @@ def prev_line_ends_sentence(lines, current_index, sentence_endings):
             or re.match(PHAN_PATTERN, lower)
             or re.match(CHUONG_PATTERN, lower)
             or re.match(MUC_PATTERN, lower)
+            or re.match(TIEU_MUC_PATTERN, lower)
         ):
             return True
 
@@ -58,6 +61,7 @@ def prev_line_ends_sentence(lines, current_index, sentence_endings):
             re.match(PHAN_PATTERN, lower)
             or re.match(CHUONG_PATTERN, lower)
             or re.match(MUC_PATTERN, lower)
+            or re.match(TIEU_MUC_PATTERN, lower)
         ):
             return True
     return False
@@ -108,7 +112,7 @@ def collect_content(output_text, start_index):
 def parse_document(input_text, so_hieu):
     """
     Parse Vietnamese legal document structure and store in database.
-    Handles hierarchy: Phần thứ (Part) -> Chương (Chapter) -> Mục (Section) -> Điều (Article)
+    Handles hierarchy: Phần thứ (Part) -> Chương (Chapter) -> Mục (Section) -> Tiểu mục (Subsection) -> Điều (Article)
     -> Khoản (Clause) -> Điểm (Point) and Phụ lục (Appendix).
 
     Edge case: Documents without parts/chapters are supported - elements will be
@@ -124,8 +128,8 @@ def parse_document(input_text, so_hieu):
     index = 0
     result = {}
     # Track current parent IDs and titles for hierarchy
-    phan_id = chuong_id = muc_id = dieu_id = khoan_id = phu_luc_id = None
-    phan_title = chuong_title = muc_title = dieu_title = khoan_title = phu_luc_title = ""
+    phan_id = chuong_id = muc_id = tieu_muc_id = dieu_id = khoan_id = phu_luc_id = None
+    phan_title = chuong_title = muc_title = tieu_muc_title = dieu_title = khoan_title = phu_luc_title = ""
 
     last_article_num = 0  # Track last article number for validation
     
@@ -167,10 +171,10 @@ def parse_document(input_text, so_hieu):
                 "type": "phụ_lục",
             }
 
-            # Reset hierarchy (Phụ lục KHÔNG kế thừa Phần/Chương/Mục/Điều)
+            # Reset hierarchy (Phụ lục KHÔNG kế thừa Phần/Chương/Mục/Tiểu mục/Điều)
             phu_luc_title = title
-            phan_id = chuong_id = muc_id = dieu_id = khoan_id = None
-            phan_title = chuong_title = muc_title = dieu_title = khoan_title = ""
+            phan_id = chuong_id = muc_id = tieu_muc_id = dieu_id = khoan_id = None
+            phan_title = chuong_title = muc_title = tieu_muc_title = dieu_title = khoan_title = ""
             continue
 
         # ---- Phần thứ (Part) ----
@@ -212,8 +216,8 @@ def parse_document(input_text, so_hieu):
 
             # Reset hierarchy
             phan_title = title
-            chuong_id = muc_id = dieu_id = khoan_id = None
-            chuong_title = muc_title = dieu_title = khoan_title = ""
+            chuong_id = muc_id = tieu_muc_id = dieu_id = khoan_id = None
+            chuong_title = muc_title = tieu_muc_title = dieu_title = khoan_title = ""
             continue
 
         # ---- Chương (Chapter) ----
@@ -252,8 +256,8 @@ def parse_document(input_text, so_hieu):
 
             # Reset hierarchy
             chuong_title = title
-            muc_id = dieu_id = khoan_id = None
-            muc_title = dieu_title = khoan_title = ""
+            muc_id = tieu_muc_id = dieu_id = khoan_id = None
+            muc_title = tieu_muc_title = dieu_title = khoan_title = ""
             continue
 
         # ---- Mục (Section) ----
@@ -302,6 +306,64 @@ def parse_document(input_text, so_hieu):
 
             # Reset hierarchy
             muc_title = title
+            tieu_muc_id = dieu_id = khoan_id = None
+            tieu_muc_title = dieu_title = khoan_title = ""
+            continue
+
+        # ---- Tiểu mục (Subsection) ----
+        match = re.match(r"^(tiểu\s+mục\s+\d+)(?:[.\s]+(.*))?", line.lower())
+        if match:
+            title = match.group(1).strip()
+            inline_content = match.group(2).strip() if match.group(2) else ""
+
+            # Collect following content
+            extra_content, index = collect_content(text, index + 1)
+            content = inline_content
+            if extra_content:
+                content = f"{content}\n{extra_content}" if content else extra_content
+            content = clean_content(content)
+
+            if phu_luc_id:
+                parent_id = phu_luc_id
+            else:
+                parent_id = muc_id
+
+            # Build path considering hierarchy
+            if phan_title:
+                if chuong_title:
+                    if muc_title:
+                        full_path = f"{so_hieu}_{phan_title}_{chuong_title}_{muc_title}_{title}"
+                    else:
+                        full_path = f"{so_hieu}_{phan_title}_{chuong_title}_{title}"
+                else:
+                    full_path = f"{so_hieu}_{phan_title}_{title}"
+            elif chuong_title:
+                if muc_title:
+                    full_path = f"{so_hieu}_{chuong_title}_{muc_title}_{title}"
+                else:
+                    full_path = f"{so_hieu}_{chuong_title}_{title}"
+            elif muc_title:
+                full_path = f"{so_hieu}_{muc_title}_{title}"
+            elif phu_luc_title:
+                full_path = f"{so_hieu}_{phu_luc_title}_{title}"
+            else:
+                full_path = f"{so_hieu}_{title}"
+
+            tieu_muc_id = generate_id(full_path)
+            result[tieu_muc_id] = {
+                "id": tieu_muc_id,
+                "title": title,
+                "content": content,
+                "parent_id": parent_id,
+                "so_hieu": so_hieu,
+                "full_path": full_path,
+                "type": "tiểu_mục",
+                "is_amendment": False,
+                "is_phu_luc": phu_luc_id is not None
+            }
+
+            # Reset hierarchy
+            tieu_muc_title = title
             dieu_id = khoan_id = None
             dieu_title = khoan_title = ""
             continue
@@ -342,7 +404,9 @@ def parse_document(input_text, so_hieu):
                 content = f"{content}\n{extra_content}" if content else extra_content
             content = clean_content(content)
 
-            if muc_id:
+            if tieu_muc_id:
+                parent_id = tieu_muc_id
+            elif muc_id:
                 parent_id = muc_id
             elif phu_luc_id:
                 parent_id = phu_luc_id
@@ -364,6 +428,8 @@ def parse_document(input_text, so_hieu):
 
             if muc_title:
                 parent_path += f"_{muc_title}"
+            if tieu_muc_title:
+                parent_path += f"_{tieu_muc_title}"
 
             full_path = f"{parent_path}_{title}"
             dieu_id = generate_id(full_path)
@@ -404,6 +470,8 @@ def parse_document(input_text, so_hieu):
 
             if dieu_id:
                 parent_id = dieu_id
+            elif tieu_muc_id:
+                parent_id = tieu_muc_id
             elif muc_id:
                 parent_id = muc_id
             elif phu_luc_id:
@@ -426,6 +494,8 @@ def parse_document(input_text, so_hieu):
 
             if muc_title:
                 parent_path += f"_{muc_title}"
+            if tieu_muc_title:
+                parent_path += f"_{tieu_muc_title}"
             parent_path += f"_{dieu_title}"
 
             full_path = f"{parent_path}_{title}"
@@ -476,6 +546,8 @@ def parse_document(input_text, so_hieu):
 
             if muc_title:
                 parent_path += f"_{muc_title}"
+            if tieu_muc_title:
+                parent_path += f"_{tieu_muc_title}"
             parent_path += f"_{dieu_title}_{khoan_title}"
 
             full_path = f"{parent_path}_{title}"
