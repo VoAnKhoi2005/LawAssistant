@@ -15,12 +15,15 @@ def collect_content(output_text, start_index):
     # Define opening and closing quote characters
     OPENING_QUOTES = ('"', '"', '“', '「', '『')
     CLOSING_QUOTES = ('"', '"', '”', '」', '』')
-    ALL_QUOTES = OPENING_QUOTES + CLOSING_QUOTES + ('"',)  # ASCII can be either
+    SENTENCE_ENDINGS = ('.', '。', '!', '?', ':', ';', '」', '』', '"', '"', ')', ']')
 
     while i < len(output_text):
         next_line = output_text[i].strip()
 
         if next_line:
+            # 🔑 snapshot trạng thái quote TRƯỚC dòng này
+            in_quotes_before = in_quotes
+
             # Process each character to track quote state
             for char in next_line:
                 if char in OPENING_QUOTES:
@@ -31,7 +34,8 @@ def collect_content(output_text, start_index):
                     in_quotes = not in_quotes
 
             # Only check for structural markers when NOT inside quotes
-            if not in_quotes:
+            # ⚠️ dùng trạng thái TRƯỚC dòng
+            if not in_quotes_before:
                 lower_line = next_line.lower()
                 if (re.match(r"^điều\s+[ivxlcdm]+\s*[.:]?", lower_line)
                         or re.match(r"^điều\s+\d+\s*[.:]?", lower_line)
@@ -39,8 +43,8 @@ def collect_content(output_text, start_index):
                         or re.match(r"^chương\s+\d+", lower_line)
                         or re.match(r"^mục\s+[ivxlcdm]+", lower_line)
                         or re.match(r"^mục\s+\d+", lower_line)
-                        or re.match(r"^phụ\s+lục\s+[ivxlcdm]+\s*[.:]?", lower_line)  # Phụ lục XI
-                        or re.match(r"^phụ\s+lục\s+\d+\s*[.:]?", lower_line)  # Phụ lục 1
+                        or re.match(r"^phụ\s+lục\s+[ivxlcdm]+\s*[.:]?", lower_line)
+                        or re.match(r"^phụ\s+lục\s+\d+\s*[.:]?", lower_line)
                         or re.match(r"^\d+\.\s+", next_line)
                         or re.match(r"^[a-zA-ZđĐ]\)\s+", next_line)):
                     break
