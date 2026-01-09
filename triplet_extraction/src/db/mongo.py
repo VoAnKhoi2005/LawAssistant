@@ -126,6 +126,7 @@ def extract_all_from_mongo_collection(collection):
     Uses batch_size to prevent memory overflow."""
     projection = {
         'section_id': 1,
+        'sequence': 1,
         'so_hieu': 1,
         'content': 1
     }

@@ -251,6 +251,9 @@ def extract_objects(vp_tokens, verb_token):
         obj_token = next((t for t in vp_tokens if t['pos'] == 'N'), None)
 
     if obj_token is None:
+        obj_token = next((t for t in vp_tokens if (t['deprel'] == 'vmod' or t['pos'] == 'A')), None)
+
+    if obj_token is None:
         return []
 
     # Collect main object and its dependents
@@ -382,6 +385,7 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
     # Annotate text
     annotation = phoNLP_model.annotate(text=segmented_text[0])
     df = parsing_result(annotation)
+    print(df.to_string(index=False))
 
     triplets = process_sentence(df, logger)
     all_triplets = []

@@ -18,8 +18,8 @@ def main():
     phonlp_dir = os.path.join(current_dir, "nlp_models", "phonlp")
     synonym_file = os.path.join(current_dir, "listSameKey.txt")
     stopwords_file = os.path.join(current_dir, "stopwords.csv")
-    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_1.csv")
-    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction.txt")
+    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_2.csv")
+    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction_08_01_2026.txt")
 
     # === Initialize MongoDB ===
     mongo_client = init_mongo()
@@ -39,7 +39,7 @@ def main():
     os.makedirs(os.path.dirname(no_triplet_csv_path), exist_ok=True)
     no_triplet_file = open(no_triplet_csv_path, "w", newline="", encoding="utf-8")
     csv_writer = csv.writer(no_triplet_file)
-    csv_writer.writerow(["section_id", "document_number", "sentence"])
+    csv_writer.writerow(["section_id", "document_number", "sequence", "sentence"])
 
     # === Setup logger ===
     os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
@@ -64,7 +64,7 @@ def main():
     start_time = time.time()
 
     try:
-        reprocess_no_triplet = False
+        reprocess_no_triplet = True
         if not reprocess_no_triplet:
             print("Đang xóa cơ sở dữ liệu cũ...")
             delete_all_mongo(db)
@@ -78,19 +78,29 @@ def main():
         else:
             print("Đang đọc các câu chưa có triplet từ CSV...")
             rows = []
-            prev_csv_path = os.path.join(base_dir, "graph", "logs", "no_triplets_dat_dai_log_1.csv")
+            prev_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_1.csv")
             with open(prev_csv_path, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     rows.append({
                         "section_id": row["section_id"],
                         "so_hieu": row["document_number"],
+                        "sequence": row["sequence"],
                         "content": row["sentence"]
                     })
             print(f"Tìm thấy {len(rows)} hàng để xử lý.\n")
             rows_iterator = tqdm(rows, desc="Đang xử lý văn bản", unit="văn bản")
 
         for i, row in enumerate(rows_iterator, 1):
+            section_id = row["section_id"]
+            sequence_number = row.get("sequence", 0)
+            section = db["legal_sections"].find_one({"_id": ObjectId(section_id)})
+            if not section:
+                continue
+
+            if section.get("is_amendment", False):
+                continue
+
             sentence = row['content']
             if not sentence or not sentence.strip():
                 continue
@@ -101,13 +111,14 @@ def main():
             }
 
             try:
+                logger.debug(f"Processing section_id: {section_id}, sequence {sequence_number}")
                 triplets = triplet_extraction(
                     text=sentence,
                     vncorenlp_client=vncorenlp_client,
                     phoNLP_model=phoNLP_model,
                     stopwords=stopwords,
                     logger=logger,
-                    max_depth=4,
+                    max_depth=3,
                 )
 
                 triplets_list = [
@@ -142,7 +153,7 @@ def main():
                         logger.error(f"Insert error for {doc_metadata['section_id']}: {e}")
                 else:
                     total_no_triplets += 1
-                    csv_writer.writerow([doc_metadata['section_id'], doc_metadata['document_number'], sentence])
+                    csv_writer.writerow([doc_metadata['section_id'], doc_metadata['document_number'], sequence_number, sentence])
 
                 total_processed += 1
 

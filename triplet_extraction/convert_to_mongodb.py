@@ -86,8 +86,6 @@ def main():
                 section_data["document_title"] = clean_title(title)
                 section_data["effective_date"] = effective_date
                 section_data["source_file"] = source_files
-                
-                # Use custom string ID instead of MongoDB ObjectId
                 section_data["_id"] = section_id
 
                 # Use upsert to insert or update based on _id (custom string)

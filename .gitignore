@@ -98,3 +98,4 @@ Thumbs.db
 *.zip
 copilot.exe
 triplet_extraction/logs/dat_dai_triplet_extraction.txt
+triplet_extraction/logs/dat_dai_triplet_extraction_08_01_2026.txt

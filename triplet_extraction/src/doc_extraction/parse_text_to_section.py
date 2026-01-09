@@ -62,6 +62,12 @@ def parse_document(input_text, so_hieu):
     Edge case: Documents without chapters are supported - elements will be
     organized directly under the document (so_hieu).
     """
+
+    AMENDMENT_PATTERN = re.compile(
+        r"^\s*(sửa đổi|bổ sung|bãi bỏ|thay thế)\b",
+        flags=re.IGNORECASE
+    )
+
     text = [line.strip() for line in input_text.splitlines() if line.strip()]
     index = 0
     result = {}
@@ -220,7 +226,9 @@ def parse_document(input_text, so_hieu):
             content = parts[1].strip() if len(parts) > 1 else ""
             
             # Check if this is an amendment article (e.g., "Sửa đổi, bổ sung")
-            is_amendment = bool(re.search(r"sửa đổi|bổ sung|bãi bỏ|thay thế", content.lower()))
+            is_amendment = bool(AMENDMENT_PATTERN.search(content))
+
+            # Check if this is under an appendix
             is_phu_luc = phu_luc_id is not None
 
             extra_content, index = collect_content(text, index + 1)
@@ -274,7 +282,8 @@ def parse_document(input_text, so_hieu):
             title = f"khoản {title_num}"
 
             # Check if this is an amendment article (e.g., "Sửa đổi, bổ sung")
-            is_amendment = bool(re.search(r"sửa đổi|bổ sung|bãi bỏ|thay thế", content.lower()))
+            is_amendment = bool(AMENDMENT_PATTERN.search(content))
+
             is_phu_luc = phu_luc_id is not None
             
             extra_content, index = collect_content(text, index + 1)
@@ -329,7 +338,8 @@ def parse_document(input_text, so_hieu):
             title = f"điểm {letter}"
 
             # Check if this is an amendment article (e.g., "Sửa đổi, bổ sung")
-            is_amendment = bool(re.search(r"sửa đổi|bổ sung|bãi bỏ|thay thế", content.lower()))
+            is_amendment = bool(AMENDMENT_PATTERN.search(content))
+
             is_phu_luc = phu_luc_id is not None
             
             extra_content, index = collect_content(text, index + 1)
