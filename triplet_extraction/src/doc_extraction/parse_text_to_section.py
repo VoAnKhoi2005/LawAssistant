@@ -131,7 +131,35 @@ def parse_document(input_text, so_hieu):
     phan_id = chuong_id = muc_id = tieu_muc_id = dieu_id = khoan_id = phu_luc_id = None
     phan_title = chuong_title = muc_title = tieu_muc_title = dieu_title = khoan_title = phu_luc_title = ""
 
+    # Track full_path occurrences to ensure uniqueness
+    full_path_counts = {}
+
     last_article_num = 0  # Track last article number for validation
+    
+    def make_unique_path(base_path):
+        """Ensure full_path is unique by adding suffix if needed."""
+        if base_path not in full_path_counts:
+            full_path_counts[base_path] = 0
+            return base_path
+        else:
+            # Path already exists, need to add suffix to both
+            full_path_counts[base_path] += 1
+            count = full_path_counts[base_path]
+            
+            # Update the existing entry with suffix if it's the first duplicate
+            if count == 1:
+                # Find and update the original entry
+                for entry_id, entry in result.items():
+                    if entry.get("full_path") == base_path:
+                        new_path = f"{base_path}_1"
+                        entry["full_path"] = new_path
+                        entry["id"] = generate_id(new_path)
+                        # Update result dict key
+                        result[entry["id"]] = result.pop(entry_id)
+                        break
+            
+            # Return new path with incremented suffix
+            return f"{base_path}_{count + 1}"
     
     while index < len(text):
         line = text[index].strip()
@@ -158,7 +186,8 @@ def parse_document(input_text, so_hieu):
 
             content = clean_content("\n".join(content_parts))
 
-            full_path = f"{so_hieu}_{title}"
+            base_path = f"{so_hieu}_{title}"
+            full_path = make_unique_path(base_path)
             phu_luc_id = generate_id(full_path)
 
             result[phu_luc_id] = {
@@ -201,7 +230,8 @@ def parse_document(input_text, so_hieu):
                 content = f"{content}\n{extra_content}" if content else extra_content
             content = clean_content(content)
 
-            full_path = f"{so_hieu}_{title}"
+            base_path = f"{so_hieu}_{title}"
+            full_path = make_unique_path(base_path)
             phan_id = generate_id(full_path)
             result[phan_id] = {
                 "id": phan_id,
@@ -238,10 +268,11 @@ def parse_document(input_text, so_hieu):
 
             # Build path considering no part case
             if phan_title:
-                full_path = f"{so_hieu}_{phan_title}_{title}"
+                base_path = f"{so_hieu}_{phan_title}_{title}"
             else:
-                full_path = f"{so_hieu}_{title}"
+                base_path = f"{so_hieu}_{title}"
 
+            full_path = make_unique_path(base_path)
             chuong_id = generate_id(full_path)
             result[chuong_id] = {
                 "id": chuong_id,
@@ -281,16 +312,17 @@ def parse_document(input_text, so_hieu):
             # Build path considering hierarchy
             if phan_title:
                 if chuong_title:
-                    full_path = f"{so_hieu}_{phan_title}_{chuong_title}_{title}"
+                    base_path = f"{so_hieu}_{phan_title}_{chuong_title}_{title}"
                 else:
-                    full_path = f"{so_hieu}_{phan_title}_{title}"
+                    base_path = f"{so_hieu}_{phan_title}_{title}"
             elif chuong_title:
-                full_path = f"{so_hieu}_{chuong_title}_{title}"
+                base_path = f"{so_hieu}_{chuong_title}_{title}"
             elif phu_luc_title:
-                full_path = f"{so_hieu}_{phu_luc_title}_{title}"
+                base_path = f"{so_hieu}_{phu_luc_title}_{title}"
             else:
-                full_path = f"{so_hieu}_{title}"
+                base_path = f"{so_hieu}_{title}"
 
+            full_path = make_unique_path(base_path)
             muc_id = generate_id(full_path)
             result[muc_id] = {
                 "id": muc_id,
@@ -332,23 +364,24 @@ def parse_document(input_text, so_hieu):
             if phan_title:
                 if chuong_title:
                     if muc_title:
-                        full_path = f"{so_hieu}_{phan_title}_{chuong_title}_{muc_title}_{title}"
+                        base_path = f"{so_hieu}_{phan_title}_{chuong_title}_{muc_title}_{title}"
                     else:
-                        full_path = f"{so_hieu}_{phan_title}_{chuong_title}_{title}"
+                        base_path = f"{so_hieu}_{phan_title}_{chuong_title}_{title}"
                 else:
-                    full_path = f"{so_hieu}_{phan_title}_{title}"
+                    base_path = f"{so_hieu}_{phan_title}_{title}"
             elif chuong_title:
                 if muc_title:
-                    full_path = f"{so_hieu}_{chuong_title}_{muc_title}_{title}"
+                    base_path = f"{so_hieu}_{chuong_title}_{muc_title}_{title}"
                 else:
-                    full_path = f"{so_hieu}_{chuong_title}_{title}"
+                    base_path = f"{so_hieu}_{chuong_title}_{title}"
             elif muc_title:
-                full_path = f"{so_hieu}_{muc_title}_{title}"
+                base_path = f"{so_hieu}_{muc_title}_{title}"
             elif phu_luc_title:
-                full_path = f"{so_hieu}_{phu_luc_title}_{title}"
+                base_path = f"{so_hieu}_{phu_luc_title}_{title}"
             else:
-                full_path = f"{so_hieu}_{title}"
+                base_path = f"{so_hieu}_{title}"
 
+            full_path = make_unique_path(base_path)
             tieu_muc_id = generate_id(full_path)
             result[tieu_muc_id] = {
                 "id": tieu_muc_id,
@@ -431,7 +464,8 @@ def parse_document(input_text, so_hieu):
             if tieu_muc_title:
                 parent_path += f"_{tieu_muc_title}"
 
-            full_path = f"{parent_path}_{title}"
+            base_path = f"{parent_path}_{title}"
+            full_path = make_unique_path(base_path)
             dieu_id = generate_id(full_path)
             result[dieu_id] = {
                 "id": dieu_id,
@@ -498,7 +532,8 @@ def parse_document(input_text, so_hieu):
                 parent_path += f"_{tieu_muc_title}"
             parent_path += f"_{dieu_title}"
 
-            full_path = f"{parent_path}_{title}"
+            base_path = f"{parent_path}_{title}"
+            full_path = make_unique_path(base_path)
             khoan_id = generate_id(full_path)
             result[khoan_id] = {
                 "id": khoan_id,
@@ -550,7 +585,8 @@ def parse_document(input_text, so_hieu):
                 parent_path += f"_{tieu_muc_title}"
             parent_path += f"_{dieu_title}_{khoan_title}"
 
-            full_path = f"{parent_path}_{title}"
+            base_path = f"{parent_path}_{title}"
+            full_path = make_unique_path(base_path)
             diem_id = generate_id(full_path)
             result[diem_id] = {
                 "id": diem_id,

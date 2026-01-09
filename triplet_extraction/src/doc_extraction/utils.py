@@ -51,8 +51,7 @@ def clean_content(text):
 
 def generate_id(full_path_title):
     """Generate unique ID from full path title using SHA256."""
-    # return hashlib.sha256(full_path_title.encode('utf-8')).hexdigest()
-    return ObjectId()
+    return hashlib.sha256(full_path_title.encode('utf-8')).hexdigest()
 
 def strip_markdown_formatting(text):
     """
