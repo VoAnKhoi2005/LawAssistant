@@ -33,7 +33,7 @@ def main():
     sections_collection.create_index("full_path")
 
     # Read the extracted texts CSV
-    extracted_csv = data_folder / "extracted_texts_google.csv"
+    extracted_csv = data_folder / "extracted_texts_google_fixed_v1.csv"
     df = pd.read_csv(extracted_csv, encoding='utf-8-sig')
 
     print(f"Loaded {len(df)} documents from CSV")
