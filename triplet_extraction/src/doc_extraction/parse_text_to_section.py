@@ -3,7 +3,7 @@ import re
 from triplet_extraction.src.doc_extraction.utils import clean_content, generate_id
 
 # Define reusable regex patterns
-PHAN_PATTERN = r"^phần\s+thứ\s+(?:nhất|hai|ba|tư|năm|sáu|bảy|tám|chín|mười|mười\s+một|mười\s+hai|mười\s+ba|mười\s+bốn|mười\s+lăm|mười\s+sáu|mười\s+bẩy|mười\s+tám|mười\s+chín|hai\s+mươi)"
+PHAN_PATTERN = r"^phần\s+thứ"
 CHUONG_PATTERN = r"^chương\s+[ivxlcdm\d]+"
 MUC_PATTERN = r"^mục\s+[ivxlcdm\d]+"
 DIEU_PATTERN = r"^điều\s+[ivxlcdm\d]+\s*[.:]?"
@@ -174,10 +174,21 @@ def parse_document(input_text, so_hieu):
             continue
 
         # ---- Phần thứ (Part) ----
-        match = re.match(f"{PHAN_PATTERN}(?:[.\\s]+(.*))?", line.lower())
-        if match:
-            title = match.group(1).strip()
-            inline_content = match.group(2).strip() if match.group(2) else ""
+        if re.match(PHAN_PATTERN, line.lower()):
+            # Extract the full title from the line (everything until content or newline)
+            parts = line.split('.', 1)  # Split at first dot if exists
+            if len(parts) > 1:
+                title = parts[0].strip().lower()
+                inline_content = parts[1].strip()
+            else:
+                # Check if there's a colon or just whitespace separation
+                title_match = re.match(r'^([^\n:]+?)(?:[:]\s*(.*))?$', line, re.IGNORECASE)
+                if title_match:
+                    title = title_match.group(1).strip().lower()
+                    inline_content = title_match.group(2).strip() if title_match.group(2) else ""
+                else:
+                    title = line.strip().lower()
+                    inline_content = ""
 
             # Collect following content
             extra_content, index = collect_content(text, index + 1)
