@@ -20,11 +20,11 @@ def init_mongo(uri=None):
         return None
 
 
-def get_or_create_concept(concepts_collection, name, document_id, document_number, synonym_dict=None):
+def get_or_create_concept(concepts_collection, name, section_id, document_number, synonym_dict=None):
     """Get existing concept or create new one, adding document reference
     Also checks synonyms to find existing concepts"""
 
-    doc_ref = {"document_id": document_id, "document_number": document_number}
+    doc_ref = {"section_id": section_id, "so_hieu": document_number}
     
     # Get synonyms list from synonym_dict if available
     synonyms = []
@@ -49,11 +49,11 @@ def get_or_create_concept(concepts_collection, name, document_id, document_numbe
     return result["_id"]
 
 
-def get_or_create_relation(relations_collection, name, document_id, document_number, synonym_dict=None):
+def get_or_create_relation(relations_collection, name, section_id, document_number, synonym_dict=None):
     """Get existing relation or create new one, adding document reference
     Also checks synonyms to find existing relations"""
 
-    doc_ref = {"document_id": document_id, "document_number": document_number}
+    doc_ref = {"section_id": section_id, "so_hieu": document_number}
     
     # Get synonyms list from synonym_dict if available
     synonyms = []
@@ -85,7 +85,7 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
     triplets_collection = db["triplets"]
 
     section_id = metadata['section_id']
-    document_number = metadata['document_number']
+    document_number = metadata['so_hieu']
 
     triplets_to_insert = []
 
@@ -112,7 +112,7 @@ def insert_triplet_batch_mongo(db, triplets_list, metadata, synonym_dict=None):
             "relation_name": r_name,
             "object_name": c2_name,
             "section_id": section_id,
-            "document_number": document_number
+            "so_hieu": document_number
         }
         triplets_to_insert.append(triplet_doc)
 

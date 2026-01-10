@@ -1,0 +1,44 @@
+[
+  {
+    "part": 1,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260110_115632_part1.jsonl",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part1_output.jsonl",
+    "resumed": true
+  },
+  {
+    "part": 2,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260110_115632_part2.jsonl",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part2_output.jsonl",
+    "resumed": true
+  },
+  {
+    "part": 3,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260110_115632_part3.jsonl",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part3_output.jsonl",
+    "resumed": true
+  },
+  {
+    "part": 4,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260110_115632_part4.jsonl",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part4_output.jsonl",
+    "resumed": true
+  },
+  {
+    "part": 5,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260110_115632_part5.jsonl",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part5_output.jsonl",
+    "resumed": true
+  },
+  {
+    "part": 6,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260110_115632_part6.jsonl",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part6_output.jsonl",
+    "resumed": true
+  }
+]

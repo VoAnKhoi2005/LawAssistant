@@ -1,0 +1,29 @@
+[
+  {
+    "part": 1,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260109_232451_part1.jsonl",
+    "file_id": "file-N4qbHMRRzJbGQp6eBDH7Af",
+    "batch_id": "batch_69612be1316081908a5ba35f955afc8f",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part1_output.jsonl",
+    "completed_at": "2026-01-10T06:53:32.894172"
+  },
+  {
+    "part": 2,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260109_232451_part2.jsonl",
+    "file_id": "file-WEYeUPYXDmhqh8z7mmeCEu",
+    "batch_id": "batch_696195099f608190b4ecac9496326e97",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part2_output.jsonl",
+    "completed_at": "2026-01-10T07:02:53.097454"
+  },
+  {
+    "part": 3,
+    "file_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_property_law_20260109_232451_part3.jsonl",
+    "file_id": "file-ScKDT1oxDSNKUjDGJrYHJf",
+    "batch_id": "batch_69619738ef748190a73684ead1cd8134",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\triplet_extraction\\batch_preprocessing\\batch_part3_output.jsonl",
+    "completed_at": "2026-01-10T07:23:17.056452"
+  }
+]

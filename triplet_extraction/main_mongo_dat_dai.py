@@ -18,8 +18,8 @@ def main():
     phonlp_dir = os.path.join(current_dir, "nlp_models", "phonlp")
     synonym_file = os.path.join(current_dir, "listSameKey.txt")
     stopwords_file = os.path.join(current_dir, "stopwords.csv")
-    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_2.csv")
-    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction_08_01_2026.txt")
+    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_10_01_2026.csv")
+    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction_10_01_2026.txt")
 
     # === Initialize MongoDB ===
     mongo_client = init_mongo()
@@ -51,7 +51,7 @@ def main():
     )
 
     # Disable console logging (optional)
-    logger.removeHandler(console_handler)
+    # logger.removeHandler(console_handler)
 
     logger.info("Starting triplet extraction...")
     logger.debug("Debug mode enabled")
@@ -64,7 +64,7 @@ def main():
     start_time = time.time()
 
     try:
-        reprocess_no_triplet = True
+        reprocess_no_triplet = False
         if not reprocess_no_triplet:
             print("Đang xóa cơ sở dữ liệu cũ...")
             delete_all_mongo(db)
@@ -94,7 +94,13 @@ def main():
         for i, row in enumerate(rows_iterator, 1):
             section_id = row["section_id"]
             sequence_number = row.get("sequence", 0)
-            section = db["legal_sections"].find_one({"_id": ObjectId(section_id)})
+            
+            # Try to find section by ObjectId first, then by string ID
+            try:
+                section = db["legal_sections"].find_one({"_id": ObjectId(section_id)})
+            except:
+                section = db["legal_sections"].find_one({"_id": section_id})
+            
             if not section:
                 continue
 
@@ -106,7 +112,7 @@ def main():
                 continue
 
             doc_metadata = {
-                'document_number': row.get('so_hieu', 'UNKNOWN'),
+                'so_hieu': row.get('so_hieu', 'UNKNOWN'),
                 'section_id': str(row.get('section_id', row.get('_id', 'UNKNOWN')))
             }
 
@@ -135,6 +141,7 @@ def main():
                             metadata=doc_metadata,
                             synonym_dict=synonym_dict,
                         )
+                        logger.debug(f"Inserted {count} triplets for section_id: {section_id}, sequence {sequence_number}")
                         total_triplets_inserted += count
                         
                         # Update progress bar description with stats
@@ -153,7 +160,7 @@ def main():
                         logger.error(f"Insert error for {doc_metadata['section_id']}: {e}")
                 else:
                     total_no_triplets += 1
-                    csv_writer.writerow([doc_metadata['section_id'], doc_metadata['document_number'], sequence_number, sentence])
+                    csv_writer.writerow([doc_metadata['section_id'], doc_metadata['so_hieu'], sequence_number, sentence])
 
                 total_processed += 1
 
