@@ -1,0 +1,412 @@
+Near-Realtime Knowledge Update on the Legal
+Search Platform
+Dung Dang1,2, Hung Ngo3, Dung A. Tran1,2, Vuong T. Pham4, Hien D. Nguyen1,2,*
+1University of Information Technology, Ho Chi Minh City, Vietnam
+2Vietnam National University, Ho Chi Minh City, Vietnam
+3Technological University of Dublin, Dublin, Ireland
+4Insitute of Data Science and Artificial Intelligence, Ho Chi Minh City, Vietnam
+Email: dungdv@uit.edu.vn, hung.ngo@tudublin.ie, dungta@uit.edu.vn, vuong.pham@sgu.edu.vn, hiennd@uit.edu.vn
+Abstract—Updating legal information is crucial to ensure the Updating legal documents often encounters the following
+accuracy and timeliness of legal regulations. This study intro- situations. Firstly, a new document is issued to completely
+duces a platform capable of updating legal information based on
+replace the content of an old document, such as Decree
+the latest legal documents to swiftly assist users in accessing new
+100/2019/ND-CP1 completely replacing Decree 46/2016/ND-
+regulations during legal inquiries. The platform automatically
+identifies newly enacted content, determines update requirements CP 2. In these cases, the platform does not need to identify
+and changes from these documents, maps specific outdated con- detailed changes for the update but will delete the entire
+tent needing replacement, and updates legal knowledge through content of the old document and represent the new document
+corresponding knowledge graph updates. Experiments have been
+to replace it in the knowledge base.
+conducted, yielding positive results to demonstrate the feasibility
+This research introduces a platform capable of supporting
+of this approach.
+the updating of legal documents when new documents are
+Index Terms—Legal Information, Knowledge Graph, Ontology,
+Knowledge-based systems, Knowledge Update. issued. This platform not only helps accurately identify the
+parts of the content that need to be replaced but also updates
+the information quickly and accurately. In the legal system
+I. INTRODUCTION
+in Vietnam, new legal documents are often issued to adjust,
+Today, AI technology has been widely applied in the amend, or supplement certain points in the old document
+legal field, bringing significant benefits [5]–[7]. In addition, without replacing the entire content. This requires the support
+intelligent legal query systems can support legal decision- platform to have the ability to accurately process and recognize
+making quickly and accurately. These systems help reduce these changes to ensure the legal information is updated
+the workload for humans, while also improving efficiency efficiently and promptly.
+and reliability in handling legal issues [4]. However, queries
+II. RELATED WORK
+and decisions must always be based on the most recent legal
+documents. This requires legal information to be continuously Nowadays, to meet the continuous demand for information
+updated to avoid obsolescence and inaccurate results. updates across various fields, research on knowledge updating
+The platform of this study uses a knowledge graph as the has been conducted [3], yielding several notable results as
+knowledge base for the system [12], [13]. Legal documents are follows:
+organized and represented as a knowledge graph. The ques- [15] proposed a method for updating embeddings in
+tions from end-users are converted into graphs that represent dynamic Knowledge Graphs (KGs). Those graphs undergo
+the semantics of the questions. The platform then searches for frequent changes with the addition or removal of nodes and
+subgraphs in the knowledge base that match the knowledge edges. Instead of recalculating embeddings from scratch after
+graph of the questions to provide answers to the users [13], each minor change, the study focuses on updating only the
+as illustrated in Figure 1. embeddings related to new changes. This approach saves time
+In reality, legal documents are constantly changing, updat- and resources while maintaining the quality of Knowledge
+ing, and improving to keep up with societal developments Graphs as they continue to evolve. However, effective imple-
+and the needs of the people. The process of updating legal mentation of this method requires substantial historical data
+information is diverse, potentially involving the issuance of a on KG changes.
+new document that replaces the entire content of the old one, or Similarly, the authors in [2] built an AIR framework to
+simply adjusting, amending, or supplementing specific parts. adaptively update embeddings for dynamic KGs. This method
+This creates many challenges and difficulties for the process measures the importance score of each triple in the KG
+of updating legal information, which can be time-consuming
+1Decree No. 100/2019/ND-CP on Administrative penalties for road traffic
+and labor-intensive for humans.
+and rail transport offences, 2019
+2Decree No. 46/2016/ND-CP on administrative penalties for road traffic
+*Corresponding author: Hien D. Nguyen offences and rail transport offences, 2016
+
+Fig. 1. Legal Search Platform Overview.
+and, based on this score, AIR selects a subset of triples of new documents that amend or supplement existing content.
+most affected by new information for updating. Besides, The proposed platform aims to identify specific changes within
+AIR updates the embeddings without needing to retrain the these new documents and seamlessly integrate them into the
+entire model from scratch, thus saving time and resources. corresponding knowledge graph, thereby ensuring accurate
+However, the effectiveness of AIR depends on the accuracy and timely information representation.
+of the importance scores assigned to each triple and may face
+challenges when handling large KGs. III. KNOWLEDGE UPDATE
+The study in [19] discussed a method that uses exceptions A. Text Analysis Techniques
+to modify existing rules instead of directly changing those
+To analyze the content and the required changes in the legal
+rules. This approach helps maintain the integrity of the foun-
+documents, this research develops a unique method to analyze
+dational knowledge and can be more efficient and manageable
+updated documents, aiming to identify the requirements and
+compared to traditional knowledge update methods. By using
+determine the positions that need to be changed.
+RE models, this method provides a more suitable semantic
+foundation for rule updates. However, it is a highly complex
+method and poses challenges in accurately identifying and
+representing exceptions.
+The study in [9] proposed a new method, called StableKE,
+for efficiently updating knowledge in large language models
+(LLMs). This method utilizes Semantic Paraphrase Enhance-
+ment and Contextual Description Enrichment strategies to
+augment knowledge. However, the effectiveness of this method
+heavily relies on the quality of the data used for training
+and evaluation. Moreover, StableKE does not provide detailed
+information on the decision-making process.
+[10] presented the UnKE method for updating unstructured
+knowledge in large language models. This method uses key-
+Fig. 2. Simulation of the Action Identification Process.
+value pairs at the layer level to represent and edit unstructured
+knowledge effectively and flexibly. However, this method de- 1) Identifying the Set of Words Describing Document Mod-
+pends on the architecture of the LLM and requires adjustments ification Actions: Identifying the main action of a document
+when applied to new LLM models. Additionally, it lacks item, as illustrated in Figure 2, is a crucial step in understand-
+transparency and has limitations in terms of explainability. ing the implications of changes in legal texts. The specific
+Automating the process of updating legal information can steps include:
+help monitor, analyze, and update changes in legal documents, a. Collecting Key Phrases
+thereby supporting legal professionals and the public in access- • Data Source: Collect key phrases that are the main
+ing information easily and accurately. This not only saves time verbs in sentences from the Amending and Supplementing
+and effort but also improves the effectiveness of applying and Law on the Promulgation of Legal Normative Documents.
+complying with the law. Data sources are collected from legal databases and govern-
+Existing methods for automatic and rapid knowledge updat- ment websites.
+ing often prove inadequate or require substantial implementa- • Extraction: Extract key phrases related to actions
+tion effort. This is particularly evident in the domain of legal from document items.
+knowledge, where research on knowledge updates is limited, b. Grouping Key Phrases
+and adapting methods from other fields is challenging. This • Action Classification: The collected key phrases will
+study focuses on incremental updates triggered by the issuance be grouped into different types of actions such as amendments,
+
+additions, replacements, and repeals. This classification helps
+the system easily identify and process changes in legal texts.
+Due to the precise language used in legal texts, the col-
+lection and classification of key phrases will achieve high
+accuracy. This reduces errors in identifying and processing
+changes. It helps the system quickly and accurately identify Fig. 4. Simulation of the Document Segmentation Process.
+the actions required for legal texts. Grouping key phrases by
+action also improves the efficiency of the document updating
+1) Break down the new text into document items:: Legal
+process.
+documents will be divided into document items, as shown in
+Figure 4. Document items are components within a document
+that represent specific content (such as a point or clause
+without containing subpoints) within that document.
+2) Identifying the Primary Actions of Document Items:
+The sophisticated text analysis technique described in Section
+3.A.1 is utilized to accurately identify the primary actions
+of the specified document items. These actions, which may
+Fig. 3. Simulation of the Object Identification Process.
+include amendments, updates, and other modifications, are cru-
+2) Identifying Accompanying Objects: Identifying the ac- cial for understanding the changes within the legal documents.
+companying objects of the actions determined above or in Following identification, these actions are systematically cat-
+other words, the specific positions in the old document that egorized into types of changes, collected, and classified as
+the document item refers to, as illustrated in Figure 3, is a follows:
+crucial step to ensure that all changes are made accurately Type 1: Content Modifications (Amendments)
+and consistently. The steps include: This type of amendment involves making changes to the
+• Context Analysis: Analyze the context of key phrases existing content of the legal document. It includes the actions
+and surrounding content to ensure the identified position is described in Table I as follows:
+accurate and relevant.
+• Determining Scope: Identify the scope of the para- TABLE I
+graph, clause, or point that will be affected by the change. This SUMMARY OF CONTENT MODIFICATIONS
+includes determining the relevant sections in the old document
+No. AmendmentCategory Description
+and ensuring that all changes are applied within the correct
+1 Amendment of Articles Modifying specific articles within the
+scope.
+existing legal document to reflect new
+Example: a) Amend the opening paragraph of Clause 3, or updated information
+Article 44 as follows: ”3. A fine ranging from VND 2,000,000 2 Amendment of Clauses Changing the content of specific
+clauses within a particular article to
+to VND 3,000,000 shall be imposed on the train driver,
+ensure clarity or accuracy
+train captain, vice train captain responsible for safety for 3 Amendment of Points Modifying the content of specific
+committing one of the following violations:”; The specific points within a clause to update or
+correct the information
+object to be amended will be ”Clause 3, Article 44”.
+4 Replace Phrases Substituting certain phrases within the
+3) Determining the Content of Changes: Accurately deter- documenttoreflectnewterminologyor
+mining the scope of changes required: correct errors
+5 Remove Phrases Deleting specific phrases from the doc-
+• Context Analysis: Analyzing the context helps the
+ument that are no longer relevant or
+system better understand the implications of the changes and accurate
+ensures that all changes are executed correctly. 6 Amendment of Article Changing the titles of specific articles
+Example: ”23. Amend the opening paragraph and Point a Titles to better represent the content or pur-
+pose of the article
+of Clause 3 of Article 44 as follows: a) Amend the opening
+7 Amendment of Clause Modifying the titles of specific clauses
+paragraph of Clause 3, Article 44 as follows: ”3. A fine Titles to improve clarity or accuracy
+ranging from VND 2,000,000 to VND 3,000,000 shall be 8 Amendment of Intro- Changing the introductory paragraphs
+ductory Paragraphs ofspecificclausesorarticlestoprovide
+imposed on the train driver, train captain, vice train captain
+better context or clarity
+responsible for safety for committing one of the following
+violations:”;” The change here only applies to the opening
+paragraph of the Clause, not the entire content of the Clause. Type 2: Content Additions (Additions)
+This type of amendment involves adding new content to the
+B. Analyzing Amendments
+legal document. It includes the actions described in Table II
+Analyzing the changes based on the newly issued legal as follows:
+documents is the crucial first step. To achieve this, we need Type 3: Content Repeals (Repeals)
+to identify the different types of changes that may occur in This type of amendment involves removing content from
+Vietnamese legal texts. To accomplish this: the legal document. It includes the actions described in Table
+
+TABLE II chief conductors responsible for safety who commit one of the
+SUMMARY OF CONTENT ADDITIONS following violations:”
+• Specific Item: The item to be amended is Clause 3,
+No. Addition Category Description
+Article 44, with the old content retrieved from the system.
+1 Addition of Points Adding new points to the existing
+clauses to incorporate new information • Scope of Changes: The system identifies that the scope
+or regulations of the change is limited to the introductory paragraph of
+2 Addition of Clauses Incorporating new clauses into the ex-
+the clause, not the entire clause.
+isting articles to expand on or clarify
+existing information
+3 Addition of Articles Adding new articles to the legal docu- D. Updating the Knowledge Graph
+ment to introduce entirely new sections
+or topics The content of legal documents is stored in the form of
+knowledge graphs, where conceptual keyword clusters serve
+as nodes and the relationships between them are the edges
+III as follows: of the graph. This knowledge graph forms the foundational
+knowledge base for the legal query system. The process
+TABLE III of constructing a knowledge graph involves converting legal
+SUMMARY OF CONTENT REPEALS documents provided by users into knowledge graphs that
+represent the content of the legal documents. This process is
+No. Repeal Category Description illustrated in Figure 5 and has been presented in the study
+1 Repeal of Points Removingspecificpointsfromthedoc-
+[12] The knowledge graph is composed of a set of triples
+ument that are outdated, irrelevant, or
+redundant that represent concepts and the relationships between them,
+2 Repeal of Clauses Eliminating specific clauses from the facilitating faster and more accurate analysis and processing
+document that are no longer applicable
+of information.
+or necessary
+3 Repeal of Articles Deleting entire articles from the legal Updating legal information in the knowledge base involves
+document to streamline the content or updating the knowledge graph based on the changes that have
+remove obsolete sections
+been analyzed, performed according to various types. In other
+words, it involves updating the triples related to the changed
+Example: content. This is carried out according to the following types
+a) Amendment of Point e, Clause 2, Article 28 as follows: of updates:
+”e) Not numbering seats, beds on passenger cars according Type 1: Content Modifications (Amendments)
+to regulations;” Content modifications involve making changes to the exist-
+Through the parsing technique, the research identifies that ing content in the knowledge base. This process is illustrated in
+this document item falls under the category of ”Amendment.” Figure 6 and is carried out according to the following specific
+steps
+C. Mapping Changes
+KnowledgeBase = [ALL_TRIPLES_KNOWLEDGE_BASE]
+Mapping the changes from the new document to the old one
+is crucial for identifying specific items and content that need • Step 1: Identify old triples
+to be modified. This process involves:
+OldTriples = EMPTY_LIST
+• Identifying Specific Items: Accurately pinpointing the FOR Triple IN KnowledgeBase:
+IF ShouldReplace(Triple):
+location of the content to be modified in the old document
+ADD Triple TO OldTriples
+using the technique outlined in Section III-A2. This RETURN OldTriples
+allows the system to retrieve the relevant content from
+the stored old document. • Step 2: Remove old triples
+• Scope of Changes: Employing the method described FOR Triple IN OldTriples:
+in Section III-A3 to define the scope of the required REMOVE Triple FROM KnowledgeBase
+RETURN KnowledgeBase
+changes based on the retrieved old content, ensuring that
+all modifications are fully and accurately updated. • Step 3: Identify parent entities
+Once these two steps are completed, the platform updates the
+ParentEntities = EMPTY_LIST
+new content in conjunction with the old content to create the FOR Entity IN KnowledgeBase:
+most current version of the document. IF IsParent(Entity, NewTriple):
+ADD Entity TO ParentEntities
+Example:
+RETURN ParentEntities
+a) Amendment of the introductory paragraph of Clause 3,
+Article 44: • Step 4: Implement changes
+“3. A fine ranging from 2,000,000 VND to 3,000,000 VND
+ADD NewTriple TO KnowledgeBase
+shall be imposed on train drivers, chief conductors, and deputy RETURN KnowledgeBase
+
+Fig. 5. Process of constructing a knowledge graph from legal documents.
+Fig. 8. Simulation of the Graph Repeal Process.
+Fig. 6. Simulation of the Graph Amendment Process.
+• Step 2: Remove triples
+Type 2: Content Additions (Additions)
+FOR Triple IN RelatedTriples:
+Content additions involve integrating new information into
+REMOVE Triple FROM KnowledgeBase
+the existing knowledge base, or in other words, adding new RETURN KnowledgeBase
+triples to the system. This process is illustrated in Figure 7
+and is carried out through the following specific steps: IV. EXPERIMENTAL RESULTS
+To verify the effectiveness of the platform, the study con-
+ducted specific experiments with road traffic laws, an area
+frequently updated and revised. The chosen subject of study
+was Decree 123/2021/ND-CP 3 (The updated content replacing
+Decree 100 on road traffic regulations.), issued to amend
+and supplement certain provisions of Decree 100/2019/ND-
+CP 4 related to traffic violations and penalties. The experiment
+aimed to evaluate the platform’s capability in identifying and
+analyzing change requests in new legal texts, as well as
+Fig. 7. Simulation of the Graph Addition Process.
+accurately updating these changes in the system’s knowledge
+• Step 1: Identify parent entities base, specifically its knowledge graph.
+ParentEntities = EMPTY_LIST
+FOR Entity IN KnowledgeBase: TABLE IV
+IF IsParent(Entity, NewTriple): DETAILS OF DECREE DECREE 100/2019/ND-CP AND DECREE
+ADD Entity TO ParentEntities 123/2021/ND-CP
+RETURN ParentEntities
+• Step 2: Implement changes Decree 100/2019/ND-CP Decree 123/2021/ND-CP
+ADD NewTriple TO KnowledgeBase Chapter 5 1
+RETURN KnowledgeBase
+Article 86 1
+Type 3: Content Repeals (Repeals) Clause 442 36
+Content repeals involve removing information from the Point 1354 116
+system’s knowledge base, specifically by deleting the triples
+related to the content being removed. This process is illustrated
+The platform analyzed the content of Decree 123, identify-
+in Figure 8 and is carried out through the following specific
+ing change requests, additions, or deletions. Ultimately, the
+steps:
+platform updated these changes in the system’s knowledge
+• Step 1: Identify related triples
+RelatedTriples = EMPTY_LIST 3Decree No. 123/2021/ND-CP on Amending and supplementing some
+FOR Triple IN KnowledgeBase: articles of decrees provisions on penalties for administrative violations in the
+IF IsRelated(Triple, ContentIdentifier): marine region, road, rail traffic, and domestic airline, 2021
+ADD Triple TO RelatedTriples 4Decree No. 100/2019/ND-CP on Administrative penalties for road traffic
+RETURN RelatedTriples and rail transport offences, 2019
+
+graph, ensuring accurate and consistent integration of new or with a terminal tag but the account balance is insufficient
+information. to pay when passing through the electronic toll lane) to enter
+The experimental results demonstrated the platform’s suc- the lane dedicated to electronic toll collection at toll stations;”
+cess in identifying and analyzing change requests in Decree replacing the old content: “c) Operating a vehicle that does
+123. Specifically, the platform identified 128 items requiring not meet the conditions for electronic toll collection to enter
+changes, including modifications, additions, and removals, the lane dedicated to electronic toll collection at toll stations.”
+totaling 340 points, sections, and articles. Detailed results are The new content clearly specifies the cases where the
+provided in Table V and Figure 9.. vehicle does not meet the toll collection conditions, making it
+easier for readers to understand and apply in practice. In the
+updating process, additional triples will be added as follows:
+• vehicle → without → terminal tag
+• terminal tag → insufficient → payment
+This experiment illustrates the platform’s capability to effec-
+tively identify and update changes in legal documents, proving
+the feasibility and potential of the platform in supporting legal
+experts and regulatory agencies in promptly and accurately
+updating legal information.
+V. CONCLUSIONS
+This platform has proven effective in updating legal docu-
+Fig. 9. The quantity of the paltform’s updating in Decree 123. ments promptly and accurately with the latest legal documents.
+Analyzing and mapping changes, combined with updating
+the corresponding knowledge graph, ensures that all legal
+TABLE V
+SUMMARY OF DOCUMENT CHANGES amendments are reflected accurately and timely. Moreover,
+this method avoids the need to update the entire knowledge
+Change Type Number Number Update base, focusing only on the relevant knowledge graph, thus
+of items of affected Type saving time and resources. Experimental results demonstrate
+requiring items
+the platform’s ability to efficiently identify and process a large
+replacement
+Amendment of Articles 9 156 volume of changes.
+Amendment of Points 44 48 Amendments In the future, the research focus on fully automating the
+Amendment of Clauses 22 62
+knowledge update process within the platform under the
+Replace Phrases 19 19
+Remove Phrases 4 4 guidance of domain experts. This automation will encompass
+Amendment of Article 1 1 the detection of newly released legal documents and the
+Title
+subsequent processing of these documents to ensure timely
+Amendment of Clause 1 1
+Title knowledge integration. Furthermore, the platform’s applicabil-
+Amendment of Intro- 3 3 ity will be expanded to encompass a wider range of domains,
+ductory Paragraphs
+thereby enhancing its versatility.
+Addition of Points 9 9
+Additions
+Addition of Clauses 6 12
+Repeal of Points 7 15 ACKNOWLEDGMENT
+Repeal of Clauses 2 2 Repeals
+Repeal of Articles 1 8 This research is funded by VNUHCM - University of
+Total 128 340 Information Technology (UIT) under grant number D1-2023-
+04.
+In Decree 123, the platform recognized 128 items requiring
+modification including various types of changes ranging from
+REFERENCES
+amendments, additions, to repeals of specific clauses and [1] C. Wewer, F. Lemmerich, M. Cochez, “Updating Embeddings for
+points. Based on those 128 items, the system updated 340 Dynamic Knowledge Graphs,” 2021.
+articles, clauses, and points. They have been modified, added, [2] Z. Jia, H. Li, L. Chen, “AIR: Adaptive Incremental Embedding Updating
+for Dynamic Knowledge Graphs,” In: X. Wang et al. (Eds.), Database
+or repealed during the update process. Moreover, the update
+Systems for Advanced Applications. DASFAA 2023, Lecture Notes in
+process successfully updated 518 triples out of a total of 1582 Computer Science, vol. 13944, Springer, Cham, pp. 300–312, 2023.
+triples in the knowledge base of road traffic laws. DOI: 10.1007/978-3-031-30672-3 41.
+[3] N.Zhang,Y.Yao,B.Tian,etal.,“AComprehensiveStudyofKnowledge
+Example: In point b of clause 3, article 2, it is required to
+Editing for Large Language Models,” arXiv, 2401.01286, 2024.
+change as follows: [4] D. Szostek and M. Zalucki, “Legal Tech: Information Technology tools
+“b) Amend point c of clause 4, article 5 as follows: in the administration of justice,” Nomos, 2021.
+[5] G. Governatori, T. Bench-Capon, B. Verheij, et al., “Thirty years of
+“c) Operating a vehicle that does not meet the conditions
+Artificial Intelligence and Law: the first decade,” Artificial Intelligence
+for electronic toll collection (vehicle without a terminal tag and Law, vol. 30, no. 4, pp. 481–519, 2022. Springer.
+
+[6] G. Sartor, M. Araszkiewicz, K. Atkinson, et al., “Thirty years of Arti- system for introducing law students with legal drafting,” Artificial
+ficial Intelligence and Law: the second decade,” Artificial Intelligence Intelligence and Law, vol. 31, no. 4, pp. 829–863, 2023.
+and Law, vol. 30, pp. 521–557, 2022. Springer. [15] F. Krause, K. Kurniawan, E. Kiesling, et al., “Leveraging Semantic Rep-
+[7] S. Villata, M. Araszkiewicz, K. Ashley, et al., “Thirty years of artificial resentations via Knowledge Graph Embeddings,” Artificial Intelligence
+intelligence and law: the third decade,” Artificial Intelligence and Law, in Manufacturing: Enabling Intelligent, Flexible and Cost-Effective
+vol. 30, pp. 561–591, 2022. Springer. Production Through AI, pp. 71–85, Springer, 2023.
+[8] M. Slota and J. Leite, “Exception-Based Knowledge Updates,” SloTa
+[16] H. Nguyen, V. Pham, H. Q. Ngo, A. Huynh, B. Nguyen, J. Machado,
+2017, arXiv, 1706.00585, 2017.
+“Intelligent search system for resume and labor law,” PeerJ Computer
+[9] N. Zhang, Y. Yao, S. Deng, “Knowledge Editing in Large Language
+Science, vol. 10, e1786, 2024.
+Models,” LREC-COLING 2024 Tutorials, pp. 33-41, 2024.
+[17] T. H. Nguyen, H. D. Nguyen, V. T. Pham, et al., “Legal-Onto: An
+[10] J. Deng, Z. Wei, L. Pang, H. Ding, H. Shen, and X. Cheng, “UnKE:
+Ontology-based Model for Representing the Knowledge of a Legal
+Unstructured Knowledge Editing in Large Language Models,” arXiv,
+Document,” Proceedings of 17th International Conference on Evaluation
+2405.15349, 2024.
+of Novel Approaches to Software Engineering (ENASE 2022), Online
+[11] H. Q. Ngo, H. D. Nguyen, and N. A. Le-Khac, “Building legal
+streaming, pp. 426–434, 2022, Scitepress.
+knowledge map repository with NLP toolkits,” CITA 2023, pp. 25–36,
+Springer, 2023. [18] V. T. Pham, H. D. Nguyen, T. Le, B. Nguyen, Q. H. Ngo, “Ontology-
+[12] D. Dang, H.D. Nguyen, H. Ngo, et al., “Information Retrieval from based solution for building an intelligent searching system on traffic law
+Legal Documents with Ontology and Graph Embeddings Approach,” documents,” Proceedings of 15th International Conference on Agents
+IEA/AIE 2023, pp. 300–312, Shanghai, China, July 2023. and Artificial Intelligence (ICAART 2023), Vol. 1, Lisbon, Portugal,
+[13] D. Dang, V. Pham, T. Cao, et al., “A Practical Approach to Leverage pp. 217–224, 2023, Scitepress.
+Knowledge Graphs for Legal Query,” ISDS 2023, pp. 271–284, Can [19] M. Slota, J. Leite, “A unifying perspective on knowledge updates,”
+Tho, Vietnam, November 2023. Proceedings of the 13th European Conference on Logics in Artificial In-
+[14] Markovic´, Marko and Gostojic´, Stevan “Legal document assembly telligence(JELIA2012),Toulouse,France,pp.372–384,2012,Springer.

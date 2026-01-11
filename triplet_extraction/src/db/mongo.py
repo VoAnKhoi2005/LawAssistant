@@ -372,6 +372,8 @@ def build_tree_downward(sections_col, node_id: str, max_depth: int = 10) -> Dict
             "document_title": node.get("document_title", ""),
             "so_hieu": node.get("so_hieu", ""),
             "effective_date": node.get("effective_date", ""),
+            "is_amendment": node.get("is_amendment", False),
+            "is_phu_luc": node.get("is_phu_luc", False),
             "children": []
         }
 
