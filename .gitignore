@@ -102,3 +102,5 @@ triplet_extraction/logs/dat_dai_triplet_extraction_08_01_2026.txt
 triplet_extraction/logs/dat_dai_triplet_extraction_10_01_2026.txt
 
 nlp_models
+semantic_retrieval/search_index/*
+!semantic_retrieval/search_index/.gitkeep
