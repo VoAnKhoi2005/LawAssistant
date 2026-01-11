@@ -1,4 +1,5 @@
 import os
+from typing import Dict, Optional
 
 import pymongo
 from bson import ObjectId
@@ -183,3 +184,76 @@ def update_existing_triplets_with_names(db):
         print(f"Updated {result.modified_count} triplets with names.")
     else:
         print("No triplets needed updating.")
+
+
+def build_tree_downward(sections_col, node_id: str, max_depth: int = 10) -> Dict:
+    """
+    Build tree structure by traversing downward from a given node to all children.
+
+    Args:
+        sections_col: MongoDB collection
+        node_id: The _id of the starting node
+        max_depth: Maximum depth to traverse
+
+    Returns:
+        Dict representing the tree structure
+    """
+
+    def get_node_with_children(current_id: str, depth: int = 0) -> Optional[Dict]:
+        if not current_id or depth > max_depth:
+            return None
+
+        node = sections_col.find_one({"_id": current_id})
+        if not node:
+            return None
+
+        # Build the tree node
+        tree_node = {
+            "_id": node["_id"],
+            "title": node.get("title", ""),
+            "type": node.get("type", ""),
+            "content": node.get("content", ""),
+            "full_path": node.get("full_path", ""),
+            "document_title": node.get("document_title", ""),
+            "so_hieu": node.get("so_hieu", ""),
+            "effective_date": node.get("effective_date", ""),
+            "is_amendment": node.get("is_amendment", False),
+            "is_phu_luc": node.get("is_phu_luc", False),
+            "children": []
+        }
+
+        # Find all children
+        children = sections_col.find({"parent_id": current_id})
+        for child in children:
+            child_tree = get_node_with_children(child["_id"], depth + 1)
+            if child_tree:
+                tree_node["children"].append(child_tree)
+
+        return tree_node
+
+    return get_node_with_children(node_id)
+
+
+def print_tree(node: Dict, indent: int = 0, show_content: bool = False):
+    """
+    Pretty print the tree structure.
+    """
+    if not node:
+        return
+
+    prefix = "  " * indent
+    print(f"{prefix}├─ [{node['type']}] {node['title']}")
+
+    if show_content and node.get('content'):
+        content_preview = node['content'][:100] + "..." if len(node['content']) > 100 else node['content']
+        print(f"{prefix}   Content: {content_preview}")
+
+    # Print children if using downward tree
+    if 'children' in node:
+        for child in node['children']:
+            print_tree(child, indent + 1, show_content)
+
+    # Print parent if using upward tree
+    if 'parent' in node:
+        print(f"{prefix}   ↑ Parent:")
+        print_tree(node['parent'], indent + 1, show_content)
