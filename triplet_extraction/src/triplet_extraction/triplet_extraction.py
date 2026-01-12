@@ -385,7 +385,7 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
     # Annotate text
     annotation = phoNLP_model.annotate(text=segmented_text[0])
     df = parsing_result(annotation)
-    print(df.to_string(index=False))
+    # print(df.to_string(index=False))
 
     triplets = process_sentence(df, logger)
     all_triplets = []
