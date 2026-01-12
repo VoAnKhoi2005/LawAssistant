@@ -1,0 +1,73 @@
+{
+    "abbreviations": {
+        "bhxh": "bảo hiểm xã hội",
+        "bhyt": "bảo hiểm y tế",
+        "bhtn": "bảo hiểm thất nghiệp",
+        "bhtg": "bảo hiểm tiền gửi",
+        "bhtnlđ": "bảo hiểm tai nạn lao động",
+        "nđ": "nghị định",
+        "qđ": "quyết định",
+        "plqh": "pháp lệnh quốc hội",
+        "ubnd": "ủy ban nhân dân",
+        "hđnd": "hội đồng nhân dân",
+        "tand": "tòa án nhân dân",
+        "vksnd": "viện kiểm sát nhân dân",
+        "tandtc": "tòa án nhân dân tối cao",
+        "vksndtc": "viện kiểm sát nhân dân tối cao",
+        "cmnd": "chứng minh nhân dân",
+        "cccd": "căn cước công dân",
+        "gcn": "giấy chứng nhận",
+        "gplx": "giấy phép lái xe",
+        "gpkd": "giấy phép kinh doanh",
+        "gcnđkkd": "giấy chứng nhận đăng ký kinh doanh",
+        "gcnqsdđ": "giấy chứng nhận quyền sử dụng đất",
+
+        "tnhh": "trách nhiệm hữu hạn",
+        "đkkd": "đăng ký kinh doanh",
+        "mst": "mã số thuế",
+        "hkd": "hộ kinh doanh",
+        "dntn": "doanh nghiệp tư nhân",
+        "dnnn": "doanh nghiệp nhà nước",
+        "ctcp": "công ty cổ phần",
+        "cttnhh": "công ty trách nhiệm hữu hạn",
+
+
+        "tncn": "thu nhập cá nhân",
+        "tndn": "thu nhập doanh nghiệp",
+        "gtgt": "giá trị gia tăng",
+        "ttđb": "tiêu thụ đặc biệt",
+        "xnk": "xuất nhập khẩu",
+
+
+        "qsdđ": "quyền sử dụng đất",
+        "bđs": "bất động sản",
+
+
+        "hđlđ": "hợp đồng lao động",
+        "hdld": "hợp đồng lao động",
+        "nlđ": "người lao động",
+        "nsdlđ": "người sử dụng lao động",
+        "atlđ": "an toàn lao động",
+        "vslđ": "vệ sinh lao động",
+
+        "atgt": "an toàn giao thông",
+        "gtđb": "giao thông đường bộ",
+        "đkx": "đăng ký xe",
+
+
+        "vphc": "vi phạm hành chính",
+        "xpvphc": "xử phạt vi phạm hành chính",
+        "tthc": "thủ tục hành chính",
+
+        "blhs": "bộ luật hình sự",
+        "blds": "bộ luật dân sự",
+        "bllđ": "bộ luật lao động",
+        "blttds": "bộ luật tố tụng dân sự",
+        "bltths": "bộ luật tố tụng hình sự"
+    },
+    "punctuation": {
+        "&": "và",
+        "/": "hoặc",
+        "+": "và"
+    }
+}
