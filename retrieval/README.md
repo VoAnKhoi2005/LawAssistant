@@ -69,7 +69,7 @@ display_results(results, db["legal_sections"])
 #### Using Python Script
 ```bash
 cd E:\Github\LawAssistant\retrieval
-python test_bm25_retrieval.py
+python bm25_retrieval.py
 ```
 
 #### Using Jupyter Notebook
