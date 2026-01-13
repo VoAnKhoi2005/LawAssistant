@@ -8,10 +8,10 @@ import time
 from dotenv import load_dotenv
 
 # Import dependencies
-from src.retrieval import create_pipeline
-from src.triplet_extraction.src import init_mongo
-from src.triplet_extraction.src import init_vncorenlp
 import phonlp
+from src.db import init_mongo
+from src.retrieval.retrieval_pipeline import create_pipeline
+from src.triplet_extraction.pos_taging import init_vncorenlp
 
 
 def main():

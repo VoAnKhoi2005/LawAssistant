@@ -1,10 +1,11 @@
 import time
 
+from src.db import init_mongo
 from src.retrieval.graph.dpr_ranker import DPRRanker
-from src.triplet_extraction.src import init_mongo
-from src.triplet_extraction.src import init_vncorenlp
 from src.retrieval.graph.retrieval_system import retrieve_and_rank
 import phonlp
+
+from src.triplet_extraction.pos_taging import init_vncorenlp
 
 
 def display_results(ranked_results, sections_col=None, top_n=5):

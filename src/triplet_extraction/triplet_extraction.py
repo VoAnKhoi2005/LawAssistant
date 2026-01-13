@@ -1,5 +1,5 @@
 from src.triplet_extraction.pos_taging import parsing_result
-from src.triplet_extraction.utils import clean_text
+from src.utils import clean_text
 
 def parse_dataframe_to_tokens(df):
     """Convert DataFrame to a list of token dicts"""

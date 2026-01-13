@@ -1,6 +1,7 @@
 from collections import defaultdict
 from typing import List, Dict, Any, Tuple
-from src.triplet_extraction.src import clean_text, parsing_result
+from src.triplet_extraction.pos_taging import parsing_result
+from src.utils import clean_text
 from src.retrieval.graph.bm25_ranker import rank_sections_bm25, hybrid_rank
 
 STOP_VERBS = {

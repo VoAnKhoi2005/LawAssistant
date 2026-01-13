@@ -7,26 +7,13 @@ Returns top 20 most relevant legal sections
 import logging
 from typing import List, Dict, Optional, Tuple
 
-# Query Preprocessing
-from src.retrieval.preprocess_query.src import QueryPreprocessor
-
-# Graph Retrieval
-from src.retrieval.graph.src import (
-    k_hop_traversal_mongo,
-    score_triplets_from_traversal,
-    match_concepts_graph,
-    match_relations_graph,
-    extract_verbs,
-    collect_sections_content
-)
 from src.retrieval.graph.dpr_ranker import DPRRanker
-
-# Semantic Retrieval
-from src.retrieval.semantic.src import HybridSearchEngine
-from src.retrieval.semantic.src import SearchConfig
-
-# NLP utilities
-from src.triplet_extraction.src import clean_text
+from src.retrieval.graph.retrieval_system import extract_verbs, match_relations_graph, match_concepts_graph, \
+    k_hop_traversal_mongo, score_triplets_from_traversal, collect_sections_content
+from src.retrieval.preprocess_query.query_preprocessor import QueryPreprocessor
+from src.retrieval.semantic.config import SearchConfig
+from src.retrieval.semantic.hybrid_search import HybridSearchEngine
+from src.utils import clean_text
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

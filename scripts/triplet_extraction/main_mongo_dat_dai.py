@@ -1,9 +1,14 @@
+import csv
+import logging
+
 from tqdm import tqdm
 import phonlp
 import time
 
 from src.db import *
+from src.triplet_extraction.pos_taging import init_vncorenlp
 from src.triplet_extraction.triplet_extraction import *
+from src.triplet_extraction.utils import load_synonym_dict, load_stopwords, setup_logger
 
 
 def main():
