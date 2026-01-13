@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from triplet_extraction.src.db import init_mongo
 from triplet_extraction.src.triplet_extraction import init_vncorenlp
-from retrieval.src.retrieval_system import retrieve_and_rank, print_matched_concepts_relations
+from graph_retrieval.src.retrieval_system import retrieve_and_rank, print_matched_concepts_relations
 import phonlp
 
 

@@ -12,11 +12,6 @@ from transformers import AutoTokenizer, AutoModel
 class DPRRanker:
     """
     Dense Passage Retrieval using Vietnamese language models
-    
-    Supports models like:
-    - vinai/phobert-base
-    - vinai/bartpho-word
-    - VoVanPhuc/sup-SimCSE-VietNamese-phobert-base
     """
     
     def __init__(
@@ -41,7 +36,7 @@ class DPRRanker:
             print("Using FP16 precision for faster inference")
         
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.model = AutoModel.from_pretrained(model_name).to(self.device)
+        self.model = AutoModel.from_pretrained(model_name, trust_remote_code=True).to(self.device)
         
         # Convert to half precision if using GPU
         if self.use_fp16:
@@ -188,7 +183,7 @@ def rank_sections_dpr(
     question: str,
     sections: List[Dict[str, Any]],
     dpr_ranker: DPRRanker = None,
-    model_name: str = "VoVanPhuc/sup-SimCSE-VietNamese-phobert-base",
+    model_name: str = "dangvantuan/vietnamese-document-embedding",
     top_k: int = 10,
     batch_size: int = None
 ) -> List[Dict[str, Any]]:
@@ -273,7 +268,7 @@ def hybrid_rank_bm25_dpr(
     Returns:
         List of ranked sections with hybrid scores
     """
-    from retrieval.src.bm25_ranker import rank_sections_bm25
+    from graph_retrieval.src.bm25_ranker import rank_sections_bm25
     
     if triplet_scores is None:
         triplet_scores = {}
@@ -284,7 +279,12 @@ def hybrid_rank_bm25_dpr(
     
     # Get DPR rankings
     print("\n=== DPR RANKING ===")
-    dpr_results = rank_sections_dpr(question, sections, dpr_ranker=dpr_ranker, top_k=len(sections))
+    dpr_results = rank_sections_dpr(
+        question, sections,
+        dpr_ranker=dpr_ranker,
+        model_name="dangvantuan/vietnamese-document-embedding",
+        top_k=len(sections),
+    )
     
     # Create lookup dictionaries
     bm25_scores = {r['section_id']: r['bm25_score'] for r in bm25_results}

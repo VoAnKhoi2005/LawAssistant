@@ -1,12 +1,15 @@
+import time
+
+from graph_retrieval.src.dpr_ranker import DPRRanker
 from triplet_extraction.src.db import init_mongo
 from triplet_extraction.src.triplet_extraction import init_vncorenlp
-from retrieval.src.retrieval_system import retrieve_and_rank
+from graph_retrieval.src.retrieval_system import retrieve_and_rank
 import phonlp
 
 
 def display_results(ranked_results, sections_col=None, top_n=5):
     """
-    Display ranked retrieval results
+    Display ranked graph_retrieval results
     
     Args:
         ranked_results: List of ranked section dictionaries
@@ -66,8 +69,9 @@ def main():
     test_questions = [
         # "Phải xác nhận tài sản trên đất mới được bán đất có đúng không?",
         # "Điều kiện để được cấp giấy chứng nhận quyền sử dụng đất là gì?",
-        "Điều kiện chuyển nhượng quyền sử dụng đất là gì?",
+        # "Điều kiện chuyển nhượng quyền sử dụng đất là gì?",
         # "Ai có quyền chuyển nhượng quyền sử dụng đất?",
+        "Các loại đất nào được sử dụng kết hợp đa mục đích?"
     ]
     
     # === Process each question ===
@@ -75,6 +79,10 @@ def main():
         print("\n" + "="*100)
         print(f"QUESTION {i}: {question}")
         print("="*100)
+
+        dpr_ranker = DPRRanker(
+            model_name="VoVanPhuc/sup-SimCSE-VietNamese-phobert-base"
+        )
         
         # Retrieve and rank sections
         ranked_results = retrieve_and_rank(
@@ -87,7 +95,8 @@ def main():
             triplets_col=triplets_col,
             k_hops=2,
             use_khop=True,
-            use_dpr=True,  # Set to True to enable DPR (requires transformers, torch)
+            dpr_ranker=dpr_ranker,
+            use_dpr=True,
             top_k=20
         )
         
@@ -100,5 +109,11 @@ def main():
 
 
 if __name__ == "__main__":
+    start = time.perf_counter()
+
     main()
+
+    end = time.perf_counter()
+    print(f"Execution time: {end - start:.4f} seconds")
+
 

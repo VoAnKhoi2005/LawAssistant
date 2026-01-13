@@ -1,14 +1,60 @@
 from collections import defaultdict
 from typing import List, Dict, Any, Tuple, Set, Optional
 from triplet_extraction.src.triplet_extraction import clean_text, parsing_result
-from retrieval.src.bm25_ranker import rank_sections_bm25, hybrid_rank
+from graph_retrieval.src.bm25_ranker import rank_sections_bm25, hybrid_rank
+
+STOP_VERBS = {
+    # Modal / permission / obligation
+    "được", "phải", "cần", "nên", "không_được", "được_phép",
+
+    # Aspect / tense
+    "đã", "đang", "sẽ", "vừa", "mới",
+
+    # Passive / causative
+    "bị", "được_bị",
+
+    # Copula / state
+    "là", "là_phải", "trở_thành",
+
+    # Existential / appearance
+    "có", "có_thể", "có_thể_là",
+
+    # Negation helpers
+    "không", "chưa", "chẳng", "chớ",
+
+    # Light verbs (semantically empty alone)
+    "thực_hiện",
+    "tiến_hành",
+    "tiến_hành_việc",
+    "đưa_ra",
+    "đưa_vào",
+    "tiếp_tục",
+    "tiến_tới",
+
+    # Discourse / logical glue
+    "để", "nhằm", "theo", "về", "tại",
+
+    # Result / completion helpers
+    "xong", "hoàn_thành",
+}
 
 
 def extract_verbs(text: str, phoNLP_model) -> List[str]:
-    """Extract main verbs from text using PhoNLP"""
+    """
+    Extract semantic verbs from text using PhoNLP.
+    """
     annotation = phoNLP_model.annotate(text=text)
     df = parsing_result(annotation)
-    verbs = df.loc[df["pos"] == "V", "word"].tolist()
+
+    verbs = (
+        df.loc[df["pos"] == "V", "word"]
+        .str.lower()
+        .tolist()
+    )
+
+    # remove stop verbs
+    verbs = [v for v in verbs if v not in STOP_VERBS]
+
     return verbs
 
 
@@ -52,7 +98,6 @@ def match_concepts_graph(
             query = {
                 '$or': [
                     {'name': {'$regex': normalized_phrase, '$options': 'i'}},
-                    {'synonyms': {'$regex': normalized_phrase, '$options': 'i'}},
                     {'synonym': {'$regex': normalized_phrase, '$options': 'i'}}
                 ]
             }
@@ -112,7 +157,6 @@ def match_relations_graph(
             query = {
                 '$or': [
                     {'name': {'$regex': normalized_phrase, '$options': 'i'}},
-                    {'synonyms': {'$regex': normalized_phrase, '$options': 'i'}},
                     {'synonym': {'$regex': normalized_phrase, '$options': 'i'}}
                 ]
             }
@@ -432,11 +476,11 @@ def retrieve_and_rank(
     return_matches: bool = False
 ) -> Any:
     """
-    Main retrieval function with k-hop graph traversal and Dense Passage Retrieval
+    Main graph_retrieval function with k-hop graph traversal and Dense Passage Retrieval
     1. Text segmentation and verb extraction
     2. Graph-based concept/relation matching (MongoDB queries)
     3. K-hop neighborhood extraction (graph traversal)
-    4. Triplet-based section retrieval
+    4. Triplet-based section graph_retrieval
     5. Hybrid BM25 + graph scoring
 
     Args:
@@ -587,7 +631,7 @@ def retrieve_and_rank(
         # Stage 2: Apply DPR only on top candidates (expensive but accurate)
         print(f"\nStage 2: Applying DPR to re-rank top {len(stage1_candidates)} candidates...")
         
-        from retrieval.src.dpr_ranker import rank_sections_dpr
+        from graph_retrieval.src.dpr_ranker import rank_sections_dpr
         
         # Get DPR scores for candidates only
         dpr_results = rank_sections_dpr(

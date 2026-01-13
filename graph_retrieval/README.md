@@ -33,7 +33,7 @@ Question → Verb Extraction → Concept/Relation Matching → Triplet Retrieval
 ### Basic Example
 
 ```python
-from retrieval.src.retrieval_system import retrieve_and_rank, display_results
+from graph_retrieval.src.retrieval_system import retrieve_and_rank, display_results
 from triplet_extraction.src.db import init_mongo
 from triplet_extraction.src.triplet_extraction import init_vncorenlp
 import phonlp
@@ -69,7 +69,7 @@ display_results(results, db["legal_sections"])
 #### Using Python Script
 ```bash
 cd E:\Github\LawAssistant\retrieval
-python bm25_retrieval.py
+python main_retrieval.py
 ```
 
 #### Using Jupyter Notebook

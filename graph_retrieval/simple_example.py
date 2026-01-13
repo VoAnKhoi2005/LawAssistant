@@ -1,5 +1,5 @@
 """
-Simple example demonstrating the complete retrieval pipeline
+Simple example demonstrating the complete graph_retrieval pipeline
 """
 
 import os
@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from triplet_extraction.src.db import init_mongo
 from triplet_extraction.src.triplet_extraction import init_vncorenlp
-from retrieval.src.retrieval_system import retrieve_and_rank, display_results
+from graph_retrieval.src.retrieval_system import retrieve_and_rank, display_results
 import phonlp
 
 
