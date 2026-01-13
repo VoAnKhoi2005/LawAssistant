@@ -128,7 +128,7 @@ class RetrievalPipeline:
             self.sections_col = self.db["legal_sections"]
             self.concepts_col = self.db["concepts"]
             self.relations_col = self.db["relations"]
-            self.triplets_col = self.db["triplets_new"]
+            self.triplets_col = self.db["triplets"]
             self.section_relations_col = self.db["legal_section_relations"]
             self.vncorenlp_client = vncorenlp_client
             self.phonlp_model = phonlp_model
@@ -177,7 +177,6 @@ class RetrievalPipeline:
         
         logger.info("\n" + "="*80)
         logger.info("STEP 1: QUERY PREPROCESSING")
-        logger.info("="*80)
         logger.info(f"Original query: {query}")
         
         processed_query = self.query_preprocessor.process(query)
@@ -210,12 +209,25 @@ class RetrievalPipeline:
             max_phrase_length=1
         )
         logger.info(f"Matched {len(matched_relations)} relations")
+
+        window_size = 2
+        concept_search_tokens = set()
+
+        for match in matched_relations:
+            verb_pos = match['position']
+            start = max(0, verb_pos - window_size)
+            end = min(len(segmented_tokens), verb_pos + window_size + 1)
+            concept_search_tokens.update(segmented_tokens[start:end])
+
+        # Fallback: if no relations matched, search all tokens
+        if not concept_search_tokens:
+            concept_search_tokens = set(segmented_tokens)
         
         # Match concepts
         matched_concepts = match_concepts_graph(
-            segmented_tokens,
+            list(concept_search_tokens),
             self.concepts_col,
-            max_phrase_length=3
+            max_phrase_length=1
         )
         logger.info(f"Matched {len(matched_concepts)} concepts")
         
@@ -259,19 +271,19 @@ class RetrievalPipeline:
         for section in sections:
             section['content'] = sections_content.get(str(section['_id']), section.get('content', ''))
 
-        print(f"\nBM25+Triplet ranking for all {len(sections)} sections...")
-        stage1_candidates = hybrid_rank(
-            query,
-            sections,
-            self.vncorenlp_client,
-            triplet_scores=triplet_scores,
-            top_k=min(top_k, len(sections)),
-            bm25_weight=0.6,
-            triplet_weight=0.4
-        )
-        print(f"Selected top {len(stage1_candidates)} candidates for DPR")
+        # print(f"\nBM25+Triplet ranking for all {len(sections)} sections...")
+        # stage1_candidates = hybrid_rank(
+        #     query,
+        #     sections,
+        #     self.vncorenlp_client,
+        #     triplet_scores=triplet_scores,
+        #     top_k=min(top_k, len(sections)),
+        #     bm25_weight=0.6,
+        #     triplet_weight=0.4
+        # )
+        # print(f"Selected top {len(stage1_candidates)} candidates for DPR")
         
-        return stage1_candidates, triplet_scores
+        return sections, triplet_scores
     
     def retrieve_from_semantic(self, query: str, top_k: int = 100) -> List[Dict]:
         """Step 2b: Retrieve from semantic search"""
@@ -306,138 +318,6 @@ class RetrievalPipeline:
             }
             sections.append(section)
         return sections
-
-    def get_ancestor_chain(self, section_id, max_depth=3):
-        """
-        Get the chain of ancestors for a section up to type "điều".
-        Stops when reaching "điều" type ancestor.
-
-        Args:
-            section_id: ID of the section
-            max_depth: Maximum depth to traverse upward
-
-        Returns:
-            list: List of ancestor IDs from immediate parent up to (and including) "điều"
-        """
-        ancestors = []
-        current_id = section_id
-
-        for _ in range(max_depth):
-            section = self.sections_col.find_one({'_id': current_id}, {'parent_id': 1, 'type': 1})
-            if not section or not section.get('parent_id'):
-                break
-
-            parent_id = section['parent_id']
-
-            # Get parent info to check its type
-            parent_section = self.sections_col.find_one({'_id': parent_id}, {'type': 1})
-            if not parent_section:
-                break
-
-            parent_type = parent_section.get('type', '')
-            ancestors.append(parent_id)
-
-            # Stop if we've reached a "điều" type
-            if parent_type == 'điều':
-                break
-
-            current_id = parent_id
-
-        return ancestors
-
-    def find_common_ancestors(self, section_ids, max_depth=3):
-        """
-        Find common ancestors for a group of sections (optimized with bulk fetching).
-        Finds ancestors at "điều" level or above to merge descendants at/below "điều".
-
-        Args:
-            section_ids: List of section IDs
-            max_depth: Maximum depth to look for ancestors
-
-        Returns:
-            dict: Map of ancestor_id -> list of descendant section_ids
-        """
-        if not section_ids:
-            return {}
-        
-        # Define hierarchy levels - we want to find ancestors AT or ABOVE điều
-        # to potentially merge their descendants that are AT or BELOW điều
-        STOP_LEVELS = {'phần', 'chương', 'mục', 'tiểu_mục'}  # Stop before these (too high)
-        
-        # Track ancestors for each section
-        section_ancestors = {sid: [] for sid in section_ids}
-        
-        # Batch processing by depth level
-        current_batch = list(section_ids)
-        original_mapping = {sid: [sid] for sid in section_ids}
-        
-        for depth in range(max_depth):
-            if not current_batch:
-                break
-            
-            # Bulk fetch all sections in current batch
-            sections = list(self.sections_col.find(
-                {'_id': {'$in': current_batch}},
-                {'_id': 1, 'parent_id': 1}
-            ))
-            
-            # Collect unique parent IDs
-            parent_ids = set()
-            section_to_parent = {}
-            
-            for sec in sections:
-                parent_id = sec.get('parent_id')
-                if parent_id:
-                    parent_ids.add(parent_id)
-                    section_to_parent[sec['_id']] = parent_id
-            
-            if not parent_ids:
-                break
-            
-            # Bulk fetch parent types
-            parent_sections = {
-                p['_id']: p.get('type', '') 
-                for p in self.sections_col.find(
-                    {'_id': {'$in': list(parent_ids)}},
-                    {'_id': 1, 'type': 1}
-                )
-            }
-            
-            # Update ancestor lists and prepare next batch
-            next_batch = []
-            next_mapping = {}
-            
-            for current_id in current_batch:
-                parent_id = section_to_parent.get(current_id)
-                if not parent_id:
-                    continue
-                
-                parent_type = parent_sections.get(parent_id, '')
-                
-                # Add parent to ancestor list for all original sections
-                for original_id in original_mapping.get(current_id, []):
-                    section_ancestors[original_id].append(parent_id)
-                
-                # Stop if we've gone above điều level (phần, chương, mục, tiểu_mục)
-                if parent_type not in STOP_LEVELS:
-                    next_batch.append(parent_id)
-                    if parent_id not in next_mapping:
-                        next_mapping[parent_id] = []
-                    next_mapping[parent_id].extend(original_mapping.get(current_id, []))
-            
-            current_batch = next_batch
-            original_mapping = next_mapping
-        
-        # Count how many sections have each ancestor
-        ancestor_counts = {}
-        for section_id, ancestors in section_ancestors.items():
-            for ancestor_id in ancestors:
-                if ancestor_id not in ancestor_counts:
-                    ancestor_counts[ancestor_id] = []
-                ancestor_counts[ancestor_id].append(section_id)
-
-        return ancestor_counts
-
 
     def merge_and_rank(
             self,
@@ -506,29 +386,29 @@ class RetrievalPipeline:
                 
                 logger.info(f"✓ DPR scoring complete for {len(sections_list)} sections")
 
-        # Find common ancestors and merge leaf nodes if threshold met
-        if self.use_graph_retrieval and hasattr(self, 'sections_col'):
-            logger.info("\nFinding common ancestors for leaf nodes...")
-
-            MAX_DESCENDANTS_THRESHOLD = 4
-            MAX_ANCESTOR_DEPTH = 3
-            
-            # Define what can be merged: điều and below (điều, khoản, điểm)
-            MERGEABLE_TYPES = {'khoản', 'điểm'}
-            # Ancestors can be điều or khoản level to qualify for merging
-            MERGE_TARGET_TYPES = {'điều', 'khoản'}
-
-            # Filter sections that can be merged
-            mergeable_sections = [s for s in sections_list if s.get('type', '') in MERGEABLE_TYPES]
-            non_mergeable_sections = [s for s in sections_list if s.get('type', '') not in MERGEABLE_TYPES]
-
-            logger.info(f"Mergeable sections (điều/khoản/điểm): {len(mergeable_sections)}")
-            logger.info(f"Non-mergeable sections (above điều): {len(non_mergeable_sections)}")
-
-            if not mergeable_sections:
-                logger.info("No mergeable sections to analyze")
-            else:
-                print("Tracing ancestors for mergeable sections...")
+        # # Find common ancestors and merge leaf nodes if threshold met
+        # if self.use_graph_retrieval and hasattr(self, 'sections_col'):
+        #     logger.info("\nFinding common ancestors for leaf nodes...")
+        #
+        #     MAX_DESCENDANTS_THRESHOLD = 4
+        #     MAX_ANCESTOR_DEPTH = 3
+        #
+        #     # Define what can be merged: điều and below (điều, khoản, điểm)
+        #     MERGEABLE_TYPES = {'khoản', 'điểm'}
+        #     # Ancestors can be điều or khoản level to qualify for merging
+        #     MERGE_TARGET_TYPES = {'điều', 'khoản'}
+        #
+        #     # Filter sections that can be merged
+        #     mergeable_sections = [s for s in sections_list if s.get('type', '') in MERGEABLE_TYPES]
+        #     non_mergeable_sections = [s for s in sections_list if s.get('type', '') not in MERGEABLE_TYPES]
+        #
+        #     logger.info(f"Mergeable sections (khoản/điểm): {len(mergeable_sections)}")
+        #     logger.info(f"Non-mergeable sections (above điều): {len(non_mergeable_sections)}")
+        #
+        #     if not mergeable_sections:
+        #         logger.info("No mergeable sections to analyze")
+        #     else:
+        #         print("Tracing ancestors for mergeable sections...")
 
         # Normalize scores
         graph_scores_list = [s.get('graph_score', 0.0) for s in sections_list]
@@ -655,9 +535,8 @@ class RetrievalPipeline:
             return top_sections
         
         # Collect content for related sections (upward traversal)
-        related_section_ids = [str(s['_id']) for s in related_sections]
-        sections_content = collect_sections_content_upward(self.sections_col, related_section_ids)
-        
+        sections_content = self.collect_related_content(related_sections)
+
         # Add content and prepare related sections for inclusion
         related_results = []
         for section in related_sections:
@@ -686,7 +565,7 @@ class RetrievalPipeline:
                 'so_hieu': section.get('so_hieu', ''),
                 'is_related_section': True,
                 'relation_info': relation_info,
-                'hybrid_score': 0.0,  # Related sections don't have scores
+                'hybrid_score': 0.0,
                 'graph_score': 0.0,
                 'semantic_score': 0.0,
                 'dpr_score': 0.0
@@ -701,7 +580,35 @@ class RetrievalPipeline:
         combined_results = top_sections + related_results
         
         return combined_results
-    
+
+    def collect_related_content(self, sections):
+        upward_ids = []
+        downward_ids = []
+
+        for s in sections:
+            if s.get("type") == "điều":
+                downward_ids.append(str(s["_id"]))
+            else:
+                upward_ids.append(str(s["_id"]))
+
+        result = {}  # { section_id: merged_content }
+
+        if upward_ids:
+            upward_map = collect_sections_content_upward(
+                self.sections_col, upward_ids
+            )
+            # upward_map: Dict[str, str]
+            result.update(upward_map)
+
+        if downward_ids:
+            downward_map = collect_sections_content_downward(
+                self.sections_col, downward_ids
+            )
+            # downward_map: Dict[str, str]
+            result.update(downward_map)
+
+        return result
+
     def retrieve(self, query: str, top_k: int = 20) -> List[Dict]:
         """
         Main retrieval pipeline
@@ -715,7 +622,6 @@ class RetrievalPipeline:
         """
         logger.info("\n" + "="*100)
         logger.info(f"QUERY: {query}")
-        logger.info("="*100)
         
         # Step 1: Preprocess query
         processed_query = self.preprocess_query(query)
@@ -781,7 +687,7 @@ class RetrievalPipeline:
         # Display related sections
         if related_results:
             logger.info("\n" + "="*100)
-            logger.info(f"RELATED SECTIONS (AMENDMENTS) - {len(related_results)} sections")
+            logger.info(f"RELATED SECTIONS - {len(related_results)} sections")
             logger.info("="*100)
 
             for idx, result in enumerate(related_results, 1):

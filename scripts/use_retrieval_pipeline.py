@@ -177,11 +177,11 @@ def custom_weights():
         semantic_weight=0.2,   # 20% weight to semantic
         dpr_weight=0.3,        # 30% weight to DPR
         
-        k_hops=3  # Deeper graph traversal
+        k_hops=1  # Deeper graph traversal
     )
     
     query = "Ai có quyền chuyển nhượng quyền sử dụng đất?"
-    results = pipeline.retrieve(query, top_k=20)
+    results = pipeline.retrieve(query, top_k=10)
     
     pipeline.display_results(results, top_n=5)
     
@@ -217,7 +217,7 @@ def graph_only():
         use_dpr=False  # Disable DPR
     )
     
-    query = "Quy định về chuyển mục đích sử dụng đất"
+    query = "Điều kiện chuyển nhượng quyền sử dụng đất là gì?"
     results = pipeline.retrieve(query, top_k=20)
     
     pipeline.display_results(results, top_n=5)
