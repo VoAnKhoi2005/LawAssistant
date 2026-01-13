@@ -97,10 +97,12 @@ Thumbs.db
 *.env
 *.zip
 copilot.exe
-triplet_extraction/logs/dat_dai_triplet_extraction.txt
-triplet_extraction/logs/dat_dai_triplet_extraction_08_01_2026.txt
-triplet_extraction/logs/dat_dai_triplet_extraction_10_01_2026.txt
+logs/dat_dai_triplet_extraction.txt
+logs/dat_dai_triplet_extraction_08_01_2026.txt
+logs/dat_dai_triplet_extraction_10_01_2026.txt
 
 nlp_models
-semantic_retrieval/search_index/*
-!semantic_retrieval/search_index/.gitkeep
+src/retrieval/semantic/search_index/*
+!src/retrieval/semantic/search_index/.gitkeep
+/data/triplet_extraction/listSameKey.txt
+/logs/
