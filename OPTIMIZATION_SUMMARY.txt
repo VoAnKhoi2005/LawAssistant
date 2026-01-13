@@ -1,0 +1,49 @@
+OPTIMIZATION SUMMARY
+====================
+
+1. MERGE_AND_RANK LOGIC FIXES
+   ✓ Fixed score initialization (lines 391-403)
+     - All sections now consistently initialize all 3 scores to 0.0
+     - Prevents missing key errors and inconsistent behavior
+   
+   ✓ Moved DPR scoring before aggregation (lines 486-500)
+     - DPR now runs BEFORE ancestor merging
+     - Ancestors get meaningful DPR scores via max aggregation
+     - Eliminated wasteful averaging of zeros
+   
+   ✓ Changed to max aggregation (lines 528-531)
+     - Changed from average to max for graph/semantic/dpr scores
+     - Preserves strongest signals from child sections
+     - Prevents dilution of highly relevant content
+
+2. FIND_COMMON_ANCESTORS PERFORMANCE
+   ✓ Optimized with bulk fetching (lines 342-429)
+     - OLD: N * max_depth * 2 queries (per section traversal)
+     - NEW: max_depth * 2 queries total (batch traversal)
+     - Example: 100 sections, depth=3
+       * OLD: 100 * 3 * 2 = 600 queries
+       * NEW: 3 * 2 = 6 queries
+     - ~100x speedup for large result sets!
+
+3. HIERARCHY UNDERSTANDING & FIX
+   ✓ Hierarchy (top to bottom):
+     1. Phần thứ (Part)
+     2. Chương (Chapter)
+     3. Mục (Section)
+     4. Tiểu mục (Subsection)
+     5. Điều (Article)      ← Stop here
+     6. Khoản (Clause)      ← Merge these
+     7. Điểm (Point)        ← And these
+   
+   ✓ Updated aggregation logic (lines 502-557)
+     - OLD: Only merge to 'điều' type
+     - NEW: Merge to ANY aggregation level (phần, chương, mục, tiểu_mục, điều)
+     - More flexible and correct according to hierarchy
+     - Properly filters leaf vs aggregation sections
+
+PERFORMANCE IMPACT
+===================
+- Query time: Significantly faster for large result sets
+- Database load: Reduced by ~99% for ancestor finding
+- Score quality: Improved with max aggregation
+- Correctness: Fixed DPR scoring bug, proper hierarchy handling

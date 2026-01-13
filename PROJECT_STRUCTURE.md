@@ -404,9 +404,9 @@ htmlcov/
 
 __version__ = "1.0.0"
 
-from src.core.retrieval_pipeline import UnifiedRetrievalPipeline, create_pipeline
+from src.core.retrieval_pipeline import RetrievalPipeline, create_pipeline
 
-__all__ = ["UnifiedRetrievalPipeline", "create_pipeline"]
+__all__ = ["RetrievalPipeline", "create_pipeline"]
 ```
 
 **src/retrieval/__init__.py**

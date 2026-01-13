@@ -13,8 +13,6 @@ logger = logging.getLogger(__name__)
 
 
 class QueryNormalizer:
-
-
     # Vietnamese characters cho word boundary
     VIET_CHARS = r'a-zA-ZàáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđĐ'
 
