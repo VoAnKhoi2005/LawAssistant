@@ -1,0 +1,19 @@
+[
+  {
+    "part": 1,
+    "file_path": "E:\\Github\\LawAssistant\\scripts\\batch_qa_pipeline_20260114_065327_part1.jsonl",
+    "file_id": "file-QLmYKFpdfCEB2PtsLohFzh",
+    "batch_id": "batch_6966db03375c8190a6a4655664a37a88",
+    "status": "failed",
+    "failed_at": "2026-01-14T06:55:41.773231"
+  },
+  {
+    "part": 2,
+    "file_path": "E:\\Github\\LawAssistant\\scripts\\batch_qa_pipeline_20260114_065327_part2.jsonl",
+    "file_id": "file-UAGDSV23eSqmffCB6TyQFz",
+    "batch_id": "batch_6966db825da48190919ca3b6b8ad7d36",
+    "status": "completed",
+    "output_path": "E:\\Github\\LawAssistant\\scripts\\batch_part2_output.jsonl",
+    "completed_at": "2026-01-14T06:59:50.105194"
+  }
+]

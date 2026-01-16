@@ -1,3 +1,4 @@
+import csv
 import json
 import os
 import time
@@ -141,7 +142,7 @@ def create_batch_files_from_questions(questions_file_path, top_k=5):
         use_semantic_retrieval=True,
 
         # Graph traversal depth
-        k_hops=2,
+        k_hops=0,
 
         # Custom scoring weights (will be normalized)
         graph_weight=0.3,
@@ -380,26 +381,83 @@ def save_results_to_file(output_files):
     print(f"\n✓ Results saved to: {results_file.name}")
     return results_file
 
+def save_results_to_csv(output_files):
+    """Process batch output files and save Q&A results to a CSV file."""
+    print("\n" + "=" * 50)
+    print("SAVING RESULTS TO CSV")
+    print("=" * 50)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    results_file = OUTPUT_DIR / f"qa_results_{timestamp}.csv"
+
+    with open(results_file, "w", encoding="utf-8", newline="") as out_f:
+        writer = csv.writer(out_f)
+
+        # CSV header
+        writer.writerow(["id", "answer"])
+
+        for output_file in output_files:
+            output_file = Path(output_file)
+
+            if not output_file.exists():
+                print(f"⚠ Output file not found: {output_file}")
+                continue
+
+            print(f"\nProcessing: {output_file.name}")
+
+            with open(output_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+
+            for line in tqdm(lines, desc="  Processing entries"):
+                try:
+                    data = json.loads(line)
+
+                    # Check response status
+                    if data.get("response", {}).get("status_code") != 200:
+                        continue
+
+                    answer = (
+                        data["response"]["body"]["choices"][0]["message"]["content"]
+                        .strip()
+                    )
+
+                    custom_id = data.get("custom_id", "")
+
+                    writer.writerow([custom_id, answer])
+
+                except Exception as e:
+                    print(f"    ⚠ Error processing line: {e}")
+                    continue
+
+    print(f"\n✓ Results saved to: {results_file.name}")
+    return results_file
+
 def main():
     """Main execution flow - process questions with batch API."""
-    print("="*50)
-    print("CHATGPT BATCH API - QA PIPELINE")
-    print("="*50)
-    
-    # Step 1: Read questions and create batch files
-    question_file_path = rf"{BASE_DIR}\data\questions_property_law.jsonl"
-    file_paths = create_batch_files_from_questions(question_file_path, top_k=5)
-    
-    if not file_paths:
-        print("\n⚠ No batch files created. Exiting.")
-        return
+    # print("="*50)
+    # print("CHATGPT BATCH API - QA PIPELINE")
+    # print("="*50)
+    #
+    # # Step 1: Read questions and create batch files
+    # question_file_path = rf"{BASE_DIR}\data\facebook_questions.jsonl"
+    # file_paths = create_batch_files_from_questions(question_file_path, top_k=10)
+    #
+    # if not file_paths:
+    #     print("\nNo batch files created. Exiting.")
+    #     return
+
+    file_paths = [
+        r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part1.jsonl",
+        r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part2.jsonl",
+        r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part3.jsonl"
+    ]
 
     # Step 2: Process each batch sequentially
     total_parts = len(file_paths)
     all_results = []
     
     for idx, file_path in enumerate(file_paths, start=1):
-        result = submit_and_monitor_single_batch(file_path, idx, total_parts)
+        result = submit_and_monitor_single_batch(Path(file_path), idx, total_parts)
         if result:
             all_results.append(result)
             
@@ -430,7 +488,8 @@ def main():
     if len(completed_results) == total_parts:
         output_files = [r["output_path"] for r in completed_results if r.get("output_path")]
         if output_files:
-            save_results_to_file(output_files)
+            # save_results_to_file(output_files)
+            save_results_to_csv(output_files)
         else:
             print("\n⚠ No output files to save")
     else:

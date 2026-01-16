@@ -10,7 +10,8 @@ from typing import List, Dict, Optional, Tuple
 from src.retrieval.graph.bm25_ranker import hybrid_rank
 from src.retrieval.graph.dpr_ranker import DPRRanker
 from src.retrieval.graph.retrieval_system import extract_verbs, match_relations_graph, match_concepts_graph, \
-    k_hop_traversal_mongo, score_triplets_from_traversal
+    k_hop_traversal_mongo, score_triplets_from_traversal, collect_concept_ids_from_relations, \
+    link_relations_to_nearby_concepts
 from src.retrieval.preprocess_query.query_preprocessor import QueryPreprocessor
 from src.retrieval.semantic.config import SearchConfig
 from src.retrieval.semantic.hybrid_search import HybridSearchEngine
@@ -168,7 +169,6 @@ class RetrievalPipeline:
         logger.info("\n" + "="*80)
         logger.info("PIPELINE INITIALIZATION COMPLETE")
         logger.info(f"Weights: Graph={self.graph_weight:.2f}, Semantic={self.semantic_weight:.2f}, DPR={self.dpr_weight:.2f}")
-        logger.info("="*80 + "\n")
     
     def preprocess_query(self, query: str) -> str:
         """Step 1: Preprocess query"""
@@ -210,30 +210,36 @@ class RetrievalPipeline:
         )
         logger.info(f"Matched {len(matched_relations)} relations")
 
-        window_size = 2
-        concept_search_tokens = set()
-
-        for match in matched_relations:
-            verb_pos = match['position']
-            start = max(0, verb_pos - window_size)
-            end = min(len(segmented_tokens), verb_pos + window_size + 1)
-            concept_search_tokens.update(segmented_tokens[start:end])
-
-        # Fallback: if no relations matched, search all tokens
-        if not concept_search_tokens:
-            concept_search_tokens = set(segmented_tokens)
-        
-        # Match concepts
-        matched_concepts = match_concepts_graph(
-            list(concept_search_tokens),
-            self.concepts_col,
-            max_phrase_length=1
+        relation_concept_ids = collect_concept_ids_from_relations(
+            matched_relations,
+            self.triplets_col
         )
-        logger.info(f"Matched {len(matched_concepts)} concepts")
-        
-        # Extract IDs
-        seed_concept_ids = [match['data']['_id'] for match in matched_concepts]
-        seed_relation_ids = [match['data']['_id'] for match in matched_relations]
+        relation_connected_concepts = list(
+            self.concepts_col.find({"_id": {"$in": list(relation_concept_ids)}})
+        )
+
+        # relation_to_nearby_concepts = link_relations_to_nearby_concepts(
+        #     segmented_tokens,
+        #     matched_relations,
+        #     relation_connected_concepts,
+        #     window_size=6,
+        #     max_phrase_len=4
+        # )
+        # seed_concept_ids = set()
+        # for ids in relation_to_nearby_concepts.values():
+        #     seed_concept_ids.update(ids)
+
+        # fallback: use all relation-connected concepts
+        # if not seed_concept_ids:
+        #     seed_concept_ids = set(relation_concept_ids)
+
+        seed_concept_ids = [r["_id"] for r in relation_connected_concepts]
+        seed_relation_ids = [r["data"]["_id"] for r in matched_relations]
+
+        logger.info(
+            f"Seed concepts: {len(seed_concept_ids)}, "
+            f"Seed relations: {len(seed_relation_ids)}"
+        )
         
         if not seed_concept_ids and not seed_relation_ids:
             logger.warning("No concepts or relations matched - graph retrieval skipped")
@@ -247,7 +253,7 @@ class RetrievalPipeline:
             triplets_col=self.triplets_col,
             concepts_col=self.concepts_col,
             k_hops=self.k_hops,
-            max_concepts=500
+            max_concepts=1000,
         )
         
         # Score sections from triplets
@@ -271,19 +277,19 @@ class RetrievalPipeline:
         for section in sections:
             section['content'] = sections_content.get(str(section['_id']), section.get('content', ''))
 
-        # print(f"\nBM25+Triplet ranking for all {len(sections)} sections...")
-        # stage1_candidates = hybrid_rank(
-        #     query,
-        #     sections,
-        #     self.vncorenlp_client,
-        #     triplet_scores=triplet_scores,
-        #     top_k=min(top_k, len(sections)),
-        #     bm25_weight=0.6,
-        #     triplet_weight=0.4
-        # )
-        # print(f"Selected top {len(stage1_candidates)} candidates for DPR")
+        print(f"\nBM25+Triplet ranking for all {len(sections)} sections...")
+        stage1_candidates = hybrid_rank(
+            query,
+            sections,
+            self.vncorenlp_client,
+            triplet_scores=triplet_scores,
+            top_k=min(top_k, len(sections)),
+            bm25_weight=0.6,
+            triplet_weight=0.4
+        )
+        print(f"Selected top {len(stage1_candidates)} candidates for DPR")
         
-        return sections, triplet_scores
+        return stage1_candidates, triplet_scores
     
     def retrieve_from_semantic(self, query: str, top_k: int = 100) -> List[Dict]:
         """Step 2b: Retrieve from semantic search"""
@@ -330,7 +336,6 @@ class RetrievalPipeline:
         """Step 3: Merge results and apply hybrid ranking"""
         logger.info("\n" + "=" * 80)
         logger.info("STEP 3: HYBRID RANKING")
-        logger.info("=" * 80)
 
         # Merge sections (deduplicate by section_id)
         all_sections = {}
