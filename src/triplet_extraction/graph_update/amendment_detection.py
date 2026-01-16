@@ -150,6 +150,9 @@ def parse_amendment_reference(text: str, document_col) -> dict | None:
     - If so_hieu is missing but doc_name exists and document_col is provided,
       attempts to resolve so_hieu via fuzzy search
     """
+    if not text or not text.strip():
+        return None
+
     text = text.split(":")[0]  # Consider only text before first colon
 
     khoan_m = AMENDMENT_KHOAN_PATTERN.search(text)

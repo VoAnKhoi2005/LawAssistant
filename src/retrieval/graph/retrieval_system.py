@@ -1,5 +1,7 @@
 from collections import defaultdict
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Set
+
+from src.retrieval.utils.collect_content import collect_sections_content_upward
 from src.triplet_extraction.pos_taging import parsing_result
 from src.utils import clean_text
 from src.retrieval.graph.bm25_ranker import rank_sections_bm25, hybrid_rank
@@ -125,75 +127,212 @@ def match_concepts_graph(
 
 
 def match_relations_graph(
-    tokens: List[str],
-    relations_col,
-    max_phrase_length: int = 5
+        tokens: List[str],
+        relations_col,
+        max_phrase_length: int = 5,
+        similarity_threshold: float = 0.8
 ) -> List[Dict]:
     """
-    Match relations using MongoDB text search and regex
-    More efficient than loading all relations into memory
-
-    Args:
-        tokens: List of tokens to match
-        relations_col: MongoDB relations collection
-        max_phrase_length: Maximum phrase length to check
-
-    Returns:
-        List of matched relations with position info
+    More efficient version using text search or split queries
     """
     if not tokens:
         return []
 
-    matched_relations = []
-    i = 0
+    phrase_map = {}
 
-    while i < len(tokens):
-        best_match = None
-        best_length = 0
-
-        for length in range(min(max_phrase_length, len(tokens) - i), 0, -1):
+    for i in range(len(tokens)):
+        for length in range(1, min(max_phrase_length + 1, len(tokens) - i + 1)):
             phrase = " ".join(tokens[i:i + length])
-            normalized_phrase = phrase.replace('_', ' ').lower()
+            normalized = phrase.replace('_', ' ').lower().strip()
+            phrase_map[normalized] = (i, length)
 
-            query = {
-                '$or': [
-                    {'name': {'$regex': normalized_phrase, '$options': 'i'}},
-                    {'synonym': {'$regex': normalized_phrase, '$options': 'i'}}
-                ]
-            }
+    # Option 1: Use text index (if you have one on name/synonym fields)
+    # query = {'$text': {'$search': ' '.join(phrase_map.keys())}}
 
-            matches = list(relations_col.find(query))
+    # Option 2: Fetch all relations once and match in-memory (good if relations count is small)
+    all_relations = list(relations_col.find({}))
 
-            if matches:
-                best_match = matches
-                best_length = length
-                break
+    scored_matches = []
+    for match in all_relations:
+        for phrase, (pos, length) in phrase_map.items():
+            score = calculate_match_score(
+                phrase,
+                match.get('name', ''),
+                match.get('synonym', [])
+            )
 
-        if best_match:
-            for match in best_match:
-                matched_relations.append({
-                    'position': i,
-                    'matched_text': " ".join(tokens[i:i + best_length]),
+            if score >= similarity_threshold:
+                scored_matches.append({
+                    'position': pos,
+                    'length': length,
+                    'matched_text': " ".join(tokens[pos:pos + length]),
+                    'score': score,
                     'data': match
                 })
-            i += best_length
-        else:
-            i += 1
 
-    return matched_relations
+    # Resolve overlaps
+    scored_matches.sort(key=lambda x: (-x['length'], -x['score'], x['position']))
 
+    final_matches = []
+    used_positions = set()
+
+    for match in scored_matches:
+        pos_range = set(range(match['position'], match['position'] + match['length']))
+        if not pos_range & used_positions:
+            final_matches.append(match)
+            used_positions.update(pos_range)
+
+    final_matches.sort(key=lambda x: x['position'])
+    return final_matches
+
+
+def calculate_match_score(phrase: str, name: str, synonyms: List[str]) -> float:
+    """
+    Calculate similarity score between phrase and relation
+    Uses multiple strategies for robust matching
+    """
+    from difflib import SequenceMatcher
+
+    name = name.lower().strip()
+    phrase = phrase.lower().strip()
+
+    # Exact match
+    if phrase == name:
+        return 1.0
+
+    # Check synonyms
+    for syn in (synonyms or []):
+        syn = syn.lower().strip()
+        if phrase == syn:
+            return 1.0
+
+    # Containment matching
+    if phrase in name or name in phrase:
+        return 0.95
+
+    for syn in (synonyms or []):
+        syn = syn.lower().strip()
+        if phrase in syn or syn in phrase:
+            return 0.95
+
+    # Fuzzy matching (Levenshtein-like)
+    max_score = 0.0
+
+    # Compare with name
+    ratio = SequenceMatcher(None, phrase, name).ratio()
+    max_score = max(max_score, ratio)
+
+    # Compare with synonyms
+    for syn in (synonyms or []):
+        syn = syn.lower().strip()
+        ratio = SequenceMatcher(None, phrase, syn).ratio()
+        max_score = max(max_score, ratio)
+
+    return max_score
+
+def build_concept_phrase_map(concepts: list) -> dict:
+    """
+    Map phrase → concept document
+    """
+
+    def normalize(text: str) -> str:
+        return text.replace("_", " ").lower().strip()
+
+    phrase_map = {}
+
+    for c in concepts:
+        if "name" in c:
+            phrase_map[normalize(c["name"])] = c
+
+        for syn in c.get("synonym", []):
+            phrase_map[normalize(syn)] = c
+
+    return phrase_map
+
+
+def link_relations_to_nearby_concepts(
+    segmented_tokens: list,
+    matched_relations: list,
+    relation_connected_concepts: list,
+    window_size: int = 4,
+    max_phrase_len: int = 4
+) -> dict:
+    """
+    For each matched relation (verb), find nearby concepts in the query
+    using phrase-level fuzzy matching.
+
+    Args:
+        segmented_tokens: tokenized query (vncorenlp word_segment)
+        matched_relations: output from match_relations_graph
+        relation_connected_concepts: concept docs connected to relations (graph-side)
+        window_size: number of tokens left/right of verb to consider
+        max_phrase_len: maximum length of contiguous phrase
+
+    Returns:
+        dict[relation_id] -> {
+            "relation": relation_match,
+            "concepts": [concept_docs]
+        }
+    """
+    concept_phrase_map = build_concept_phrase_map(relation_connected_concepts)
+
+    result = {}
+    for rel in matched_relations:
+        verb_pos = rel["position"]
+
+        # Local context window around the verb
+        start = max(0, verb_pos - window_size)
+        end = min(len(segmented_tokens), verb_pos + window_size + 1)
+        context_tokens = segmented_tokens[start:end]
+
+        matched_concepts = {}
+
+        for i in range(len(context_tokens)):
+            for j in range(
+                i + 1,
+                min(i + max_phrase_len, len(context_tokens)) + 1
+            ):
+                phrase = (" ".join(context_tokens[i:j])).replace("_", " ").lower().strip()
+
+                # Fuzzy containment matching
+                for key, concept in concept_phrase_map.items():
+                    if phrase == key or phrase in key or key in phrase:
+                        matched_concepts[concept["_id"]] = concept
+
+        result[rel["data"]["_id"]] = {
+            "relation": rel,
+            "concepts": list(matched_concepts.values())
+        }
+
+    return result
+
+
+def collect_concept_ids_from_relations(matched_relations, triplets_col):
+    relation_ids = [r["data"]["_id"] for r in matched_relations]
+    concept_ids = set()
+
+    for t in triplets_col.find(
+        {"relation_id": {"$in": relation_ids}},
+        {"subject_id": 1, "object_id": 1}
+    ):
+        if t.get("subject_id"):
+            concept_ids.add(t["subject_id"])
+        if t.get("object_id"):
+            concept_ids.add(t["object_id"])
+
+    return concept_ids
 
 # ============================================================================
 # K-HOP NEIGHBORHOOD EXTRACTION USING MONGODB
 # ============================================================================
 
 def k_hop_traversal_mongo(
-    seed_concept_ids: List[str],
-    seed_relation_ids: List[str],
-    triplets_col,
-    concepts_col,
-    k_hops: int = 2,
-    max_concepts: int = 500
+        seed_concept_ids: List[str],
+        seed_relation_ids: List[str],
+        triplets_col,
+        concepts_col,
+        k_hops: int = 2,
+        max_concepts: int = 1000
 ) -> Dict[str, Any]:
     """
     Extract k-hop neighborhood using MongoDB aggregation pipeline
@@ -230,7 +369,6 @@ def k_hop_traversal_mongo(
     # Track all discovered entities
     all_concept_ids = set(seed_concept_ids)
     all_relation_ids = set(seed_relation_ids)
-    all_triplets = []
 
     current_concept_ids = set(seed_concept_ids)
 
@@ -248,10 +386,6 @@ def k_hop_traversal_mongo(
                 {'object_id': {'$in': list(current_concept_ids)}}
             ]
         }
-
-        # Optionally filter by seed relations
-        if seed_relation_ids and hop == 0:
-            query['relation_id'] = {'$in': seed_relation_ids}
 
         hop_triplets = list(triplets_col.find(query))
         print(f"Found {len(hop_triplets)} triplets at hop {hop + 1}")
@@ -272,8 +406,6 @@ def k_hop_traversal_mongo(
             if relation_id:
                 new_relation_ids.add(relation_id)
 
-            all_triplets.append(triplet)
-
         # Update global sets
         previously_seen = len(all_concept_ids)
         all_concept_ids.update(new_concept_ids)
@@ -290,19 +422,35 @@ def k_hop_traversal_mongo(
             print(f"\nWarning: Reached max concepts limit ({max_concepts}), stopping traversal")
             break
 
+    # Always collect triplets among final concept and relation sets
+    # All 3 IDs (subject, object, relation) must be in the final sets
+    print(f"\n=== COLLECTING TRIPLETS AMONG FINAL CONCEPT AND RELATION SETS ===")
+    final_query = {
+        '$and': [
+            {'subject_id': {'$in': list(all_concept_ids)}},
+            {'object_id': {'$in': list(all_concept_ids)}},
+            {'relation_id': {'$in': list(all_relation_ids)}}
+        ]
+    }
+
+    final_triplets = list(triplets_col.find(final_query))
+    print(f"Found {len(final_triplets)} triplets where all 3 IDs match")
+    print(f"  - Concepts: {len(all_concept_ids)}")
+    print(f"  - Relations: {len(all_relation_ids)}")
+
     # Fetch full concept documents
     concepts = list(concepts_col.find({'_id': {'$in': list(all_concept_ids)}}))
 
     print(f"\n=== TRAVERSAL COMPLETE ===")
     print(f"Total concepts: {len(all_concept_ids)}")
     print(f"Total relations: {len(all_relation_ids)}")
-    print(f"Total triplets: {len(all_triplets)}")
+    print(f"Total triplets: {len(final_triplets)}")
 
     return {
         'concepts': concepts,
         'concept_ids': all_concept_ids,
         'relation_ids': all_relation_ids,
-        'triplets': all_triplets
+        'triplets': final_triplets
     }
 
 
@@ -387,71 +535,6 @@ def score_triplets_from_traversal(
         print("No sections scored")
 
     return section_ids, score_dict
-
-def collect_sections_content(
-    sections_col,
-    section_ids: List[str]
-) -> Dict[str, str]:
-    """
-    For each section_id:
-      - walk parent_id upward until type == 'điều'
-      - collect all content on the path
-
-    Returns:
-      { section_id: merged_content }
-    """
-
-    pipeline = [
-        {
-            "$match": {
-                "_id": {"$in": section_ids}
-            }
-        },
-        {
-            "$graphLookup": {
-                "from": sections_col.name,
-                "startWith": "$parent_id",
-                "connectFromField": "parent_id",
-                "connectToField": "_id",
-                "as": "ancestors",
-                "depthField": "depth"
-            }
-        },
-        {
-            "$addFields": {
-                "chain": {
-                    "$concatArrays": [["$$ROOT"], "$ancestors"]
-                }
-            }
-        },
-        {
-            "$project": {
-                "_id": 1,
-                "chain": 1
-            }
-        }
-    ]
-
-    docs = list(sections_col.aggregate(pipeline))
-
-    result = {}
-
-    for doc in docs:
-        chain = doc["chain"]
-
-        # sort bottom → top
-        chain.sort(key=lambda x: x.get("depth", -1))
-
-        contents = []
-        for s in chain:
-            if s.get("content"):
-                contents.append(s["content"].strip())
-            if s.get("type") == "điều":
-                break
-
-        result[str(doc["_id"])] = "\n".join(reversed(contents))
-
-    return result
 
 # ============================================================================
 # MAIN RETRIEVAL AND RANKING WITH K-HOP TRAVERSAL
@@ -569,7 +652,7 @@ def retrieve_and_rank(
             triplets_col=triplets_col,
             concepts_col=concepts_col,
             k_hops=k_hops,
-            max_concepts=500
+            max_concepts=1000
         )
 
         # Score sections from expanded graph
@@ -601,7 +684,7 @@ def retrieve_and_rank(
         print("No triplet matches found, using all sections for BM25 ranking")
         sections = list(sections_col.find({}).limit(1000))
 
-    sections_content = collect_sections_content(sections_col, [str(s['_id']) for s in sections])
+    sections_content = collect_sections_content_upward(sections_col, [str(s['_id']) for s in sections])
     for section in sections:
         section['content'] = sections_content[section['_id']]
 
@@ -609,8 +692,6 @@ def retrieve_and_rank(
 
     if not sections:
         return ([], matched_concepts, matched_relations) if return_matches else []
-
-
 
     # Step 7: Hybrid ranking (BM25 + DPR + Graph scores)
     if use_hybrid and use_dpr:

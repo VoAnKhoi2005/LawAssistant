@@ -58,8 +58,8 @@ def main():
     
     # === Initialize NLP models ===
     print("\nInitializing NLP models...")
-    vncorenlp_path = r"/triplet_extraction/nlp_models/VnCoreNLP-1.2"
-    phonlp_path = r"/triplet_extraction/nlp_models/phonlp"
+    vncorenlp_path = r"E:\Github\LawAssistant\nlp_models\VnCoreNLP-1.2"
+    phonlp_path = r"E:\Github\LawAssistant\nlp_models\phonlp"
     
     vncorenlp_client = init_vncorenlp(vncorenlp_path)
     phoNLP_model = phonlp.load(save_dir=phonlp_path)
@@ -68,11 +68,11 @@ def main():
     
     # === Test questions ===
     test_questions = [
-        # "Phải xác nhận tài sản trên đất mới được bán đất có đúng không?",
+        "Phải xác nhận tài sản trên đất mới được bán đất có đúng không?",
         # "Điều kiện để được cấp giấy chứng nhận quyền sử dụng đất là gì?",
         # "Điều kiện chuyển nhượng quyền sử dụng đất là gì?",
         # "Ai có quyền chuyển nhượng quyền sử dụng đất?",
-        "Các loại đất nào được sử dụng kết hợp đa mục đích?"
+        # "Các loại đất nào được sử dụng kết hợp đa mục đích?"
     ]
     
     # === Process each question ===
