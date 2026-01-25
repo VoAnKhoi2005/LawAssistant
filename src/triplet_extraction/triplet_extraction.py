@@ -25,7 +25,7 @@ def split_sentence_np_vp(tokens):
 
     # Find the main verb (root or first valid verb)
     for i, token in enumerate(tokens):
-        if token['pos'] == 'V':
+        if token['pos'] in ['V', 'R']:
             if token['deprel'] == 'root' and token['head'] == 0:
                 # Avoid picking verb at start (index 0)
                 if i == 0:
@@ -79,10 +79,14 @@ def collect_direct_dependents(tokens, head_id):
 def rebuild_phrase(tokens):
     """Sort tokens by their original position in the sentence and join them together"""
     tokens_sorted = sorted(tokens, key=lambda x: x['id'])
-    phrase = " ".join(t['word'] for t in tokens_sorted)
+    phrase = " ".join(t['word'] for t in tokens_sorted if t['word'].strip())
     return phrase
 
 def extract_main_subjects(np_tokens):
+    # Remove leading V tokens
+    while np_tokens and np_tokens[0]['pos'] == 'V':
+        np_tokens = np_tokens[1:]
+
     if not np_tokens:
         return []
 
@@ -159,7 +163,7 @@ def extract_verbs(vp_tokens):
     # Find the root verb first
     root_verb = None
     for t in vp_tokens:
-        if t['deprel'] == 'root' and t['head'] == 0 and t['pos'] == 'V':
+        if t['deprel'] == 'root' and t['head'] == 0 and t['pos'] in ['V', 'R']:
             root_verb = t
             break
 
@@ -243,8 +247,10 @@ def extract_objects(vp_tokens, verb_token):
     if not vp_tokens:
         return []
 
+    obj_token = None
+
     # Find the first object token (dob, iob, pob)
-    obj_token = next((t for t in vp_tokens if t['deprel'] in ['dob', 'iob', 'pob']), None)
+    # obj_token = next((t for t in vp_tokens if t['deprel'] in ['dob', 'iob', 'pob']), None)
 
     # Fallback to the first noun in vp_tokens
     if obj_token is None:
@@ -266,8 +272,10 @@ def extract_objects(vp_tokens, verb_token):
             'tokens': vp_tokens
         }]
 
-    # Find coordination tokens
-    coord_tokens = [t for t in vp_tokens if t['pos'] in ['Cc', 'CH']]
+    coord_tokens = [
+        t for i, t in enumerate(vp_tokens)
+        if t['pos'] in ['Cc', 'CH'] and i < len(vp_tokens) - 1
+    ]
     for obj in main_objects:
         if obj in coord_tokens:
             main_objects = []
@@ -317,6 +325,11 @@ def extract_objects(vp_tokens, verb_token):
         return final_phrases
 
     else:
+        vp_tokens = [
+            token for token in vp_tokens
+            if token['pos'] not in ['CH', 'Cc']
+        ]
+
         return [{
             'text': rebuild_phrase(vp_tokens),
             'tokens': vp_tokens
@@ -324,6 +337,7 @@ def extract_objects(vp_tokens, verb_token):
 
 
 def process_sentence(df, logger):
+    logger.debug(df.to_string(index=False))
     tokens = parse_dataframe_to_tokens(df)
     np_tokens, vp_tokens = split_sentence_np_vp(tokens)
     logger.debug("-----------------NP-----------------")
@@ -398,6 +412,9 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
             refined_subj_triplets = process_sentence(df_subj, logger)
             if refined_subj_triplets and len(refined_subj_triplets) > 0 and len(refined_subj_triplets[0]) > 0:
                 subj_refined = refined_subj_triplets[0][0]
+                # If refined subject is empty or whitespace, keep original
+                if not subj_refined or not subj_refined.strip():
+                    subj_refined = subj
             else:
                 subj_refined = subj
         except (IndexError, Exception):
@@ -411,6 +428,9 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
             refined_obj_triplets = process_sentence(df_obj, logger)
             if refined_obj_triplets and len(refined_obj_triplets) > 0 and len(refined_obj_triplets[0]) > 0:
                 obj_refined = refined_obj_triplets[0][0]
+                # If refined object is empty or whitespace, keep original
+                if not obj_refined or not obj_refined.strip():
+                    obj_refined = obj
             else:
                 obj_refined = obj
         except (IndexError, Exception):
@@ -445,3 +465,78 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
         filtered_triplets.append((subj_filtered, verb_filtered, obj_filtered))
 
     return filtered_triplets
+
+def main():
+    import logging
+    from src.utils import load_stopwords
+    from src.triplet_extraction.pos_taging import init_vncorenlp
+    import phonlp
+    import os
+    from src.utils import setup_logger
+    import re
+
+    current_dir = os.getcwd()
+    base_dir = r"E:\Github\LawAssistant"
+    print(f"Working directory: {current_dir}")
+    print(f"Base directory set to: {base_dir}\n")
+
+    # === Define files paths relative to base directory ===
+    vncorenlp_dir = os.path.join(base_dir, "nlp_models", "VnCoreNLP-1.2")
+    phonlp_dir = os.path.join(base_dir, "nlp_models", "phonlp")
+    synonym_file = os.path.join(current_dir, "listSameKey.txt")
+    stopwords_file = os.path.join(current_dir, "stopwords.csv")
+    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_1.csv")
+    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction.txt")
+
+    # === Initialize NLP models ===
+    vncorenlp_client = init_vncorenlp(vncorenlp_dir)
+    phoNLP_model = phonlp.load(save_dir=phonlp_dir)
+    stopwords = load_stopwords(stopwords_file)
+
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+    logger, console_handler, file_handler = setup_logger(
+        name="triplet_extraction",
+        level=logging.DEBUG,
+        log_to_file=False,
+        file_path=log_file_path
+    )
+
+    sentence = "Người đại diện của tổ chức chịu trách nhiệm đối với việc quản lý đất. Việc quản lý đất được thực hiện trong các trường hợp sau đây: tổ chức trong nước được giao quản lý đất có mặt nước của các sông. Tổ chức trong nước được giao quản lý đất có mặt nước chuyên dùng."
+    pattern = re.compile(
+        r"""
+        (?<!\d)      # not preceded by a digit
+        \.           # the dot
+        (?!\d|\.)    # not followed by digit or another dot
+        \s+          # whitespace
+        """,
+        re.VERBOSE
+    )
+    sentences = re.split(pattern, sentence)
+
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+    logger, console_handler, file_handler = setup_logger(
+        name="triplet_extraction",
+        level=logging.DEBUG,
+        log_to_file=True,
+        file_path=log_file_path
+    )
+
+    all_triplet = []
+    for s in sentences:
+        print("Processing sentence:", s)
+        triplets = triplet_extraction(
+            text=s,
+            vncorenlp_client=vncorenlp_client,
+            phoNLP_model=phoNLP_model,
+            stopwords=stopwords,
+            logger=logger,
+            max_depth=4,
+        )
+        all_triplet.extend(triplets)
+
+    for t in all_triplet:
+        print(t)
+
+
+if __name__ == "__main__":
+    main()

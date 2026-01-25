@@ -1,5 +1,7 @@
 import csv
 import logging
+import re
+from datetime import datetime
 
 from tqdm import tqdm
 import phonlp
@@ -10,21 +12,37 @@ from src.triplet_extraction.pos_taging import init_vncorenlp
 from src.triplet_extraction.triplet_extraction import *
 from src.triplet_extraction.utils import load_synonym_dict, load_stopwords, setup_logger
 
+KEEP_SO_HIEU = [
+    "31/2024/QH15",
+    "101/2024/NĐ-CP",
+    "102/2024/NĐ-CP",
+    "103/2024/NĐ-CP",
+    "226/2025/NĐ-CP",
+    "27/2023/QH15",
+    "95/2024/NĐ-CP",
+    "29/2023/QH15",
+    "96/2024/NĐ-CP",
+    "91/2015/QH13",
+    "52/2014/QH13"
+]
 
 def main():
     # === Setup working directory ===
     current_dir = os.getcwd()
-    base_dir = os.path.dirname(current_dir)
+    base_dir = r"E:\Github\LawAssistant"
     print(f"Working directory: {current_dir}")
     print(f"Base directory set to: {base_dir}\n")
 
     # === Define files paths relative to base directory ===
-    vncorenlp_dir = os.path.join(current_dir, "nlp_models", "VnCoreNLP-1.2")
-    phonlp_dir = os.path.join(current_dir, "nlp_models", "phonlp")
-    synonym_file = os.path.join(current_dir, "listSameKey.txt")
-    stopwords_file = os.path.join(current_dir, "stopwords.csv")
-    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_10_01_2026.csv")
-    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction_10_01_2026.txt")
+    vncorenlp_dir = os.path.join(base_dir, "nlp_models", "VnCoreNLP-1.2")
+    phonlp_dir = os.path.join(base_dir, "nlp_models", "phonlp")
+    synonym_file = os.path.join(base_dir, "src", "triplet_extraction", "listSameKey.txt")
+    stopwords_file = os.path.join(base_dir, "src", "triplet_extraction", "stopwords.csv")
+    
+    # Generate unique timestamp for log files
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    no_triplet_csv_path = os.path.join(current_dir, "logs", f"no_triplets_dat_dai_log_{timestamp}.csv")
+    log_file_path = os.path.join(current_dir, "logs", f"dat_dai_triplet_extraction_{timestamp}.txt")
 
     # === Initialize MongoDB ===
     mongo_client = init_mongo()
@@ -96,16 +114,24 @@ def main():
             print(f"Tìm thấy {len(rows)} hàng để xử lý.\n")
             rows_iterator = tqdm(rows, desc="Đang xử lý văn bản", unit="văn bản")
 
+        legal_sections_dict = {}
+
+        cursor = db["legal_sections"].find({})
+        for doc in cursor:
+            legal_sections_dict[doc["_id"]] = doc
+        print(f"Đã tải {len(legal_sections_dict)} mục pháp luật vào bộ nhớ.\n")
+
         for i, row in enumerate(rows_iterator, 1):
             section_id = row["section_id"]
             sequence_number = row.get("sequence", 0)
-            
-            # Try to find section by ObjectId first, then by string ID
-            try:
-                section = db["legal_sections"].find_one({"_id": ObjectId(section_id)})
-            except:
-                section = db["legal_sections"].find_one({"_id": section_id})
-            
+            so_hieu = row.get("so_hieu")
+
+            if not so_hieu:
+                continue
+            if so_hieu not in KEEP_SO_HIEU:
+                continue
+
+            section = legal_sections_dict[section_id]
             if not section:
                 continue
 
@@ -123,18 +149,31 @@ def main():
 
             try:
                 logger.debug(f"Processing section_id: {section_id}, sequence {sequence_number}")
-                triplets = triplet_extraction(
-                    text=sentence,
-                    vncorenlp_client=vncorenlp_client,
-                    phoNLP_model=phoNLP_model,
-                    stopwords=stopwords,
-                    logger=logger,
-                    max_depth=3,
+                pattern = re.compile(
+                    r"""
+                    (?<!\d)      # not preceded by a digit
+                    \.           # the dot
+                    (?!\d|\.)    # not followed by digit or another dot
+                    \s+          # whitespace
+                    """,
+                    re.VERBOSE
                 )
+                sentences = re.split(pattern, sentence)
+                all_triplets = []
+                for s in sentences:
+                    triplets = triplet_extraction(
+                        text=sentence,
+                        vncorenlp_client=vncorenlp_client,
+                        phoNLP_model=phoNLP_model,
+                        stopwords=stopwords,
+                        logger=logger,
+                        max_depth=4,
+                    )
+                    all_triplets.extend(triplets)
 
                 triplets_list = [
                     {"c1": c1, "r": r, "c2": c2}
-                    for (c1, r, c2) in triplets
+                    for (c1, r, c2) in all_triplets
                     if c1 and r and c2
                 ]
 
@@ -182,9 +221,8 @@ def main():
     finally:
         # Print final summary
         elapsed_time = time.time() - start_time
-        print(f"\n{'='*60}")
-        print(f"TỔNG KẾT")
         print(f"{'='*60}")
+        print(f"TỔNG KẾT")
         print(f"Tổng số xử lý:           {total_processed:,}")
         print(f"Tổng triplets chèn:      {total_triplets_inserted:,}")
         print(f"Không có triplet:        {total_no_triplets:,}")
@@ -192,12 +230,12 @@ def main():
         print(f"Thời gian:               {elapsed_time/60:.2f} phút")
         print(f"Tốc độ TB:               {total_processed/elapsed_time if elapsed_time > 0 else 0:.2f} văn bản/giây")
         print(f"{'='*60}\n")
-        
-        if 'mongo_client' in locals():
-            mongo_client.close()
-        if 'no_triplet_file' in locals():
-            no_triplet_file.close()
-        print("Đã đóng tất cả kết nối. Hoàn thành.")
+
+    if 'mongo_client' in locals():
+        mongo_client.close()
+    if 'no_triplet_file' in locals():
+        no_triplet_file.close()
+    print("Đã đóng tất cả kết nối. Hoàn thành.")
 
 
 if __name__ == "__main__":

@@ -108,3 +108,6 @@ src/retrieval/semantic/search_index/*
 notebook/test_new_retrival/QA_batch_requests/checkpoints/
 *.jsonl
 *.faiss
+listSameKey.txt
+scripts/triplet_extraction/listSameKey.txt
+scripts/triplet_extraction/listSameKey.txt

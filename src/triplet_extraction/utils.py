@@ -70,6 +70,7 @@ def load_stopwords(stopword_file):
                     stopwords.add(row[1].strip().lower())
     except Exception as e:
         print(f"Error loading stopwords: {e}")
+    print(f"Loaded stopwords from {stopword_file}, total: {len(stopwords)}")
     return stopwords
 
 
