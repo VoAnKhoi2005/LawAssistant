@@ -9,7 +9,10 @@ AMENDMENT_CHUONG_PATTERN = re.compile(r"chương\s+([ivxlcdm\d]+)", re.IGNORECAS
 AMENDMENT_MUC_PATTERN = re.compile(r"mục\s+([ivxlcdm\d]+)", re.IGNORECASE)
 AMENDMENT_TIEU_MUC_PATTERN = re.compile(r"tiểu\s+mục\s+(\d+)", re.IGNORECASE)
 AMENDMENT_PHU_LUC_PATTERN = re.compile(r"phụ\s+lục(?:\s+([ivxlcdm\d]+))?", re.IGNORECASE)
-AMENDMENT_SO_HIEU_PATTERN = re.compile(r"số\s+(\d+/\d+/QH\d+)", re.IGNORECASE)
+AMENDMENT_SO_HIEU_PATTERN = re.compile(
+    r"số\s+(\d{1,3}/\d{4}/[A-ZĐ]+[-–]?[A-Z0-9]+)",
+    re.IGNORECASE
+)
 # Capture law name - Vietnamese law names typically start with "Luật" or "Bộ luật"
 AMENDMENT_LAW_NAME_PATTERN = re.compile(r"((?:Bộ\s+)?Luật\s+[^\d\n]+?)(?=\s+số|\s+năm|$)", re.IGNORECASE)
 # Enhanced law/document name pattern to capture various legal document types

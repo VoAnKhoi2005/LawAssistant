@@ -60,30 +60,62 @@ def extract_verbs(text: str, phoNLP_model) -> List[str]:
 
     return verbs
 
-
-# ============================================================================
-# MONGODB GRAPH-BASED MATCHING (REPLACES IN-MEMORY MATCHING)
-# ============================================================================
-
 def match_concepts_graph(
     tokens: List[str],
     concepts_col,
-    max_phrase_length: int = 5
+    max_phrase_length: int = 5,
+    similarity_threshold: float = 0.9,
+    embedding_model=None
 ) -> List[Dict]:
     """
-    Match concepts using MongoDB text search and regex
-    More efficient than loading all concepts into memory
+    Match concepts using embeddings for semantic similarity
+    Falls back to regex matching if embeddings not available
 
     Args:
         tokens: List of tokens to match
         concepts_col: MongoDB concepts collection
         max_phrase_length: Maximum phrase length to check
+        similarity_threshold: Minimum similarity score (0-1)
+        embedding_model: Optional embedding model (AutoModel for generating embeddings)
 
     Returns:
-        List of matched concepts with position info
+        List of matched concepts with position info and similarity scores
     """
     if not tokens:
         return []
+
+    # Check if concepts have embeddings
+    sample = concepts_col.find_one({'embeddings': {'$exists': True}})
+    use_embeddings = sample is not None and embedding_model is not None
+
+    if not use_embeddings:
+        # Fallback to regex matching
+        return _match_concepts_regex(tokens, concepts_col, max_phrase_length)
+
+    # Embedding-based matching
+    from sklearn.metrics.pairwise import cosine_similarity
+    import numpy as np
+    import torch
+    from transformers import AutoTokenizer
+    
+    # Load tokenizer if model provided
+    if hasattr(embedding_model, 'config'):
+        tokenizer = AutoTokenizer.from_pretrained(embedding_model.config._name_or_path)
+    else:
+        tokenizer = None
+    
+    def get_embedding(text: str) -> np.ndarray:
+        """Generate embedding for text"""
+        if tokenizer is None:
+            return None
+        with torch.no_grad():
+            inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=512)
+            if torch.cuda.is_available():
+                inputs = {k: v.cuda() for k, v in inputs.items()}
+                embedding_model.cuda()
+            outputs = embedding_model(**inputs)
+            embedding = outputs.last_hidden_state[:, 0, :].squeeze().cpu().numpy()
+        return embedding
 
     matched_concepts = []
     i = 0
@@ -91,13 +123,71 @@ def match_concepts_graph(
     while i < len(tokens):
         best_match = None
         best_length = 0
+        best_score = 0.0
 
         # Try phrases from longest to shortest
         for length in range(min(max_phrase_length, len(tokens) - i), 0, -1):
             phrase = " ".join(tokens[i:i + length])
             normalized_phrase = phrase.replace('_', ' ').lower()
 
-            # MongoDB query with case-insensitive regex
+            # Generate embedding for query phrase
+            query_embedding = get_embedding(normalized_phrase)
+            if query_embedding is None:
+                continue
+
+            # Get all concepts with embeddings
+            concepts = list(concepts_col.find({'embeddings': {'$exists': True}}))
+            
+            if not concepts:
+                continue
+
+            # Find best matching concept
+            for concept in concepts:
+                concept_embeddings = np.array(concept['embeddings'])
+                
+                # Compare with all embeddings (name + synonyms)
+                similarities = cosine_similarity([query_embedding], concept_embeddings)[0]
+                max_sim = np.max(similarities)
+
+                if max_sim >= similarity_threshold and max_sim > best_score:
+                    best_match = concept
+                    best_length = length
+                    best_score = max_sim
+
+            if best_match:
+                break
+
+        if best_match:
+            matched_concepts.append({
+                'position': i,
+                'matched_text': " ".join(tokens[i:i + best_length]),
+                'similarity_score': best_score,
+                'data': best_match
+            })
+            i += best_length
+        else:
+            i += 1
+
+    return matched_concepts
+
+
+def _match_concepts_regex(
+    tokens: List[str],
+    concepts_col,
+    max_phrase_length: int = 5
+) -> List[Dict]:
+    """Fallback regex-based concept matching"""
+    matched_concepts = []
+    i = 0
+
+    while i < len(tokens):
+        best_match = None
+        best_length = 0
+
+        for length in range(min(max_phrase_length, len(tokens) - i), 0, -1):
+            phrase = " ".join(tokens[i:i + length])
+            normalized_phrase = phrase.replace('_', ' ').lower()
+
             query = {
                 '$or': [
                     {'name': {'$regex': normalized_phrase, '$options': 'i'}},
@@ -117,6 +207,7 @@ def match_concepts_graph(
                 matched_concepts.append({
                     'position': i,
                     'matched_text': " ".join(tokens[i:i + best_length]),
+                    'similarity_score': 1.0,  # Exact match
                     'data': match
                 })
             i += best_length
@@ -130,14 +221,126 @@ def match_relations_graph(
         tokens: List[str],
         relations_col,
         max_phrase_length: int = 5,
-        similarity_threshold: float = 0.8
+        similarity_threshold: float = 0.9,
+        embedding_model=None
 ) -> List[Dict]:
     """
-    More efficient version using text search or split queries
+    Match relations using embeddings for semantic similarity
+    Falls back to fuzzy matching if embeddings not available
+    
+    Args:
+        tokens: List of tokens to match
+        relations_col: MongoDB relations collection
+        max_phrase_length: Maximum phrase length
+        similarity_threshold: Minimum similarity score (0-1)
+        embedding_model: Optional embedding model for semantic matching
+    
+    Returns:
+        List of matched relations with similarity scores
     """
     if not tokens:
         return []
 
+    # Check if relations have embeddings
+    sample = relations_col.find_one({'embeddings': {'$exists': True}})
+    use_embeddings = sample is not None and embedding_model is not None
+
+    if not use_embeddings:
+        # Fallback to fuzzy matching
+        return _match_relations_fuzzy(tokens, relations_col, max_phrase_length, similarity_threshold)
+
+    # Embedding-based matching
+    from sklearn.metrics.pairwise import cosine_similarity
+    import numpy as np
+    import torch
+    from transformers import AutoTokenizer
+    
+    # Load tokenizer if model provided
+    if hasattr(embedding_model, 'config'):
+        tokenizer = AutoTokenizer.from_pretrained(embedding_model.config._name_or_path)
+    else:
+        tokenizer = None
+    
+    def get_embedding(text: str) -> np.ndarray:
+        """Generate embedding for text"""
+        if tokenizer is None:
+            return None
+        with torch.no_grad():
+            inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=512)
+            if torch.cuda.is_available():
+                inputs = {k: v.cuda() for k, v in inputs.items()}
+                embedding_model.cuda()
+            outputs = embedding_model(**inputs)
+            embedding = outputs.last_hidden_state[:, 0, :].squeeze().cpu().numpy()
+        return embedding
+
+    # Build phrase map
+    phrase_map = {}
+    for i in range(len(tokens)):
+        for length in range(1, min(max_phrase_length + 1, len(tokens) - i + 1)):
+            phrase = " ".join(tokens[i:i + length])
+            normalized = phrase.replace('_', ' ').lower().strip()
+            phrase_map[normalized] = (i, length)
+
+    # Get all relations with embeddings
+    all_relations = list(relations_col.find({'embeddings': {'$exists': True}}))
+    
+    if not all_relations:
+        # Fallback to fuzzy matching
+        return _match_relations_fuzzy(tokens, relations_col, max_phrase_length, similarity_threshold)
+
+    scored_matches = []
+    
+    # Generate embeddings for all phrases
+    phrase_embeddings = {}
+    for phrase in phrase_map.keys():
+        emb = get_embedding(phrase)
+        if emb is not None:
+            phrase_embeddings[phrase] = emb
+
+    # Compare each phrase with all relations
+    for phrase, query_emb in phrase_embeddings.items():
+        pos, length = phrase_map[phrase]
+        
+        for relation in all_relations:
+            relation_embeddings = np.array(relation['embeddings'])
+            
+            # Compare with all embeddings (name + synonyms)
+            similarities = cosine_similarity([query_emb], relation_embeddings)[0]
+            max_sim = np.max(similarities)
+
+            if max_sim >= similarity_threshold:
+                scored_matches.append({
+                    'position': pos,
+                    'length': length,
+                    'matched_text': " ".join(tokens[pos:pos + length]),
+                    'score': max_sim,
+                    'data': relation
+                })
+
+    # Resolve overlaps
+    scored_matches.sort(key=lambda x: (-x['length'], -x['score'], x['position']))
+
+    final_matches = []
+    used_positions = set()
+
+    for match in scored_matches:
+        pos_range = set(range(match['position'], match['position'] + match['length']))
+        if not pos_range & used_positions:
+            final_matches.append(match)
+            used_positions.update(pos_range)
+
+    final_matches.sort(key=lambda x: x['position'])
+    return final_matches
+
+
+def _match_relations_fuzzy(
+        tokens: List[str],
+        relations_col,
+        max_phrase_length: int = 5,
+        similarity_threshold: float = 0.8
+) -> List[Dict]:
+    """Fallback fuzzy matching for relations"""
     phrase_map = {}
 
     for i in range(len(tokens)):
@@ -146,10 +349,6 @@ def match_relations_graph(
             normalized = phrase.replace('_', ' ').lower().strip()
             phrase_map[normalized] = (i, length)
 
-    # Option 1: Use text index (if you have one on name/synonym fields)
-    # query = {'$text': {'$search': ' '.join(phrase_map.keys())}}
-
-    # Option 2: Fetch all relations once and match in-memory (good if relations count is small)
     all_relations = list(relations_col.find({}))
 
     scored_matches = []
@@ -365,6 +564,39 @@ def k_hop_traversal_mongo(
     print(f"\n=== K-HOP TRAVERSAL (k={k_hops}) ===")
     print(f"Seed concepts: {len(seed_concept_ids)}")
     print(f"Seed relations: {len(seed_relation_ids)}")
+    
+    # Check if seed concepts already exceed limit
+    if len(seed_concept_ids) > max_concepts:
+        print(f"\n⚠WARNING: Seed concepts ({len(seed_concept_ids)}) exceed max limit ({max_concepts})")
+        print(f"Skipping k-hop traversal and using seed concepts directly")
+        
+        # Return just the seed concepts without expansion
+        all_concept_ids = set(seed_concept_ids)
+        all_relation_ids = set(seed_relation_ids)
+        
+        # Fetch only triplets among seed concepts and relations
+        final_query = {
+            '$and': [
+                {'subject_id': {'$in': list(all_concept_ids)}},
+                {'object_id': {'$in': list(all_concept_ids)}},
+                {'relation_id': {'$in': list(all_relation_ids)}}
+            ]
+        }
+        
+        final_triplets = list(triplets_col.find(final_query))
+        concepts = list(concepts_col.find({'_id': {'$in': list(all_concept_ids)}}))
+        
+        print(f"\n=== SEED-ONLY RESULT (NO HOPS) ===")
+        print(f"Concepts: {len(all_concept_ids)}")
+        print(f"Relations: {len(all_relation_ids)}")
+        print(f"Triplets: {len(final_triplets)}")
+        
+        return {
+            'concepts': concepts,
+            'concept_ids': all_concept_ids,
+            'relation_ids': all_relation_ids,
+            'triplets': final_triplets
+        }
 
     # Track all discovered entities
     all_concept_ids = set(seed_concept_ids)
@@ -414,13 +646,14 @@ def k_hop_traversal_mongo(
         print(f"Discovered {len(new_concept_ids)} unique concepts (new: {len(all_concept_ids) - previously_seen})")
         print(f"Total concepts so far: {len(all_concept_ids)}")
 
+        # Safety limit to prevent explosion - stop immediately if exceeded
+        if len(all_concept_ids) > max_concepts:
+            print(f"\n⚠️  WARNING: Reached max concepts limit ({max_concepts}), stopping traversal immediately")
+            print(f"Total concepts accumulated: {len(all_concept_ids)}")
+            break
+
         # Prepare next hop (only expand from newly discovered concepts)
         current_concept_ids = new_concept_ids - current_concept_ids
-
-        # Safety limit to prevent explosion
-        if len(all_concept_ids) > max_concepts:
-            print(f"\nWarning: Reached max concepts limit ({max_concepts}), stopping traversal")
-            break
 
     # Always collect triplets among final concept and relation sets
     # All 3 IDs (subject, object, relation) must be in the final sets

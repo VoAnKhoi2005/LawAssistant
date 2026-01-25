@@ -18,7 +18,7 @@ from src.triplet_extraction.pos_taging import init_vncorenlp
 
 
 CURRENT_DIR = os.getcwd()
-BASE_DIR = os.path.dirname(CURRENT_DIR)
+BASE_DIR = r"E:\Github\LawAssistant"
 print(f"Working directory: {CURRENT_DIR}")
 print(f"Base directory set to: {BASE_DIR}\n")
 
@@ -30,8 +30,8 @@ mongo_client = init_mongo(MONGODB_URI)
 vncorenlp_client = init_vncorenlp(rf"{BASE_DIR}\nlp_models\VnCoreNLP-1.2")
 phonlp_model = phonlp.load(save_dir=rf"{BASE_DIR}\nlp_models\phonlp")
 MODEL_NAME = "gpt-4.1"
-MAX_FILE_TOKENS = 2_000_000
-MAX_TASK_TOKENS = 500_000
+MAX_FILE_TOKENS = 1_500_000
+MAX_TASK_TOKENS = 400_000
 OUTPUT_DIR = Path(__file__).parent
 BATCH_PREFIX = "batch_qa_pipeline"
 
@@ -119,7 +119,7 @@ def create_batch_files_from_questions(questions_file_path, top_k=5):
     pipeline = RetrievalPipeline(
         # Query preprocessing config
         openai_api_key=API_KEY,
-        openai_model="gpt-4o-mini",
+        openai_model="gpt-4.1-mini",
         dictionary_path=rf"{BASE_DIR}\src\retrieval\preprocess_query\dictionary.json",
 
         # Graph retrieval config
@@ -142,7 +142,7 @@ def create_batch_files_from_questions(questions_file_path, top_k=5):
         use_semantic_retrieval=True,
 
         # Graph traversal depth
-        k_hops=0,
+        k_hops=1,
 
         # Custom scoring weights (will be normalized)
         graph_weight=0.3,
@@ -434,23 +434,23 @@ def save_results_to_csv(output_files):
 
 def main():
     """Main execution flow - process questions with batch API."""
-    # print("="*50)
-    # print("CHATGPT BATCH API - QA PIPELINE")
-    # print("="*50)
-    #
-    # # Step 1: Read questions and create batch files
-    # question_file_path = rf"{BASE_DIR}\data\facebook_questions.jsonl"
-    # file_paths = create_batch_files_from_questions(question_file_path, top_k=10)
-    #
-    # if not file_paths:
-    #     print("\nNo batch files created. Exiting.")
-    #     return
+    print("="*50)
+    print("CHATGPT BATCH API - QA PIPELINE")
+    print("="*50)
 
-    file_paths = [
-        r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part1.jsonl",
-        r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part2.jsonl",
-        r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part3.jsonl"
-    ]
+    # Step 1: Read questions and create batch files
+    question_file_path = rf"{BASE_DIR}\data\facebook_questions.jsonl"
+    file_paths = create_batch_files_from_questions(question_file_path, top_k=10)
+
+    if not file_paths:
+        print("\nNo batch files created. Exiting.")
+        return
+
+    # file_paths = [
+    #     r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part1.jsonl",
+    #     r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part2.jsonl",
+    #     r"E:\Github\LawAssistant\scripts\batch_qa_pipeline_20260114_065327_part3.jsonl"
+    # ]
 
     # Step 2: Process each batch sequentially
     total_parts = len(file_paths)

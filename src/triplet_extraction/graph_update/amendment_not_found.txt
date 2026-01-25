@@ -1,34 +1,34 @@
 Amendment references not found in database
-Total not found: 74
+Total not found: 324
 ================================================================================
 
 BREAKDOWN BY REASON:
 --------------------------------------------------------------------------------
-document_not_found: 73
-article_not_found: 1
+document_not_found: 302
+article_not_found: 22
 
 TOP 20 MISSING DOCUMENTS (so_hieu):
 --------------------------------------------------------------------------------
+23/2024/NĐ-CP: 61 references
+71/2024/NĐ-CP: 20 references
+40/2019/TT-BGTVT: 16 references
 16/2017/QH14: 12 references
+43/2014/NĐ-CP: 12 references
+150/2012/TT-BTC: 12 references
+292/2016/TT-BTC: 11 references
+75/2014/TT-BGTVT: 10 references
 77/2015/QH13: 7 references
 65/2014/QH13: 7 references
+29/2023/TT-BGTVT: 7 references
 50/2014/QH13: 6 references
+11/2021/TT-BXD: 6 references
+08/2012/TT-BGTVT: 6 references
 41/2009/QH12: 5 references
 79/2015/QH13: 5 references
 30/2009/QH12: 5 references
-201/2025/QH15: 4 references
-44/2013/QH13: 3 references
-66/2014/QH13: 3 references
-14/2008/QH12: 2 references
-55/2014/QH13: 2 references
-18/2017/QH14: 1 references
-26/2008/QH12: 1 references
-04/2007/QH12: 1 references
-06/2017/QH14: 1 references
-15/2017/QH14: 1 references
-32/2024/QH15: 1 references
-40/2009/QH12: 1 references
-74/2014/QH13: 1 references
+08/2024/TT-BTNMT: 5 references
+01/2018/TT-BXD: 5 references
+137/2013/NĐ-CP: 4 references
 
 DETAILED ENTRIES:
 ================================================================================
@@ -516,33 +516,607 @@ Details: N/A
 Incomplete path: N/A
 Full ref: {'so_hieu': '39/2019/QH14', 'dieu': '3', 'khoan': '4', 'amendment_type': ['modify', 'add']}
 --------------------------------------------------------------------------------
-Source: 261/2025/NĐ-CP_điều 2_khoản 4
-Reason: document_not_found
-So hieu: 201/2025/QH15
-Details: N/A
-Incomplete path: N/A
-Full ref: {'so_hieu': '201/2025/QH15', 'dieu': '17', 'khoan': '4', 'diem': 'v', 'amendment_type': ['modify', 'add']}
+Source: 226/2025/NĐ-CP_điều 1_khoản 16_điểm b
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 36
+Incomplete path: 71/2024/NĐ-CP > điều 36
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '36', 'khoan': '3', 'amendment_type': ['modify', 'add']}
 --------------------------------------------------------------------------------
-Source: 261/2025/NĐ-CP_điều 2_khoản 3
-Reason: document_not_found
-So hieu: 201/2025/QH15
-Details: N/A
-Incomplete path: N/A
-Full ref: {'so_hieu': '201/2025/QH15', 'dieu': '13', 'khoan': '1', 'diem': 'v', 'amendment_type': ['add']}
+Source: 226/2025/NĐ-CP_điều 1_khoản 16_điểm a
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 36
+Incomplete path: 71/2024/NĐ-CP > điều 36
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '36', 'khoan': '1', 'diem': 'b', 'amendment_type': ['modify', 'add']}
 --------------------------------------------------------------------------------
-Source: 261/2025/NĐ-CP_điều 2_khoản 2
-Reason: document_not_found
-So hieu: 201/2025/QH15
-Details: N/A
-Incomplete path: N/A
-Full ref: {'so_hieu': '201/2025/QH15', 'dieu': '7', 'khoan': '1', 'diem': 'v', 'amendment_type': ['add']}
+Source: 226/2025/NĐ-CP_điều 1_khoản 15
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 35
+Incomplete path: 71/2024/NĐ-CP > điều 35
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '35', 'khoan': '3', 'amendment_type': ['modify', 'add']}
 --------------------------------------------------------------------------------
-Source: 261/2025/NĐ-CP_điều 2_khoản 1
+Source: 226/2025/NĐ-CP_điều 1_khoản 14_điểm b
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 34
+Incomplete path: 71/2024/NĐ-CP > điều 34
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '34', 'khoan': '3', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 14_điểm a
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 34
+Incomplete path: 71/2024/NĐ-CP > điều 34
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '34', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 13
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 31
+Incomplete path: 71/2024/NĐ-CP > điều 31
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '31', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 12
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 24
+Incomplete path: 71/2024/NĐ-CP > điều 24
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '24', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 11
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 20
+Incomplete path: 71/2024/NĐ-CP > điều 20
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '20', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 10
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 16
+Incomplete path: 71/2024/NĐ-CP > điều 16
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '16', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 9
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 14
+Incomplete path: 71/2024/NĐ-CP > điều 14
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '14', 'khoan': '6', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 8
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 13
+Incomplete path: 71/2024/NĐ-CP > điều 13
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '13', 'khoan': '5', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 7
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 12
+Incomplete path: 71/2024/NĐ-CP > điều 12
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '12', 'khoan': '2', 'diem': 'd', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 6
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 10
+Incomplete path: 71/2024/NĐ-CP > điều 10
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '10', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 5
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 8
+Incomplete path: 71/2024/NĐ-CP > điều 8
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '8', 'khoan': '1', 'diem': 'h', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 4_điểm đ
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 6
+Incomplete path: 71/2024/NĐ-CP > điều 6
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '6', 'khoan': '8', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 4_điểm d
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 6
+Incomplete path: 71/2024/NĐ-CP > điều 6
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '6', 'khoan': '7', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 4_điểm c
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 6
+Incomplete path: 71/2024/NĐ-CP > điều 6
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '6', 'khoan': '4', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 4_điểm b
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 6
+Incomplete path: 71/2024/NĐ-CP > điều 6
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '6', 'khoan': '3', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 1_khoản 4_điểm a
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 6
+Incomplete path: 71/2024/NĐ-CP > điều 6
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '6', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 2_khoản 8
+Reason: article_not_found
+So hieu: 88/2024/NĐ-CP
+Details: điều 31
+Incomplete path: 88/2024/NĐ-CP > điều 31
+Full ref: {'so_hieu': '88/2024/NĐ-CP', 'dieu': '31', 'khoan': '6', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 5_khoản 2
 Reason: document_not_found
-So hieu: 201/2025/QH15
+So hieu: 112/2024/NĐ-CP
 Details: N/A
 Incomplete path: N/A
-Full ref: {'so_hieu': '201/2025/QH15', 'dieu': '4', 'khoan': '3', 'diem': 'v', 'amendment_type': ['modify', 'add']}
+Full ref: {'so_hieu': '112/2024/NĐ-CP', 'dieu': '10', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 5_khoản 1
+Reason: document_not_found
+So hieu: 112/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '112/2024/NĐ-CP', 'dieu': '7', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 226/2025/NĐ-CP_điều 7_khoản 1_điểm c
+Reason: article_not_found
+So hieu: 71/2024/NĐ-CP
+Details: điều 14
+Incomplete path: 71/2024/NĐ-CP > điều 14
+Full ref: {'so_hieu': '71/2024/NĐ-CP', 'dieu': '14', 'khoan': '1', 'diem': 'b', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 32
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '67', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 31
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '67', 'khoan': '2', 'diem': 'b', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 30
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '66', 'khoan': '3', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 29
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '62', 'khoan': '3', 'diem': 'a', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 28_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '61', 'khoan': '3', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 28_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '61', 'khoan': '3', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 28_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '61', 'khoan': '3', 'diem': 'a', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 3_1
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '5', 'khoan': '1', 'diem': 'b', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 2_1
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '3', 'khoan': '5', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 27
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '60', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm g
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm e
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm đ
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm d
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 26_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '57', 'khoan': '2', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 25
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '51', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm h
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm g
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm e
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm đ
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm d
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 24_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '50', 'khoan': '2', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 23_điểm d
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '49', 'khoan': '1', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 23_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '49', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 23_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '49', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 23_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '49', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 22
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '47', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 21
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '46', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 20
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '45', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 19
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '44', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 18
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '38', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 17
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '36', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 16
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '33', 'khoan': '4', 'diem': 'a', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 15
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '31', 'khoan': '3', 'diem': 'a', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 14_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '30', 'khoan': '3', 'diem': 'e', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 14_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '30', 'khoan': '3', 'diem': 'e', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 13_điểm d
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '27', 'khoan': '2', 'diem': 'b', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 13_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '27', 'khoan': '2', 'diem': 'b', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 13_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '27', 'khoan': '2', 'diem': 'b', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 13_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '27', 'khoan': '2', 'diem': 'b', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 12
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '18', 'khoan': '2', 'diem': 'c', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 11_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '16', 'khoan': '2', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 11_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '16', 'khoan': '2', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 10_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '12', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 10_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '12', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 10_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '12', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 9
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '13', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 8
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '11', 'khoan': '5', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 7
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '10', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 6
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '9', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 5
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '8', 'khoan': '3', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 4_điểm d
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '6', 'khoan': '3', 'diem': 'd', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 4_điểm c
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '6', 'khoan': '3', 'diem': 'd', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 4_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '6', 'khoan': '3', 'diem': 'd', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 4_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '6', 'khoan': '3', 'diem': 'd', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 1_điểm b
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '1', 'khoan': '4', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 66_khoản 1_điểm a
+Reason: document_not_found
+So hieu: 23/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2024/NĐ-CP', 'dieu': '1', 'khoan': '4', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 67_khoản 2
+Reason: document_not_found
+So hieu: 24/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '24/2024/NĐ-CP', 'dieu': '131', 'khoan': '4', 'diem': 'c', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 67_khoản 1
+Reason: document_not_found
+So hieu: 24/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '24/2024/NĐ-CP', 'dieu': '91', 'khoan': '2', 'amendment_type': ['add']}
 --------------------------------------------------------------------------------
 Source: 115/2024/NĐ-CP_chương x_điều 68_khoản 9
 Reason: article_not_found
@@ -550,4 +1124,1180 @@ So hieu: 61/2020/QH14
 Details: điều 108
 Incomplete path: 61/2020/QH14 > điều 108
 Full ref: {'so_hieu': '61/2020/QH14', 'dieu': '108', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 69
+Reason: document_not_found
+So hieu: 60/2024/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '60/2024/NĐ-CP', 'dieu': '6', 'khoan': '8', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 70_khoản 4
+Reason: document_not_found
+So hieu: 137/2013/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '137/2013/NĐ-CP', 'dieu': '3', 'khoan': '9', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 70_khoản 3
+Reason: document_not_found
+So hieu: 137/2013/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '137/2013/NĐ-CP', 'dieu': '3', 'khoan': '8', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 70_khoản 2
+Reason: document_not_found
+So hieu: 137/2013/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '137/2013/NĐ-CP', 'dieu': '3', 'khoan': '7', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 70_khoản 1
+Reason: document_not_found
+So hieu: 137/2013/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '137/2013/NĐ-CP', 'dieu': '3', 'khoan': '6', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 115/2024/NĐ-CP_chương x_điều 71
+Reason: document_not_found
+So hieu: 05/2021/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '05/2021/NĐ-CP', 'dieu': '48', 'khoan': '4', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 102/2024/NĐ-CP_chương x_điều 110_khoản 2
+Reason: document_not_found
+So hieu: 37/2019/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '37/2019/NĐ-CP', 'dieu': '28', 'khoan': '7', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 102/2024/NĐ-CP_chương x_điều 110_khoản 1
+Reason: document_not_found
+So hieu: 37/2019/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '37/2019/NĐ-CP', 'dieu': '22', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 12
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '101', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 11
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '72', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 10
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '68', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 9
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '68', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 8
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '65', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 7
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '60', 'khoan': '6', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 6
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '46', 'khoan': '5', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 5
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '37', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 4
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '32', 'khoan': '5', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 3
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '17', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 2
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '15', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 1_khoản 1
+Reason: document_not_found
+So hieu: 43/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '43/2014/NĐ-CP', 'dieu': '15', 'khoan': '4', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 2_khoản 2
+Reason: document_not_found
+So hieu: 44/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '44/2014/NĐ-CP', 'dieu': '18', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 2_khoản 1
+Reason: document_not_found
+So hieu: 44/2014/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '44/2014/NĐ-CP', 'dieu': '16', 'khoan': '4', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 3_khoản 3
+Reason: document_not_found
+So hieu: 148/2020/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '148/2020/NĐ-CP', 'dieu': '4', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 3_khoản 2
+Reason: document_not_found
+So hieu: 148/2020/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '148/2020/NĐ-CP', 'dieu': '1', 'khoan': '21', 'diem': 'd', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 10/2023/NĐ-CP_điều 3_khoản 1
+Reason: document_not_found
+So hieu: 148/2020/NĐ-CP
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '148/2020/NĐ-CP', 'dieu': '1', 'khoan': '12', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 3_khoản 4
+Reason: document_not_found
+So hieu: 08/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BTNMT', 'dieu': '21', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 3_khoản 3
+Reason: document_not_found
+So hieu: 08/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BTNMT', 'dieu': '17', 'khoan': '3', 'diem': 'd', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 3_khoản 2
+Reason: document_not_found
+So hieu: 08/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BTNMT', 'dieu': '16', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 3_khoản 1_điểm b
+Reason: document_not_found
+So hieu: 08/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BTNMT', 'dieu': '6', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 3_khoản 1_điểm a
+Reason: document_not_found
+So hieu: 08/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BTNMT', 'dieu': '6', 'khoan': '1', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 4_khoản 1_2
+Reason: document_not_found
+So hieu: 09/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '09/2024/TT', 'dieu': '5', 'khoan': '1', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 4_khoản 5
+Reason: document_not_found
+So hieu: 09/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '09/2024/TT', 'dieu': '38', 'khoan': '1', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 4_khoản 4
+Reason: document_not_found
+So hieu: 09/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '09/2024/TT', 'dieu': '26', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 4_khoản 2_2
+Reason: document_not_found
+So hieu: 09/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '09/2024/TT', 'dieu': '10', 'khoan': '3', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 8_khoản 4
+Reason: document_not_found
+So hieu: 26/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '26/2024/TT-BTNMT', 'dieu': '27', 'khoan': '3', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 8_khoản 3
+Reason: document_not_found
+So hieu: 26/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '26/2024/TT-BTNMT', 'dieu': '23', 'khoan': '5', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 8_khoản 2
+Reason: document_not_found
+So hieu: 26/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '26/2024/TT-BTNMT', 'dieu': '23', 'khoan': '2', 'diem': 'c', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 8_khoản 1
+Reason: document_not_found
+So hieu: 26/2024/TT-BTNMT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '26/2024/TT-BTNMT', 'dieu': '18', 'khoan': '6', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 9_khoản 3
+Reason: document_not_found
+So hieu: 29/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2024/TT', 'dieu': '62', 'khoan': '3', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 9_khoản 2
+Reason: document_not_found
+So hieu: 29/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2024/TT', 'dieu': '34', 'chuong': 'v', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 23/2025/TT-BNNMT_chương ii_điều 9_khoản 1
+Reason: document_not_found
+So hieu: 29/2024/TT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2024/TT', 'dieu': '1', 'khoan': '4', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 1_khoản 3
+Reason: document_not_found
+So hieu: 99/2018/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '99/2018/TT-BTC', 'dieu': '5', 'khoan': '1', 'diem': 'd', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 1_khoản 2
+Reason: document_not_found
+So hieu: 99/2018/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '99/2018/TT-BTC', 'dieu': '19', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 1_khoản 1
+Reason: document_not_found
+So hieu: 99/2018/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '99/2018/TT-BTC', 'dieu': '5', 'khoan': '1', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 2_khoản 3
+Reason: document_not_found
+So hieu: 24/2024/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '24/2024/TT-BTC', 'dieu': '12', 'khoan': '1', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 2_khoản 2
+Reason: document_not_found
+So hieu: 24/2024/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '24/2024/TT-BTC', 'dieu': '9', 'khoan': '6', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 2_khoản 1
+Reason: document_not_found
+So hieu: 24/2024/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '24/2024/TT-BTC', 'dieu': '2', 'khoan': '1', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 3_khoản 2
+Reason: document_not_found
+So hieu: 133/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '133/2016/TT-BTC', 'dieu': '10', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 3_khoản 1
+Reason: document_not_found
+So hieu: 133/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '133/2016/TT-BTC', 'dieu': '10', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 6
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '9', 'khoan': '1', 'diem': 'a', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 4
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '18', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 3_điểm d
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '15', 'khoan': '4', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 3_điểm c
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '15', 'khoan': '4', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 3_điểm b
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '15', 'khoan': '4', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 3_điểm a
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '15', 'khoan': '4', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 2
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '11', 'khoan': '5', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 1_điểm d
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '7', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 1_điểm c
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '7', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 1_điểm b
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '7', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 4_khoản 1_điểm a
+Reason: document_not_found
+So hieu: 292/2016/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '292/2016/TT-BTC', 'dieu': '7', 'khoan': '2', 'diem': 'a', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 10
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '9', 'khoan': '1', 'diem': 'a', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 8
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '18', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 7
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '17', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 6_điểm c
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '15', 'khoan': '1', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 6_điểm b
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '15', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 6_điểm a
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '15', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 5
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '11', 'khoan': '6', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 4_điểm b
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '7', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 4_điểm a
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '7', 'khoan': '1', 'amendment_type': ['modify']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 3
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '6', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 2
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '5', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 46/2025/TT-BTC_điều 5_khoản 1
+Reason: document_not_found
+So hieu: 150/2012/TT-BTC
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '150/2012/TT-BTC', 'dieu': '2', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 3_khoản 4
+Reason: document_not_found
+So hieu: 08/2024/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BXD', 'dieu': '6', 'khoan': '3', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 3_khoản 3
+Reason: document_not_found
+So hieu: 08/2024/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BXD', 'dieu': '5', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 3_khoản 2_1
+Reason: document_not_found
+So hieu: 08/2024/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BXD', 'dieu': '23', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 3_khoản 1
+Reason: document_not_found
+So hieu: 08/2024/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2024/TT-BXD', 'dieu': '6', 'khoan': '2', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 4_khoản 3
+Reason: document_not_found
+So hieu: 01/2008/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '01/2008/TT-BXD', 'dieu': '1', 'phu_luc': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 5_khoản 3
+Reason: document_not_found
+So hieu: 11/2010/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2010/TT-BXD', 'dieu': '3', 'khoan': '2', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 5_khoản 2
+Reason: document_not_found
+So hieu: 11/2010/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2010/TT-BXD', 'dieu': '3', 'khoan': '4', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 5_khoản 1
+Reason: document_not_found
+So hieu: 11/2010/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2010/TT-BXD', 'dieu': '3', 'khoan': '1', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 6_khoản 3
+Reason: document_not_found
+So hieu: 08/2012/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BXD', 'dieu': '6', 'khoan': '1', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 6_khoản 2
+Reason: document_not_found
+So hieu: 08/2012/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BXD', 'dieu': '8', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 6_khoản 1_điểm b
+Reason: document_not_found
+So hieu: 08/2012/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BXD', 'dieu': '7', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 6_khoản 1_điểm a
+Reason: document_not_found
+So hieu: 08/2012/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BXD', 'dieu': '7', 'khoan': '1', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 7_khoản 5_điểm c
+Reason: document_not_found
+So hieu: 01/2018/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '01/2018/TT-BXD', 'dieu': '10', 'khoan': '2', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 7_khoản 4_điểm c
+Reason: document_not_found
+So hieu: 01/2018/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '01/2018/TT-BXD', 'dieu': '32', 'khoan': '3', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 7_khoản 3
+Reason: document_not_found
+So hieu: 01/2018/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '01/2018/TT-BXD', 'dieu': '10', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 7_khoản 2
+Reason: document_not_found
+So hieu: 01/2018/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '01/2018/TT-BXD', 'dieu': '8', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 7_khoản 1
+Reason: document_not_found
+So hieu: 01/2018/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '01/2018/TT-BXD', 'dieu': '8', 'khoan': '1', 'diem': 'd', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 9
+Reason: document_not_found
+So hieu: 08/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2021/TT-BXD', 'dieu': '3', 'khoan': '5', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 11_khoản 7
+Reason: document_not_found
+So hieu: 11/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2021/TT-BXD', 'dieu': '10', 'khoan': '7', 'phu_luc': 'ix', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 11_khoản 5
+Reason: document_not_found
+So hieu: 11/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2021/TT-BXD', 'dieu': '1', 'khoan': '1', 'amendment_type': ['replace', 'remove', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 11_khoản 5_điểm a
+Reason: document_not_found
+So hieu: 11/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2021/TT-BXD', 'dieu': '8', 'khoan': '1', 'amendment_type': ['remove']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 11_khoản 5_điểm b
+Reason: document_not_found
+So hieu: 11/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2021/TT-BXD', 'dieu': '8', 'khoan': '5', 'diem': 'b', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 11_khoản 2
+Reason: document_not_found
+So hieu: 11/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2021/TT-BXD', 'dieu': '11', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 11_khoản 1
+Reason: document_not_found
+So hieu: 11/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '11/2021/TT-BXD', 'dieu': '9', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 12
+Reason: document_not_found
+So hieu: 13/2021/TT-BXD
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '13/2021/TT-BXD', 'dieu': '2', 'khoan': '5', 'muc': 'v', 'phu_luc': 'v', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 13_khoản 6
+Reason: document_not_found
+So hieu: 08/2012/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BGTVT', 'dieu': '1', 'khoan': '4', 'phu_luc': 'iii', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 13_khoản 5
+Reason: document_not_found
+So hieu: 08/2012/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BGTVT', 'dieu': '4', 'khoan': '2', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 13_khoản 4
+Reason: document_not_found
+So hieu: 08/2012/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BGTVT', 'dieu': '12', 'khoan': '1', 'phu_luc': 'ii', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 13_khoản 3
+Reason: document_not_found
+So hieu: 08/2012/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BGTVT', 'dieu': '12', 'khoan': '2', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 13_khoản 2
+Reason: document_not_found
+So hieu: 08/2012/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BGTVT', 'dieu': '10', 'khoan': '4', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 13_khoản 1
+Reason: document_not_found
+So hieu: 08/2012/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '08/2012/TT-BGTVT', 'dieu': '7', 'khoan': '5', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 14_khoản 4
+Reason: document_not_found
+So hieu: 16/2013/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '16/2013/TT-BGTVT', 'dieu': '2', 'khoan': '2', 'phu_luc': 'iii', 'amendment_type': ['remove', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 14_khoản 3
+Reason: document_not_found
+So hieu: 16/2013/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '16/2013/TT-BGTVT', 'dieu': '3', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 14_khoản 2
+Reason: document_not_found
+So hieu: 16/2013/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '16/2013/TT-BGTVT', 'dieu': '3', 'khoan': '2', 'diem': 'a', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 14_khoản 1
+Reason: document_not_found
+So hieu: 16/2013/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '16/2013/TT-BGTVT', 'dieu': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 15_khoản 3
+Reason: document_not_found
+So hieu: 69/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '69/2014/TT-BGTVT', 'dieu': '6', 'khoan': '1', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 15_khoản 2
+Reason: document_not_found
+So hieu: 69/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '69/2014/TT-BGTVT', 'dieu': '8', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 15_khoản 1
+Reason: document_not_found
+So hieu: 69/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '69/2014/TT-BGTVT', 'dieu': '5', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 10
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '1', 'khoan': '11', 'phu_luc': 'i', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 9
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '20', 'khoan': '2', 'phu_luc': 'i', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 8
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '21', 'khoan': '6', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 7
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '21', 'khoan': '5', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 6
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '21', 'khoan': '4', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 5
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '20', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 4
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '10', 'khoan': '4', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 3
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '9', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 2
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '8', 'khoan': '7', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 16_khoản 1
+Reason: document_not_found
+So hieu: 75/2014/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '75/2014/TT-BGTVT', 'dieu': '3', 'khoan': '5', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 17_khoản 4
+Reason: document_not_found
+So hieu: 15/2016/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '15/2016/TT-BGTVT', 'dieu': '10', 'khoan': '3', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 17_khoản 3
+Reason: document_not_found
+So hieu: 15/2016/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '15/2016/TT-BGTVT', 'dieu': '10', 'khoan': '1', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 17_khoản 1
+Reason: document_not_found
+So hieu: 15/2016/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '15/2016/TT-BGTVT', 'dieu': '10', 'khoan': '1', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 18
+Reason: document_not_found
+So hieu: 39/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '39/2019/TT-BGTVT', 'dieu': '20', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 12
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '29', 'khoan': '1', 'diem': 'c', 'phu_luc': 'xvii', 'amendment_type': ['remove', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 10
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '9', 'khoan': '3', 'diem': 'a', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 9
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '8', 'khoan': '2', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 8
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '29', 'khoan': '3', 'diem': 'c', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 7
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '29', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 6
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '29', 'khoan': '1', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 5_điểm b
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '27', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 5_điểm a
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '27', 'khoan': '1', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 4
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '19', 'khoan': '7', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 3_điểm c
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '11', 'khoan': '7', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 3_điểm b
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '11', 'khoan': '7', 'diem': 'b', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 3_điểm a
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '11', 'khoan': '7', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 2_điểm c
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '8', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 2_điểm b
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '8', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 2_điểm a
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '8', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 19_khoản 1
+Reason: document_not_found
+So hieu: 40/2019/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2019/TT-BGTVT', 'dieu': '7', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 20_khoản 1_điểm d
+Reason: document_not_found
+So hieu: 23/2018/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2018/TT-BGTVT', 'dieu': '11', 'khoan': '8', 'diem': 'b', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 20_khoản 1_điểm c
+Reason: document_not_found
+So hieu: 23/2018/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2018/TT-BGTVT', 'dieu': '12', 'khoan': '4', 'diem': 'a', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 20_khoản 1_điểm b
+Reason: document_not_found
+So hieu: 23/2018/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2018/TT-BGTVT', 'dieu': '11', 'khoan': '4', 'diem': 'c', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 20_khoản 1_điểm a
+Reason: document_not_found
+So hieu: 23/2018/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '23/2018/TT-BGTVT', 'dieu': '5', 'khoan': '5', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 21_khoản 1
+Reason: document_not_found
+So hieu: 26/2018/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '26/2018/TT-BGTVT', 'dieu': '4', 'khoan': '5', 'amendment_type': ['replace', 'modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 22_khoản 1
+Reason: document_not_found
+So hieu: 28/2018/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '28/2018/TT-BGTVT', 'dieu': '10', 'khoan': '1', 'diem': 'g', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 23_khoản 2
+Reason: document_not_found
+So hieu: 14/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '14/2023/TT-BGTVT', 'dieu': '6', 'khoan': '2', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 23_khoản 1
+Reason: document_not_found
+So hieu: 14/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '14/2023/TT-BGTVT', 'dieu': '5', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 6_điểm b
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '11', 'khoan': '2', 'diem': 'c', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 6_điểm a
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '11', 'khoan': '2', 'diem': 'c', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 5
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '58', 'khoan': '2', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 4
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '57', 'khoan': '5', 'amendment_type': ['add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 3
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '41', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 2
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '37', 'khoan': '4', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 24_khoản 1
+Reason: document_not_found
+So hieu: 29/2023/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '29/2023/TT-BGTVT', 'dieu': '3', 'khoan': '10', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 25_khoản 1
+Reason: document_not_found
+So hieu: 16/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '16/2024/TT-BGTVT', 'dieu': '1', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 26_khoản 2
+Reason: document_not_found
+So hieu: 38/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '38/2024/TT-BGTVT', 'dieu': '10', 'khoan': '4', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 26_khoản 1
+Reason: document_not_found
+So hieu: 38/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '38/2024/TT-BGTVT', 'dieu': '10', 'khoan': '3', 'amendment_type': ['modify', 'add']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 27_khoản 4
+Reason: document_not_found
+So hieu: 40/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2024/TT-BGTVT', 'dieu': '9', 'khoan': '4', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 27_khoản 3
+Reason: document_not_found
+So hieu: 40/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2024/TT-BGTVT', 'dieu': '9', 'khoan': '4', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 27_khoản 2
+Reason: document_not_found
+So hieu: 40/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2024/TT-BGTVT', 'dieu': '9', 'khoan': '6', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 27_khoản 1
+Reason: document_not_found
+So hieu: 40/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '40/2024/TT-BGTVT', 'dieu': '7', 'khoan': '2', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 28_khoản 2
+Reason: document_not_found
+So hieu: 41/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '41/2024/TT-BGTVT', 'dieu': '5', 'khoan': '3', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 28_khoản 1
+Reason: document_not_found
+So hieu: 41/2024/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '41/2024/TT-BGTVT', 'dieu': '3', 'khoan': '5', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 29_khoản 2
+Reason: document_not_found
+So hieu: 52/2022/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '52/2022/TT-BGTVT', 'dieu': '15', 'khoan': '1', 'diem': 'b', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 29_khoản 1
+Reason: document_not_found
+So hieu: 52/2022/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '52/2022/TT-BGTVT', 'dieu': '3', 'khoan': '2', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 30_khoản 2
+Reason: document_not_found
+So hieu: 64/2011/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '64/2011/TT-BGTVT', 'dieu': '6', 'khoan': '2', 'amendment_type': ['replace']}
+--------------------------------------------------------------------------------
+Source: 09/2025/TT-BXD_điều 30_khoản 1
+Reason: document_not_found
+So hieu: 64/2011/TT-BGTVT
+Details: N/A
+Incomplete path: N/A
+Full ref: {'so_hieu': '64/2011/TT-BGTVT', 'dieu': '7', 'amendment_type': ['modify', 'add']}
 --------------------------------------------------------------------------------

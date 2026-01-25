@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-01-24T11:51:16.592888",
+  "total_questions": 120,
+  "processed_questions": 120,
+  "total_batches": 1,
+  "batch_files": [
+    "E:\\Github\\LawAssistant\\notebook\\test_new_retrival\\QA_batch_requests\\batch_1.jsonl"
+  ]
+}

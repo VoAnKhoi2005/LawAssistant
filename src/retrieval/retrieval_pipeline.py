@@ -5,6 +5,7 @@ Returns top 20 most relevant legal sections
 """
 
 import logging
+import torch
 from typing import List, Dict, Optional, Tuple
 
 from src.retrieval.graph.bm25_ranker import hybrid_rank
@@ -134,6 +135,14 @@ class RetrievalPipeline:
             self.vncorenlp_client = vncorenlp_client
             self.phonlp_model = phonlp_model
             
+            # Load embedding model for concept/relation matching
+            logger.info("Loading embedding model for graph matching...")
+            from transformers import AutoModel
+            self.graph_embedding_model = AutoModel.from_pretrained(dpr_model_name)
+            if torch.cuda.is_available():
+                self.graph_embedding_model.cuda()
+            self.graph_embedding_model.eval()
+            
             logger.info(f"✓ Graph retrieval ready (k_hops={k_hops})")
         else:
             logger.info("[2/4] Graph retrieval disabled")
@@ -206,7 +215,9 @@ class RetrievalPipeline:
         matched_relations = match_relations_graph(
             verbs,
             self.relations_col,
-            max_phrase_length=1
+            max_phrase_length=1,
+            similarity_threshold=0.9,
+            embedding_model=self.graph_embedding_model if hasattr(self, 'graph_embedding_model') else None
         )
         logger.info(f"Matched {len(matched_relations)} relations")
 

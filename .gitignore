@@ -104,3 +104,7 @@ src/retrieval/semantic/search_index/*
 !src/retrieval/semantic/search_index/.gitkeep
 /data/triplet_extraction/listSameKey.txt
 /logs/
+/src/triplet_extraction/batch_preprocessing/
+notebook/test_new_retrival/QA_batch_requests/checkpoints/
+*.jsonl
+*.faiss
