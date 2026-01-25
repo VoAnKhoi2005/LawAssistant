@@ -219,26 +219,27 @@ def extract_verbs(vp_tokens):
 
         return verb_phrases, all_tokens
 
-    # Single verb: return it with its dependents
+    # Single verb: return it with its dependents (recursively collect verb chains)
     verb_tokens = [root_verb]
-    verb_tokens.extend(collect_direct_dependents(vp_tokens, root_verb['id']))
+    
+    # Recursively collect all vmod dependents to capture full verb chains
+    def collect_verb_chain(verb_id, tokens):
+        chain = []
+        for t in tokens:
+            if t['head'] == verb_id and t['deprel'] == 'vmod' and t['pos'] == 'V':
+                chain.append(t)
+                # Recursively collect further verb dependents
+                chain.extend(collect_verb_chain(t['id'], tokens))
+        return chain
+    
+    verb_tokens.extend(collect_verb_chain(root_verb['id'], vp_tokens))
     sorted_verb_tokens = sorted(verb_tokens, key=lambda x: x['id'])
-
-    # Filter out tokens after the first noun
-    filtered_tokens = []
-    for token in sorted_verb_tokens:
-        if token['pos'].startswith('N'):
-            break
-        filtered_tokens.append(token)
-
-    # If we filtered out everything, at least return the root verb
-    if not filtered_tokens:
-        filtered_tokens = [root_verb]
-
+    
+    # Don't filter out tokens - keep the full verb chain
     return [{
-        'text': rebuild_phrase(filtered_tokens),
-        'tokens': filtered_tokens
-    }], filtered_tokens
+        'text': rebuild_phrase(sorted_verb_tokens),
+        'tokens': sorted_verb_tokens
+    }], sorted_verb_tokens
 
 def extract_objects(vp_tokens, verb_token):
     # Remove verb tokens from vp_tokens (make a copy to avoid modifying during iteration)
