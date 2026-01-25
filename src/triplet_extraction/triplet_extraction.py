@@ -388,63 +388,102 @@ def process_sentence(df, logger):
 
     return triplets
 
-def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, max_depth=2, depth=0):
-    """Recursively extract triplets from text, including nested subjects/objects"""
-    if depth > max_depth or not text.strip():
+def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, max_depth=2):
+    """Iteratively extract triplets from text, including nested subjects/objects"""
+    if not text.strip():
         return []
 
-    sentence = clean_text(text)
-    segmented_text = vncorenlp_client.word_segment(sentence)
-
-    # Annotate text
-    annotation = phoNLP_model.annotate(text=segmented_text[0])
-    df = parsing_result(annotation)
-    # print(df.to_string(index=False))
-
-    triplets = process_sentence(df, logger)
+    # Queue of (text, current_depth, parent_text) to process
+    work_queue = [(text, 0, None)]
     all_triplets = []
+    seen_texts = set()
 
-    for subj, verb, obj in triplets:
-        # Refine subject
+    while work_queue:
+        current_text, current_depth, parent_text = work_queue.pop(0)
+        
+        # Skip if already processed or depth exceeded
+        if current_text in seen_texts or current_depth > max_depth:
+            continue
+        
+        seen_texts.add(current_text)
+        
         try:
-            subj_annotation = phoNLP_model.annotate(text=subj)
-            df_subj = parsing_result(subj_annotation)
-            refined_subj_triplets = process_sentence(df_subj, logger)
-            if refined_subj_triplets and len(refined_subj_triplets) > 0 and len(refined_subj_triplets[0]) > 0:
-                subj_refined = refined_subj_triplets[0][0]
-                # If refined subject is empty or whitespace, keep original
-                if not subj_refined or not subj_refined.strip():
-                    subj_refined = subj
-            else:
-                subj_refined = subj
-        except (IndexError, Exception):
-            subj_refined = subj
-            refined_subj_triplets = []
+            sentence = clean_text(current_text)
+            segmented_text = vncorenlp_client.word_segment(sentence)
+            
+            # Annotate text
+            annotation = phoNLP_model.annotate(text=segmented_text[0])
+            df = parsing_result(annotation)
+            
+            triplets = process_sentence(df, logger)
+            
+            for subj, verb, obj in triplets:
+                # Store triplet with metadata
+                all_triplets.append({
+                    'subj': subj,
+                    'verb': verb,
+                    'obj': obj,
+                    'depth': current_depth,
+                    'parent_text': parent_text,
+                    'source_text': current_text
+                })
+                
+                # Queue subject for processing if it's complex enough
+                if current_depth < max_depth and len(subj.split()) > 2:
+                    work_queue.append((subj, current_depth + 1, subj))
+                
+                # Queue object for processing if it's complex enough
+                if current_depth < max_depth and len(obj.split()) > 2:
+                    work_queue.append((obj, current_depth + 1, obj))
+                    
+        except Exception:
+            continue
 
-        # Refine object
-        try:
-            obj_annotation = phoNLP_model.annotate(text=obj)
-            df_obj = parsing_result(obj_annotation)
-            refined_obj_triplets = process_sentence(df_obj, logger)
-            if refined_obj_triplets and len(refined_obj_triplets) > 0 and len(refined_obj_triplets[0]) > 0:
-                obj_refined = refined_obj_triplets[0][0]
-                # If refined object is empty or whitespace, keep original
-                if not obj_refined or not obj_refined.strip():
-                    obj_refined = obj
-            else:
-                obj_refined = obj
-        except (IndexError, Exception):
-            obj_refined = obj
-            refined_obj_triplets = []
-
-        all_triplets.append((subj_refined, verb, obj_refined))
-        all_triplets.extend(refined_subj_triplets)
-        all_triplets.extend(refined_obj_triplets)
-
-    filtered_triplets = []
-
+    # Track which specific subject/object texts were expanded into deeper triplets
+    expanded_phrases = set()
+    
     for triplet in all_triplets:
-        subj, verb, obj = triplet
+        if triplet['parent_text'] is not None:
+            # The parent_text is the phrase that was expanded
+            expanded_phrases.add(triplet['parent_text'])
+    
+    # Build parent-child relationship map
+    child_refinements = {}  # Maps parent phrase -> refined (subj, obj)
+    for triplet in all_triplets:
+        if triplet['parent_text'] is not None and triplet['parent_text'] in expanded_phrases:
+            if triplet['parent_text'] not in child_refinements:
+                child_refinements[triplet['parent_text']] = (triplet['subj'], triplet['obj'])
+    
+    # Filter and refine triplets
+    final_triplets = []
+    for triplet in all_triplets:
+        subj = triplet['subj']
+        verb = triplet['verb']
+        obj = triplet['obj']
+        
+        # If this triplet has a child in expanded_phrases, keep it but replace subj/obj
+        has_expanded_subj = subj in expanded_phrases
+        has_expanded_obj = obj in expanded_phrases
+        
+        if has_expanded_subj or has_expanded_obj:
+            # Replace with refined versions
+            if has_expanded_subj and subj in child_refinements:
+                subj = child_refinements[subj][0]
+            if has_expanded_obj and obj in child_refinements:
+                obj = child_refinements[obj][0]
+            
+            final_triplets.append((subj, verb, obj, triplet['depth']))
+            continue
+        
+        # Keep triplets that weren't expanded
+        final_triplets.append((subj, verb, obj, triplet['depth']))
+
+    # Apply stopwords filtering and normalization
+    filtered_triplets = []
+    seen = set()
+
+    for triplet_data in final_triplets:
+        subj, verb, obj, depth_level = triplet_data
 
         # Remove stopwords
         subj_filtered = ' '.join([w for w in subj.split() if w.lower() not in stopwords]).strip()
@@ -459,10 +498,16 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
         if not obj_filtered:
             obj_filtered = obj
 
+        # Normalize: replace underscores, strip, lowercase
         subj_filtered = subj_filtered.replace('_', ' ').strip().lower()
         verb_filtered = verb_filtered.replace('_', ' ').strip().lower()
         obj_filtered = obj_filtered.replace('_', ' ').strip().lower()
-        filtered_triplets.append((subj_filtered, verb_filtered, obj_filtered))
+        
+        # Deduplicate triplets
+        triplet_tuple = (subj_filtered, verb_filtered, obj_filtered)
+        if triplet_tuple not in seen:
+            filtered_triplets.append(triplet_tuple)
+            seen.add(triplet_tuple)
 
     return filtered_triplets
 
@@ -530,8 +575,10 @@ def main():
             phoNLP_model=phoNLP_model,
             stopwords=stopwords,
             logger=logger,
-            max_depth=4,
+            max_depth=8,
         )
+        for t in triplets:
+            logger.debug(t)
         all_triplet.extend(triplets)
 
     for t in all_triplet:
