@@ -36,7 +36,7 @@ def main():
     # === Define files paths relative to base directory ===
     vncorenlp_dir = os.path.join(base_dir, "nlp_models", "VnCoreNLP-1.2")
     phonlp_dir = os.path.join(base_dir, "nlp_models", "phonlp")
-    synonym_file = os.path.join(base_dir, "src", "triplet_extraction", "listSameKey.txt")
+    synonym_file = os.path.join(base_dir, "data", "triplet_extraction", "listSameKey.txt")
     stopwords_file = os.path.join(base_dir, "src", "triplet_extraction", "stopwords.csv")
     
     # Generate unique timestamp for log files
