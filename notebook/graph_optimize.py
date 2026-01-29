@@ -57,16 +57,66 @@ class VietnameseSimilarityFinder:
                 logger.warning("GPU requested but not available, using CPU")
         return device
 
+    def _ensure_index(self, collection, keys, *, name=None, unique=False):
+        existing = collection.index_information()
+
+        for idx in existing.values():
+            if idx["key"] == keys:
+                return  # index với key này đã tồn tại
+
+        collection.create_index(
+            keys,
+            name=name,
+            unique=unique
+        )
+
     def _create_indexes(self):
-        """Create MongoDB indexes for efficient queries"""
-        self.concepts.create_index("name")
-        self.concepts.create_index("embedding")
-        self.relations.create_index("name")
-        self.relations.create_index("embedding")
-        self.triplets.create_index([("subject_id", 1), ("relation_id", 1), ("object_id", 1)])
-        self.triplets.create_index("subject_name")
-        self.triplets.create_index("object_name")
-        logger.info("Indexes created successfully")
+        """Create MongoDB indexes for efficient queries (safe & idempotent)"""
+
+        self._ensure_index(
+            self.concepts,
+            [("name", 1)],
+            name="concept_name_idx"
+        )
+
+        self._ensure_index(
+            self.concepts,
+            [("embedding", 1)],
+            name="concept_embedding_idx"
+        )
+
+        self._ensure_index(
+            self.relations,
+            [("name", 1)],
+            name="relation_name_idx"
+        )
+
+        self._ensure_index(
+            self.relations,
+            [("embedding", 1)],
+            name="relation_embedding_idx"
+        )
+
+        self._ensure_index(
+            self.triplets,
+            [("subject_id", 1), ("relation_id", 1), ("object_id", 1)],
+            name="triplet_sro_idx",
+            unique=True
+        )
+
+        self._ensure_index(
+            self.triplets,
+            [("subject_name", 1)],
+            name="triplet_subject_name_idx"
+        )
+
+        self._ensure_index(
+            self.triplets,
+            [("object_name", 1)],
+            name="triplet_object_name_idx"
+        )
+
+        logger.info("Indexes ensured successfully")
 
     def get_embedding(self, text: str) -> np.ndarray:
         """Generate embedding for a text using SimCSE on GPU"""
@@ -703,7 +753,38 @@ class VietnameseSimilarityFinder:
             {'$set': {'synonym': list(all_synonyms)}}
         )
         
-        # Update triplets - subject references
+        # Handle duplicate triplets by removing them first, then updating
+        # Find all triplets that reference ANY of the concepts (merged or main)
+        all_concept_ids = merged_concepts + [main_concept_id]
+        triplets_to_check = list(self.triplets.find({
+            '$or': [
+                {'subject_id': {'$in': all_concept_ids}},
+                {'object_id': {'$in': all_concept_ids}}
+            ]
+        }))
+        
+        # Track unique triplet signatures after merge
+        seen_signatures = set()
+        triplets_to_keep = []
+        triplets_to_delete = []
+        
+        for triplet in triplets_to_check:
+            # Calculate what the triplet would look like after merge
+            new_subject = main_concept_id if triplet['subject_id'] in merged_concepts else triplet['subject_id']
+            new_object = main_concept_id if triplet['object_id'] in merged_concepts else triplet['object_id']
+            signature = (new_subject, triplet['relation_id'], new_object)
+            
+            if signature in seen_signatures:
+                triplets_to_delete.append(triplet['_id'])
+            else:
+                seen_signatures.add(signature)
+                triplets_to_keep.append(triplet['_id'])
+        
+        # Delete duplicate triplets
+        if triplets_to_delete:
+            self.triplets.delete_many({'_id': {'$in': triplets_to_delete}})
+        
+        # Update remaining triplets - subject references
         subject_result = self.triplets.update_many(
             {'subject_id': {'$in': merged_concepts}},
             {'$set': {
@@ -712,7 +793,7 @@ class VietnameseSimilarityFinder:
             }}
         )
         
-        # Update triplets - object references
+        # Update remaining triplets - object references
         object_result = self.triplets.update_many(
             {'object_id': {'$in': merged_concepts}},
             {'$set': {
@@ -729,6 +810,7 @@ class VietnameseSimilarityFinder:
             'main_name': main_concept_name,
             'main_id': str(main_concept_id),
             'triplets_updated': subject_result.modified_count + object_result.modified_count,
+            'duplicates_removed': len(triplets_to_delete),
             'ref_count': main_concept['count']
         }
 
@@ -788,7 +870,34 @@ class VietnameseSimilarityFinder:
             {'$set': {'synonym': list(all_synonyms)}}
         )
         
-        # Update triplets
+        # Handle duplicate triplets by removing them first, then updating
+        # Find all triplets that reference ANY of the relations (merged or main)
+        all_relation_ids = merged_relations + [main_relation_id]
+        triplets_to_check = list(self.triplets.find({
+            'relation_id': {'$in': all_relation_ids}
+        }))
+        
+        # Track unique triplet signatures after merge
+        seen_signatures = set()
+        triplets_to_keep = []
+        triplets_to_delete = []
+        
+        for triplet in triplets_to_check:
+            # Calculate what the triplet would look like after merge
+            new_relation = main_relation_id if triplet['relation_id'] in merged_relations else triplet['relation_id']
+            signature = (triplet['subject_id'], new_relation, triplet['object_id'])
+            
+            if signature in seen_signatures:
+                triplets_to_delete.append(triplet['_id'])
+            else:
+                seen_signatures.add(signature)
+                triplets_to_keep.append(triplet['_id'])
+        
+        # Delete duplicate triplets
+        if triplets_to_delete:
+            self.triplets.delete_many({'_id': {'$in': triplets_to_delete}})
+        
+        # Update remaining triplets
         triplet_result = self.triplets.update_many(
             {'relation_id': {'$in': merged_relations}},
             {'$set': {
@@ -805,6 +914,7 @@ class VietnameseSimilarityFinder:
             'main_name': main_relation_name,
             'main_id': str(main_relation_id),
             'triplets_updated': triplet_result.modified_count,
+            'duplicates_removed': len(triplets_to_delete),
             'ref_count': main_relation['count']
         }
 
@@ -837,10 +947,9 @@ def main():
         
         concept_groups = finder.find_all_similar_groups(
             collection_name='concepts',
-            min_similarity=0.7
+            min_similarity=0.85
         )
 
-        # Find groups of similar relations (FAST VERSION)
         print("\n" + "="*80)
         print("=== FINDING GROUPS OF SIMILAR RELATIONS ===")
         print("="*80)

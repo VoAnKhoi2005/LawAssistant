@@ -492,12 +492,8 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
         obj_filtered = ' '.join([w for w in obj.split() if w.lower() not in stopwords]).strip()
 
         # Skip remove stopwords if any element becomes empty
-        if not subj_filtered:
-            subj_filtered = subj
         if not verb_filtered:
             verb_filtered = verb
-        if not obj_filtered:
-            obj_filtered = obj
 
         # Normalize: replace underscores, strip, lowercase
         subj_filtered = subj_filtered.replace('_', ' ').strip().lower()
@@ -547,7 +543,7 @@ def main():
         file_path=log_file_path
     )
 
-    sentence = "Người đại diện của tổ chức chịu trách nhiệm đối với việc quản lý đất. Việc quản lý đất được thực hiện trong các trường hợp sau đây: tổ chức trong nước được giao quản lý đất có mặt nước của các sông. Tổ chức trong nước được giao quản lý đất có mặt nước chuyên dùng."
+    sentence = "Người sử dụng đất có quyền chung. Người sử dụng đất được cấp Giấy chứng nhận quyền sử dụng đất khi có đủ điều kiện theo quy định của pháp luật về đất đai. Người sử dụng đất được cấp Giấy chứng nhận quyền sở hữu tài sản gắn liền với đất khi có đủ điều kiện theo quy định của pháp luật về đất đai."
     pattern = re.compile(
         r"""
         (?<!\d)      # not preceded by a digit
