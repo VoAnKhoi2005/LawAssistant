@@ -108,3 +108,4 @@ src/retrieval/semantic/search_index/*
 notebook/test_new_retrival/QA_batch_requests/checkpoints/
 *.jsonl
 *.faiss
+data/luat_dat_dai/~$Luat_dat_dai_file.xlsx
