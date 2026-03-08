@@ -25,7 +25,7 @@ def split_sentence_np_vp(tokens):
 
     # Find the main verb (root or first valid verb)
     for i, token in enumerate(tokens):
-        if token['pos'] == 'V':
+        if token['pos'] in ['V', 'R']:
             if token['deprel'] == 'root' and token['head'] == 0:
                 # Avoid picking verb at start (index 0)
                 if i == 0:
@@ -79,10 +79,14 @@ def collect_direct_dependents(tokens, head_id):
 def rebuild_phrase(tokens):
     """Sort tokens by their original position in the sentence and join them together"""
     tokens_sorted = sorted(tokens, key=lambda x: x['id'])
-    phrase = " ".join(t['word'] for t in tokens_sorted)
+    phrase = " ".join(t['word'] for t in tokens_sorted if t['word'].strip())
     return phrase
 
 def extract_main_subjects(np_tokens):
+    # Remove leading V tokens
+    while np_tokens and np_tokens[0]['pos'] == 'V':
+        np_tokens = np_tokens[1:]
+
     if not np_tokens:
         return []
 
@@ -159,7 +163,7 @@ def extract_verbs(vp_tokens):
     # Find the root verb first
     root_verb = None
     for t in vp_tokens:
-        if t['deprel'] == 'root' and t['head'] == 0 and t['pos'] == 'V':
+        if t['deprel'] == 'root' and t['head'] == 0 and t['pos'] in ['V', 'R']:
             root_verb = t
             break
 
@@ -215,26 +219,27 @@ def extract_verbs(vp_tokens):
 
         return verb_phrases, all_tokens
 
-    # Single verb: return it with its dependents
+    # Single verb: return it with its dependents (recursively collect verb chains)
     verb_tokens = [root_verb]
-    verb_tokens.extend(collect_direct_dependents(vp_tokens, root_verb['id']))
+    
+    # Recursively collect all vmod dependents to capture full verb chains
+    def collect_verb_chain(verb_id, tokens):
+        chain = []
+        for t in tokens:
+            if t['head'] == verb_id and t['deprel'] == 'vmod' and t['pos'] == 'V':
+                chain.append(t)
+                # Recursively collect further verb dependents
+                chain.extend(collect_verb_chain(t['id'], tokens))
+        return chain
+    
+    verb_tokens.extend(collect_verb_chain(root_verb['id'], vp_tokens))
     sorted_verb_tokens = sorted(verb_tokens, key=lambda x: x['id'])
-
-    # Filter out tokens after the first noun
-    filtered_tokens = []
-    for token in sorted_verb_tokens:
-        if token['pos'].startswith('N'):
-            break
-        filtered_tokens.append(token)
-
-    # If we filtered out everything, at least return the root verb
-    if not filtered_tokens:
-        filtered_tokens = [root_verb]
-
+    
+    # Don't filter out tokens - keep the full verb chain
     return [{
-        'text': rebuild_phrase(filtered_tokens),
-        'tokens': filtered_tokens
-    }], filtered_tokens
+        'text': rebuild_phrase(sorted_verb_tokens),
+        'tokens': sorted_verb_tokens
+    }], sorted_verb_tokens
 
 def extract_objects(vp_tokens, verb_token):
     # Remove verb tokens from vp_tokens (make a copy to avoid modifying during iteration)
@@ -243,8 +248,10 @@ def extract_objects(vp_tokens, verb_token):
     if not vp_tokens:
         return []
 
+    obj_token = None
+
     # Find the first object token (dob, iob, pob)
-    obj_token = next((t for t in vp_tokens if t['deprel'] in ['dob', 'iob', 'pob']), None)
+    # obj_token = next((t for t in vp_tokens if t['deprel'] in ['dob', 'iob', 'pob']), None)
 
     # Fallback to the first noun in vp_tokens
     if obj_token is None:
@@ -266,8 +273,10 @@ def extract_objects(vp_tokens, verb_token):
             'tokens': vp_tokens
         }]
 
-    # Find coordination tokens
-    coord_tokens = [t for t in vp_tokens if t['pos'] in ['Cc', 'CH']]
+    coord_tokens = [
+        t for i, t in enumerate(vp_tokens)
+        if t['pos'] in ['Cc', 'CH'] and i < len(vp_tokens) - 1
+    ]
     for obj in main_objects:
         if obj in coord_tokens:
             main_objects = []
@@ -317,6 +326,11 @@ def extract_objects(vp_tokens, verb_token):
         return final_phrases
 
     else:
+        vp_tokens = [
+            token for token in vp_tokens
+            if token['pos'] not in ['CH', 'Cc']
+        ]
+
         return [{
             'text': rebuild_phrase(vp_tokens),
             'tokens': vp_tokens
@@ -324,6 +338,7 @@ def extract_objects(vp_tokens, verb_token):
 
 
 def process_sentence(df, logger):
+    logger.debug(df.to_string(index=False))
     tokens = parse_dataframe_to_tokens(df)
     np_tokens, vp_tokens = split_sentence_np_vp(tokens)
     logger.debug("-----------------NP-----------------")
@@ -374,57 +389,102 @@ def process_sentence(df, logger):
 
     return triplets
 
-def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, max_depth=2, depth=0):
-    """Recursively extract triplets from text, including nested subjects/objects"""
-    if depth > max_depth or not text.strip():
+def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, max_depth=2):
+    """Iteratively extract triplets from text, including nested subjects/objects"""
+    if not text.strip():
         return []
 
-    sentence = clean_text(text)
-    segmented_text = vncorenlp_client.word_segment(sentence)
-
-    # Annotate text
-    annotation = phoNLP_model.annotate(text=segmented_text[0])
-    df = parsing_result(annotation)
-    # print(df.to_string(index=False))
-
-    triplets = process_sentence(df, logger)
+    # Queue of (text, current_depth, parent_text) to process
+    work_queue = [(text, 0, None)]
     all_triplets = []
+    seen_texts = set()
 
-    for subj, verb, obj in triplets:
-        # Refine subject
+    while work_queue:
+        current_text, current_depth, parent_text = work_queue.pop(0)
+        
+        # Skip if already processed or depth exceeded
+        if current_text in seen_texts or current_depth > max_depth:
+            continue
+        
+        seen_texts.add(current_text)
+        
         try:
-            subj_annotation = phoNLP_model.annotate(text=subj)
-            df_subj = parsing_result(subj_annotation)
-            refined_subj_triplets = process_sentence(df_subj, logger)
-            if refined_subj_triplets and len(refined_subj_triplets) > 0 and len(refined_subj_triplets[0]) > 0:
-                subj_refined = refined_subj_triplets[0][0]
-            else:
-                subj_refined = subj
-        except (IndexError, Exception):
-            subj_refined = subj
-            refined_subj_triplets = []
+            sentence = clean_text(current_text)
+            segmented_text = vncorenlp_client.word_segment(sentence)
+            
+            # Annotate text
+            annotation = phoNLP_model.annotate(text=segmented_text[0])
+            df = parsing_result(annotation)
+            
+            triplets = process_sentence(df, logger)
+            
+            for subj, verb, obj in triplets:
+                # Store triplet with metadata
+                all_triplets.append({
+                    'subj': subj,
+                    'verb': verb,
+                    'obj': obj,
+                    'depth': current_depth,
+                    'parent_text': parent_text,
+                    'source_text': current_text
+                })
+                
+                # Queue subject for processing if it's complex enough
+                if current_depth < max_depth and len(subj.split()) > 2:
+                    work_queue.append((subj, current_depth + 1, subj))
+                
+                # Queue object for processing if it's complex enough
+                if current_depth < max_depth and len(obj.split()) > 2:
+                    work_queue.append((obj, current_depth + 1, obj))
+                    
+        except Exception:
+            continue
 
-        # Refine object
-        try:
-            obj_annotation = phoNLP_model.annotate(text=obj)
-            df_obj = parsing_result(obj_annotation)
-            refined_obj_triplets = process_sentence(df_obj, logger)
-            if refined_obj_triplets and len(refined_obj_triplets) > 0 and len(refined_obj_triplets[0]) > 0:
-                obj_refined = refined_obj_triplets[0][0]
-            else:
-                obj_refined = obj
-        except (IndexError, Exception):
-            obj_refined = obj
-            refined_obj_triplets = []
-
-        all_triplets.append((subj_refined, verb, obj_refined))
-        all_triplets.extend(refined_subj_triplets)
-        all_triplets.extend(refined_obj_triplets)
-
-    filtered_triplets = []
-
+    # Track which specific subject/object texts were expanded into deeper triplets
+    expanded_phrases = set()
+    
     for triplet in all_triplets:
-        subj, verb, obj = triplet
+        if triplet['parent_text'] is not None:
+            # The parent_text is the phrase that was expanded
+            expanded_phrases.add(triplet['parent_text'])
+    
+    # Build parent-child relationship map
+    child_refinements = {}  # Maps parent phrase -> refined (subj, obj)
+    for triplet in all_triplets:
+        if triplet['parent_text'] is not None and triplet['parent_text'] in expanded_phrases:
+            if triplet['parent_text'] not in child_refinements:
+                child_refinements[triplet['parent_text']] = (triplet['subj'], triplet['obj'])
+    
+    # Filter and refine triplets
+    final_triplets = []
+    for triplet in all_triplets:
+        subj = triplet['subj']
+        verb = triplet['verb']
+        obj = triplet['obj']
+        
+        # If this triplet has a child in expanded_phrases, keep it but replace subj/obj
+        has_expanded_subj = subj in expanded_phrases
+        has_expanded_obj = obj in expanded_phrases
+        
+        if has_expanded_subj or has_expanded_obj:
+            # Replace with refined versions
+            if has_expanded_subj and subj in child_refinements:
+                subj = child_refinements[subj][0]
+            if has_expanded_obj and obj in child_refinements:
+                obj = child_refinements[obj][0]
+            
+            final_triplets.append((subj, verb, obj, triplet['depth']))
+            continue
+        
+        # Keep triplets that weren't expanded
+        final_triplets.append((subj, verb, obj, triplet['depth']))
+
+    # Apply stopwords filtering and normalization
+    filtered_triplets = []
+    seen = set()
+
+    for triplet_data in final_triplets:
+        subj, verb, obj, depth_level = triplet_data
 
         # Remove stopwords
         subj_filtered = ' '.join([w for w in subj.split() if w.lower() not in stopwords]).strip()
@@ -432,16 +492,95 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
         obj_filtered = ' '.join([w for w in obj.split() if w.lower() not in stopwords]).strip()
 
         # Skip remove stopwords if any element becomes empty
-        if not subj_filtered:
-            subj_filtered = subj
         if not verb_filtered:
             verb_filtered = verb
-        if not obj_filtered:
-            obj_filtered = obj
 
+        # Normalize: replace underscores, strip, lowercase
         subj_filtered = subj_filtered.replace('_', ' ').strip().lower()
         verb_filtered = verb_filtered.replace('_', ' ').strip().lower()
         obj_filtered = obj_filtered.replace('_', ' ').strip().lower()
-        filtered_triplets.append((subj_filtered, verb_filtered, obj_filtered))
+        
+        # Deduplicate triplets
+        triplet_tuple = (subj_filtered, verb_filtered, obj_filtered)
+        if triplet_tuple not in seen:
+            filtered_triplets.append(triplet_tuple)
+            seen.add(triplet_tuple)
 
     return filtered_triplets
+
+def main():
+    import logging
+    from src.utils import load_stopwords
+    from src.triplet_extraction.pos_taging import init_vncorenlp
+    import phonlp
+    import os
+    from src.utils import setup_logger
+    import re
+
+    current_dir = os.getcwd()
+    base_dir = r"E:\Github\LawAssistant"
+    print(f"Working directory: {current_dir}")
+    print(f"Base directory set to: {base_dir}\n")
+
+    # === Define files paths relative to base directory ===
+    vncorenlp_dir = os.path.join(base_dir, "nlp_models", "VnCoreNLP-1.2")
+    phonlp_dir = os.path.join(base_dir, "nlp_models", "phonlp")
+    synonym_file = os.path.join(current_dir, "listSameKey.txt")
+    stopwords_file = os.path.join(current_dir, "stopwords.csv")
+    no_triplet_csv_path = os.path.join(current_dir, "logs", "no_triplets_dat_dai_log_1.csv")
+    log_file_path = os.path.join(current_dir, "logs", "dat_dai_triplet_extraction.txt")
+
+    # === Initialize NLP models ===
+    vncorenlp_client = init_vncorenlp(vncorenlp_dir)
+    phoNLP_model = phonlp.load(save_dir=phonlp_dir)
+    stopwords = load_stopwords(stopwords_file)
+
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+    logger, console_handler, file_handler = setup_logger(
+        name="triplet_extraction",
+        level=logging.DEBUG,
+        log_to_file=False,
+        file_path=log_file_path
+    )
+
+    sentence = "Người sử dụng đất có quyền chung. Người sử dụng đất được cấp Giấy chứng nhận quyền sử dụng đất khi có đủ điều kiện theo quy định của pháp luật về đất đai. Người sử dụng đất được cấp Giấy chứng nhận quyền sở hữu tài sản gắn liền với đất khi có đủ điều kiện theo quy định của pháp luật về đất đai."
+    pattern = re.compile(
+        r"""
+        (?<!\d)      # not preceded by a digit
+        \.           # the dot
+        (?!\d|\.)    # not followed by digit or another dot
+        \s+          # whitespace
+        """,
+        re.VERBOSE
+    )
+    sentences = re.split(pattern, sentence)
+
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+    logger, console_handler, file_handler = setup_logger(
+        name="triplet_extraction",
+        level=logging.DEBUG,
+        log_to_file=True,
+        file_path=log_file_path
+    )
+
+    all_triplet = []
+    for s in sentences:
+        print("Processing sentence:", s)
+        triplets = triplet_extraction(
+            text=s,
+            vncorenlp_client=vncorenlp_client,
+            phoNLP_model=phoNLP_model,
+            stopwords=stopwords,
+            logger=logger,
+            max_depth=8,
+        )
+        for t in triplets:
+            logger.debug(t)
+        all_triplet.extend(triplets)
+
+    for t in all_triplet:
+        print(t)
+
+
+if __name__ == "__main__":
+    main()

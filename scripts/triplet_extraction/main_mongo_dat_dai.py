@@ -109,7 +109,7 @@ def main():
             if not section:
                 continue
 
-            if section.get("is_amendment", False):
+            if section.get("is_amendment"):
                 continue
 
             sentence = row['content']
