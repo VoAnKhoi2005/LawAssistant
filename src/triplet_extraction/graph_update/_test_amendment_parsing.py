@@ -1,6 +1,3 @@
-"""
-Test script to verify amendment document parsing for documents like 90/2025/QH15
-"""
 from src.triplet_extraction.doc_extraction.parse_text_to_section import parse_document
 
 # Sample text from amendment law
@@ -54,13 +51,3 @@ for section_id, section_data in result.items():
             print(f"{indent}  → {content_preview}")
     print(f"{indent}  Full path: {section_data['full_path']}")
     print()
-
-print("=" * 80)
-print("\nKey observations:")
-print("1. ✅ Điều 1 should be marked as amendment article")
-print("2. ✅ Numbered items (1., 2., 3.) under Điều 1 should be 'khoản X (sửa đổi)'")
-print("3. ✅ Lettered items (a), b), c)) should be 'điểm X (sửa đổi)'")
-print("4. ✅ Quoted sections (e.g., \"1. Hoạt động...\") should be part of content,")
-print("      NOT parsed as separate khoản")
-print("5. Note: Short items like 'b) Bãi bỏ khoản 2;' may be merged into")
-print("         previous section content")

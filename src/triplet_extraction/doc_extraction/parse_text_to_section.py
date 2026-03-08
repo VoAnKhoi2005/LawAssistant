@@ -88,12 +88,16 @@ def collect_content(output_text, start_index):
 
             # Track quote state
             for ch in line:
-                if ch in OPENING_QUOTES:
-                    in_quotes = True
+                if ch == '"':
+                    in_quotes = not in_quotes
+                elif ch in OPENING_QUOTES:
+                    if in_quotes and ch in CLOSING_QUOTES:
+                        # This char can also close — treat as closing
+                        in_quotes = False
+                    else:
+                        in_quotes = True
                 elif ch in CLOSING_QUOTES:
                     in_quotes = False
-                elif ch == '"':
-                    in_quotes = not in_quotes
 
             if not in_quotes_before and is_marker_line(line):
                 if re.match(r"^(phụ\s+lục)(?:\s+([ivxlcdm\d]+))?(?:[.\s]+(.*))?$", line.lower()):
