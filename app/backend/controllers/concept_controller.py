@@ -1,6 +1,12 @@
 from typing import List, Optional
 from services.concept_service import ConceptService
 from dto.concept_dto import CreateConceptRequest, UpdateConceptRequest, ConceptResponse
+from pydantic import BaseModel
+
+
+class AddSectionToConceptRequest(BaseModel):
+    section_id: str
+    so_hieu: str
 
 
 class ConceptController:
@@ -27,3 +33,11 @@ class ConceptController:
     async def delete(self, concept_id: str):
         await self.concept_service.delete_concept(concept_id)
         return {"message": "Concept deleted successfully"}
+    
+    async def add_section(self, concept_id: str, request: AddSectionToConceptRequest):
+        return await self.concept_service.add_section_to_concept(
+            concept_id, request.section_id, request.so_hieu
+        )
+    
+    async def remove_section(self, concept_id: str, section_id: str):
+        return await self.concept_service.remove_section_from_concept(concept_id, section_id)

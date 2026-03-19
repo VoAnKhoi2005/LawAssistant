@@ -45,3 +45,38 @@ class TripletService:
                 detail="Triplet not found"
             )
         return result
+    
+    async def add_section_to_triplet(self, triplet_id: str, section_id: str, so_hieu: str) -> dict:
+        triplet = await self.get_triplet_by_id(triplet_id)
+        
+        # Check if document already exists
+        documents = triplet.get("documents", [])
+        for doc in documents:
+            if doc.get("section_id") == section_id and doc.get("so_hieu") == so_hieu:
+                return triplet
+        
+        # Add new document reference
+        documents.append({"section_id": section_id, "so_hieu": so_hieu})
+        
+        from bson import ObjectId
+        await self.triplet_repository.collection.update_one(
+            {"_id": ObjectId(triplet_id)},
+            {"$set": {"documents": documents}}
+        )
+        
+        return await self.get_triplet_by_id(triplet_id)
+    
+    async def remove_section_from_triplet(self, triplet_id: str, section_id: str) -> dict:
+        triplet = await self.get_triplet_by_id(triplet_id)
+        
+        # Remove document reference
+        documents = triplet.get("documents", [])
+        documents = [doc for doc in documents if doc.get("section_id") != section_id]
+        
+        from bson import ObjectId
+        await self.triplet_repository.collection.update_one(
+            {"_id": ObjectId(triplet_id)},
+            {"$set": {"documents": documents}}
+        )
+        
+        return await self.get_triplet_by_id(triplet_id)

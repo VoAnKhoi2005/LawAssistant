@@ -1,6 +1,12 @@
 from typing import List, Optional
 from services.triplet_service import TripletService
 from dto.triplet_dto import CreateTripletRequest, UpdateTripletRequest, TripletResponse
+from pydantic import BaseModel
+
+
+class AddSectionToTripletRequest(BaseModel):
+    section_id: str
+    so_hieu: str
 
 
 class TripletController:
@@ -30,3 +36,11 @@ class TripletController:
     async def delete(self, triplet_id: str):
         await self.triplet_service.delete_triplet(triplet_id)
         return {"message": "Triplet deleted successfully"}
+    
+    async def add_section(self, triplet_id: str, request: AddSectionToTripletRequest):
+        return await self.triplet_service.add_section_to_triplet(
+            triplet_id, request.section_id, request.so_hieu
+        )
+    
+    async def remove_section(self, triplet_id: str, section_id: str):
+        return await self.triplet_service.remove_section_from_triplet(triplet_id, section_id)

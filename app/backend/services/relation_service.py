@@ -42,3 +42,38 @@ class RelationService:
                 detail="Relation not found"
             )
         return result
+    
+    async def add_section_to_relation(self, relation_id: str, section_id: str, so_hieu: str) -> dict:
+        relation = await self.get_relation_by_id(relation_id)
+        
+        # Check if document already exists
+        documents = relation.get("documents", [])
+        for doc in documents:
+            if doc.get("section_id") == section_id and doc.get("so_hieu") == so_hieu:
+                return relation
+        
+        # Add new document reference
+        documents.append({"section_id": section_id, "so_hieu": so_hieu})
+        
+        from bson import ObjectId
+        await self.relation_repository.collection.update_one(
+            {"_id": ObjectId(relation_id)},
+            {"$set": {"documents": documents}}
+        )
+        
+        return await self.get_relation_by_id(relation_id)
+    
+    async def remove_section_from_relation(self, relation_id: str, section_id: str) -> dict:
+        relation = await self.get_relation_by_id(relation_id)
+        
+        # Remove document reference
+        documents = relation.get("documents", [])
+        documents = [doc for doc in documents if doc.get("section_id") != section_id]
+        
+        from bson import ObjectId
+        await self.relation_repository.collection.update_one(
+            {"_id": ObjectId(relation_id)},
+            {"$set": {"documents": documents}}
+        )
+        
+        return await self.get_relation_by_id(relation_id)

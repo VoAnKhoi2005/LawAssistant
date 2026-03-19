@@ -42,3 +42,38 @@ class ConceptService:
                 detail="Concept not found"
             )
         return result
+    
+    async def add_section_to_concept(self, concept_id: str, section_id: str, so_hieu: str) -> dict:
+        concept = await self.get_concept_by_id(concept_id)
+        
+        # Check if document already exists
+        documents = concept.get("documents", [])
+        for doc in documents:
+            if doc.get("section_id") == section_id and doc.get("so_hieu") == so_hieu:
+                return concept
+        
+        # Add new document reference
+        documents.append({"section_id": section_id, "so_hieu": so_hieu})
+        
+        from bson import ObjectId
+        await self.concept_repository.collection.update_one(
+            {"_id": ObjectId(concept_id)},
+            {"$set": {"documents": documents}}
+        )
+        
+        return await self.get_concept_by_id(concept_id)
+    
+    async def remove_section_from_concept(self, concept_id: str, section_id: str) -> dict:
+        concept = await self.get_concept_by_id(concept_id)
+        
+        # Remove document reference
+        documents = concept.get("documents", [])
+        documents = [doc for doc in documents if doc.get("section_id") != section_id]
+        
+        from bson import ObjectId
+        await self.concept_repository.collection.update_one(
+            {"_id": ObjectId(concept_id)},
+            {"$set": {"documents": documents}}
+        )
+        
+        return await self.get_concept_by_id(concept_id)

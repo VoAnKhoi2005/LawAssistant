@@ -1,6 +1,12 @@
 from typing import List, Optional
 from services.relation_service import RelationService
 from dto.relation_dto import CreateRelationRequest, UpdateRelationRequest, RelationResponse
+from pydantic import BaseModel
+
+
+class AddSectionToRelationRequest(BaseModel):
+    section_id: str
+    so_hieu: str
 
 
 class RelationController:
@@ -27,3 +33,11 @@ class RelationController:
     async def delete(self, relation_id: str):
         await self.relation_service.delete_relation(relation_id)
         return {"message": "Relation deleted successfully"}
+    
+    async def add_section(self, relation_id: str, request: AddSectionToRelationRequest):
+        return await self.relation_service.add_section_to_relation(
+            relation_id, request.section_id, request.so_hieu
+        )
+    
+    async def remove_section(self, relation_id: str, section_id: str):
+        return await self.relation_service.remove_section_from_relation(relation_id, section_id)

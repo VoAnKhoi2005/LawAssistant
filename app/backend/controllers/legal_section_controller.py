@@ -31,3 +31,13 @@ class LegalSectionController:
     async def delete(self, section_id: str):
         await self.legal_section_service.delete_section(section_id)
         return {"message": "Legal section deleted successfully"}
+    
+    # Association methods
+    async def get_concepts(self, section_id: str, skip: int = 0, limit: int = 100):
+        return await self.legal_section_service.get_section_concepts(section_id, skip, limit)
+    
+    async def get_relations(self, section_id: str, skip: int = 0, limit: int = 100):
+        return await self.legal_section_service.get_section_relations(section_id, skip, limit)
+    
+    async def get_triplets(self, section_id: str, skip: int = 0, limit: int = 100):
+        return await self.legal_section_service.get_section_triplets(section_id, skip, limit)

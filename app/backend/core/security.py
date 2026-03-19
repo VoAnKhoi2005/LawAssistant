@@ -1,14 +1,16 @@
 from datetime import datetime, timedelta
 from typing import Optional
+
+from fastapi import Depends, Request
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from fastapi import HTTPException, status, Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from core.config import settings
+from core.exceptions import UnauthorizedException
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-security_scheme = HTTPBearer()
+security_scheme = HTTPBearer(auto_error=False)
 
 
 def hash_password(password: str) -> str:
@@ -19,40 +21,56 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+def _create_token(data: dict, expires_delta: timedelta, secret_key: str) -> str:
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=settings.access_token_expire_minutes)
-    
+    expire = datetime.utcnow() + expires_delta
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, settings.jwt_secret_key, algorithm=settings.algorithm)
-    return encoded_jwt
+    return jwt.encode(to_encode, secret_key, algorithm=settings.algorithm)
+
+
+def _decode_token(token: str, secret_key: str) -> dict:
+    try:
+        payload = jwt.decode(token, secret_key, algorithms=[settings.algorithm])
+        return payload
+    except JWTError as exc:
+        raise UnauthorizedException("Invalid or expired token") from exc
+
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+    delta = expires_delta or timedelta(minutes=settings.access_token_expire_minutes)
+    return _create_token(data, delta, settings.jwt_secret_key)
+
+
+def create_refresh_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+    delta = expires_delta or timedelta(days=settings.refresh_token_expire_days)
+    return _create_token(data, delta, settings.jwt_refresh_secret_key)
 
 
 def decode_access_token(token: str) -> dict:
-    try:
-        payload = jwt.decode(token, settings.jwt_secret_key, algorithms=[settings.algorithm])
-        return payload
-    except JWTError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+    return _decode_token(token, settings.jwt_secret_key)
 
 
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security_scheme)) -> dict:
-    token = credentials.credentials
-    payload = decode_access_token(token)
-    
-    user_id: str = payload.get("sub")
-    if user_id is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    
-    return {"user_id": user_id, "username": payload.get("username")}
+def decode_refresh_token(token: str) -> dict:
+    return _decode_token(token, settings.jwt_refresh_secret_key)
+
+
+async def get_current_user(
+    request: Request,
+    credentials: HTTPAuthorizationCredentials = Depends(security_scheme),
+) -> dict:
+    if credentials is None:
+        raise UnauthorizedException("Authorization header missing")
+
+    payload = decode_access_token(credentials.credentials)
+    user_id: Optional[str] = payload.get("sub")
+    if not user_id:
+        raise UnauthorizedException("Invalid token payload")
+
+    user_controller = getattr(request.app.state, "user_controller", None)
+    if user_controller:
+        user = await user_controller.user_service.get_user_by_id(user_id)
+        if not user:
+            raise UnauthorizedException("User not found")
+        return user
+
+    return {"id": user_id, "username": payload.get("username")}
