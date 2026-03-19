@@ -4,6 +4,8 @@ from typing import Optional, List, Tuple, Dict, Set
 AMENDMENT_KHOAN_PATTERN = re.compile(r"khoản\s+(\d+)", re.IGNORECASE)
 AMENDMENT_DIEU_PATTERN = re.compile(r"điều\s+(\d+)", re.IGNORECASE)
 AMENDMENT_DIEM_PATTERN = re.compile(r"điểm\s+([a-z])", re.IGNORECASE)
+# Shorthand pattern for "khoản X điểm Y" notation (e.g., "khoản 2a", "3b")
+AMENDMENT_SHORTHAND_PATTERN = re.compile(r"(?:khoản\s+)?(\d+)([a-z])(?!\d)", re.IGNORECASE)
 AMENDMENT_PHAN_PATTERN = re.compile(r"phần\s+thứ\s+([ivxlcdm\d]+)", re.IGNORECASE)
 AMENDMENT_CHUONG_PATTERN = re.compile(r"chương\s+([ivxlcdm\d]+)", re.IGNORECASE)
 AMENDMENT_MUC_PATTERN = re.compile(r"mục\s+([ivxlcdm\d]+)", re.IGNORECASE)
@@ -77,6 +79,7 @@ def parse_amendment_reference(text: str, document_col) -> List[dict]:
                 continue
             
             # Parse this segment
+            shorthand_m = AMENDMENT_SHORTHAND_PATTERN.search(segment)
             dieu_m = AMENDMENT_DIEU_PATTERN.search(segment)
             khoan_m = AMENDMENT_KHOAN_PATTERN.search(segment)
             diem_m = AMENDMENT_DIEM_PATTERN.search(segment)
@@ -85,6 +88,12 @@ def parse_amendment_reference(text: str, document_col) -> List[dict]:
             muc_m = AMENDMENT_MUC_PATTERN.search(segment)
             tieu_muc_m = AMENDMENT_TIEU_MUC_PATTERN.search(segment)
             phu_luc_m = AMENDMENT_PHU_LUC_PATTERN.search(segment)
+            
+            # Handle shorthand notation (e.g., "khoản 2a" or "2a" = khoản 2 điểm a)
+            if shorthand_m and not diem_m:
+                if not khoan_m:
+                    khoan_m = shorthand_m
+                diem_m = shorthand_m
             
             # Update context with new values found
             if dieu_m:
@@ -102,7 +111,11 @@ def parse_amendment_reference(text: str, document_col) -> List[dict]:
                     current_context['diem'] = None
             
             if diem_m:
-                current_context['diem'] = diem_m.group(1).lower()
+                # For shorthand, group(2) contains the letter; for regular, group(1)
+                if diem_m == shorthand_m:
+                    current_context['diem'] = diem_m.group(2).lower()
+                else:
+                    current_context['diem'] = diem_m.group(1).lower()
             
             if phan_m:
                 current_context['phan'] = phan_m.group(1).lower()
@@ -125,6 +138,7 @@ def parse_amendment_reference(text: str, document_col) -> List[dict]:
         return references if references else []
     
     # Single reference case - parse all components
+    shorthand_m = AMENDMENT_SHORTHAND_PATTERN.search(text)
     khoan_m = AMENDMENT_KHOAN_PATTERN.search(text)
     dieu_m = AMENDMENT_DIEU_PATTERN.search(text)
     diem_m = AMENDMENT_DIEM_PATTERN.search(text)
@@ -134,9 +148,23 @@ def parse_amendment_reference(text: str, document_col) -> List[dict]:
     tieu_muc_m = AMENDMENT_TIEU_MUC_PATTERN.search(text)
     phu_luc_m = AMENDMENT_PHU_LUC_PATTERN.search(text)
 
+    # Handle shorthand notation (e.g., "khoản 2a" or "2a" = khoản 2 điểm a)
+    if shorthand_m and not diem_m:
+        if not khoan_m:
+            khoan_m = shorthand_m
+        diem_m = shorthand_m
+
     if not (khoan_m or dieu_m or diem_m or phan_m or chuong_m or muc_m or
             tieu_muc_m or phu_luc_m or so_hieu_m or doc_name_m):
         return []
+
+    # For shorthand, group(2) contains the letter; for regular, group(1)
+    diem_value = None
+    if diem_m:
+        if diem_m == shorthand_m:
+            diem_value = diem_m.group(2).lower()
+        else:
+            diem_value = diem_m.group(1).lower()
 
     ref = {
         "phan": phan_m.group(1).lower() if phan_m else None,
@@ -146,7 +174,7 @@ def parse_amendment_reference(text: str, document_col) -> List[dict]:
         "phu_luc": phu_luc_m.group(1).lower() if phu_luc_m and phu_luc_m.group(1) else None,
         "dieu": dieu_m.group(1) if dieu_m else None,
         "khoan": khoan_m.group(1) if khoan_m else None,
-        "diem": diem_m.group(1).lower() if diem_m else None,
+        "diem": diem_value,
         "so_hieu": so_hieu,
         "doc_name": doc_name,
     }
