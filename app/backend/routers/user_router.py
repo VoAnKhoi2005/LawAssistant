@@ -10,7 +10,7 @@ def create_user_router(user_controller: UserController) -> APIRouter:
 
     @router.get("/me")
     async def get_current_user_profile(current_user: dict = Depends(get_current_user)):
-        data = await user_controller.get_current_user_profile(current_user["id"])
+        data = await user_controller.get_user_by_id(current_user["id"])
         return success_response(data, message="User profile retrieved")
 
     return router
@@ -23,7 +23,7 @@ def create_user_router_with_state() -> APIRouter:
     async def get_current_user_profile(
         req: Request, current_user: dict = Depends(get_current_user)
     ):
-        data = await req.app.state.user_controller.get_current_user_profile(current_user["id"])
+        data = await req.app.state.user_controller.get_user_by_id(current_user["id"])
         return success_response(data, message="User profile retrieved")
 
     return router

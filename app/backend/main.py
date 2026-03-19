@@ -83,7 +83,7 @@ async def lifespan(app: FastAPI):
     relation_service = RelationService(relation_repository)
     section_relation_service = SectionRelationService(section_relation_repository)
     triplet_service = TripletService(triplet_repository)
-    auth_service = AuthService(user_service, redis)
+    auth_service = AuthService(user_repository, redis)
     
     # Initialize controllers
     user_controller = UserController(user_service)

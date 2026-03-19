@@ -1,26 +1,51 @@
 from redis.asyncio import Redis
 
 from core.config import settings
-from core.exceptions import UnauthorizedException
-from core.security import create_access_token, create_refresh_token, decode_refresh_token
+from core.exceptions import ConflictException, NotFoundException, UnauthorizedException
+from core.security import (
+    create_access_token,
+    create_refresh_token,
+    decode_refresh_token,
+    hash_password,
+    verify_password,
+)
 from dto.auth_dto import TokenPairResponse
 from dto.user_dto import RegisterRequest, LoginRequest
-from services.user_service import UserService
+from repositories.user_repository import UserRepository
 
 
 class AuthService:
-    def __init__(self, user_service: UserService, redis_client: Redis):
-        self.user_service = user_service
+    def __init__(self, user_repository: UserRepository, redis_client: Redis):
+        self.user_repository = user_repository
         self.redis = redis_client
 
     async def register(self, request: RegisterRequest) -> dict:
-        user = await self.user_service.create_user(request.username, request.email, request.password)
+        existing_username = await self.user_repository.find_by_username(request.username)
+        if existing_username:
+            raise ConflictException("Username already exists")
+
+        existing_email = await self.user_repository.find_by_email(request.email)
+        if existing_email:
+            raise ConflictException("Email already exists")
+
+        user_doc = await self.user_repository.create(
+            {
+                "username": request.username,
+                "email": request.email,
+                "password": hash_password(request.password),
+            }
+        )
+
+        user = self._sanitize_user(user_doc)
         tokens = await self._issue_tokens(user["id"], user["username"])
         return {"user": user, "tokens": tokens}
 
     async def login(self, request: LoginRequest) -> dict:
-        user_doc = await self.user_service.verify_user_credentials(request.username, request.password)
-        user = self.user_service.serialize_user(user_doc)
+        user_doc = await self.user_repository.find_by_username(request.username)
+        if not user_doc or not verify_password(request.password, user_doc["password"]):
+            raise UnauthorizedException("Incorrect username or password")
+
+        user = self._sanitize_user(user_doc)
         tokens = await self._issue_tokens(user["id"], user["username"])
         return {"user": user, "tokens": tokens}
 
@@ -35,10 +60,11 @@ class AuthService:
         if not stored_token or stored_token != refresh_token:
             raise UnauthorizedException("Refresh token is invalid or has expired")
 
-        user = await self.user_service.get_user_by_id(user_id)
-        if not user:
-            raise UnauthorizedException("User not found")
+        user_doc = await self.user_repository.find_by_id(user_id)
+        if not user_doc:
+            raise NotFoundException("User not found")
 
+        user = self._sanitize_user(user_doc)
         tokens = await self._issue_tokens(user_id, username)
         return {"user": user, "tokens": tokens}
 
@@ -63,3 +89,11 @@ class AuthService:
     @staticmethod
     def _refresh_token_key(user_id: str) -> str:
         return f"refresh_token:{user_id}"
+
+    @staticmethod
+    def _sanitize_user(user_doc: dict) -> dict:
+        return {
+            "id": str(user_doc["_id"]),
+            "username": user_doc["username"],
+            "email": user_doc["email"],
+        }
