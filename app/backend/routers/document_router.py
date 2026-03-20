@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Request, Query
 
-from controllers.document_controller import DocumentController
 from core.security import get_current_user
 from dto.document_dto import CreateDocumentRequest, UpdateDocumentRequest
 from utils.response import success_response

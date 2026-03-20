@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Request, Query
 
-from controllers.relation_controller import RelationController, AddSectionToRelationRequest
+from controllers.relation_controller import AddSectionToRelationRequest
 from core.security import get_current_user
 from dto.relation_dto import CreateRelationRequest, UpdateRelationRequest
 from utils.response import success_response

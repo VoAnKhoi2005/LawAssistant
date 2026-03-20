@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Request, Query
 
-from controllers.legal_section_controller import LegalSectionController
 from core.security import get_current_user
 from dto.legal_section_dto import CreateLegalSectionRequest, UpdateLegalSectionRequest
 from utils.response import success_response

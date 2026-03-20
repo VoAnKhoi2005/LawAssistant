@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Request, Query
 
-from controllers.concept_controller import ConceptController, AddSectionToConceptRequest
+from controllers.concept_controller import AddSectionToConceptRequest
 from core.security import get_current_user
 from dto.concept_dto import CreateConceptRequest, UpdateConceptRequest
 from utils.response import success_response

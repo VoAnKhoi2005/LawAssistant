@@ -1,6 +1,5 @@
-from typing import List, Optional
 from services.document_service import DocumentService
-from dto.document_dto import CreateDocumentRequest, UpdateDocumentRequest, DocumentResponse
+from dto.document_dto import CreateDocumentRequest, UpdateDocumentRequest
 
 
 class DocumentController:

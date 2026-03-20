@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Request, Query
 
-from controllers.section_relation_controller import SectionRelationController
 from core.security import get_current_user
 from dto.section_relation_dto import CreateSectionRelationRequest, UpdateSectionRelationRequest
 from utils.response import success_response

@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Request
 
-from controllers.auth_controller import AuthController
 from core.security import get_current_user
 from dto.auth_dto import RefreshTokenRequest
 from dto.user_dto import LoginRequest, RegisterRequest

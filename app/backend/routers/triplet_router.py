@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Request, Query
 
-from controllers.triplet_controller import TripletController, AddSectionToTripletRequest
+from controllers.triplet_controller import AddSectionToTripletRequest
 from core.security import get_current_user
 from dto.triplet_dto import CreateTripletRequest, UpdateTripletRequest
 from utils.response import success_response
