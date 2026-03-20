@@ -12,27 +12,56 @@ class DocumentService:
         self.document_repository = document_repository
         self.upload_file_repository = upload_file_repository
     
-    async def get_all_documents(self, skip: int = 0, limit: int = 100) -> List[Document]:
-        document_dicts = await self.document_repository.find_all(skip, limit)
+    async def get_all_documents(self, skip: int = 0, limit: int = 100, user_id: str = None) -> List[Document]:
+        """Get all documents, optionally filtered by user_id"""
+        if user_id:
+            # Use repository method to filter by user_id
+            document_dicts = await self.document_repository.find_by_user_id(user_id, skip, limit)
+        else:
+            # Get all documents
+            document_dicts = await self.document_repository.find_all(skip, limit)
+        
         return [self._dict_to_document(doc_dict) for doc_dict in document_dicts]
     
-    async def get_document_by_id(self, document_id: str) -> Document:
+    async def get_document_by_id(self, document_id: str, user_id: str = None) -> Document:
+        """Get document by ID with optional user authorization check"""
         document_dict = await self.document_repository.find_by_id(document_id)
         if not document_dict:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Document not found"
             )
-        return self._dict_to_document(document_dict)
+        
+        document = self._dict_to_document(document_dict)
+        
+        # Check authorization if user_id is provided
+        if user_id and document.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to access this document"
+            )
+        
+        return document
     
-    async def get_document_by_so_hieu(self, so_hieu: str) -> Document:
+    async def get_document_by_so_hieu(self, so_hieu: str, user_id: str = None) -> Document:
+        """Get document by so_hieu with optional user authorization check"""
         document_dict = await self.document_repository.find_by_so_hieu(so_hieu)
         if not document_dict:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Document not found"
             )
-        return self._dict_to_document(document_dict)
+        
+        document = self._dict_to_document(document_dict)
+        
+        # Check authorization if user_id is provided
+        if user_id and document.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to access this document"
+            )
+        
+        return document
     
     async def create_document(
         self, 
@@ -40,6 +69,7 @@ class DocumentService:
         title: str,
         effective_date: str,
         file_ids: List[str],
+        user_id: str,
     ) -> Dict[str, Any]:
         """
         Create a document with file references and start processing
@@ -80,6 +110,7 @@ class DocumentService:
         
         # Create document model
         document = Document(
+            user_id=user_id,
             so_hieu=so_hieu,
             title=title,
             effective_date=DateModel(date=parsed_date),
@@ -139,7 +170,11 @@ class DocumentService:
                 detail=f"Failed to queue document processing: {str(e)}"
             )
     
-    async def update_document(self, document_id: str, document: Document) -> Document:
+    async def update_document(self, document_id: str, document: Document, user_id: str = None) -> Document:
+        """Update document with optional user authorization check"""
+        # Check if document exists and user has permission
+        existing_document = await self.get_document_by_id(document_id, user_id)
+        
         updated_document = await self.document_repository.update(document_id, document)
         if not updated_document:
             raise HTTPException(
@@ -148,7 +183,11 @@ class DocumentService:
             )
         return updated_document
     
-    async def delete_document(self, document_id: str) -> bool:
+    async def delete_document(self, document_id: str, user_id: str = None) -> bool:
+        """Delete document with optional user authorization check"""
+        # Check if document exists and user has permission
+        await self.get_document_by_id(document_id, user_id)
+        
         result = await self.document_repository.delete(document_id)
         if not result:
             raise HTTPException(

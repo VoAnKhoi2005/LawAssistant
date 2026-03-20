@@ -20,6 +20,11 @@ class DocumentRepository:
     async def find_by_so_hieu(self, so_hieu: str) -> Optional[dict]:
         return await self.collection.find_one({"so_hieu": so_hieu})
     
+    async def find_by_user_id(self, user_id: str, skip: int = 0, limit: int = 100) -> List[dict]:
+        """Find all documents belonging to a specific user"""
+        cursor = self.collection.find({"user_id": user_id}).skip(skip).limit(limit)
+        return await cursor.to_list(length=limit)
+    
     async def create(self, document: Document) -> Document:
         document_dict = document.model_dump(by_alias=True, exclude={"id"})
         result = await self.collection.insert_one(document_dict)

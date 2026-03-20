@@ -5,6 +5,7 @@ from models.common import ObjectIdModel, DateModel, FileRef
 
 class Document(BaseModel):
     id: Optional[str] = Field(None, alias="_id")
+    user_id: str
     effective_date: DateModel
     is_active: bool
     so_hieu: str

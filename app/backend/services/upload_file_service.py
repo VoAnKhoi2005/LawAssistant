@@ -14,18 +14,36 @@ class UploadFileService:
         self.uploads_dir = Path("uploads")
         self.uploads_dir.mkdir(exist_ok=True)
     
-    async def get_all_files(self, skip: int = 0, limit: int = 100) -> List[UploadedFile]:
-        file_dicts = await self.upload_file_repository.find_all(skip, limit)
+    async def get_all_files(self, skip: int = 0, limit: int = 100, user_id: str = None) -> List[UploadedFile]:
+        """Get all files, optionally filtered by user_id"""
+        if user_id:
+            # Use repository method to filter by user_id
+            file_dicts = await self.upload_file_repository.find_by_user_id(user_id, skip, limit)
+        else:
+            # Get all files
+            file_dicts = await self.upload_file_repository.find_all(skip, limit)
+        
         return [self._dict_to_uploaded_file(file_dict) for file_dict in file_dicts]
     
-    async def get_file_by_id(self, file_id: str) -> UploadedFile:
+    async def get_file_by_id(self, file_id: str, user_id: str = None) -> UploadedFile:
+        """Get file by ID with optional user authorization check"""
         file_dict = await self.upload_file_repository.find_by_id(file_id)
         if not file_dict:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="File not found"
             )
-        return self._dict_to_uploaded_file(file_dict)
+        
+        uploaded_file = self._dict_to_uploaded_file(file_dict)
+        
+        # Check authorization if user_id is provided
+        if user_id and uploaded_file.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to access this file"
+            )
+        
+        return uploaded_file
     
     async def get_files_by_user_id(self, user_id: str, skip: int = 0, limit: int = 100) -> List[UploadedFile]:
         file_dicts = await self.upload_file_repository.find_by_user_id(user_id, skip, limit)
@@ -126,10 +144,14 @@ class UploadFileService:
         
         return uploaded_files
     
-    async def update_file_status(self, file_id: str, status: str, error: Optional[str] = None) -> dict:
+    async def update_file_status(self, file_id: str, status: str, error: Optional[str] = None, user_id: str = None) -> dict:
         """
-        Update file processing status
+        Update file processing status with optional authorization check
         """
+        # Check authorization if user_id is provided
+        if user_id:
+            await self.get_file_by_id(file_id, user_id)
+        
         file_record = await self.upload_file_repository.update_status(file_id, status, error)
         if not file_record:
             raise HTTPException(
@@ -138,20 +160,29 @@ class UploadFileService:
             )
         return file_record
     
-    async def delete_file(self, file_id: str) -> bool:
+    async def delete_file(self, file_id: str, user_id: str = None) -> bool:
         """
-        Delete file from both filesystem and database
+        Delete file from both filesystem and database with authorization check
         """
-        # Get file record first
-        file_record = await self.upload_file_repository.find_by_id(file_id)
-        if not file_record:
+        # Get file record first and check authorization
+        file_dict = await self.upload_file_repository.find_by_id(file_id)
+        if not file_dict:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="File not found"
             )
         
+        uploaded_file = self._dict_to_uploaded_file(file_dict)
+        
+        # Check authorization if user_id is provided
+        if user_id and uploaded_file.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to delete this file"
+            )
+        
         # Delete from filesystem
-        file_path = Path(file_record["storage_path"])
+        file_path = Path(file_dict["storage_path"])
         if file_path.exists():
             try:
                 os.remove(file_path)
@@ -171,19 +202,29 @@ class UploadFileService:
         
         return result
     
-    async def get_file_content(self, file_id: str) -> tuple[bytes, str, str]:
+    async def get_file_content(self, file_id: str, user_id: str = None) -> tuple[bytes, str, str]:
         """
-        Get file content for download
+        Get file content for download with authorization check
         Returns: (file_content, filename, content_type)
         """
-        file_record = await self.upload_file_repository.find_by_id(file_id)
-        if not file_record:
+        # Get file and check authorization
+        file_dict = await self.upload_file_repository.find_by_id(file_id)
+        if not file_dict:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="File not found"
             )
         
-        file_path = Path(file_record["storage_path"])
+        uploaded_file = self._dict_to_uploaded_file(file_dict)
+        
+        # Check authorization if user_id is provided
+        if user_id and uploaded_file.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to download this file"
+            )
+        
+        file_path = Path(file_dict["storage_path"])
         if not file_path.exists():
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
@@ -196,8 +237,8 @@ class UploadFileService:
             
             return (
                 content, 
-                file_record["filename"], 
-                file_record.get("content_type", "application/octet-stream")
+                file_dict["filename"], 
+                file_dict.get("content_type", "application/octet-stream")
             )
         except Exception as e:
             raise HTTPException(
