@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Request
 
 from controllers.user_controller import UserController
 from core.security import get_current_user
-from utils.response import success_response
+from utils.api_response_helper import success_response
 
 
 def create_user_router(user_controller: UserController) -> APIRouter:

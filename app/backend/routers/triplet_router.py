@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Request, Query
 from controllers.triplet_controller import AddSectionToTripletRequest
 from core.security import get_current_user
 from dto.triplet_dto import CreateTripletRequest, UpdateTripletRequest
-from utils.response import success_response
+from utils.api_response_helper import success_response
 
 
 def create_triplet_router_with_state() -> APIRouter:

@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Request
 from core.security import get_current_user
 from dto.auth_dto import RefreshTokenRequest
 from dto.user_dto import LoginRequest, RegisterRequest
-from utils.response import success_response
+from utils.api_response_helper import success_response
 
 
 def create_auth_router_with_state() -> APIRouter:

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Request, Query
 
 from core.security import get_current_user
 from dto.legal_section_dto import CreateLegalSectionRequest, UpdateLegalSectionRequest
-from utils.response import success_response
+from utils.api_response_helper import success_response
 
 
 def create_legal_section_router_with_state() -> APIRouter:

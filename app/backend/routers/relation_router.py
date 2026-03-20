@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Request, Query
 from controllers.relation_controller import AddSectionToRelationRequest
 from core.security import get_current_user
 from dto.relation_dto import CreateRelationRequest, UpdateRelationRequest
-from utils.response import success_response
+from utils.api_response_helper import success_response
 
 
 def create_relation_router_with_state() -> APIRouter:
