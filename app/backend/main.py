@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from controllers.upload_file_controller import UploadFileController
 from core.error_handler import app_exception_handler, general_exception_handler
 from core.exceptions import AppException
 from core.redis_client import (
@@ -17,7 +18,9 @@ from repositories.legal_section_repository import LegalSectionRepository
 from repositories.relation_repository import RelationRepository
 from repositories.section_relation_repository import SectionRelationRepository
 from repositories.triplet_repository import TripletRepository
+from repositories.upload_file_repository import UploadFileRepository
 from repositories.user_repository import UserRepository
+from routers.upload_file_router import create_upload_file_router_with_state
 
 # Services
 from services.auth_service import AuthService
@@ -27,6 +30,7 @@ from services.legal_section_service import LegalSectionService
 from services.relation_service import RelationService
 from services.section_relation_service import SectionRelationService
 from services.triplet_service import TripletService
+from services.upload_file_service import UploadFileService
 from services.user_service import UserService
 
 # Controllers
@@ -69,10 +73,11 @@ async def lifespan(app: FastAPI):
     relation_repository = RelationRepository(db)
     section_relation_repository = SectionRelationRepository(db)
     triplet_repository = TripletRepository(db)
+    upload_file_repository = UploadFileRepository(db)
     
     # Initialize services
     user_service = UserService(user_repository)
-    document_service = DocumentService(document_repository)
+    document_service = DocumentService(document_repository, upload_file_repository)
     concept_service = ConceptService(concept_repository)
     legal_section_service = LegalSectionService(
         legal_section_repository, 
@@ -84,6 +89,7 @@ async def lifespan(app: FastAPI):
     section_relation_service = SectionRelationService(section_relation_repository)
     triplet_service = TripletService(triplet_repository)
     auth_service = AuthService(user_repository, redis)
+    upload_file_service = UploadFileService(upload_file_repository)
     
     # Initialize controllers
     user_controller = UserController(user_service)
@@ -94,6 +100,7 @@ async def lifespan(app: FastAPI):
     section_relation_controller = SectionRelationController(section_relation_service)
     triplet_controller = TripletController(triplet_service)
     auth_controller = AuthController(auth_service)
+    upload_file_controller = UploadFileController(upload_file_service)
     
     # Store in app state
     app.state.user_controller = user_controller
@@ -104,6 +111,7 @@ async def lifespan(app: FastAPI):
     app.state.section_relation_controller = section_relation_controller
     app.state.triplet_controller = triplet_controller
     app.state.auth_controller = auth_controller
+    app.state.upload_file_controller = upload_file_controller
 
     yield
 
@@ -127,6 +135,7 @@ def create_app() -> FastAPI:
     app.include_router(create_relation_router_with_state())
     app.include_router(create_section_relation_router_with_state())
     app.include_router(create_triplet_router_with_state())
+    app.include_router(create_upload_file_router_with_state())
     
     return app
 
