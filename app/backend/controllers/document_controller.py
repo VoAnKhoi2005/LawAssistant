@@ -16,8 +16,12 @@ class DocumentController:
         return await self.document_service.get_document_by_so_hieu(so_hieu)
     
     async def create(self, request: CreateDocumentRequest):
-        document_data = request.model_dump(by_alias=True)
-        return await self.document_service.create_document(document_data)
+        return await self.document_service.create_document(
+            so_hieu=request.so_hieu,
+            title=request.title,
+            effective_date=request.effective_date,
+            file_ids=request.file_ids,
+        )
     
     async def update(self, document_id: str, request: UpdateDocumentRequest):
         document_data = request.model_dump(by_alias=True, exclude_unset=True)

@@ -1,4 +1,6 @@
 from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 class ObjectIdModel(BaseModel):
@@ -16,3 +18,7 @@ class DateModel(BaseModel):
 class DocumentRef(BaseModel):
     section_id: str
     so_hieu: str
+
+class FileRef(BaseModel):
+    file_id: str
+    filename: Optional[str] = None

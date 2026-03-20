@@ -2,6 +2,8 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from bson import ObjectId
 
+from models.triplet_model import Triplet
+
 
 class TripletRepository:
     def __init__(self, db: AsyncIOMotorDatabase):
@@ -16,24 +18,30 @@ class TripletRepository:
         return await self.collection.find_one({"_id": ObjectId(triplet_id)})
     
     async def find_by_subject(self, subject_id: str, skip: int = 0, limit: int = 100) -> List[dict]:
-        cursor = self.collection.find({"subject_id.$oid": subject_id}).skip(skip).limit(limit)
+        cursor = self.collection.find({"subject_id": subject_id}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
     
     async def find_by_object(self, object_id: str, skip: int = 0, limit: int = 100) -> List[dict]:
-        cursor = self.collection.find({"object_id.$oid": object_id}).skip(skip).limit(limit)
+        cursor = self.collection.find({"object_id": object_id}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
     
-    async def create(self, triplet_data: dict) -> dict:
-        result = await self.collection.insert_one(triplet_data)
-        triplet_data["_id"] = str(result.inserted_id)
-        return triplet_data
+    async def create(self, triplet: Triplet) -> Triplet:
+        triplet_dict = triplet.model_dump(by_alias=True, exclude={"id"})
+        result = await self.collection.insert_one(triplet_dict)
+        triplet_dict["_id"] = result.inserted_id
+        return Triplet(**triplet_dict)
     
-    async def update(self, triplet_id: str, triplet_data: dict) -> Optional[dict]:
+    async def update(self, triplet_id: str, triplet: Triplet) -> Optional[Triplet]:
+        triplet_dict = triplet.model_dump(by_alias=True, exclude={"id"})
         await self.collection.update_one(
             {"_id": ObjectId(triplet_id)},
-            {"$set": triplet_data}
+            {"$set": triplet_dict}
         )
-        return await self.find_by_id(triplet_id)
+        updated_dict = await self.find_by_id(triplet_id)
+        if updated_dict:
+            updated_dict["_id"] = str(updated_dict["_id"])
+            return Triplet(**updated_dict)
+        return None
     
     async def delete(self, triplet_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(triplet_id)})

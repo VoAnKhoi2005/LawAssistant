@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 
 class LegalSection(BaseModel):
-    id: str = Field(..., alias="_id")
+    id: Optional[str] = Field(None, alias="_id")
     content: Optional[str] = None
     document_title: str
     effective_date: str

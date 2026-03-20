@@ -1,21 +1,21 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
-from app.backend.models.common import ObjectIdModel, DocumentRef
+from models.common import DocumentRef
 
 
 class Relation(BaseModel):
-    id: ObjectIdModel = Field(..., alias="_id")
-    documents: List[DocumentRef]
+    id: Optional[str] = Field(None, alias="_id")
+    documents: List[DocumentRef] = []
 
-    object_id: ObjectIdModel
+    object_id: Optional[str] = None
     object_name: str
 
-    relation_id: ObjectIdModel
+    relation_id: Optional[str] = None
     relation_name: str
 
-    subject_id: ObjectIdModel
+    subject_id: Optional[str] = None
     subject_name: str
 
     model_config = {

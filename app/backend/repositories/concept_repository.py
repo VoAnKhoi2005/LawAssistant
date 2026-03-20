@@ -2,6 +2,8 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from bson import ObjectId
 
+from models.concept_model import Concept
+
 
 class ConceptRepository:
     def __init__(self, db: AsyncIOMotorDatabase):
@@ -22,17 +24,23 @@ class ConceptRepository:
         cursor = self.collection.find({"name": {"$regex": name, "$options": "i"}}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
     
-    async def create(self, concept_data: dict) -> dict:
-        result = await self.collection.insert_one(concept_data)
-        concept_data["_id"] = str(result.inserted_id)
-        return concept_data
+    async def create(self, concept: Concept) -> Concept:
+        concept_dict = concept.model_dump(by_alias=True, exclude={"id"})
+        result = await self.collection.insert_one(concept_dict)
+        concept_dict["_id"] = result.inserted_id
+        return Concept(**concept_dict)
     
-    async def update(self, concept_id: str, concept_data: dict) -> Optional[dict]:
+    async def update(self, concept_id: str, concept: Concept) -> Optional[Concept]:
+        concept_dict = concept.model_dump(by_alias=True, exclude={"id"})
         await self.collection.update_one(
             {"_id": ObjectId(concept_id)},
-            {"$set": concept_data}
+            {"$set": concept_dict}
         )
-        return await self.find_by_id(concept_id)
+        updated_dict = await self.find_by_id(concept_id)
+        if updated_dict:
+            updated_dict["_id"] = str(updated_dict["_id"])
+            return Concept(**updated_dict)
+        return None
     
     async def delete(self, concept_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(concept_id)})

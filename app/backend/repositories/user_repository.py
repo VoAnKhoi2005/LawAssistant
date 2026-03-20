@@ -2,6 +2,8 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional
 from bson import ObjectId
 
+from models.user_model import User
+
 
 class UserRepository:
     def __init__(self, db: AsyncIOMotorDatabase):
@@ -17,7 +19,8 @@ class UserRepository:
     async def find_by_id(self, user_id: str) -> Optional[dict]:
         return await self.collection.find_one({"_id": ObjectId(user_id)})
     
-    async def create(self, user_data: dict) -> dict:
-        result = await self.collection.insert_one(user_data)
-        user_data["_id"] = str(result.inserted_id)
-        return user_data
+    async def create(self, user: User) -> User:
+        user_dict = user.model_dump(by_alias=True, exclude={"id"})
+        result = await self.collection.insert_one(user_dict)
+        user_dict["_id"] = result.inserted_id
+        return User(**user_dict)

@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, EmailStr
 
 
 class User(BaseModel):
-    id: str = Field(..., alias="_id")
+    id: Optional[str] = Field(None, alias="_id")
     username: str
     email: EmailStr
     password: str

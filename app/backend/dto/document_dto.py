@@ -1,14 +1,13 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
-from models.common import ObjectIdModel, DateModel
+from models.common import ObjectIdModel, DateModel, FileRef
 
 
 class CreateDocumentRequest(BaseModel):
-    effective_date: DateModel
-    is_active: bool
-    so_hieu: str
-    source_files: List[str]
-    title: str
+    so_hieu: str = Field(..., description="Document identifier (e.g., 01/2013/QH13)")
+    title: str = Field(..., description="Document title")
+    effective_date: str = Field(..., description="Effective date (YYYY-MM-DD)")
+    file_ids: List[str] = Field(..., description="List of uploaded file IDs")
 
 
 class UploadDocumentRequest(BaseModel):
@@ -18,12 +17,12 @@ class UploadDocumentRequest(BaseModel):
     order: int = Field(default=1, description="Processing order priority")
 
 
-class DocumentUploadResponse(BaseModel):
+class DocumentCreateResponse(BaseModel):
     document_id: str
     task_id: str
     status: str
     message: str
-    uploaded_files: List[str]
+    file_refs: List[dict]
 
 
 class TaskStatusResponse(BaseModel):
@@ -46,11 +45,16 @@ class UpdateDocumentRequest(BaseModel):
 
 class DocumentResponse(BaseModel):
     id: ObjectIdModel = Field(..., alias="_id")
-    effective_date: DateModel
+    effective_date: str
     is_active: bool
     so_hieu: str
-    source_files: List[str]
     title: str
+    files: List[FileRef]
+    source_files: List[str]
+    status: Optional[str] = None
+    task_id: Optional[str] = None
+    order: Optional[int] = None
+    error: Optional[str] = None
     
     model_config = {
         "populate_by_name": True

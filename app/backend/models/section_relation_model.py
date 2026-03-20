@@ -1,6 +1,5 @@
 from typing import Optional, List
 from pydantic import BaseModel, Field
-from models.common import ObjectIdModel
 
 
 class RefDetails(BaseModel):
@@ -9,13 +8,13 @@ class RefDetails(BaseModel):
     dieu: str
     khoan: Optional[str] = None
     muc: Optional[str] = None
-    phan: Optional[None] = None
+    phan: Optional[str] = None
     phu_luc: Optional[str] = None
     so_hieu: str
-    tieu_muc: Optional[None] = None
+    tieu_muc: Optional[str] = None
 
 class SectionRelation(BaseModel):
-    id: ObjectIdModel = Field(..., alias="_id")
+    id: Optional[str] = Field(None, alias="_id")
 
     source: str
     target: str

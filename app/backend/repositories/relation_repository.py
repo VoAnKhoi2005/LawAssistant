@@ -2,6 +2,8 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from bson import ObjectId
 
+from models.relation_model import Relation
+
 
 class RelationRepository:
     def __init__(self, db: AsyncIOMotorDatabase):
@@ -19,17 +21,23 @@ class RelationRepository:
         cursor = self.collection.find({"relation_name": relation_name}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
     
-    async def create(self, relation_data: dict) -> dict:
-        result = await self.collection.insert_one(relation_data)
-        relation_data["_id"] = str(result.inserted_id)
-        return relation_data
+    async def create(self, relation: Relation) -> Relation:
+        relation_dict = relation.model_dump(by_alias=True, exclude={"id"})
+        result = await self.collection.insert_one(relation_dict)
+        relation_dict["_id"] = result.inserted_id
+        return Relation(**relation_dict)
     
-    async def update(self, relation_id: str, relation_data: dict) -> Optional[dict]:
+    async def update(self, relation_id: str, relation: Relation) -> Optional[Relation]:
+        relation_dict = relation.model_dump(by_alias=True, exclude={"id"})
         await self.collection.update_one(
             {"_id": ObjectId(relation_id)},
-            {"$set": relation_data}
+            {"$set": relation_dict}
         )
-        return await self.find_by_id(relation_id)
+        updated_dict = await self.find_by_id(relation_id)
+        if updated_dict:
+            updated_dict["_id"] = str(updated_dict["_id"])
+            return Relation(**updated_dict)
+        return None
     
     async def delete(self, relation_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(relation_id)})
