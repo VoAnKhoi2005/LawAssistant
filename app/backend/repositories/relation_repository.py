@@ -42,3 +42,19 @@ class RelationRepository:
     async def delete(self, relation_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(relation_id)})
         return result.deleted_count > 0
+    
+    async def find_or_create_by_name(self, relation_name: str, subject_name: str = "", object_name: str = "") -> dict:
+        """Find relation by name or create if not exists"""
+        existing_list = await self.find_by_relation_name(relation_name)
+        if existing_list and len(existing_list) > 0:
+            return existing_list[0]
+        
+        relation = Relation(
+            relation_name=relation_name,
+            subject_name=subject_name,
+            object_name=object_name
+        )
+        created = await self.create(relation)
+        relation_dict = created.model_dump(by_alias=True)
+        relation_dict["_id"] = created.id
+        return relation_dict

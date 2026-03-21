@@ -10,7 +10,7 @@ from core.redis_client import (
     connect_to_redis,
     get_redis,
 )
-from db.database import close_mongo_connection, connect_to_mongo, get_database
+from infrastructure import close_mongo_connection, connect_to_mongo, get_database
 # Repositories
 from repositories.concept_repository import ConceptRepository
 from repositories.document_repository import DocumentRepository

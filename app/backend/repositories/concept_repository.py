@@ -45,3 +45,15 @@ class ConceptRepository:
     async def delete(self, concept_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(concept_id)})
         return result.deleted_count > 0
+    
+    async def find_or_create_by_name(self, name: str) -> dict:
+        """Find concept by name or create if not exists"""
+        existing = await self.find_by_name(name)
+        if existing:
+            return existing
+        
+        concept = Concept(name=name)
+        created = await self.create(concept)
+        concept_dict = created.model_dump(by_alias=True)
+        concept_dict["_id"] = created.id
+        return concept_dict

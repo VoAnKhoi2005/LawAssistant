@@ -72,6 +72,15 @@ class TripletService:
         triplet.documents = [doc for doc in triplet.documents if doc.section_id != section_id]
         
         return await self.triplet_repository.update(triplet_id, triplet)
+    
+    async def create_many_triplets(self, triplets: List[Triplet]) -> List[Triplet]:
+        """Batch create multiple triplets"""
+        return await self.triplet_repository.create_many(triplets)
+    
+    async def get_triplets_by_document(self, document_id: str, skip: int = 0, limit: int = 100) -> List[Triplet]:
+        """Get all triplets associated with a document"""
+        triplet_dicts = await self.triplet_repository.find_by_document(document_id, skip, limit)
+        return [self._dict_to_triplet(triplet_dict) for triplet_dict in triplet_dicts]
 
     @staticmethod
     def _dict_to_triplet(triplet_dict: dict) -> Triplet:

@@ -68,6 +68,13 @@ class RelationService:
         relation.documents = [doc for doc in relation.documents if doc.section_id != section_id]
         
         return await self.relation_repository.update(relation_id, relation)
+    
+    async def get_or_create_relation_by_name(self, relation_name: str, subject_name: str = "", object_name: str = "") -> Relation:
+        """Get existing relation by name or create new one"""
+        relation_dict = await self.relation_repository.find_or_create_by_name(
+            relation_name, subject_name, object_name
+        )
+        return self._dict_to_relation(relation_dict)
 
     @staticmethod
     def _dict_to_relation(relation_dict: dict) -> Relation:

@@ -69,6 +69,11 @@ class ConceptService:
         
         return await self.concept_repository.update(concept_id, concept)
     
+    async def get_or_create_concept_by_name(self, name: str) -> Concept:
+        """Get existing concept by name or create new one"""
+        concept_dict = await self.concept_repository.find_or_create_by_name(name)
+        return self._dict_to_concept(concept_dict)
+    
     @staticmethod
     def _dict_to_concept(concept_dict: dict) -> Concept:
         # Convert MongoDB dict to Concept model

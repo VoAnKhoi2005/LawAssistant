@@ -14,7 +14,11 @@ class Settings(BaseSettings):
     redis_port: int = 6379
     redis_password: str = None
     openai_api_key: str
+    openai_model: str
     google_application_credentials: str
+    google_cloud_storage_bucket: str
+    vncorenlp_model_path: str
+    phonlp_model_path: str
 
     model_config = SettingsConfigDict(env_file=".env")
 

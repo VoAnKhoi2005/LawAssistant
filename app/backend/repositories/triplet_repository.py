@@ -46,3 +46,22 @@ class TripletRepository:
     async def delete(self, triplet_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(triplet_id)})
         return result.deleted_count > 0
+    
+    async def create_many(self, triplets: List[Triplet]) -> List[Triplet]:
+        """Batch create multiple triplets"""
+        triplet_dicts = [triplet.model_dump(by_alias=True, exclude={"id"}) for triplet in triplets]
+        result = await self.collection.insert_many(triplet_dicts)
+        
+        created_triplets = []
+        for idx, inserted_id in enumerate(result.inserted_ids):
+            triplet_dicts[idx]["_id"] = str(inserted_id)
+            created_triplets.append(Triplet(**triplet_dicts[idx]))
+        
+        return created_triplets
+    
+    async def find_by_document(self, document_id: str, skip: int = 0, limit: int = 100) -> List[dict]:
+        """Find triplets associated with a specific document"""
+        cursor = self.collection.find(
+            {"documents.section_id": document_id}
+        ).skip(skip).limit(limit)
+        return await cursor.to_list(length=limit)
