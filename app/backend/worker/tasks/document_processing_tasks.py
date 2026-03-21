@@ -9,9 +9,6 @@ from repositories.document_repository import DocumentRepository
 from repositories.triplet_repository import TripletRepository
 from repositories.concept_repository import ConceptRepository
 from repositories.relation_repository import RelationRepository
-from repositories.upload_file_repository import UploadFileRepository
-from services.document_service import DocumentService
-from services.triplet_service import TripletService
 from worker.document_processor import DocumentProcessor
 
 logger = logging.getLogger(__name__)

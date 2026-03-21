@@ -10,7 +10,8 @@ from core.redis_client import (
     connect_to_redis,
     get_redis,
 )
-from infrastructure import close_mongo_connection, connect_to_mongo, get_database
+from infrastructure.db.database import connect_to_mongo, get_database, close_mongo_connection
+
 # Repositories
 from repositories.concept_repository import ConceptRepository
 from repositories.document_repository import DocumentRepository
@@ -53,6 +54,16 @@ from routers.section_relation_router import create_section_relation_router_with_
 from routers.triplet_router import create_triplet_router_with_state
 from routers.user_router import create_user_router_with_state
 
+class AppState:
+    user_controller: UserController
+    document_controller: DocumentController
+    concept_controller: ConceptController
+    legal_section_controller: LegalSectionController
+    relation_controller: RelationController
+    section_relation_controller: SectionRelationController
+    triplet_controller: TripletController
+    auth_controller: AuthController
+    upload_file_controller: UploadFileController
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -103,6 +114,7 @@ async def lifespan(app: FastAPI):
     upload_file_controller = UploadFileController(upload_file_service)
     
     # Store in app state
+    app.state = AppState()
     app.state.user_controller = user_controller
     app.state.document_controller = document_controller
     app.state.concept_controller = concept_controller
