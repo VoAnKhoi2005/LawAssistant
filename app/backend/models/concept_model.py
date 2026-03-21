@@ -1,6 +1,7 @@
 from typing import Optional, List
+from bson import ObjectId
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from models.common import DocumentRef
 
@@ -11,6 +12,13 @@ class Concept(BaseModel):
     documents: List[DocumentRef] = []
     name: str
     synonym: List[str] = []
+
+    @field_validator('id', mode='before')
+    @classmethod
+    def convert_objectid(cls, v):
+        if isinstance(v, ObjectId):
+            return str(v)
+        return v
 
     model_config = {
         "populate_by_name": True

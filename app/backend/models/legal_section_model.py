@@ -1,6 +1,7 @@
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from bson import ObjectId
+from pydantic import BaseModel, Field, field_validator
 
 
 class LegalSection(BaseModel):
@@ -18,6 +19,13 @@ class LegalSection(BaseModel):
 
     is_amendment: Optional[bool] = None
     is_phu_luc: Optional[bool] = None
+
+    @field_validator('id', mode='before')
+    @classmethod
+    def convert_objectid(cls, v):
+        if isinstance(v, ObjectId):
+            return str(v)
+        return v
 
     model_config = {
         "populate_by_name": True

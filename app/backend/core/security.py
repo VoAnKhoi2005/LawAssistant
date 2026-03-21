@@ -71,6 +71,6 @@ async def get_current_user(
         user = await user_controller.user_service.get_user_by_id(user_id)
         if not user:
             raise UnauthorizedException("User not found")
-        return user
+        return user.model_dump()
 
     return {"id": user_id, "username": payload.get("username")}

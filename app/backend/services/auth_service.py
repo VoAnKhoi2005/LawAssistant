@@ -11,6 +11,7 @@ from core.security import (
 )
 from dto.auth_dto import TokenPairResponse
 from dto.user_dto import RegisterRequest, LoginRequest
+from models.user_model import User
 from repositories.user_repository import UserRepository
 
 
@@ -29,11 +30,11 @@ class AuthService:
             raise ConflictException("Email already exists")
 
         user_doc = await self.user_repository.create(
-            {
-                "username": request.username,
-                "email": request.email,
-                "password": hash_password(request.password),
-            }
+            User(
+                username=request.username,
+                email=request.email,
+                password=hash_password(request.password),
+            )
         )
 
         user = self._sanitize_user(user_doc)
@@ -91,9 +92,9 @@ class AuthService:
         return f"refresh_token:{user_id}"
 
     @staticmethod
-    def _sanitize_user(user_doc: dict) -> dict:
+    def _sanitize_user(user_doc: User) -> dict:
         return {
-            "id": str(user_doc["_id"]),
-            "username": user_doc["username"],
-            "email": user_doc["email"],
+            "id": str(user_doc.id),
+            "username": user_doc.username,
+            "email": user_doc.email,
         }

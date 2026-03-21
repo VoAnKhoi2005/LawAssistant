@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Celery worker script for document processing
-Usage: python worker.py
-"""
 import os
 import sys
 
