@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lexis Obsidian | Legal Document Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#3a5470",
+              "surface-container-low": "#f5f2f8",
+              "primary": "#525f71",
+              "surface-container-highest": "#e3e1ec",
+              "primary-container": "#d6e4f9",
+              "surface-tint": "#525f71",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#f7f9ff",
+              "on-primary": "#f5f8ff",
+              "on-tertiary-container": "#563e00",
+              "inverse-primary": "#d8e6fc",
+              "secondary": "#48617e",
+              "inverse-surface": "#0e0e11",
+              "secondary-fixed": "#d1e4ff",
+              "on-error": "#fff7f7",
+              "on-secondary-fixed-variant": "#445d7b",
+              "primary-fixed-dim": "#c8d5ea",
+              "on-primary-container": "#455364",
+              "surface-variant": "#e3e1ec",
+              "on-tertiary-fixed": "#3d2b00",
+              "error-dim": "#4f0116",
+              "secondary-dim": "#3c5572",
+              "surface-container-high": "#e9e7f0",
+              "surface-bright": "#fbf8fc",
+              "outline": "#7a7a83",
+              "on-tertiary": "#fff8f1",
+              "tertiary-fixed-dim": "#eab330",
+              "secondary-container": "#d1e4ff",
+              "error-container": "#ff8b9a",
+              "on-secondary-fixed": "#27415d",
+              "tertiary": "#7a5a00",
+              "outline-variant": "#b2b1bb",
+              "tertiary-container": "#f9c13d",
+              "on-error-container": "#782232",
+              "error": "#9e3f4e",
+              "background": "#fbf8fc",
+              "surface-container": "#efedf4",
+              "secondary-fixed-dim": "#bdd7f9",
+              "tertiary-fixed": "#f9c13d",
+              "tertiary-dim": "#6b4e00",
+              "inverse-on-surface": "#9e9ca0",
+              "surface": "#fbf8fc",
+              "on-surface-variant": "#5e5e67",
+              "on-primary-fixed-variant": "#4f5d6e",
+              "on-primary-fixed": "#334051",
+              "primary-fixed": "#d6e4f9",
+              "on-surface": "#31323a",
+              "surface-dim": "#dad9e5",
+              "on-background": "#31323a",
+              "primary-dim": "#465365",
+              "on-tertiary-fixed-variant": "#614700"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(82, 95, 113, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-hidden">
+<div class="flex h-screen overflow-hidden">
+<!-- SIDEBAR NAVIGATION -->
+<aside class="bg-slate-50 dark:bg-[#1a1b1e] h-screen w-64 flex flex-col py-6">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<h2 class="text-xl font-bold tracking-tight text-[#31323a] dark:text-slate-100">Lexis Obsidian</h2>
+<p class="text-[10px] font-manrope font-bold uppercase tracking-widest text-primary/60">Management System</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<!-- Documents (Active) -->
+<a class="bg-[#525f71] text-white rounded-lg px-4 py-3 shadow-sm flex items-center gap-3 scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-manrope font-bold text-sm">Documents</span>
+</a>
+<!-- Sections -->
+<a class="text-[#525f71] dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg px-4 py-3 transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-manrope font-bold text-sm">Sections</span>
+</a>
+<!-- KG -->
+<a class="text-[#525f71] dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg px-4 py-3 transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-manrope font-bold text-sm">Knowledge Graph</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4">
+<div class="h-[1px] bg-outline-variant/20 mb-4"></div>
+<a class="text-[#525f71] dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg px-4 py-3 transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-manrope font-bold text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- MAIN WORKSPACE -->
+<main class="flex-1 flex flex-col bg-surface overflow-hidden">
+<!-- HEADER SECTION -->
+<header class="pt-10 px-10 pb-6 flex justify-between items-end">
+<div class="max-w-2xl">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-bold font-label tracking-widest text-primary uppercase">Vietnam Legal Archive</span>
+<div class="h-1 w-8 bg-tertiary rounded-full"></div>
+</div>
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight leading-tight">Legal Document Management</h1>
+<p class="mt-2 text-on-surface-variant font-body"><br/></p>
+</div>
+<div class="flex gap-3">
+<div class="relative group">
+<input class="pl-10 pr-4 py-2.5 bg-surface-container-low border-none rounded-xl text-sm focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Search documents..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+</div>
+<button class="bg-primary px-6 py-2.5 rounded-xl text-white font-bold text-sm flex items-center gap-2 hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="upload_file">upload_file</span>
+                    Add Document
+                </button>
+</div>
+</header>
+<!-- FILTERS AREA -->
+<section class="px-10 py-4 flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-tighter">Filter by type:</span>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 rounded-full bg-secondary text-white text-xs font-bold">All</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold hover:bg-surface-container-highest transition-colors">Laws</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold hover:bg-surface-container-highest transition-colors">Decrees</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold hover:bg-surface-container-highest transition-colors">Circulars</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold hover:bg-surface-container-highest transition-colors">Decisions</button>
+</div>
+<div class="ml-auto flex gap-4">
+<button class="flex items-center gap-1 text-xs font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span>
+                    Advanced
+                </button>
+<button class="flex items-center gap-1 text-xs font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="sort">sort</span>
+                    Sort
+                </button>
+</div>
+</section>
+<!-- CONTENT CANVAS -->
+<section class="flex-1 px-10 pb-10 overflow-hidden flex flex-col">
+<div class="flex-1 bg-surface-container-low rounded-[2rem] p-4 overflow-hidden flex flex-col">
+<div class="overflow-auto flex-1 custom-scrollbar">
+<table class="w-full border-separate border-spacing-y-4">
+<thead>
+<tr class="text-left">
+<th class="px-6 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60">ID &amp; Number</th>
+<th class="px-6 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60">Title</th>
+<th class="px-6 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60">Effective Date</th>
+<th class="px-6 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60">Status</th>
+<th class="px-6 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60 text-right">Actions</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-lowest transition-all duration-200 cursor-pointer">
+<td class="px-6 py-6 bg-surface-container-lowest rounded-l-2xl group-hover:shadow-sm">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary">ID: LAW-2023-01</span>
+<span class="text-sm font-manrope font-extrabold text-on-surface">15/2023/QH15</span>
+</div>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-error/10 flex items-center justify-center rounded-md border border-error/20">
+<span class="material-symbols-outlined text-error text-[20px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface leading-tight">Luật Đấu thầu 2023</span>
+<span class="text-[11px] text-on-surface-variant">Field: Bidding, Public Asset Management</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<span class="text-sm font-medium text-on-surface-variant">01/01/2024</span>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-tertiary/10 text-tertiary uppercase tracking-tighter">
+                                    Active
+                                </span>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest rounded-r-2xl group-hover:shadow-sm text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-lowest transition-all duration-200 cursor-pointer">
+<td class="px-6 py-6 bg-surface-container-lowest rounded-l-2xl group-hover:shadow-sm">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary">ID: DEC-2023-45</span>
+<span class="text-sm font-manrope font-extrabold text-on-surface">24/2023/NĐ-CP</span>
+</div>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-secondary/10 flex items-center justify-center rounded-md border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="description">description</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface leading-tight">Nghị định quy định chi tiết một số điều của Luật Đấu thầu</span>
+<span class="text-[11px] text-on-surface-variant">Field: Administrative, Specialized Law</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<span class="text-sm font-medium text-on-surface-variant">27/02/2024</span>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-tertiary/10 text-tertiary uppercase tracking-tighter">
+                                    Active
+                                </span>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest rounded-r-2xl group-hover:shadow-sm text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-lowest transition-all duration-200 cursor-pointer">
+<td class="px-6 py-6 bg-surface-container-lowest rounded-l-2xl group-hover:shadow-sm">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary">ID: LAW-2015-12</span>
+<span class="text-sm font-manrope font-extrabold text-on-surface">100/2015/QH13</span>
+</div>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-error/10 flex items-center justify-center rounded-md border border-error/20">
+<span class="material-symbols-outlined text-error text-[20px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface leading-tight">Bộ luật Hình sự 2015 (Sửa đổi 2017)</span>
+<span class="text-[11px] text-on-surface-variant">Field: Judicial, Criminal</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<span class="text-sm font-medium text-on-surface-variant">01/01/2018</span>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest group-hover:shadow-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-outline-variant/10 text-on-surface-variant uppercase tracking-tighter">
+                                    Expired (Replaced)
+                                </span>
+</td>
+<td class="px-6 py-6 bg-surface-container-lowest rounded-r-2xl group-hover:shadow-sm text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PAGINATION / FOOTER -->
+<div class="mt-4 pt-4 flex items-center justify-between border-t border-outline-variant/10 px-4">
+<span class="text-xs font-label text-on-surface-variant">Showing <span class="font-bold text-on-surface">3</span> of <span class="font-bold text-on-surface">1,248</span> documents</span>
+<div class="flex gap-1">
+<button class="p-2 rounded-lg hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container-highest text-xs font-bold transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container-highest text-xs font-bold transition-colors">3</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- QUICK VIEW SIDEBAR -->
+</div>
+</body></html>

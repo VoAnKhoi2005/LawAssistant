@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lexis Obsidian - Create New Document</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-tint": "#525f71",
+            "primary-dim": "#465365",
+            "inverse-on-surface": "#9e9ca0",
+            "error-container": "#ff8b9a",
+            "secondary": "#48617e",
+            "secondary-fixed": "#d1e4ff",
+            "on-primary-fixed-variant": "#4f5d6e",
+            "tertiary": "#7a5a00",
+            "surface-container-lowest": "#ffffff",
+            "on-primary": "#f5f8ff",
+            "on-surface": "#31323a",
+            "on-primary-fixed": "#334051",
+            "surface-container-high": "#e9e7f0",
+            "surface-container-highest": "#e3e1ec",
+            "secondary-dim": "#3c5572",
+            "on-surface-variant": "#5e5e67",
+            "on-background": "#31323a",
+            "surface-dim": "#dad9e5",
+            "surface-container-low": "#f5f2f8",
+            "on-error-container": "#782232",
+            "on-tertiary": "#fff8f1",
+            "error": "#9e3f4e",
+            "primary-container": "#d6e4f9",
+            "background": "#fbf8fc",
+            "tertiary-fixed-dim": "#eab330",
+            "primary": "#525f71",
+            "error-dim": "#4f0116",
+            "outline": "#7a7a83",
+            "surface": "#fbf8fc",
+            "primary-fixed-dim": "#c8d5ea",
+            "on-secondary": "#f7f9ff",
+            "on-tertiary-fixed": "#3d2b00",
+            "tertiary-dim": "#6b4e00",
+            "surface-container": "#efedf4",
+            "primary-fixed": "#d6e4f9",
+            "on-secondary-fixed": "#27415d",
+            "tertiary-container": "#f9c13d",
+            "surface-variant": "#e3e1ec",
+            "on-secondary-fixed-variant": "#445d7b",
+            "inverse-surface": "#0e0e11",
+            "on-primary-container": "#455364",
+            "secondary-fixed-dim": "#bdd7f9",
+            "secondary-container": "#d1e4ff",
+            "on-error": "#fff7f7",
+            "inverse-primary": "#d8e6fc",
+            "on-tertiary-fixed-variant": "#614700",
+            "outline-variant": "#b2b1bb",
+            "on-secondary-container": "#3a5470",
+            "tertiary-fixed": "#f9c13d",
+            "surface-bright": "#fbf8fc",
+            "on-tertiary-container": "#563e00"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(24px);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Manrope', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background overflow-hidden">
+<!-- Underlying Page: Documents Management (Mocked) -->
+<div class="flex h-screen w-full">
+<!-- SideNav (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-6 bg-slate-50 dark:bg-[#1a1b1e] h-screen w-64 border-r-0 shadow-[40px_0_40px_rgba(82,95,113,0.04)] z-0">
+<div class="mb-10">
+<h1 class="text-xl font-bold tracking-tight text-[#31323a] dark:text-slate-100">Lexis Obsidian</h1>
+<p class="font-inter text-xs text-[#525f71]/70 mt-1">Legal Intelligence</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-[#e2e8f0] dark:bg-[#31323a] text-[#525f71] dark:text-white rounded-lg font-bold translate-x-1 transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-manrope text-sm">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#525f71]/70 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-[#2c2e33] transition-colors" href="#">
+<span class="material-symbols-outlined">segment</span>
+<span class="font-manrope text-sm">Sections</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#525f71]/70 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-[#2c2e33] transition-colors" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-manrope text-sm">KG</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-[#525f71]/70 dark:text-slate-400 hover:bg-slate-200/50 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-sm">Settings</span>
+</a>
+<div class="flex items-center gap-3 px-4 py-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-primary font-bold text-xs">JD</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface">John Doe</span>
+<span class="text-[10px] text-on-surface-variant">Senior Counsel</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Content Canvas (Blurred background) -->
+<main class="ml-64 flex-1 p-8 filter blur-sm">
+<header class="flex justify-between items-end mb-12">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Case Documents</h2>
+<p class="text-on-surface-variant mt-2 max-w-xl">Organize and analyze litigation artifacts for the Smith vs. Global Tech case.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-semibold shadow-lg">New Case</button>
+</header>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 bg-surface-container-low p-6 rounded-xl min-h-[400px]">
+<!-- Mock Table -->
+<div class="w-full bg-white rounded-lg shadow-sm"></div>
+</div>
+</div>
+</main>
+</div>
+<!-- MODAL OVERLAY -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-on-surface/40 backdrop-blur-md p-4">
+<div class="bg-surface-container-lowest w-full max-w-2xl rounded-2xl shadow-[0_24px_48px_rgba(82,95,113,0.15)] flex flex-col max-h-[921px]">
+<!-- Modal Header -->
+<header class="px-8 py-6 border-b border-outline-variant/10 flex justify-between items-center">
+<div>
+<h3 class="text-xl font-bold text-on-surface">Create New Document</h3>
+<p class="text-xs text-on-surface-variant">Step 2 of 2: Review and Arrange Files</p>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Modal Body -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Document Info (Filled) -->
+<section class="grid grid-cols-2 gap-6">
+<div class="col-span-2">
+<label class="block text-[10px] uppercase tracking-wider font-bold text-on-surface-variant mb-1">Document Title</label>
+<input class="w-full bg-transparent border-0 border-b border-primary py-2 text-on-surface font-semibold focus:ring-0" readonly="" type="text" value="Legal Brief for Smith vs. Global Tech (Initial Filings)"/>
+</div>
+<div>
+<label class="block text-[10px] uppercase tracking-wider font-bold text-on-surface-variant mb-1">Case ID</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-2 text-on-surface text-sm focus:ring-0" readonly="" type="text" value="CV-2024-0082"/>
+</div>
+<div>
+<label class="block text-[10px] uppercase tracking-wider font-bold text-on-surface-variant mb-1">Author</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-2 text-on-surface text-sm focus:ring-0" readonly="" type="text" value="Doe, J."/>
+</div>
+</section>
+<!-- Reorderable Files Section -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h4 class="text-sm font-bold text-on-surface uppercase tracking-tight">Uploaded Files (3)</h4>
+<button class="text-xs font-semibold text-primary flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add more
+            </button>
+</div>
+<div class="space-y-3">
+<!-- File Item 1 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-low rounded-xl border border-transparent hover:border-primary/20 hover:bg-surface-container transition-all">
+<div class="cursor-grab active:cursor-grabbing text-outline-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-on-surface">Draft_v1.pdf</p>
+<p class="text-[10px] text-on-surface-variant">1.2 MB • Added today</p>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-white rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">arrow_upward</span>
+</button>
+<button class="p-1 hover:bg-white rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">arrow_downward</span>
+</button>
+<button class="p-1 hover:bg-error/10 text-error rounded ml-2">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- File Item 2 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-low rounded-xl border border-transparent hover:border-primary/20 hover:bg-surface-container transition-all">
+<div class="cursor-grab active:cursor-grabbing text-outline-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-on-surface">Legal_Brief_Final.docx</p>
+<p class="text-[10px] text-on-surface-variant">842 KB • Added today</p>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-white rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">arrow_upward</span>
+</button>
+<button class="p-1 hover:bg-white rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">arrow_downward</span>
+</button>
+<button class="p-1 hover:bg-error/10 text-error rounded ml-2">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- File Item 3 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-low rounded-xl border border-transparent hover:border-primary/20 hover:bg-surface-container transition-all">
+<div class="cursor-grab active:cursor-grabbing text-outline-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-on-surface">Exhibit_A.pdf</p>
+<p class="text-[10px] text-on-surface-variant">4.5 MB • Added today</p>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-white rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">arrow_upward</span>
+</button>
+<button class="p-1 hover:bg-white rounded text-on-surface-variant" disabled="">
+<span class="material-symbols-outlined text-lg opacity-20">arrow_downward</span>
+</button>
+<button class="p-1 hover:bg-error/10 text-error rounded ml-2">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Summary Note -->
+<div class="p-4 rounded-xl bg-tertiary-container/10 border border-tertiary-container/20 flex gap-3">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<p class="text-xs text-on-tertiary-container leading-relaxed">
+            The order of files above will determine the structure of the final compiled document. You can drag and drop items to adjust the sequence.
+          </p>
+</div>
+</div>
+<!-- Modal Footer -->
+<footer class="px-8 py-6 bg-surface-container-low/50 border-t border-outline-variant/10 flex justify-between items-center">
+<button class="text-on-surface-variant font-semibold px-4 py-2 hover:bg-surface-container rounded-lg transition-colors">
+          Back
+        </button>
+<div class="flex gap-4">
+<button class="text-on-surface-variant font-semibold px-4 py-2 hover:bg-surface-container rounded-lg transition-colors">
+            Cancel
+          </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold shadow-md hover:bg-primary-dim transition-all active:scale-95">
+            Create Document
+          </button>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

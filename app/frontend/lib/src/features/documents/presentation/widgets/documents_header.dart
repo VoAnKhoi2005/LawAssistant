@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../core/api/services/upload_file_api_service.dart';
+import '../providers/documents_provider.dart';
+import 'create_document_dialog.dart';
 
 class DocumentsHeader extends StatelessWidget {
   final bool isMobile;
@@ -6,10 +10,60 @@ class DocumentsHeader extends StatelessWidget {
   const DocumentsHeader({super.key, this.isMobile = false});
 
   Future<void> _handleAddDocument(BuildContext context) async {
-    // TODO: Implement create document functionality
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Chức năng thêm văn bản đang được phát triển'),
+    final uploadFileService = UploadFileApiService(
+      context.read<DocumentsProvider>().documentService.apiClient,
+    );
+
+    // Show create document dialog directly
+    showDialog(
+      context: context,
+      builder: (dialogContext) => CreateDocumentDialog(
+        uploadFileService: uploadFileService,
+        onSubmit: (request) async {
+          Navigator.of(dialogContext).pop();
+          
+          // Show loading snackbar
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                  Text('Đang tạo văn bản...'),
+                ],
+              ),
+              duration: Duration(seconds: 30),
+            ),
+          );
+          
+          final provider = context.read<DocumentsProvider>();
+          final success = await provider.createDocument(request);
+          
+          // Hide loading snackbar
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          }
+          
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  success
+                      ? 'Tạo văn bản thành công'
+                      : provider.errorMessage ?? 'Không thể tạo văn bản',
+                ),
+                backgroundColor: success ? Colors.green : Colors.red,
+              ),
+            );
+          }
+        },
       ),
     );
   }
