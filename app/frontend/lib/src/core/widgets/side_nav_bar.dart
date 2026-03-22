@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../navigation/routes.dart';
 
 class SideNavBar extends StatelessWidget {
   final String currentRoute;
 
-  const SideNavBar({
-    super.key,
-    required this.currentRoute,
-  });
+  const SideNavBar({super.key, required this.currentRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -71,26 +69,26 @@ class SideNavBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  _NavItem(
-                    icon: Icons.description_outlined,
-                    label: 'Documents',
-                    isActive: currentRoute == '/',
-                    onTap: () => context.go('/'),
-                  ),
-                  const SizedBox(height: 4),
-                  _NavItem(
-                    icon: Icons.account_tree_outlined,
-                    label: 'Sections',
-                    isActive: currentRoute == '/sections',
-                    onTap: () => context.go('/sections'),
-                  ),
-                  const SizedBox(height: 4),
-                  _NavItem(
-                    icon: Icons.account_balance_outlined,
-                    label: 'KG',
-                    isActive: currentRoute == '/triplets',
-                    onTap: () => context.go('/triplets'),
-                  ),
+                   _NavItem(
+                     icon: Icons.description_outlined,
+                     label: 'Documents',
+                     isActive: currentRoute.startsWith(Routes.documents),
+                     onTap: () => context.go(Routes.documents),
+                   ),
+                   const SizedBox(height: 4),
+                   _NavItem(
+                     icon: Icons.account_tree_outlined,
+                     label: 'Sections',
+                     isActive: currentRoute.startsWith(Routes.sections),
+                     onTap: () => context.go(Routes.sections),
+                   ),
+                   const SizedBox(height: 4),
+                   _NavItem(
+                     icon: Icons.account_balance_outlined,
+                     label: 'KG',
+                     isActive: currentRoute.startsWith(Routes.knowledgeGraph),
+                     onTap: () => context.go(Routes.knowledgeGraph),
+                   ),
                 ],
               ),
             ),
@@ -101,35 +99,6 @@ class SideNavBar extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: theme.colorScheme.primary,
-                      foregroundColor: theme.colorScheme.onPrimary,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add, size: 20),
-                        const SizedBox(width: 8),
-                        Text(
-                          'New Entry',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 Container(
                   height: 1,
                   color: theme.colorScheme.outlineVariant.withOpacity(0.2),
@@ -139,7 +108,7 @@ class SideNavBar extends StatelessWidget {
                   icon: Icons.logout,
                   label: 'Logout',
                   isActive: false,
-                  onTap: () {},
+                  onTap: () => context.go(Routes.login),
                 ),
               ],
             ),
@@ -176,9 +145,7 @@ class _NavItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: isActive
-                ? theme.colorScheme.primary
-                : Colors.transparent,
+            color: isActive ? theme.colorScheme.primary : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
@@ -189,8 +156,8 @@ class _NavItem extends StatelessWidget {
                 color: isActive
                     ? Colors.white
                     : isDark
-                        ? Colors.grey[400]
-                        : theme.colorScheme.primary,
+                    ? Colors.grey[400]
+                    : theme.colorScheme.primary,
               ),
               const SizedBox(width: 12),
               Text(
@@ -201,8 +168,8 @@ class _NavItem extends StatelessWidget {
                   color: isActive
                       ? Colors.white
                       : isDark
-                          ? Colors.grey[400]
-                          : theme.colorScheme.primary,
+                      ? Colors.grey[400]
+                      : theme.colorScheme.primary,
                 ),
               ),
             ],

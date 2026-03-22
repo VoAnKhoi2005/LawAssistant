@@ -98,34 +98,16 @@ class _MinimumSizeWrapper extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        const minWidth = 1024.0;
-        const minHeight = 768.0;
-        
-        if (constraints.maxWidth < minWidth || constraints.maxHeight < minHeight) {
-          return Center(
-            child: Container(
-              constraints: const BoxConstraints(
-                minWidth: minWidth,
-                minHeight: minHeight,
-              ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: SingleChildScrollView(
-                  child: SizedBox(
-                    width: minWidth,
-                    height: minHeight,
-                    child: child,
-                  ),
-                ),
-              ),
-            ),
-          );
-        }
-        
-        return child;
-      },
+    final surfaceColor = Theme.of(context).colorScheme.surface;
+    return ColoredBox(
+      color: surfaceColor,
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: child,
+        ),
+      ),
     );
   }
 }

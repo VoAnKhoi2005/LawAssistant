@@ -63,6 +63,9 @@ dependencies:
   # Environment variables
   flutter_dotenv: ^5.1.0
 
+  # Desktop window control
+  window_manager: ^0.3.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
