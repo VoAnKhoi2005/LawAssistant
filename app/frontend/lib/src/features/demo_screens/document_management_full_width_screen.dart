@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-/// Documents Page - Main document management interface
-/// Follows clean architecture presentation layer pattern
-class DocumentsPage extends StatefulWidget {
-  const DocumentsPage({Key? key}) : super(key: key);
+/// Document Management Screen - Full Width Layout
+/// Based on: law_assistant_demo/document_management_full_width/code.html
+class DocumentManagementFullWidthScreen extends StatefulWidget {
+  const DocumentManagementFullWidthScreen({Key? key}) : super(key: key);
 
   @override
-  State<DocumentsPage> createState() => _DocumentsPageState();
+  State<DocumentManagementFullWidthScreen> createState() =>
+      _DocumentManagementFullWidthScreenState();
 }
 
-class _DocumentsPageState extends State<DocumentsPage> {
+class _DocumentManagementFullWidthScreenState
+    extends State<DocumentManagementFullWidthScreen> {
   String _selectedFilter = 'All';
-  int _currentPage = 1;
-  final int _totalDocuments = 1248;
-  final int _documentsPerPage = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +99,11 @@ class _DocumentsPageState extends State<DocumentsPage> {
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
                   ),
-                  onChanged: (value) {
-                    // TODO: Implement search functionality
-                  },
                 ),
               ),
               const SizedBox(width: 12),
               FilledButton.icon(
-                onPressed: _handleAddDocument,
+                onPressed: () {},
                 icon: const Icon(Icons.upload_file, size: 20),
                 label: const Text('Add Document'),
                 style: FilledButton.styleFrom(
@@ -150,7 +146,6 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 selected: _selectedFilter == filter,
                 onSelected: (selected) {
                   setState(() => _selectedFilter = filter);
-                  // TODO: Implement filter functionality
                 },
                 backgroundColor: colorScheme.surfaceContainerHigh,
                 selectedColor: colorScheme.secondary,
@@ -169,13 +164,13 @@ class _DocumentsPageState extends State<DocumentsPage> {
           ),
           const Spacer(),
           TextButton.icon(
-            onPressed: _handleAdvancedFilter,
+            onPressed: () {},
             icon: const Icon(Icons.filter_list, size: 16),
             label: const Text('Advanced'),
           ),
           const SizedBox(width: 16),
           TextButton.icon(
-            onPressed: _handleSort,
+            onPressed: () {},
             icon: const Icon(Icons.sort, size: 16),
             label: const Text('Sort'),
           ),
@@ -267,149 +262,140 @@ class _DocumentsPageState extends State<DocumentsPage> {
     required Color iconBgColor,
     required Color iconColor,
   }) {
-    return InkWell(
-      onTap: () => _handleDocumentTap(id),
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerLowest,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.all(24),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'ID: $id',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: colorScheme.primary,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    number,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 6,
-              child: Row(
-                children: [
-                  Container(
-                    width: 32,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: iconBgColor,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: iconColor.withOpacity(0.2),
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Icon(icon, color: iconColor, size: 20),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          field,
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Text(
-                date,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  status,
-                  textAlign: TextAlign.center,
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: const EdgeInsets.all(24),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'ID: $id',
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: statusColor,
-                    letterSpacing: 0.5,
+                    color: colorScheme.primary,
                   ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  number,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 6,
+            child: Row(
+              children: [
+                Container(
+                  width: 32,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: iconBgColor,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: iconColor.withOpacity(0.2),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(icon, color: iconColor, size: 20),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        field,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              date,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: statusColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                status,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  color: statusColor,
+                  letterSpacing: 0.5,
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, size: 18),
-                    color: colorScheme.primary,
-                    onPressed: () => _handleEditDocument(id),
-                    tooltip: 'Edit document',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, size: 18),
-                    color: colorScheme.error,
-                    onPressed: () => _handleDeleteDocument(id),
-                    tooltip: 'Delete document',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.more_vert, size: 18),
-                    color: colorScheme.onSurfaceVariant,
-                    onPressed: () => _handleMoreOptions(id),
-                    tooltip: 'More options',
-                  ),
-                ],
-              ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit, size: 18),
+                  color: colorScheme.primary,
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete, size: 18),
+                  color: colorScheme.error,
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.more_vert, size: 18),
+                  color: colorScheme.onSurfaceVariant,
+                  onPressed: () {},
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildPagination(ThemeData theme, ColorScheme colorScheme) {
-    final totalPages = (_totalDocuments / _documentsPerPage).ceil();
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
@@ -431,15 +417,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
               children: [
                 const TextSpan(text: 'Showing '),
                 TextSpan(
-                  text: '${(_currentPage - 1) * _documentsPerPage + 1}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-                const TextSpan(text: '-'),
-                TextSpan(
-                  text: '${_currentPage * _documentsPerPage}',
+                  text: '3',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: colorScheme.onSurface,
@@ -447,7 +425,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 ),
                 const TextSpan(text: ' of '),
                 TextSpan(
-                  text: _totalDocuments.toString(),
+                  text: '1,248',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: colorScheme.onSurface,
@@ -461,12 +439,14 @@ class _DocumentsPageState extends State<DocumentsPage> {
             children: [
               IconButton(
                 icon: const Icon(Icons.chevron_left, size: 18),
-                onPressed: _currentPage > 1 ? () => _handlePageChange(_currentPage - 1) : null,
+                onPressed: () {},
               ),
-              ..._buildPageNumbers(totalPages, colorScheme),
+              _buildPageButton('1', colorScheme, isSelected: true),
+              _buildPageButton('2', colorScheme),
+              _buildPageButton('3', colorScheme),
               IconButton(
                 icon: const Icon(Icons.chevron_right, size: 18),
-                onPressed: _currentPage < totalPages ? () => _handlePageChange(_currentPage + 1) : null,
+                onPressed: () {},
               ),
             ],
           ),
@@ -475,83 +455,25 @@ class _DocumentsPageState extends State<DocumentsPage> {
     );
   }
 
-  List<Widget> _buildPageNumbers(int totalPages, ColorScheme colorScheme) {
-    final pages = <Widget>[];
-    final startPage = (_currentPage - 1).clamp(1, totalPages);
-    final endPage = (_currentPage + 1).clamp(1, totalPages);
-
-    for (var i = startPage; i <= endPage; i++) {
-      pages.add(_buildPageButton(i.toString(), colorScheme, isSelected: i == _currentPage));
-    }
-
-    return pages;
-  }
-
   Widget _buildPageButton(String page, ColorScheme colorScheme,
       {bool isSelected = false}) {
-    return InkWell(
-      onTap: () => _handlePageChange(int.parse(page)),
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        width: 32,
-        height: 32,
-        margin: const EdgeInsets.symmetric(horizontal: 4),
-        decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          page,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-            color: isSelected ? Colors.white : colorScheme.onSurface,
-          ),
+    return Container(
+      width: 32,
+      height: 32,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      decoration: BoxDecoration(
+        color: isSelected ? colorScheme.primary : Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        page,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          color: isSelected ? Colors.white : colorScheme.onSurface,
         ),
       ),
     );
-  }
-
-  // TODO: Implement document actions
-  void _handleAddDocument() {
-    // TODO: Show create document modal/dialog
-    debugPrint('TODO: Show create document modal');
-  }
-
-  void _handleDocumentTap(String id) {
-    // TODO: Navigate to document detail page
-    debugPrint('TODO: Navigate to document detail: $id');
-  }
-
-  void _handleEditDocument(String id) {
-    // TODO: Show edit document dialog
-    debugPrint('TODO: Edit document: $id');
-  }
-
-  void _handleDeleteDocument(String id) {
-    // TODO: Show delete confirmation dialog
-    debugPrint('TODO: Delete document: $id');
-  }
-
-  void _handleMoreOptions(String id) {
-    // TODO: Show context menu with more options
-    debugPrint('TODO: Show more options for document: $id');
-  }
-
-  void _handleAdvancedFilter() {
-    // TODO: Show advanced filter dialog
-    debugPrint('TODO: Show advanced filter dialog');
-  }
-
-  void _handleSort() {
-    // TODO: Show sort options
-    debugPrint('TODO: Show sort options');
-  }
-
-  void _handlePageChange(int page) {
-    setState(() => _currentPage = page);
-    // TODO: Fetch documents for the new page
-    debugPrint('TODO: Fetch documents for page: $page');
   }
 }

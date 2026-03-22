@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:provider/single_child_widget.dart';
 
-import 'di/service_locator.dart';
 import 'navigation/app_router.dart';
-import '../features/documents/presentation/providers/documents_provider.dart';
-import 'api/services/document_api_service.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final providers = <SingleChildWidget>[
-      ChangeNotifierProvider(
-        create: (_) => DocumentsProvider(getIt<DocumentApiService>()),
-      ),
-    ];
-
-    return MultiProvider(providers: providers, child: _buildApp());
+    return _buildApp();
   }
 
   Widget _buildApp() {
