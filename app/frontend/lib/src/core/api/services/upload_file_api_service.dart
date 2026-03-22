@@ -147,7 +147,7 @@ class UploadFileApiService extends BaseApiService {
 
   Future<ApiResponse<void>> downloadFile(String fileId) async {
     try {
-      final response = await apiClient.get(
+      await apiClient.get(
         '/api/upload-files/${encodePathSegment(fileId)}/download',
         options: Options(responseType: ResponseType.bytes),
       );

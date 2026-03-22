@@ -8,6 +8,7 @@ import '../api/services/relation_api_service.dart';
 import '../api/services/section_relation_api_service.dart';
 import '../api/services/triplet_api_service.dart';
 import '../api/services/user_api_service.dart';
+import '../api/services/upload_file_api_service.dart';
 final getIt = GetIt.instance;
 
 void setupDependencyInjection() {
@@ -40,5 +41,8 @@ void setupDependencyInjection() {
   );
   getIt.registerLazySingleton<TripletApiService>(
     () => TripletApiService(getIt<ApiClient>()),
+  );
+  getIt.registerLazySingleton<UploadFileApiService>(
+    () => UploadFileApiService(getIt<ApiClient>()),
   );
 }

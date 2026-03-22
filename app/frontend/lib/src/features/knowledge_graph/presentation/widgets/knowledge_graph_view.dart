@@ -1,6 +1,5 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
+import 'package:graphview/GraphView.dart';
 
 import '../state/knowledge_graph_view_model.dart';
 
@@ -66,9 +65,7 @@ class KnowledgeGraphView extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   'Cơ sở Dữ liệu Luật Dân sự',
-                  style: theme.textTheme.headlineLarge?.copyWith(
-                    fontSize: 30,
-                  ),
+                  style: theme.textTheme.headlineLarge?.copyWith(fontSize: 30),
                 ),
               ],
             ),
@@ -80,7 +77,10 @@ class KnowledgeGraphView extends StatelessWidget {
                 icon: const Icon(Icons.history, size: 16),
                 label: const Text('History'),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   side: BorderSide(color: colorScheme.surfaceContainer),
                   backgroundColor: colorScheme.surfaceContainerHigh,
                 ),
@@ -111,10 +111,7 @@ class KnowledgeGraphView extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: colorScheme.surfaceContainer),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 4),
         ],
       ),
       child: Row(
@@ -177,7 +174,10 @@ class KnowledgeGraphView extends StatelessWidget {
               onTap: onTap,
               borderRadius: BorderRadius.circular(8),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: colorScheme.surfaceContainer),
@@ -274,25 +274,24 @@ class KnowledgeGraphView extends StatelessWidget {
     );
   }
 
-  Widget _buildStepIndicator(String number, String label, ColorScheme colorScheme) {
+  Widget _buildStepIndicator(
+    String number,
+    String label,
+    ColorScheme colorScheme,
+  ) {
     return Column(
       children: [
         Container(
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: colorScheme.outlineVariant,
-            ),
+            border: Border.all(color: colorScheme.outlineVariant),
             shape: BoxShape.circle,
           ),
           alignment: Alignment.center,
           child: Text(
             number,
-            style: TextStyle(
-              fontSize: 12,
-              color: colorScheme.outlineVariant,
-            ),
+            style: TextStyle(fontSize: 12, color: colorScheme.outlineVariant),
           ),
         ),
         const SizedBox(height: 8),
@@ -310,27 +309,93 @@ class KnowledgeGraphView extends StatelessWidget {
   }
 
   Widget _buildGraphArea(ThemeData theme, ColorScheme colorScheme) {
+    final graph = Graph()..isTree = false;
+    final nodeMap = <String, Node>{};
+
+    // Build nodes
+    for (final node in viewModel.graphNodes) {
+      final graphNode = Node.Id(node.id);
+      nodeMap[node.id] = graphNode;
+      graph.addNode(graphNode);
+    }
+
+    // Build edges (directed)
+    for (final edge in viewModel.graphEdges) {
+      final from = nodeMap[edge.from];
+      final to = nodeMap[edge.to];
+      if (from != null && to != null) {
+        graph.addEdge(from, to);
+      }
+    }
+
+    //Force-directed configuration
+    final config = FruchtermanReingoldConfiguration()..iterations = 500;
+
     return Container(
-      margin: const EdgeInsets.fromLTRB(32, 8, 32, 24),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: colorScheme.surfaceContainer),
-      ),
+      decoration: BoxDecoration(color: colorScheme.surfaceContainerLowest),
       child: Stack(
         children: [
-          TripletGraphCanvas(
-            nodes: viewModel.graphNodes,
-            edges: viewModel.graphEdges,
-            onNodeSelected: viewModel.selectNode,
-            selectedNodeId: viewModel.selectedNodeId,
+          Positioned.fill(
+            child: InteractiveViewer(
+              constrained: false,
+              minScale: 0.3,
+              maxScale: 3.0,
+              panEnabled: true,
+              scaleEnabled: true,
+              trackpadScrollCausesScale: true,
+              boundaryMargin: const EdgeInsets.all(500),
+
+              child: Padding(
+                padding: const EdgeInsets.all(40),
+                child: GraphView(
+                  graph: graph,
+
+                  //Force-directed algorithm (correct usage)
+                  algorithm: FruchtermanReingoldAlgorithm(config),
+
+                  paint: Paint()
+                    ..color = colorScheme.outlineVariant
+                    ..strokeWidth = 1.6
+                    ..style = PaintingStyle.stroke,
+
+                  builder: (node) {
+                    final rawId = node.key?.value?.toString();
+
+                    GraphNode? graphNode;
+                    try {
+                      graphNode = viewModel.graphNodes.firstWhere(
+                        (n) => n.id == rawId,
+                      );
+                    } catch (_) {
+                      graphNode = null;
+                    }
+
+                    if (graphNode == null || rawId == null) {
+                      return const SizedBox.shrink();
+                    }
+
+                    final selected = viewModel.selectedNodeId == rawId;
+
+                    return GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () => viewModel.selectNode(rawId),
+                      child: _GraphNodeChip(
+                        node: graphNode,
+                        colorScheme: colorScheme,
+                        selected: selected,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
           ),
+
+          // Toolbar
           _buildFloatingToolbar(colorScheme),
-          Positioned(
-            right: 24,
-            top: 24,
-            child: _buildLegend(colorScheme),
-          ),
+
+          // Legend
+          Positioned(right: 24, top: 24, child: _buildLegend(colorScheme)),
         ],
       ),
     );
@@ -342,11 +407,23 @@ class KnowledgeGraphView extends StatelessWidget {
       bottom: 24,
       child: Column(
         children: [
-          _buildToolbarButton(Icons.zoom_in, colorScheme, viewModel.handleZoomIn),
+          _buildToolbarButton(
+            Icons.zoom_in,
+            colorScheme,
+            viewModel.handleZoomIn,
+          ),
           const SizedBox(height: 8),
-          _buildToolbarButton(Icons.zoom_out, colorScheme, viewModel.handleZoomOut),
+          _buildToolbarButton(
+            Icons.zoom_out,
+            colorScheme,
+            viewModel.handleZoomOut,
+          ),
           const SizedBox(height: 8),
-          _buildToolbarButton(Icons.center_focus_strong, colorScheme, viewModel.handleCenter),
+          _buildToolbarButton(
+            Icons.center_focus_strong,
+            colorScheme,
+            viewModel.handleCenter,
+          ),
           const SizedBox(height: 8),
           _buildToolbarButton(
             Icons.edit,
@@ -374,17 +451,10 @@ class KnowledgeGraphView extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: colorScheme.surfaceContainer),
           boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
-            ),
+            BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8),
           ],
         ),
-        child: Icon(
-          icon,
-          size: 20,
-          color: colorScheme.primary,
-        ),
+        child: Icon(icon, size: 20, color: colorScheme.primary),
       ),
     );
   }
@@ -396,10 +466,7 @@ class KnowledgeGraphView extends StatelessWidget {
           Container(
             width: 26,
             height: 26,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             child: Icon(icon, size: 14, color: colorScheme.onPrimaryContainer),
           ),
           const SizedBox(width: 8),
@@ -419,7 +486,11 @@ class KnowledgeGraphView extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            legendItem(colorScheme.primaryContainer, 'Subject', Icons.account_balance),
+            legendItem(
+              colorScheme.primaryContainer,
+              'Subject',
+              Icons.account_balance,
+            ),
             const SizedBox(width: 12),
             legendItem(colorScheme.tertiaryContainer, 'Object', Icons.gavel),
           ],
@@ -430,8 +501,9 @@ class KnowledgeGraphView extends StatelessWidget {
 
   Widget _buildEditSidebar(ThemeData theme, ColorScheme colorScheme) {
     final selectedNode = viewModel.selectedNode;
-    final relatedEdges =
-        selectedNode == null ? <GraphEdge>[] : viewModel.edgesForNode(selectedNode.id);
+    final relatedEdges = selectedNode == null
+        ? <GraphEdge>[]
+        : viewModel.edgesForNode(selectedNode.id);
 
     return Container(
       width: 340,
@@ -443,10 +515,7 @@ class KnowledgeGraphView extends StatelessWidget {
           ),
         ),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 24,
-          ),
+          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 24),
         ],
       ),
       child: Padding(
@@ -486,9 +555,7 @@ class KnowledgeGraphView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: colorScheme.primaryContainer.withOpacity(0.4),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: colorScheme.primary.withOpacity(0.1),
-                ),
+                border: Border.all(color: colorScheme.primary.withOpacity(0.1)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -607,174 +674,6 @@ class KnowledgeGraphView extends StatelessWidget {
   }
 }
 
-class TripletGraphCanvas extends StatelessWidget {
-  const TripletGraphCanvas({
-    super.key,
-    required this.nodes,
-    required this.edges,
-    required this.onNodeSelected,
-    required this.selectedNodeId,
-  });
-
-  final List<GraphNode> nodes;
-  final List<GraphEdge> edges;
-  final ValueChanged<String?> onNodeSelected;
-  final String? selectedNodeId;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final size = constraints.biggest;
-        final positions = _calculateNodePositions(size, nodes);
-        final nodeRadius = 28.0;
-
-        return Stack(
-          children: [
-            CustomPaint(
-              size: size,
-              painter: TripletGraphPainter(
-                positions: positions,
-                edges: edges,
-                colorScheme: colorScheme,
-              ),
-            ),
-            ...nodes.map((node) {
-              final position = positions[node.id] ?? Offset.zero;
-              final selected = node.id == selectedNodeId;
-              return Positioned(
-                left: position.dx - nodeRadius,
-                top: position.dy - nodeRadius,
-                child: GestureDetector(
-                  onTap: () => onNodeSelected(node.id),
-                  child: _GraphNodeChip(
-                    node: node,
-                    colorScheme: colorScheme,
-                    selected: selected,
-                  ),
-                ),
-              );
-            }),
-          ],
-        );
-      },
-    );
-  }
-
-  Map<String, Offset> _calculateNodePositions(Size size, List<GraphNode> nodes) {
-    final subjects = nodes.where((n) => n.type == GraphNodeType.subject).toList();
-    final objects = nodes.where((n) => n.type == GraphNodeType.object).toList();
-
-    double slotY(int index, int count) {
-      const topPadding = 60.0;
-      const bottomPadding = 60.0;
-      final available = size.height - topPadding - bottomPadding;
-      if (available <= 0) return topPadding;
-      return topPadding + available * (index + 1) / (count + 1);
-    }
-
-    final positions = <String, Offset>{};
-    for (var i = 0; i < subjects.length; i++) {
-      positions[subjects[i].id] = Offset(size.width * 0.22, slotY(i, subjects.length));
-    }
-    for (var i = 0; i < objects.length; i++) {
-      positions[objects[i].id] = Offset(size.width * 0.78, slotY(i, objects.length));
-    }
-
-    // Fallback to spread in center if a side is empty
-    if (subjects.isEmpty && objects.isNotEmpty) {
-      for (var i = 0; i < objects.length; i++) {
-        positions[objects[i].id] = Offset(size.width * 0.5, slotY(i, objects.length));
-      }
-    }
-    if (objects.isEmpty && subjects.isNotEmpty) {
-      for (var i = 0; i < subjects.length; i++) {
-        positions[subjects[i].id] = Offset(size.width * 0.5, slotY(i, subjects.length));
-      }
-    }
-
-    return positions;
-  }
-}
-
-class TripletGraphPainter extends CustomPainter {
-  TripletGraphPainter({
-    required this.positions,
-    required this.edges,
-    required this.colorScheme,
-  });
-
-  final Map<String, Offset> positions;
-  final List<GraphEdge> edges;
-  final ColorScheme colorScheme;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final edgePaint = Paint()
-      ..color = colorScheme.outlineVariant
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    for (final edge in edges) {
-      final start = positions[edge.from];
-      final end = positions[edge.to];
-      if (start == null || end == null) continue;
-
-      final path = Path()
-        ..moveTo(start.dx, start.dy)
-        ..lineTo(end.dx, end.dy);
-      canvas.drawPath(path, edgePaint);
-
-      _drawArrow(canvas, start, end, colorScheme.outlineVariant);
-      _drawLabel(canvas, start, end, edge.relation);
-    }
-  }
-
-  void _drawArrow(Canvas canvas, Offset start, Offset end, Color color) {
-    const arrowSize = 8.0;
-    final direction = (end - start);
-    final angle = math.atan2(direction.dy, direction.dx);
-    final arrowP1 = end - Offset(math.cos(angle - math.pi / 6), math.sin(angle - math.pi / 6)) * arrowSize;
-    final arrowP2 = end - Offset(math.cos(angle + math.pi / 6), math.sin(angle + math.pi / 6)) * arrowSize;
-
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-    final path = Path()
-      ..moveTo(end.dx, end.dy)
-      ..lineTo(arrowP1.dx, arrowP1.dy)
-      ..lineTo(arrowP2.dx, arrowP2.dy)
-      ..close();
-    canvas.drawPath(path, paint);
-  }
-
-  void _drawLabel(Canvas canvas, Offset start, Offset end, String label) {
-    final midpoint = Offset((start.dx + end.dx) / 2, (start.dy + end.dy) / 2);
-    final textSpan = TextSpan(
-      text: label,
-      style: TextStyle(
-        color: colorScheme.onSurfaceVariant,
-        fontSize: 11,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-    final tp = TextPainter(
-      text: textSpan,
-      textAlign: TextAlign.center,
-      textDirection: TextDirection.ltr,
-    )..layout(minWidth: 0, maxWidth: 180);
-    final offset = midpoint - Offset(tp.width / 2, tp.height / 2);
-    tp.paint(canvas, offset);
-  }
-
-  @override
-  bool shouldRepaint(covariant TripletGraphPainter oldDelegate) {
-    return oldDelegate.positions != positions || oldDelegate.edges != edges;
-  }
-}
-
 class _GraphNodeChip extends StatelessWidget {
   const _GraphNodeChip({
     required this.node,
@@ -789,8 +688,12 @@ class _GraphNodeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSubject = node.type == GraphNodeType.subject;
-    final baseColor = isSubject ? colorScheme.primaryContainer : colorScheme.tertiaryContainer;
-    final foreground = isSubject ? colorScheme.onPrimaryContainer : colorScheme.onTertiaryContainer;
+    final baseColor = isSubject
+        ? colorScheme.primary
+        : colorScheme.tertiaryContainer;
+    final foreground = isSubject
+        ? colorScheme.onPrimaryContainer
+        : colorScheme.onTertiaryContainer;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
@@ -841,7 +744,10 @@ class _GraphNodeChip extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   '${node.documentCount}',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ],
             ),

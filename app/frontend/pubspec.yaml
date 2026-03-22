@@ -59,6 +59,9 @@ dependencies:
   
   # File picker
   file_selector: ^1.0.3
+
+  # Graph visualization
+  graphview: ^1.5.1
   
   # Environment variables
   flutter_dotenv: ^5.1.0

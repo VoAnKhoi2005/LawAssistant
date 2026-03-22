@@ -217,6 +217,55 @@ class KnowledgeGraphViewModel extends ChangeNotifier {
         subjectId: ObjectIdModel('subject-vi-pham'),
         subjectName: 'Vi phạm nghĩa vụ',
       ),
+      TripletDto(
+        id: ObjectIdModel('triplet-5'),
+        documents: [
+          DocumentRef(sectionId: 'dieu-117', soHieu: 'BLDS 2015'),
+          DocumentRef(sectionId: 'dieu-122', soHieu: 'BLDS 2015'),
+        ],
+        objectId: ObjectIdModel('object-vo-hieu-toan-phan'),
+        objectName: 'Vô hiệu toàn phần',
+        relationId: ObjectIdModel('rel-dan-toi'),
+        relationName: 'Dẫn tới',
+        subjectId: ObjectIdModel('subject-vi-pham-nghiem-trong'),
+        subjectName: 'Vi phạm nghiêm trọng',
+      ),
+      TripletDto(
+        id: ObjectIdModel('triplet-6'),
+        documents: [
+          DocumentRef(sectionId: 'dieu-401', soHieu: 'BLDS 2015'),
+        ],
+        objectId: ObjectIdModel('object-thoa-thuan'),
+        objectName: 'Thỏa thuận bổ sung',
+        relationId: ObjectIdModel('rel-bo-sung'),
+        relationName: 'Bổ sung',
+        subjectId: ObjectIdModel('subject-hop-dong'),
+        subjectName: 'Hợp đồng dân sự',
+      ),
+      TripletDto(
+        id: ObjectIdModel('triplet-7'),
+        documents: [
+          DocumentRef(sectionId: 'dieu-420', soHieu: 'BLDS 2015'),
+        ],
+        objectId: ObjectIdModel('object-dam-bao'),
+        objectName: 'Biện pháp bảo đảm',
+        relationId: ObjectIdModel('rel-ap-dung'),
+        relationName: 'Áp dụng',
+        subjectId: ObjectIdModel('subject-hop-dong'),
+        subjectName: 'Hợp đồng dân sự',
+      ),
+      TripletDto(
+        id: ObjectIdModel('triplet-8'),
+        documents: [
+          DocumentRef(sectionId: 'dieu-423', soHieu: 'BLDS 2015'),
+        ],
+        objectId: ObjectIdModel('object-cham-dut'),
+        objectName: 'Chấm dứt nghĩa vụ',
+        relationId: ObjectIdModel('rel-dan-den'),
+        relationName: 'Dẫn đến',
+        subjectId: ObjectIdModel('subject-thuc-hien'),
+        subjectName: 'Thực hiện nghĩa vụ',
+      ),
     ];
   }
 }

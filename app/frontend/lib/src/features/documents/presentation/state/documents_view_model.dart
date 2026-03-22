@@ -1,4 +1,9 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:law_assistant_kg/src/core/api/models/document_models.dart';
+import 'package:law_assistant_kg/src/core/api/services/document_api_service.dart';
+import 'package:law_assistant_kg/src/core/api/services/upload_file_api_service.dart';
+import 'package:law_assistant_kg/src/core/di/service_locator.dart';
+import 'package:law_assistant_kg/src/features/documents/presentation/widgets/document_upload_dialog.dart';
 
 class DocumentItem {
   final String id;
@@ -27,17 +32,28 @@ class DocumentItem {
 }
 
 class DocumentsViewModel extends ChangeNotifier {
-  final List<String> filters = const ['All', 'Laws', 'Decrees', 'Circulars', 'Decisions'];
+  final List<String> filters = const [
+    'All',
+    'Laws',
+    'Decrees',
+    'Circulars',
+    'Decisions',
+  ];
   String _selectedFilter = 'All';
   int _currentPage = 1;
   int _documentsPerPage = 10;
   List<DocumentItem> _documents = const [];
 
   String get selectedFilter => _selectedFilter;
+
   int get currentPage => _currentPage;
+
   int get documentsPerPage => _documentsPerPage;
+
   List<DocumentItem> get documents => _documents;
-  int get totalDocuments => _documents.isEmpty ? 0 : _documents.first.totalCount;
+
+  int get totalDocuments =>
+      _documents.isEmpty ? 0 : _documents.first.totalCount;
 
   DocumentsViewModel() {
     _seedDemoData();
@@ -99,8 +115,29 @@ class DocumentsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void handleAddDocument() {
-    // Placeholder for create flow integration
+  Future<void> handleAddDocument(BuildContext context) async {
+    final created = await showDialog<DocumentDto>(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.85),
+      builder: (dialogContext) => DocumentUploadDialog(
+        documentApiService: getIt<DocumentApiService>(),
+        uploadFileApiService: getIt<UploadFileApiService>(),
+      ),
+    );
+
+    if (!context.mounted) return;
+
+    if (created != null) {
+      _documents = [_mapFromDto(created), ..._documents];
+      notifyListeners();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Document created successfully'),
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
   }
 
   void handleDocumentTap(String id) {
@@ -117,5 +154,26 @@ class DocumentsViewModel extends ChangeNotifier {
 
   void handleMoreOptions(String id) {
     // Placeholder for more options menu
+  }
+
+  DocumentItem _mapFromDto(DocumentDto document) {
+    final effectiveDate = document.effectiveDate.value;
+    final formattedDate =
+        '${effectiveDate.day.toString().padLeft(2, '0')}/${effectiveDate.month.toString().padLeft(2, '0')}/${effectiveDate.year}';
+
+    final statusTag = document.isActive ? 'tertiary' : 'neutral';
+    final statusLabel = document.isActive ? 'Active' : 'Inactive';
+
+    return DocumentItem(
+      id: document.id?.value ?? document.soHieu,
+      number: document.soHieu,
+      title: document.title,
+      field: 'Field: Not specified',
+      date: formattedDate,
+      status: statusLabel,
+      statusTagColor: statusTag,
+      iconType: 'description',
+      totalCount: totalDocuments == 0 ? 1 : totalDocuments + 1,
+    );
   }
 }

@@ -61,7 +61,9 @@ class _SidePanel extends StatelessWidget {
                     color: colorScheme.tertiary,
                     letterSpacing: 1,
                   ),
-                  backgroundColor: colorScheme.tertiaryContainer.withOpacity(0.2),
+                  backgroundColor: colorScheme.tertiaryContainer.withOpacity(
+                    0.2,
+                  ),
                   side: BorderSide.none,
                 ),
               ],
@@ -78,10 +80,13 @@ class _SidePanel extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Expanded(
-            child: HierarchyTreeWidget(
-              nodes: viewModel.hierarchyNodes,
-              selectedNodeId: viewModel.selectedNodeId,
-              onNodeSelected: viewModel.selectNode,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+              child: HierarchyTreeWidget(
+                nodes: viewModel.hierarchyNodes,
+                selectedNodeId: viewModel.selectedNodeId,
+                onNodeSelected: viewModel.selectNode,
+              ),
             ),
           ),
         ],
@@ -102,7 +107,10 @@ class _DocumentSelector extends StatelessWidget {
     return DropdownButtonFormField<String>(
       value: viewModel.selectedDocument,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 10,
+        ),
         filled: true,
         fillColor: colorScheme.surfaceContainer,
         border: OutlineInputBorder(
@@ -122,12 +130,7 @@ class _DocumentSelector extends StatelessWidget {
       ),
       dropdownColor: colorScheme.surface,
       items: viewModel.availableDocuments
-          .map(
-            (doc) => DropdownMenuItem(
-              value: doc,
-              child: Text(doc),
-            ),
-          )
+          .map((doc) => DropdownMenuItem(value: doc, child: Text(doc)))
           .toList(),
       onChanged: viewModel.selectDocument,
     );
@@ -475,7 +478,8 @@ class _Metadata extends StatelessWidget {
                               fontSize: 10,
                               color: colorScheme.onSurfaceVariant,
                             ),
-                            backgroundColor: colorScheme.surfaceContainerHighest,
+                            backgroundColor:
+                                colorScheme.surfaceContainerHighest,
                             side: BorderSide.none,
                             padding: EdgeInsets.zero,
                           ),
@@ -520,9 +524,7 @@ class _MetadataItem extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         InkWell(
-          onTap: isLink
-              ? () => debugPrint('TODO: Open source: $value')
-              : null,
+          onTap: isLink ? () => debugPrint('TODO: Open source: $value') : null,
           child: Text(
             value,
             style: TextStyle(

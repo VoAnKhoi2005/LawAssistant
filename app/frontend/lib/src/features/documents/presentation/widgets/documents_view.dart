@@ -108,7 +108,7 @@ class _Header extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               FilledButton.icon(
-                onPressed: viewModel.handleAddDocument,
+                onPressed: () => viewModel.handleAddDocument(context),
                 icon: const Icon(Icons.upload_file, size: 20),
                 label: const Text('Add Document'),
                 style: FilledButton.styleFrom(
@@ -174,13 +174,13 @@ class _Filters extends StatelessWidget {
           ),
           const Spacer(),
           TextButton.icon(
-            onPressed: viewModel.handleAddDocument,
+            onPressed: () => viewModel.handleAddDocument(context),
             icon: const Icon(Icons.filter_list, size: 16),
             label: const Text('Advanced'),
           ),
           const SizedBox(width: 16),
           TextButton.icon(
-            onPressed: viewModel.handleAddDocument,
+            onPressed: () => viewModel.handleAddDocument(context),
             icon: const Icon(Icons.sort, size: 16),
             label: const Text('Sort'),
           ),

@@ -15,7 +15,8 @@ class App extends StatelessWidget {
       title: 'Law Assistant',
       theme: _buildLightTheme(),
       darkTheme: _buildDarkTheme(),
-      themeMode: ThemeMode.light, // Force light mode
+      themeMode: ThemeMode.light,
+      // Force light mode
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
@@ -51,11 +52,26 @@ class App extends StatelessWidget {
       useMaterial3: true,
       fontFamily: 'Inter',
       textTheme: const TextTheme(
-        headlineLarge: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w800),
-        headlineMedium: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w700),
-        headlineSmall: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w600),
-        titleLarge: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w700),
-        titleMedium: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w600),
+        headlineLarge: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w800,
+        ),
+        headlineMedium: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w700,
+        ),
+        headlineSmall: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w600,
+        ),
+        titleLarge: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w600,
+        ),
         bodyLarge: TextStyle(fontFamily: 'Inter'),
         bodyMedium: TextStyle(fontFamily: 'Inter'),
         labelLarge: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w700),
@@ -78,11 +94,26 @@ class App extends StatelessWidget {
       useMaterial3: true,
       fontFamily: 'Inter',
       textTheme: const TextTheme(
-        headlineLarge: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w800),
-        headlineMedium: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w700),
-        headlineSmall: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w600),
-        titleLarge: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w700),
-        titleMedium: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w600),
+        headlineLarge: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w800,
+        ),
+        headlineMedium: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w700,
+        ),
+        headlineSmall: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w600,
+        ),
+        titleLarge: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: TextStyle(
+          fontFamily: 'Manrope',
+          fontWeight: FontWeight.w600,
+        ),
         bodyLarge: TextStyle(fontFamily: 'Inter'),
         bodyMedium: TextStyle(fontFamily: 'Inter'),
         labelLarge: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w700),
@@ -93,21 +124,12 @@ class App extends StatelessWidget {
 
 class _MinimumSizeWrapper extends StatelessWidget {
   final Widget child;
-  
+
   const _MinimumSizeWrapper({required this.child});
-  
+
   @override
   Widget build(BuildContext context) {
     final surfaceColor = Theme.of(context).colorScheme.surface;
-    return ColoredBox(
-      color: surfaceColor,
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: child,
-        ),
-      ),
-    );
+    return ColoredBox(color: surfaceColor, child: child);
   }
 }
