@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#3a5470",
+              "surface-container-low": "#f5f2f8",
+              "primary": "#525f71",
+              "surface-container-highest": "#e3e1ec",
+              "primary-container": "#d6e4f9",
+              "surface-tint": "#525f71",
+              "on-secondary": "#f7f9ff",
+              "on-primary": "#f5f8ff",
+              "on-tertiary-container": "#563e00",
+              "inverse-primary": "#d8e6fc",
+              "secondary": "#48617e",
+              "inverse-surface": "#0e0e11",
+              "secondary-fixed": "#d1e4ff",
+              "on-error": "#fff7f7",
+              "on-secondary-fixed-variant": "#445d7b",
+              "primary-fixed-dim": "#c8d5ea",
+              "on-primary-container": "#455364",
+              "surface-variant": "#e3e1ec",
+              "on-tertiary-fixed": "#3d2b00",
+              "error-dim": "#4f0116",
+              "secondary-dim": "#3c5572",
+              "surface-container-high": "#e9e7f0",
+              "surface-bright": "#fbf8fc",
+              "outline": "#7a7a83",
+              "on-tertiary": "#fff8f1",
+              "tertiary-fixed-dim": "#eab330",
+              "secondary-container": "#d1e4ff",
+              "error-container": "#ff8b9a",
+              "on-secondary-fixed": "#27415d",
+              "tertiary": "#7a5a00",
+              "outline-variant": "#b2b1bb",
+              "tertiary-container": "#f9c13d",
+              "on-error-container": "#782232",
+              "error": "#9e3f4e",
+              "background": "#fbf8fc",
+              "surface-container": "#efedf4",
+              "secondary-fixed-dim": "#bdd7f9",
+              "tertiary-fixed": "#f9c13d",
+              "tertiary-dim": "#6b4e00",
+              "inverse-on-surface": "#9e9ca0",
+              "surface": "#fbf8fc",
+              "on-surface-variant": "#5e5e67",
+              "on-primary-fixed-variant": "#4f5d6e",
+              "on-primary-fixed": "#334051",
+              "primary-fixed": "#d6e4f9",
+              "on-surface": "#31323a",
+              "surface-dim": "#dad9e5",
+              "on-background": "#31323a",
+              "primary-dim": "#465365",
+              "on-tertiary-fixed-variant": "#614700"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(24px);
+      }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #b2b1bb; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface flex h-screen overflow-hidden">
+<!-- Shared SideNavBar -->
+<aside class="flex flex-col h-screen w-64 border-r-0 bg-slate-50 dark:bg-[#1a1b1e] py-6 shrink-0 sticky top-0">
+<div class="px-6 mb-8">
+<h1 class="text-xl font-bold tracking-tight text-[#31323a] dark:text-slate-100 font-headline">Lexis Obsidian</h1>
+<p class="text-xs font-inter text-[#525f71] dark:text-[#8ba2c1] uppercase tracking-widest mt-1">Management System</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-[#525f71] dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg mx-2 my-1 px-4 py-3 transition-colors flex items-center gap-3 font-inter text-sm group" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span>Documents</span>
+</a>
+<a class="bg-[#525f71] text-white rounded-lg mx-2 my-1 px-4 py-3 shadow-sm flex items-center gap-3 font-inter text-sm scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span>Sections</span>
+</a>
+<a class="text-[#525f71] dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg mx-2 my-1 px-4 py-3 transition-colors flex items-center gap-3 font-inter text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+<span>KG</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<div class="border-t border-outline-variant/10 pt-4">
+<a class="text-[#525f71] dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg flex items-center gap-3 font-inter text-sm px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 bg-surface h-screen overflow-y-auto">
+<div class="p-8 max-w-[1600px] w-full mx-auto space-y-8 flex flex-col min-h-full">
+<!-- Page Header & Doc Selection -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 shrink-0">
+<div class="space-y-2">
+<h2 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface">Section Management</h2>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<select class="appearance-none bg-surface-container-low border-none rounded-xl px-4 py-2.5 pr-10 text-sm font-semibold text-primary cursor-pointer hover:bg-surface-container transition-colors focus:ring-2 focus:ring-primary/20">
+<option>Luật Đất đai 2024</option>
+<option>Bộ luật Dân sự 2015</option>
+<option>Luật Doanh nghiệp 2020</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline text-sm">expand_more</span>
+</div>
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary font-bold text-[10px] uppercase rounded-full tracking-wider">Hierarchy System</span>
+</div>
+</div>
+<!-- Bento Statistics Cluster -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col justify-center min-w-[140px]">
+<span class="text-[10px] font-bold text-outline-variant uppercase tracking-widest">Total Sections</span>
+<span class="text-2xl font-bold font-headline text-primary">2,482</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col justify-center min-w-[140px]">
+<span class="text-[10px] font-bold text-outline-variant uppercase tracking-widest">Last Modified</span>
+<span class="text-sm font-semibold font-body text-on-surface-variant">14 Oct, 2023</span>
+</div>
+</div>
+</header>
+<!-- Workspace: Asymmetric Layout -->
+<div class="grid grid-cols-12 gap-8 items-start flex-1">
+<!-- Left Column: Search & Hierarchy Tree -->
+<aside class="col-span-12 lg:col-span-4 space-y-6 lg:sticky lg:top-8">
+<!-- Search Bar -->
+<div class="relative">
+<input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant" placeholder="Search sections, codes, or keywords..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-primary text-on-primary text-xs font-bold rounded-full transition-all">All</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant text-xs font-bold rounded-full hover:bg-surface-container-highest transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">edit_note</span> Amendments
+                    </button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant text-xs font-bold rounded-full hover:bg-surface-container-highest transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">attachment</span> Appendix
+                    </button>
+</div>
+<!-- hierarchy Tree -->
+<div class="bg-surface-container-low rounded-3xl p-6 overflow-hidden">
+<h3 class="text-[10px] font-extrabold text-outline-variant uppercase tracking-[0.2em] mb-6">Document Structure</h3>
+<div class="space-y-1 max-h-[500px] overflow-y-auto pr-2">
+<!-- Chương -->
+<div class="space-y-1">
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary text-[20px]">keyboard_arrow_down</span>
+<span class="text-sm font-bold text-on-surface">Chương I</span>
+<span class="text-[10px] text-outline-variant italic">Quy định chung</span>
+</div>
+<!-- Mục -->
+<div class="ml-6 border-l border-outline-variant/20 space-y-1">
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary text-[18px]">keyboard_arrow_down</span>
+<span class="text-sm font-semibold text-on-surface-variant">Mục 1</span>
+<span class="text-[10px] text-outline-variant">Phạm vi điều chỉnh</span>
+</div>
+<!-- Điều (Active) -->
+<div class="ml-6 border-l border-outline-variant/20 space-y-1">
+<div class="flex items-center justify-between p-2 bg-secondary-container text-on-secondary-container rounded-lg cursor-pointer transition-all">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">radio_button_checked</span>
+<span class="text-sm font-bold">Điều 1</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors text-on-surface-variant ml-4">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant/40"></span>
+<span class="text-xs">Khoản 1</span>
+</div>
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors text-on-surface-variant ml-4">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant/40"></span>
+<span class="text-xs">Khoản 2</span>
+</div>
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors text-on-surface-variant ml-8">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant/20"></span>
+<span class="text-xs italic">Điểm a</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary text-[18px]">keyboard_arrow_right</span>
+<span class="text-sm font-semibold text-on-surface-variant">Điều 2</span>
+</div>
+</div>
+</div>
+<!-- Chương II -->
+<div class="flex items-center gap-2 p-2 hover:bg-surface-container rounded-lg cursor-pointer transition-colors group opacity-60">
+<span class="material-symbols-outlined text-outline group-hover:text-primary text-[20px]">keyboard_arrow_right</span>
+<span class="text-sm font-bold text-on-surface">Chương II</span>
+<span class="text-[10px] text-outline-variant italic">Quyền và nghĩa vụ</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Column: Section Detail View & Expanded Relationships -->
+<section class="col-span-12 lg:col-span-8 flex flex-col h-full space-y-8">
+<!-- Main Content Card -->
+<div class="bg-surface-container-lowest rounded-[2rem] p-10 shadow-[0_40px_80px_-40px_rgba(82,95,113,0.1)] relative overflow-hidden shrink-0">
+<div class="absolute top-0 right-0 p-8">
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">print</span>
+</button>
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+</div>
+<div class="max-w-2xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-wider">Status: Effective</span>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded uppercase tracking-wider">Revised: 2023</span>
+</div>
+<h3 class="text-3xl font-extrabold font-headline text-on-surface leading-tight mb-2">Điều 1. Phạm vi điều chỉnh</h3>
+<p class="text-sm text-outline-variant font-medium mb-8">Ref: 01/2024/L-CTN • Type: General Provisions</p>
+<div class="space-y-6 text-on-surface leading-relaxed font-body">
+<p>
+                                Luật này quy định về chế độ sở hữu đất đai, quyền hạn và trách nhiệm của Nhà nước đại diện chủ sở hữu toàn dân về đất đai và thống nhất quản lý về đất đai, chế độ quản lý và sử dụng đất đai, quyền và nghĩa vụ của công dân, người sử dụng đất đối với đất đai thuộc lãnh thổ của nước Cộng hòa xã hội chủ nghĩa Việt Nam.
+                            </p>
+<div class="pl-6 border-l-2 border-primary-container space-y-4 py-2">
+<p class="italic text-on-surface-variant">
+                                    1. Đất đai thuộc sở hữu toàn dân do Nhà nước đại diện chủ sở hữu và thống nhất quản lý.
+                                </p>
+<p class="italic text-on-surface-variant">
+                                    2. Nhà nước trao quyền sử dụng đất cho người sử dụng đất theo quy định của Luật này.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Content Metadata Grid -->
+<div class="mt-12 pt-12 border-t border-outline-variant/10 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="space-y-1">
+<span class="text-[10px] font-extrabold text-outline-variant uppercase tracking-widest block">Original Source</span>
+<p class="text-sm font-semibold text-primary underline underline-offset-4 decoration-primary/30">Văn bản hợp nhất số 12/VBHN-VPQH</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-extrabold text-outline-variant uppercase tracking-widest block">Authorizing Body</span>
+<p class="text-sm font-semibold text-on-surface">Quốc hội Khóa XV</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-extrabold text-outline-variant uppercase tracking-widest block">Category Tags</span>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="text-[10px] px-2 py-0.5 bg-surface-container-highest rounded text-on-surface-variant">Real Estate</span>
+<span class="text-[10px] px-2 py-0.5 bg-surface-container-highest rounded text-on-surface-variant">Civil</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Relations (Unified Full Width) -->
+<div class="flex flex-col flex-1 min-h-0 space-y-6">
+<div class="flex flex-col gap-6 shrink-0">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h4 class="text-2xl font-black font-headline text-on-surface">Document Relations</h4>
+<!-- Relation Type Filters -->
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-1.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-bold rounded-full hover:bg-outline-variant/20 transition-all">Amendment/Supplement</button>
+<button class="px-4 py-1.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-bold rounded-full hover:bg-outline-variant/20 transition-all">Reference</button>
+<button class="px-4 py-1.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-bold rounded-full hover:bg-outline-variant/20 transition-all">Legal Basis</button>
+</div>
+</div>
+<!-- Direction Tabs (Incoming/Outgoing) -->
+<div class="flex border-b border-outline-variant/20">
+<button class="px-6 py-3 border-b-2 border-primary text-primary text-xs font-black uppercase tracking-[0.15em] flex items-center gap-2">
+                                Incoming Relations
+                                <span class="text-[10px] font-bold bg-primary/10 px-2 py-0.5 rounded-full">8</span>
+</button>
+<button class="px-6 py-3 border-b-2 border-transparent text-outline-variant hover:text-on-surface transition-colors text-xs font-black uppercase tracking-[0.15em] flex items-center gap-2">
+                                Outgoing Relations
+                                <span class="text-[10px] font-bold bg-surface-container px-2 py-0.5 rounded-full">4</span>
+</button>
+</div>
+</div>
+<!-- Single Unified List -->
+<div class="flex-1 overflow-y-auto pr-2 space-y-3 pb-8">
+<!-- Card 1 (Incoming example) -->
+<div class="group bg-surface-container-low hover:bg-surface-container rounded-2xl p-5 transition-all cursor-pointer border-l-4 border-primary flex items-center gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[10px] font-black text-primary bg-primary/10 px-2 py-1 rounded tracking-tight uppercase">REFERENCE</span>
+<span class="text-base font-bold text-on-surface">Luật Đầu tư 2020</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-on-surface-variant">
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">ID Number</span>
+<span class="font-semibold">61/2020/QH14</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Điều</span>
+<span class="font-semibold">6</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Khoản</span>
+<span class="font-semibold">2</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Chương</span>
+<span class="font-semibold">I</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">chevron_right</span>
+</div>
+<!-- Card 2 (Incoming example) -->
+<div class="group bg-surface-container-low hover:bg-surface-container rounded-2xl p-5 transition-all cursor-pointer border-l-4 border-error flex items-center gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[10px] font-black text-error bg-error/10 px-2 py-1 rounded tracking-tight uppercase">AMENDMENT</span>
+<span class="text-base font-bold text-on-surface">Luật Nhà ở 2023</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-on-surface-variant">
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">ID Number</span>
+<span class="font-semibold">27/2023/QH15</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Điều</span>
+<span class="font-semibold">198</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Khoản</span>
+<span class="font-semibold">—</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Mục</span>
+<span class="font-semibold">3</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">chevron_right</span>
+</div>
+<!-- Card 3 (Incoming example) -->
+<div class="group bg-surface-container-low hover:bg-surface-container rounded-2xl p-5 transition-all cursor-pointer border-l-4 border-primary flex items-center gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[10px] font-black text-primary bg-primary/10 px-2 py-1 rounded tracking-tight uppercase">REFERENCE</span>
+<span class="text-base font-bold text-on-surface">Nghị định 43/2014/NĐ-CP</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-on-surface-variant">
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">ID Number</span>
+<span class="font-semibold">43/2014/NĐ-CP</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Điều</span>
+<span class="font-semibold">1</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Khoản</span>
+<span class="font-semibold">—</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-[9px] text-outline-variant font-extrabold uppercase tracking-widest">Điểm</span>
+<span class="font-semibold">a</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Floating Action for Mobile (Hidden on Web) -->
+<div class="fixed bottom-6 right-6 md:hidden">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</body></html>

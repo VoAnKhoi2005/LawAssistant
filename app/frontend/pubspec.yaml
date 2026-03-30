@@ -57,8 +57,17 @@ dependencies:
   # Date formatting
   intl: ^0.19.0
   
+  # File picker
+  file_selector: ^1.0.3
+
+  # Graph visualization
+  graphview: ^1.5.1
+  
   # Environment variables
   flutter_dotenv: ^5.1.0
+
+  # Desktop window control
+  window_manager: ^0.3.9
 
 dev_dependencies:
   flutter_test:

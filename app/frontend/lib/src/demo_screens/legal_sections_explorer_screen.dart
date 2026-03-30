@@ -1,0 +1,920 @@
+import 'package:flutter/material.dart';
+
+/// Legal Sections Explorer Screen
+/// Based on: law_assistant_demo/legal_sections_explorer_english_ui/code.html
+class LegalSectionsExplorerScreen extends StatefulWidget {
+  const LegalSectionsExplorerScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LegalSectionsExplorerScreen> createState() =>
+      _LegalSectionsExplorerScreenState();
+}
+
+class _LegalSectionsExplorerScreenState
+    extends State<LegalSectionsExplorerScreen> {
+  String _selectedDocument = 'Luật Đất đai 2024';
+  bool _showIncomingRelations = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      body: Row(
+        children: [
+          _buildSidePanel(theme, colorScheme),
+          Expanded(
+            child: _buildMainContent(theme, colorScheme),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSidePanel(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      width: 400,
+      color: colorScheme.surfaceContainerLow,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Section Management',
+                  style: theme.textTheme.headlineLarge?.copyWith(
+                    fontSize: 36,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _buildDocumentSelector(theme, colorScheme),
+                const SizedBox(height: 8),
+                _buildBadge('HIERARCHY SYSTEM', colorScheme),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: _buildSearchField(theme, colorScheme),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: _buildFilters(theme, colorScheme),
+          ),
+          const SizedBox(height: 24),
+          Expanded(
+            child: _buildHierarchyTree(theme, colorScheme),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDocumentSelector(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              _selectedDocument,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: colorScheme.primary,
+              ),
+            ),
+          ),
+          Icon(
+            Icons.expand_more,
+            color: colorScheme.outline,
+            size: 14,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBadge(String text, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: colorScheme.tertiaryContainer.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+          color: colorScheme.tertiary,
+          letterSpacing: 1,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchField(ThemeData theme, ColorScheme colorScheme) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: 'Search sections, codes, or keywords...',
+        hintStyle: TextStyle(
+          fontSize: 14,
+          color: colorScheme.outlineVariant,
+        ),
+        prefixIcon: Icon(
+          Icons.search,
+          color: colorScheme.outline,
+          size: 20,
+        ),
+        filled: true,
+        fillColor: colorScheme.surfaceContainer,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+      ),
+    );
+  }
+
+  Widget _buildFilters(ThemeData theme, ColorScheme colorScheme) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        _buildFilterChip('All', true, theme, colorScheme),
+        _buildFilterChip('Amendments', false, theme, colorScheme,
+            icon: Icons.edit_note),
+        _buildFilterChip('Appendix', false, theme, colorScheme,
+            icon: Icons.attachment),
+      ],
+    );
+  }
+
+  Widget _buildFilterChip(
+    String label,
+    bool selected,
+    ThemeData theme,
+    ColorScheme colorScheme, {
+    IconData? icon,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: selected
+            ? colorScheme.primary
+            : colorScheme.surfaceContainerHigh,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null) ...[
+            Icon(
+              icon,
+              size: 14,
+              color: selected ? Colors.white : colorScheme.onSurfaceVariant,
+            ),
+            const SizedBox(width: 4),
+          ],
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: selected ? Colors.white : colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHierarchyTree(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'DOCUMENT STRUCTURE',
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+              color: colorScheme.outlineVariant,
+              letterSpacing: 2,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Expanded(
+            child: ListView(
+              children: [
+                _buildTreeNode(
+                  'Chương I',
+                  'Quy định chung',
+                  true,
+                  theme,
+                  colorScheme,
+                  children: [
+                    _buildTreeNode(
+                      'Mục 1',
+                      'Phạm vi điều chỉnh',
+                      true,
+                      theme,
+                      colorScheme,
+                      level: 1,
+                      children: [
+                        _buildTreeNode(
+                          'Điều 1',
+                          '',
+                          false,
+                          theme,
+                          colorScheme,
+                          level: 2,
+                          isSelected: true,
+                          children: [
+                            _buildSubItem('Khoản 1', theme, colorScheme),
+                            _buildSubItem('Khoản 2', theme, colorScheme),
+                            _buildSubItem('Điểm a', theme, colorScheme,
+                                isItalic: true, level: 1),
+                          ],
+                        ),
+                        _buildTreeNode(
+                          'Điều 2',
+                          '',
+                          false,
+                          theme,
+                          colorScheme,
+                          level: 2,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                _buildTreeNode(
+                  'Chương II',
+                  'Quyền và nghĩa vụ',
+                  false,
+                  theme,
+                  colorScheme,
+                  opacity: 0.6,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTreeNode(
+    String title,
+    String subtitle,
+    bool expanded,
+    ThemeData theme,
+    ColorScheme colorScheme, {
+    int level = 0,
+    bool isSelected = false,
+    double opacity = 1.0,
+    List<Widget>? children,
+  }) {
+    return Opacity(
+      opacity: opacity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            margin: EdgeInsets.only(left: level * 24.0),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? colorScheme.secondaryContainer
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  expanded
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_right,
+                  size: level == 2 ? 18 : 20,
+                  color: isSelected
+                      ? colorScheme.onSecondaryContainer
+                      : colorScheme.outline,
+                ),
+                const SizedBox(width: 8),
+                if (isSelected)
+                  Icon(
+                    Icons.radio_button_checked,
+                    size: 18,
+                    color: colorScheme.onSecondaryContainer,
+                  )
+                else
+                  const SizedBox.shrink(),
+                if (isSelected) const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: level == 0 ? FontWeight.w700 : FontWeight.w600,
+                    color: isSelected
+                        ? colorScheme.onSecondaryContainer
+                        : colorScheme.onSurface,
+                  ),
+                ),
+                if (subtitle.isNotEmpty) ...[
+                  const SizedBox(width: 8),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontStyle: FontStyle.italic,
+                      color: colorScheme.outlineVariant,
+                    ),
+                  ),
+                ],
+                if (isSelected) ...[
+                  const Spacer(),
+                  Icon(
+                    Icons.chevron_right,
+                    size: 16,
+                    color: colorScheme.onSecondaryContainer,
+                  ),
+                ],
+              ],
+            ),
+          ),
+          if (children != null && expanded) ...children,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSubItem(
+    String label,
+    ThemeData theme,
+    ColorScheme colorScheme, {
+    bool isItalic = false,
+    int level = 0,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      margin: EdgeInsets.only(left: 64.0 + (level * 16)),
+      child: Row(
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+              color: colorScheme.outlineVariant.withOpacity(level == 0 ? 0.4 : 0.2),
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontStyle: isItalic ? FontStyle.italic : FontStyle.normal,
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainContent(ThemeData theme, ColorScheme colorScheme) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildArticleContent(theme, colorScheme),
+          const SizedBox(height: 64),
+          _buildRelationsSection(theme, colorScheme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildArticleContent(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.all(40),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF525F71).withOpacity(0.1),
+            blurRadius: 80,
+            offset: const Offset(0, 40),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              _buildStatusBadge('Status: Effective', colorScheme.primary,
+                  colorScheme),
+              const SizedBox(width: 12),
+              _buildStatusBadge('Revised: 2023', colorScheme.onSurfaceVariant,
+                  colorScheme),
+              const Spacer(),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.print),
+                    onPressed: () {},
+                    color: colorScheme.outline,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.share),
+                    onPressed: () {},
+                    color: colorScheme.outline,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.history),
+                    onPressed: () {},
+                    color: colorScheme.outline,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Điều 1. Phạm vi điều chỉnh',
+            style: theme.textTheme.headlineLarge?.copyWith(
+              fontSize: 30,
+              height: 1.3,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Ref: 01/2024/L-CTN • Type: General Provisions',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: colorScheme.outlineVariant,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Text(
+            'Luật này quy định về chế độ sở hữu đất đai, quyền hạn và trách nhiệm của Nhà nước đại diện chủ sở hữu toàn dân về đất đai và thống nhất quản lý về đất đai, chế độ quản lý và sử dụng đất đai, quyền và nghĩa vụ của công dân, người sử dụng đất đối với đất đai thuộc lãnh thổ của nước Cộng hòa xã hội chủ nghĩa Việt Nam.',
+            style: theme.textTheme.bodyLarge?.copyWith(
+              height: 1.6,
+              color: colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(
+                  color: colorScheme.primaryContainer,
+                  width: 2,
+                ),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '1. Đất đai thuộc sở hữu toàn dân do Nhà nước đại diện chủ sở hữu và thống nhất quản lý.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontStyle: FontStyle.italic,
+                    color: colorScheme.onSurfaceVariant,
+                    height: 1.6,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  '2. Nhà nước trao quyền sử dụng đất cho người sử dụng đất theo quy định của Luật này.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontStyle: FontStyle.italic,
+                    color: colorScheme.onSurfaceVariant,
+                    height: 1.6,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 48),
+          _buildMetadata(theme, colorScheme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatusBadge(String text, Color color, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: color == colorScheme.primary
+            ? color.withOpacity(0.1)
+            : colorScheme.surfaceContainer,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+          color: color,
+          letterSpacing: 1,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMetadata(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.only(top: 48),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: colorScheme.outlineVariant.withOpacity(0.1),
+          ),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: _buildMetadataItem(
+              'ORIGINAL SOURCE',
+              'Văn bản hợp nhất số 12/VBHN-VPQH',
+              colorScheme,
+              isLink: true,
+            ),
+          ),
+          Expanded(
+            child: _buildMetadataItem(
+              'AUTHORIZING BODY',
+              'Quốc hội Khóa XV',
+              colorScheme,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'CATEGORY TAGS',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                    color: colorScheme.outlineVariant,
+                    letterSpacing: 2,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    _buildTag('Real Estate', colorScheme),
+                    _buildTag('Civil', colorScheme),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMetadataItem(
+    String label,
+    String value,
+    ColorScheme colorScheme, {
+    bool isLink = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w800,
+            color: colorScheme.outlineVariant,
+            letterSpacing: 2,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color:
+                isLink ? colorScheme.primary : colorScheme.onSurface,
+            decoration: isLink ? TextDecoration.underline : null,
+            decorationColor: colorScheme.primary.withOpacity(0.3),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTag(String text, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 10,
+          color: colorScheme.onSurfaceVariant,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRelationsSection(ThemeData theme, ColorScheme colorScheme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Document Relations',
+              style: theme.textTheme.headlineLarge?.copyWith(
+                fontSize: 24,
+              ),
+            ),
+            Wrap(
+              spacing: 8,
+              children: [
+                _buildRelationFilter('Amendment/Supplement', colorScheme),
+                _buildRelationFilter('Reference', colorScheme),
+                _buildRelationFilter('Legal Basis', colorScheme),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        _buildRelationTabs(theme, colorScheme),
+        const SizedBox(height: 24),
+        _buildRelationCard(
+          'REFERENCE',
+          'Luật Đầu tư 2020',
+          '61/2020/QH14',
+          '6',
+          '2',
+          'I',
+          colorScheme.primary,
+          colorScheme,
+        ),
+        const SizedBox(height: 12),
+        _buildRelationCard(
+          'AMENDMENT',
+          'Luật Nhà ở 2023',
+          '27/2023/QH15',
+          '198',
+          '—',
+          '3',
+          colorScheme.error,
+          colorScheme,
+        ),
+        const SizedBox(height: 12),
+        _buildRelationCard(
+          'REFERENCE',
+          'Nghị định 43/2014/NĐ-CP',
+          '43/2014/NĐ-CP',
+          '1',
+          '—',
+          'a',
+          colorScheme.primary,
+          colorScheme,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRelationFilter(String text, ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          color: colorScheme.onSurfaceVariant,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRelationTabs(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: colorScheme.outlineVariant.withOpacity(0.2),
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          _buildTab('Incoming Relations', 8, true, theme, colorScheme),
+          _buildTab('Outgoing Relations', 4, false, theme, colorScheme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTab(String text, int count, bool selected, ThemeData theme,
+      ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: selected ? colorScheme.primary : Colors.transparent,
+            width: 2,
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            text.toUpperCase(),
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: selected
+                  ? colorScheme.primary
+                  : colorScheme.outlineVariant,
+              letterSpacing: 1.5,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            decoration: BoxDecoration(
+              color: selected
+                  ? colorScheme.primary.withOpacity(0.1)
+                  : colorScheme.surfaceContainer,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              count.toString(),
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: selected
+                    ? colorScheme.primary
+                    : colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRelationCard(
+    String type,
+    String title,
+    String id,
+    String dieu,
+    String khoan,
+    String extra,
+    Color borderColor,
+    ColorScheme colorScheme,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(16),
+        border: Border(
+          left: BorderSide(
+            color: borderColor,
+            width: 4,
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: borderColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        type,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          color: borderColor,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    _buildInfoField('ID NUMBER', id, colorScheme),
+                    const SizedBox(width: 32),
+                    _buildInfoField('Điều', dieu, colorScheme),
+                    const SizedBox(width: 32),
+                    _buildInfoField('Khoản', khoan, colorScheme),
+                    const SizedBox(width: 32),
+                    _buildInfoField(
+                        type == 'AMENDMENT' ? 'Mục' : 'Chương',
+                        extra,
+                        colorScheme),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Icon(
+            Icons.chevron_right,
+            color: colorScheme.outline,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoField(String label, String value, ColorScheme colorScheme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label.toUpperCase(),
+          style: TextStyle(
+            fontSize: 9,
+            fontWeight: FontWeight.w800,
+            color: colorScheme.outlineVariant,
+            letterSpacing: 1.5,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
+  }
+}
