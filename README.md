@@ -7,13 +7,13 @@ End-to-end **Vietnamese legal document assistant**:
 
 ## Diagrams
 ### System context diagram
-![System context diagram](docs/c4/System context diagram.png)
+![System context diagram](docs/c4/System_context_diagram.png)
 
 ### Container diagram
-![Container diagram](docs/c4/Container diagram.png)
+![Container diagram](docs/c4/Container_diagram.png)
 
 ### Component diagram (backend)
-![Component diagram](docs/c4/Component diagram BE.png)
+![Component diagram](docs/c4/Component_diagram_BE.png)
 
 ### Document processing overview
 ![Document processing pipeline](docs/process.png)
