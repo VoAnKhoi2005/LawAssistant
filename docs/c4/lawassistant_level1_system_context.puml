@@ -1,0 +1,23 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title LawAssistant - System Context (C4 Level 1)
+
+Person(user, "End user", "Logs in, uploads legal documents, and explores extracted knowledge graphs")
+System(lawAssistant, "LawAssistant", "Vietnamese law document processing + knowledge graph assistant")
+
+System_Ext(openai, "OpenAI API", "Text simplification via GPT models")
+System_Ext(gcp, "Google Cloud Vision + Cloud Storage", "OCR for PDFs and artifact storage")
+System_Ext(mongo, "MongoDB", "Stores users, documents, concepts, relations, triplets")
+System_Ext(redis, "Redis", "Auth/token store + Celery broker/backend")
+System_Ext(nlpModels, "Local NLP models", "VnCoreNLP + PhoNLP model files")
+
+Rel(user, lawAssistant, "Uses", "HTTP(S)")
+Rel(lawAssistant, mongo, "Reads/Writes", "MongoDB (Motor)")
+Rel(lawAssistant, redis, "Uses", "Redis")
+Rel(lawAssistant, gcp, "Extracts text (OCR)", "HTTPS")
+Rel(lawAssistant, openai, "Simplifies legal text", "HTTPS")
+Rel(lawAssistant, nlpModels, "Loads models from disk")
+
+LAYOUT_WITH_LEGEND()
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title LawAssistant - Containers (C4 Level 2)
+
+Person(user, "End user", "Uses the UI to manage documents and view the knowledge graph")
+Person(admin, "Operator", "Monitors background processing")
+
+System_Boundary(s1, "LawAssistant") {
+  Container(frontend, "Frontend", "Flutter (Web/Desktop)", "UI: login, documents, sections, knowledge graph")
+  Container(api, "Backend API", "Python FastAPI", "REST API, JWT auth, document orchestration")
+  Container(worker, "Document worker", "Python Celery worker", "OCR + simplification + triplet extraction pipeline")
+  Container(flower, "Flower", "Celery Flower", "Task monitoring dashboard")
+
+  ContainerDb(mongo, "MongoDB", "MongoDB", "Users, documents, concepts, relations, triplets")
+  ContainerDb(redis, "Redis", "Redis", "Celery broker/backend + auth/token store")
+}
+
+System_Ext(openai, "OpenAI API", "Text simplification")
+System_Ext(gcp, "Google Cloud Vision + Cloud Storage", "OCR for PDFs and storage bucket")
+System_Ext(nlpModels, "Local NLP models", "VnCoreNLP + PhoNLP model files")
+
+Rel(user, frontend, "Uses", "HTTP(S)")
+Rel(frontend, api, "Calls REST API", "JSON/HTTP")
+
+Rel(api, mongo, "Reads/Writes", "Motor/MongoDB")
+Rel(api, redis, "Stores auth state (e.g., refresh tokens/blacklist)", "Redis")
+Rel(api, redis, "Queues document-processing tasks", "Celery/Redis")
+
+Rel(worker, redis, "Consumes tasks + reports task state", "Celery/Redis")
+Rel(worker, mongo, "Updates documents + writes extracted triplets", "MongoDB")
+Rel(worker, gcp, "Runs OCR for PDFs", "HTTPS")
+Rel(worker, openai, "Simplifies Vietnamese legal text", "HTTPS")
+Rel(worker, nlpModels, "Runs triplet extraction", "Local FS")
+
+Rel(admin, flower, "Monitors", "HTTP")
+Rel(flower, redis, "Reads task state", "Celery/Redis")
+
+LAYOUT_WITH_LEGEND()
+@enduml

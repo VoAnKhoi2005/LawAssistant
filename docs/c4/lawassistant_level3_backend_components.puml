@@ -1,0 +1,129 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title LawAssistant - Backend Components (C4 Level 3)
+
+Person(user, "End user", "Logs in, uploads legal documents, views extracted knowledge graph")
+Container_Ext(frontend, "Frontend", "Flutter (Web/Desktop)", "UI")
+
+System_Boundary(law, "LawAssistant") {
+
+  Container_Boundary(api, "Backend API (FastAPI)") {
+    Component(fastapiApp, "FastAPI app", "Python/FastAPI", "Manual DI, registers routers, exception handlers")
+    Component(security, "Security & JWT", "core/security.py", "Password hashing, JWT encode/decode, get_current_user")
+    Component(errorHandler, "Error handlers", "core/error_handler.py", "Formats AppException and unexpected errors")
+    Component(apiResponse, "API response helper", "utils/api_response_helper.py", "success_response / paginated_success_response")
+
+    Component(authRouter, "Auth router", "routers/auth_router.py", "/api/auth")
+    Component(userRouter, "User router", "routers/user_router.py", "/api/users")
+    Component(documentRouter, "Document router", "routers/document_router.py", "/api/documents")
+    Component(uploadRouter, "UploadFile router", "routers/upload_file_router.py", "/api/upload-files")
+    Component(kgRouters, "Knowledge Graph routers", "routers/*_router.py", "concepts/relations/triplets/sections")
+
+    Component(authController, "AuthController", "controllers/auth_controller.py", "Auth endpoints")
+    Component(userController, "UserController", "controllers/user_controller.py", "User endpoints")
+    Component(documentController, "DocumentController", "controllers/document_controller.py", "Document endpoints")
+    Component(uploadController, "UploadFileController", "controllers/upload_file_controller.py", "Upload endpoints")
+    Component(kgControllers, "KG controllers", "controllers/*_controller.py", "KG endpoints")
+
+    Component(authService, "AuthService", "services/auth_service.py", "Register/login/refresh/logout")
+    Component(userService, "UserService", "services/user_service.py", "User queries")
+    Component(documentService, "DocumentService", "services/document_service.py", "Document CRUD + queue processing")
+    Component(uploadService, "UploadFileService", "services/upload_file_service.py", "Save files to uploads/<userId>/")
+    Component(kgServices, "KG services", "services/*_service.py", "Concepts/relations/triplets/legal sections")
+
+    Component(userRepo, "UserRepository", "repositories/user_repository.py", "MongoDB users collection")
+    Component(documentRepo, "DocumentRepository", "repositories/document_repository.py", "MongoDB documents collection")
+    Component(uploadRepo, "UploadFileRepository", "repositories/upload_file_repository.py", "MongoDB uploaded_files collection")
+    Component(kgRepos, "KG repositories", "repositories/*_repository.py", "MongoDB collections")
+
+    Component(mongoClient, "MongoDB client", "infrastructure/db/database.py", "Motor connection + get_database")
+    Component(redisClient, "Redis client", "core/redis_client.py", "Async Redis connection + get_redis")
+
+    Component(celeryProducer, "Celery task producer", "worker/tasks/document_processing_tasks.py", "process_document.delay(...)")
+    Component(localUploads, "Uploads folder", "Local filesystem", "Stored uploaded documents")
+  }
+
+  Container_Boundary(worker, "Document Worker (Celery)") {
+    Component(workerEntry, "Worker entrypoint", "worker/worker.py", "Starts Celery worker (queue: documents)")
+    Component(docTask, "process_document task", "worker/tasks/document_processing_tasks.py", "Orchestrates pipeline")
+    Component(docProcessor, "DocumentProcessor", "worker/document_processor.py", "Extract → Simplify → Extract triplets")
+
+    Component(docExtractor, "Document extractor", "GoogleCloudDocumentExtractor", "PDF OCR (GCP) + doc extraction")
+    Component(textSimplifier, "Text simplifier", "OpenAITextSimplifier", "Simplifies Vietnamese legal sentences")
+    Component(tripletExtractor, "Triplet extractor", "NLPTripletExtractor", "VnCoreNLP + PhoNLP")
+
+    Component(localModels, "Model files", "Local filesystem", "VNCoreNLP/PhoNLP directories")
+  }
+
+  ContainerDb(mongo, "MongoDB", "MongoDB", "Users, documents, concepts, relations, triplets")
+  ContainerDb(redis, "Redis", "Redis", "Celery broker/backend + refresh token store")
+
+  System_Ext(openai, "OpenAI API", "Text simplification")
+  System_Ext(gcp, "Google Cloud Vision + Storage", "OCR for PDFs + bucket storage")
+}
+
+' Frontend -> Backend
+Rel(user, frontend, "Uses")
+Rel(frontend, authRouter, "POST /api/auth/*", "JSON/HTTP")
+Rel(frontend, documentRouter, "CRUD /api/documents", "JSON/HTTP")
+Rel(frontend, uploadRouter, "Upload/download files", "multipart/HTTP")
+Rel(frontend, kgRouters, "Query KG endpoints", "JSON/HTTP")
+
+' Request handling
+Rel(fastapiApp, errorHandler, "Registers")
+Rel(fastapiApp, authRouter, "Includes")
+Rel(fastapiApp, userRouter, "Includes")
+Rel(fastapiApp, documentRouter, "Includes")
+Rel(fastapiApp, uploadRouter, "Includes")
+Rel(fastapiApp, kgRouters, "Includes")
+
+Rel(authRouter, authController, "Delegates (via app.state)")
+Rel(userRouter, userController, "Delegates (via app.state)")
+Rel(documentRouter, documentController, "Delegates (via app.state)")
+Rel(uploadRouter, uploadController, "Delegates (via app.state)")
+Rel(kgRouters, kgControllers, "Delegates (via app.state)")
+
+Rel(security, userService, "Loads user for get_current_user")
+Rel(authController, authService, "Calls")
+Rel(userController, userService, "Calls")
+Rel(documentController, documentService, "Calls")
+Rel(uploadController, uploadService, "Calls")
+Rel(kgControllers, kgServices, "Calls")
+
+Rel(authService, userRepo, "Reads/Writes")
+Rel(authService, redisClient, "Stores refresh tokens")
+Rel(userService, userRepo, "Reads")
+
+Rel(documentService, documentRepo, "Reads/Writes")
+Rel(documentService, uploadRepo, "Reads/Writes file status")
+Rel(documentService, celeryProducer, "Enqueues processing")
+
+Rel(uploadService, uploadRepo, "Reads/Writes metadata")
+Rel(uploadService, localUploads, "Stores files")
+
+Rel(kgServices, kgRepos, "Reads/Writes")
+
+Rel(userRepo, mongoClient, "Uses")
+Rel(documentRepo, mongoClient, "Uses")
+Rel(uploadRepo, mongoClient, "Uses")
+Rel(kgRepos, mongoClient, "Uses")
+
+Rel(mongoClient, mongo, "Connects")
+Rel(redisClient, redis, "Connects")
+Rel(celeryProducer, redis, "Publishes tasks", "Celery/Redis")
+
+' Worker pipeline
+Rel(workerEntry, redis, "Consumes tasks", "Celery/Redis")
+Rel(docTask, docProcessor, "Runs")
+Rel(docProcessor, mongo, "Updates document + writes triplets", "MongoDB")
+Rel(docProcessor, docExtractor, "Extracts text")
+Rel(docProcessor, textSimplifier, "Simplifies")
+Rel(docProcessor, tripletExtractor, "Extracts triplets")
+
+Rel(docExtractor, gcp, "OCR PDFs", "HTTPS")
+Rel(textSimplifier, openai, "LLM call", "HTTPS")
+Rel(tripletExtractor, localModels, "Loads")
+
+SHOW_LEGEND()
+@enduml
