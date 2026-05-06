@@ -13,7 +13,7 @@ End-to-end **Vietnamese legal document assistant**:
 ![Container diagram](docs/c4/Container_diagram.png)
 
 ### Component diagram (backend)
-![Component diagram](docs/c4/Component_diagram_BE.png)
+![Component diagram](docs/c4/Component_diagram_BE.svg)
 
 ### Document processing overview
 ![Document processing pipeline](docs/process.png)
