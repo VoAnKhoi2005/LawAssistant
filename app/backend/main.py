@@ -1,8 +1,12 @@
+import os
+import subprocess
+import sys
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
 from controllers.upload_file_controller import UploadFileController
+from core.config import settings
 from core.error_handler import app_exception_handler, general_exception_handler
 from core.exceptions import AppException
 from core.redis_client import (
@@ -71,6 +75,13 @@ class AppState:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    worker_process = None
+
+    if settings.auto_start_worker:
+        worker_script = os.path.join(os.path.dirname(__file__), "worker", "worker.py")
+        worker_process = subprocess.Popen([sys.executable, worker_script])
+        print(f"Started Celery worker with concurrency={settings.worker_concurrency}")
+
     # startup
     await connect_to_mongo()
     await connect_to_redis()
@@ -135,6 +146,13 @@ async def lifespan(app: FastAPI):
     yield
 
     # shutdown
+    if worker_process is not None:
+        worker_process.terminate()
+        try:
+            worker_process.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            worker_process.kill()
+
     await retrieval_service.close()
     await close_mongo_connection()
     await close_redis_connection()

@@ -6,6 +6,7 @@ BACKEND_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BACKEND_ROOT not in sys.path:
     sys.path.append(BACKEND_ROOT)
 
+from core.config import settings
 from core.celery_app import celery_app
 
 if __name__ == "__main__":
@@ -14,6 +15,6 @@ if __name__ == "__main__":
         'worker',
         '--loglevel=info',
         '--queues=documents',
-        '--concurrency=2',
+        f'--concurrency={settings.worker_concurrency}',
         '--pool=prefork'
     ])

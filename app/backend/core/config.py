@@ -13,12 +13,15 @@ class Settings(BaseSettings):
     redis_host: str = "localhost"
     redis_port: int = 6379
     redis_password: str = None
+    redis_url: str = "redis://localhost:6379/0"
     openai_api_key: str
     openai_model: str
     google_application_credentials: str
     google_cloud_storage_bucket: str
     vncorenlp_model_path: str
     phonlp_model_path: str
+    worker_concurrency: int = 2
+    auto_start_worker: bool = False
 
     model_config = SettingsConfigDict(env_file=".env")
 

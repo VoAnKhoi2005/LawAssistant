@@ -28,9 +28,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    environment:
-      - REDIS_URL=redis://redis:6379/0
-      - MONGO_URI=mongodb://admin:password@mongodb:27017/
+    env_file:
+      - .env
     depends_on:
       - redis
       - mongodb
@@ -44,16 +43,15 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    environment:
-      - REDIS_URL=redis://redis:6379/0
-      - MONGO_URI=mongodb://admin:password@mongodb:27017/
+    env_file:
+      - .env
     depends_on:
       - redis
       - mongodb
     volumes:
       - ./uploads:/app/uploads
       - ./logs:/app/logs
-    command: python worker.py
+    command: python worker/worker.py
 
   # Celery Flower (monitoring)
   flower:
@@ -62,8 +60,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5555:5555"
-    environment:
-      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      - .env
     depends_on:
       - redis
     command: celery --app=celery_app flower --port=5555
