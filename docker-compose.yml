@@ -1,0 +1,99 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: lawassistant-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: lawassistant-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build:
+      context: ./app/backend
+      dockerfile: Dockerfile
+    container_name: lawassistant-backend
+    depends_on:
+      - mongodb
+      - redis
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      DB_NAME: law_assistant
+      JWT_SECRET_KEY: change-me
+      JWT_REFRESH_SECRET_KEY: change-me-too
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${DOCKER_OPENAI_API_KEY:-local-dev-placeholder}
+      OPENAI_MODEL: ${DOCKER_OPENAI_MODEL:-gpt-4o-mini}
+      GOOGLE_APPLICATION_CREDENTIALS: ${DOCKER_GOOGLE_APPLICATION_CREDENTIALS:-/opt/credentials/google-service-account.json}
+      GOOGLE_CLOUD_STORAGE_BUCKET: ${DOCKER_GOOGLE_CLOUD_STORAGE_BUCKET:-local-dev-bucket}
+      VNCORENLP_MODEL_PATH: ${DOCKER_VNCORENLP_MODEL_PATH:-/opt/models/VnCoreNLP-1.2}
+      PHONLP_MODEL_PATH: ${DOCKER_PHONLP_MODEL_PATH:-/opt/models/phonlp}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docker/credentials:/opt/credentials:ro
+      - ./docker/models:/opt/models:ro
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  frontend:
+    build:
+      context: ./app/frontend
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: ${FRONTEND_API_BASE_URL:-http://localhost:8000}
+    container_name: lawassistant-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+  worker:
+    build:
+      context: ./app/backend
+      dockerfile: Dockerfile
+    container_name: lawassistant-worker
+    depends_on:
+      - mongodb
+      - redis
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      DB_NAME: law_assistant
+      JWT_SECRET_KEY: change-me
+      JWT_REFRESH_SECRET_KEY: change-me-too
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${DOCKER_OPENAI_API_KEY:-local-dev-placeholder}
+      OPENAI_MODEL: ${DOCKER_OPENAI_MODEL:-gpt-4o-mini}
+      GOOGLE_APPLICATION_CREDENTIALS: ${DOCKER_GOOGLE_APPLICATION_CREDENTIALS:-/opt/credentials/google-service-account.json}
+      GOOGLE_CLOUD_STORAGE_BUCKET: ${DOCKER_GOOGLE_CLOUD_STORAGE_BUCKET:-local-dev-bucket}
+      VNCORENLP_MODEL_PATH: ${DOCKER_VNCORENLP_MODEL_PATH:-/opt/models/VnCoreNLP-1.2}
+      PHONLP_MODEL_PATH: ${DOCKER_PHONLP_MODEL_PATH:-/opt/models/phonlp}
+    volumes:
+      - ./docker/credentials:/opt/credentials:ro
+      - ./docker/models:/opt/models:ro
+    command: python worker/worker.py
+    profiles:
+      - worker
+
+volumes:
+  mongodb_data:
+  redis_data:
