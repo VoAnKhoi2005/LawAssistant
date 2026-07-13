@@ -29,6 +29,7 @@ from services.concept_service import ConceptService
 from services.document_service import DocumentService
 from services.legal_section_service import LegalSectionService
 from services.relation_service import RelationService
+from services.retrieval_service import RetrievalService
 from services.section_relation_service import SectionRelationService
 from services.triplet_service import TripletService
 from services.upload_file_service import UploadFileService
@@ -40,6 +41,7 @@ from controllers.concept_controller import ConceptController
 from controllers.document_controller import DocumentController
 from controllers.legal_section_controller import LegalSectionController
 from controllers.relation_controller import RelationController
+from controllers.retrieval_controller import RetrievalController
 from controllers.section_relation_controller import SectionRelationController
 from controllers.triplet_controller import TripletController
 from controllers.user_controller import UserController
@@ -50,6 +52,7 @@ from routers.concept_router import create_concept_router_with_state
 from routers.document_router import create_document_router_with_state
 from routers.legal_section_router import create_legal_section_router_with_state
 from routers.relation_router import create_relation_router_with_state
+from routers.retrieval_router import create_retrieval_router_with_state
 from routers.section_relation_router import create_section_relation_router_with_state
 from routers.triplet_router import create_triplet_router_with_state
 from routers.user_router import create_user_router_with_state
@@ -60,6 +63,7 @@ class AppState:
     concept_controller: ConceptController
     legal_section_controller: LegalSectionController
     relation_controller: RelationController
+    retrieval_controller: RetrievalController
     section_relation_controller: SectionRelationController
     triplet_controller: TripletController
     auth_controller: AuthController
@@ -97,6 +101,7 @@ async def lifespan(app: FastAPI):
         triplet_repository
     )
     relation_service = RelationService(relation_repository)
+    retrieval_service = RetrievalService()
     section_relation_service = SectionRelationService(section_relation_repository)
     triplet_service = TripletService(triplet_repository)
     auth_service = AuthService(user_repository, redis)
@@ -108,6 +113,7 @@ async def lifespan(app: FastAPI):
     concept_controller = ConceptController(concept_service)
     legal_section_controller = LegalSectionController(legal_section_service)
     relation_controller = RelationController(relation_service)
+    retrieval_controller = RetrievalController(retrieval_service)
     section_relation_controller = SectionRelationController(section_relation_service)
     triplet_controller = TripletController(triplet_service)
     auth_controller = AuthController(auth_service)
@@ -120,6 +126,7 @@ async def lifespan(app: FastAPI):
     app.state.concept_controller = concept_controller
     app.state.legal_section_controller = legal_section_controller
     app.state.relation_controller = relation_controller
+    app.state.retrieval_controller = retrieval_controller
     app.state.section_relation_controller = section_relation_controller
     app.state.triplet_controller = triplet_controller
     app.state.auth_controller = auth_controller
@@ -128,6 +135,7 @@ async def lifespan(app: FastAPI):
     yield
 
     # shutdown
+    await retrieval_service.close()
     await close_mongo_connection()
     await close_redis_connection()
     print("Disconnected from MongoDB")
@@ -145,6 +153,7 @@ def create_app() -> FastAPI:
     app.include_router(create_concept_router_with_state())
     app.include_router(create_legal_section_router_with_state())
     app.include_router(create_relation_router_with_state())
+    app.include_router(create_retrieval_router_with_state())
     app.include_router(create_section_relation_router_with_state())
     app.include_router(create_triplet_router_with_state())
     app.include_router(create_upload_file_router_with_state())

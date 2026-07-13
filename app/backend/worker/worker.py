@@ -1,8 +1,10 @@
 import os
 import sys
 
-# Add backend directory to Python path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Add backend root directory to Python path
+BACKEND_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BACKEND_ROOT not in sys.path:
+    sys.path.append(BACKEND_ROOT)
 
 from core.celery_app import celery_app
 

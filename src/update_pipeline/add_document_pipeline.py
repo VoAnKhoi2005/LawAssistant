@@ -18,7 +18,7 @@ import sys
 import tempfile
 import time
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 import pandas as pd
 from dotenv import load_dotenv
@@ -50,8 +50,10 @@ load_dotenv()
 class DocumentPipeline:
     """Main pipeline class for processing legal documents"""
     
-    def __init__(self):
+    def __init__(self, output_dir: Optional[str] = None, resume: bool = True, force: bool = False):
         self.config = self._load_config()
+        if output_dir:
+            self.config["output_dir"] = Path(output_dir)
         self.mongo_client = None
         self.db = None
         self.openai_client = None
@@ -60,6 +62,8 @@ class DocumentPipeline:
         self.synonym_dict = None
         self.stopwords = None
         self.encoding = tiktoken.get_encoding("cl100k_base")
+        self.resume = resume
+        self.force = force
         
     def _load_config(self) -> Dict[str, Any]:
         """Load configuration from environment and defaults"""
@@ -139,6 +143,47 @@ class DocumentPipeline:
             raise Exception(f"Failed to create output directory: {str(e)}")
         
         print("✓ All components initialized successfully\n")
+
+    def _safe_doc_key(self, so_hieu: str) -> str:
+        return so_hieu.replace("/", "_").replace("\\", "_")
+
+    def _state_file(self, so_hieu: str) -> Path:
+        return self.config["output_dir"] / f"state_{self._safe_doc_key(so_hieu)}.json"
+
+    def _batch_file(self, so_hieu: str) -> Path:
+        return self.config["output_dir"] / f"batch_{self._safe_doc_key(so_hieu)}.jsonl"
+
+    def _batch_meta_file(self, so_hieu: str) -> Path:
+        return self.config["output_dir"] / f"batch_{self._safe_doc_key(so_hieu)}.meta.json"
+
+    def _result_file(self, so_hieu: str) -> Path:
+        return self.config["output_dir"] / f"results_{self._safe_doc_key(so_hieu)}.jsonl"
+
+    def _load_state(self, so_hieu: str) -> Dict[str, Any]:
+        state_file = self._state_file(so_hieu)
+        if not state_file.exists():
+            return {"steps": {}}
+        try:
+            with open(state_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {"steps": {}}
+
+    def _save_state(self, so_hieu: str, state: Dict[str, Any]) -> None:
+        with open(self._state_file(so_hieu), "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+
+    def _mark_step_complete(self, so_hieu: str, step: str, extra: Optional[Dict[str, Any]] = None) -> None:
+        state = self._load_state(so_hieu)
+        state.setdefault("steps", {})
+        payload = {"completed": True, "updated_at": int(time.time())}
+        if extra:
+            payload.update(extra)
+        state["steps"][step] = payload
+        self._save_state(so_hieu, state)
+
+    def _step_completed(self, so_hieu: str, step: str) -> bool:
+        return bool(self._load_state(so_hieu).get("steps", {}).get(step, {}).get("completed"))
     
     def step1_extract_document(self, document_info: Dict[str, Any]) -> str:
         """
@@ -163,17 +208,21 @@ class DocumentPipeline:
         effective_date = document_info["effective_date"]
         files = document_info["files"]
         
-        # Check for duplicate document
         print(f"Checking for existing document with so_hieu: {so_hieu}...")
         existing_doc = self.db.extracted_documents.find_one({"so_hieu": so_hieu})
-        if existing_doc:
+        existing_sections = self.db.legal_sections.count_documents({"so_hieu": so_hieu})
+        if not self.force and self.resume and existing_doc and existing_sections > 0:
+            print(f"✓ Step 1 already completed previously, skipping ({existing_sections} sections found)\n")
+            self._mark_step_complete(so_hieu, "extract_document", {"sections_count": existing_sections})
+            return so_hieu
+        if existing_doc and not self.force:
             raise Exception(
                 f"DUPLICATE DOCUMENT ERROR: A document with so_hieu '{so_hieu}' already exists in the database.\n"
                 f"Existing document title: {existing_doc.get('title', 'N/A')}\n"
                 f"Effective date: {existing_doc.get('effective_date', 'N/A')}\n"
-                f"Please use a different so_hieu or remove the existing document first."
+                f"Use --resume to continue an existing run or --force only after cleaning up prior data."
             )
-        print("✓ No duplicate found\n")
+        print("✓ No blocking duplicate found\n")
         
         print(f"Document: {so_hieu} - {title}")
         print(f"Effective Date: {effective_date}")
@@ -252,7 +301,11 @@ class DocumentPipeline:
                 "combined_text": combined_text,
                 "text_length": len(combined_text)
             }
-            self.db.extracted_documents.insert_one(extracted_data)
+            self.db.extracted_documents.update_one(
+                {"so_hieu": so_hieu},
+                {"$set": extracted_data},
+                upsert=True
+            )
             print(f"✓ Saved extracted text to MongoDB")
         except Exception as e:
             raise Exception(f"Failed to save extracted document to MongoDB: {str(e)}")
@@ -283,6 +336,7 @@ class DocumentPipeline:
             print(f"✓ Total: {len(combined_text):,} characters from {len(source_files)} file(s)")
             print(f"✓ Parsed into {sections_count} sections")
             print(f"✓ Saved to MongoDB collection: legal_sections")
+            self._mark_step_complete(so_hieu, "extract_document", {"sections_count": sections_count})
             
         except Exception as e:
             raise Exception(f"Document parsing failed: {str(e)}")
@@ -307,6 +361,11 @@ class DocumentPipeline:
         print(f"{'='*60}\n")
         
         print(f"Processing document: {so_hieu}")
+        if not self.force and self._step_completed(so_hieu, "simplify_sentences"):
+            existing_sentences = self.db.processed_legal_sections.count_documents({"so_hieu": so_hieu})
+            if existing_sentences > 0:
+                print(f"✓ Step 2 already completed previously, skipping ({existing_sentences} simplified sentences found)")
+                return so_hieu
         
         # Simplification prompt
         SIMPLIFY_SYSTEM_PROMPT = """
@@ -385,7 +444,7 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
             
             for idx, chunk in enumerate(content_chunks, start=1):
                 task = {
-                    "custom_id": section["leaf_id"],
+                    "custom_id": f"{section['leaf_id']}_part{idx}",
                     "method": "POST",
                     "url": "/v1/chat/completions",
                     "body": {
@@ -405,71 +464,94 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
         print(f"Created {len(tasks)} batch tasks")
         
         # Split into files if needed
-        batch_file = self.config["output_dir"] / f"batch_{so_hieu.replace('/', '_')}.jsonl"
-        with open(batch_file, "w", encoding="utf-8") as f:
-            for task in tasks:
-                task_copy = {k: v for k, v in task.items() if k != "_token_count"}
-                f.write(json.dumps(task_copy, ensure_ascii=False) + "\n")
-        
-        print(f"✓ Batch file created: {batch_file}")
-        
-        # Submit batch to OpenAI
-        print("\nSubmitting batch to OpenAI...")
-        try:
-            file_obj = self.openai_client.files.create(
-                file=open(batch_file, "rb"),
-                purpose="batch"
-            )
-        except Exception as e:
-            raise Exception(f"Failed to upload batch file to OpenAI: {str(e)}")
-        
-        try:
-            batch = self.openai_client.batches.create(
-                input_file_id=file_obj.id,
-                endpoint="/v1/chat/completions",
-                completion_window="24h"
-            )
-        except Exception as e:
-            raise Exception(f"Failed to create batch job: {str(e)}")
-        
-        print(f"✓ Batch submitted: {batch.id}")
-        print(f"  Status: {batch.status}")
+        batch_file = self._batch_file(so_hieu)
+        batch_meta_file = self._batch_meta_file(so_hieu)
+        result_file = self._result_file(so_hieu)
+
+        if not batch_file.exists() or self.force:
+            with open(batch_file, "w", encoding="utf-8") as f:
+                for task in tasks:
+                    task_copy = {k: v for k, v in task.items() if k != "_token_count"}
+                    f.write(json.dumps(task_copy, ensure_ascii=False) + "\n")
+            print(f"✓ Batch file created: {batch_file}")
+        else:
+            print(f"✓ Reusing existing batch file: {batch_file}")
+
+        if result_file.exists() and not self.force:
+            print(f"✓ Reusing existing batch results: {result_file}")
+            batch = None
+        else:
+            batch = None
+            if batch_meta_file.exists() and not self.force:
+                try:
+                    with open(batch_meta_file, "r", encoding="utf-8") as f:
+                        meta = json.load(f)
+                    batch = self.openai_client.batches.retrieve(meta["batch_id"])
+                    print(f"✓ Reusing existing batch job: {meta['batch_id']}")
+                    print(f"  Status: {batch.status}")
+                except Exception as e:
+                    print(f"⚠ Failed to reuse existing batch metadata: {str(e)}")
+                    batch = None
+
+            if batch is None:
+                print("\nSubmitting batch to OpenAI...")
+                try:
+                    with open(batch_file, "rb") as batch_stream:
+                        file_obj = self.openai_client.files.create(
+                            file=batch_stream,
+                            purpose="batch"
+                        )
+                except Exception as e:
+                    raise Exception(f"Failed to upload batch file to OpenAI: {str(e)}")
+
+                try:
+                    batch = self.openai_client.batches.create(
+                        input_file_id=file_obj.id,
+                        endpoint="/v1/chat/completions",
+                        completion_window="24h"
+                    )
+                    with open(batch_meta_file, "w", encoding="utf-8") as f:
+                        json.dump({"file_id": file_obj.id, "batch_id": batch.id}, f, ensure_ascii=False, indent=2)
+                except Exception as e:
+                    raise Exception(f"Failed to create batch job: {str(e)}")
+
+                print(f"✓ Batch submitted: {batch.id}")
+                print(f"  Status: {batch.status}")
         
         # Wait for completion
-        print("\nWaiting for batch to complete...")
-        max_retries = 2880  # 24 hours with 30 second intervals
-        retries = 0
-        
-        while batch.status not in ("completed", "failed", "expired", "cancelled"):
-            if retries >= max_retries:
-                raise Exception(f"Batch processing timeout after 24 hours. Batch ID: {batch.id}")
-            
-            time.sleep(30)
+        if not result_file.exists() or self.force:
+            print("\nWaiting for batch to complete...")
+            max_retries = 2880
+            retries = 0
+
+            while batch.status not in ("completed", "failed", "expired", "cancelled"):
+                if retries >= max_retries:
+                    raise Exception(f"Batch processing timeout after 24 hours. Batch ID: {batch.id}")
+
+                time.sleep(30)
+                try:
+                    batch = self.openai_client.batches.retrieve(batch.id)
+                    print(f"  Status: {batch.status} - {batch.request_counts.completed}/{batch.request_counts.total} completed")
+                except Exception as e:
+                    print(f"  Warning: Failed to retrieve batch status: {str(e)}")
+
+                retries += 1
+
+            if batch.status != "completed":
+                error_msg = f"Batch processing failed with status: {batch.status}"
+                if batch.status == "failed":
+                    error_msg += f"\nBatch ID: {batch.id}"
+                    if hasattr(batch, 'errors') and batch.errors:
+                        error_msg += f"\nErrors: {batch.errors}"
+                raise Exception(error_msg)
+
             try:
-                batch = self.openai_client.batches.retrieve(batch.id)
-                print(f"  Status: {batch.status} - {batch.request_counts.completed}/{batch.request_counts.total} completed")
+                content = self.openai_client.files.content(batch.output_file_id)
+                with open(result_file, "wb") as f:
+                    f.write(content.read())
+                print(f"✓ Results downloaded: {result_file}")
             except Exception as e:
-                print(f"  Warning: Failed to retrieve batch status: {str(e)}")
-            
-            retries += 1
-        
-        if batch.status != "completed":
-            error_msg = f"Batch processing failed with status: {batch.status}"
-            if batch.status == "failed":
-                error_msg += f"\nBatch ID: {batch.id}"
-                if hasattr(batch, 'errors') and batch.errors:
-                    error_msg += f"\nErrors: {batch.errors}"
-            raise Exception(error_msg)
-        
-        # Download results
-        result_file = self.config["output_dir"] / f"results_{so_hieu.replace('/', '_')}.jsonl"
-        try:
-            content = self.openai_client.files.content(batch.output_file_id)
-            with open(result_file, "wb") as f:
-                f.write(content.read())
-            print(f"✓ Results downloaded: {result_file}")
-        except Exception as e:
-            raise Exception(f"Failed to download batch results: {str(e)}")
+                raise Exception(f"Failed to download batch results: {str(e)}")
         
         # Process results and save to MongoDB
         print("\nProcessing results...")
@@ -504,7 +586,7 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
                     if not sentences:
                         continue
                     
-                    section_id = data["custom_id"].split("_part")[0]
+                    section_id = data["custom_id"].rsplit("_part", 1)[0]
                     
                     sequence = 1
                     for sentence in sentences:
@@ -533,6 +615,7 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
             if processing_errors > 0:
                 print(f"⚠ {processing_errors} errors occurred during processing")
             print(f"✓ Saved to MongoDB collection: processed_legal_sections")
+            self._mark_step_complete(so_hieu, "simplify_sentences", {"sentences_count": total_sentences})
             
             if total_sentences == 0:
                 raise Exception("No sentences were successfully processed from batch results")
@@ -559,6 +642,16 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
         print(f"{'='*60}\n")
         
         print(f"Processing document: {so_hieu}")
+        if not self.force and self._step_completed(so_hieu, "extract_triplets"):
+            existing_triplets = self.db.triplets.count_documents({"documents.so_hieu": so_hieu})
+            if existing_triplets > 0:
+                print(f"✓ Step 3 already completed previously, skipping ({existing_triplets} triplets found)")
+                return {
+                    "processed": 0,
+                    "triplets": existing_triplets,
+                    "no_triplets": 0,
+                    "errors": 0
+                }
         
         total_processed = 0
         total_triplets = 0
@@ -636,6 +729,7 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
         print(f"  Triplets extracted: {total_triplets}")
         print(f"  No triplets: {total_no_triplets}")
         print(f"  Errors: {total_errors}")
+        self._mark_step_complete(so_hieu, "extract_triplets", {"triplets_count": total_triplets})
         
         return {
             "processed": total_processed,
@@ -733,7 +827,7 @@ Example Transformation: Input: "Hành vi vi phạm quy định về hồ sơ đ�
 
 
 def run_cli_mode():
-    """Run pipeline in command-line mode"""
+    """Run pipeline in interactive command-line mode"""
     print("\n" + "="*60)
     print("Legal Document Processing Pipeline - CLI Mode")
     print("="*60 + "\n")
@@ -786,6 +880,41 @@ def run_cli_mode():
     result = pipeline.run_full_pipeline(document_info)
     
     return result
+
+
+def run_command_mode(args):
+    """Run pipeline in non-interactive terminal mode"""
+    pipeline = DocumentPipeline(
+        output_dir=args.output_dir,
+        resume=not args.no_resume,
+        force=args.force,
+    )
+    pipeline.initialize()
+
+    step = args.step
+    if step in ("full", "extract"):
+        if not args.title or not args.effective_date or not args.files:
+            raise SystemExit("--title, --effective-date, and at least one --file are required for extract/full mode")
+        document_info = {
+            "so_hieu": args.so_hieu,
+            "title": args.title,
+            "effective_date": args.effective_date,
+            "files": args.files,
+        }
+    else:
+        document_info = None
+
+    if step == "extract":
+        pipeline.step1_extract_document(document_info)
+        return
+    if step == "simplify":
+        pipeline.step2_simplify_sentences(args.so_hieu)
+        return
+    if step == "triplets":
+        pipeline.step3_extract_triplets(args.so_hieu)
+        return
+
+    pipeline.run_full_pipeline(document_info)
 
 
 def run_gui_mode():
@@ -1024,10 +1153,22 @@ def main():
         action="store_true",
         help="Run with graphical user interface (default)"
     )
+    parser.add_argument("--step", choices=["full", "extract", "simplify", "triplets"])
+    parser.add_argument("--so-hieu", dest="so_hieu")
+    parser.add_argument("--title")
+    parser.add_argument("--effective-date", dest="effective_date")
+    parser.add_argument("--file", dest="files", action="append", default=[])
+    parser.add_argument("--output-dir")
+    parser.add_argument("--force", action="store_true", help="Rerun steps even if previous state exists")
+    parser.add_argument("--no-resume", action="store_true", help="Disable reuse of previous batch/state artifacts")
     
     args = parser.parse_args()
-    
-    if args.cli:
+
+    if args.step or args.so_hieu:
+        if not args.so_hieu:
+            parser.error("--so-hieu is required in terminal command mode")
+        run_command_mode(args)
+    elif args.cli:
         run_cli_mode()
     else:
         run_gui_mode()

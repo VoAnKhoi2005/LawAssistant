@@ -16,7 +16,7 @@ celery_app = Celery(
     "document_processor",
     broker=REDIS_URL,
     backend=REDIS_URL,
-    include=["tasks.document_tasks"]
+    include=["worker.tasks.document_processing_tasks"]
 )
 
 # Celery configuration
@@ -35,10 +35,7 @@ celery_app.conf.update(
 
 # Task routing
 celery_app.conf.task_routes = {
-    "tasks.document_tasks.process_document": {"queue": "documents"},
-    "tasks.document_tasks.extract_text": {"queue": "documents"},
-    "tasks.document_tasks.simplify_sentences": {"queue": "documents"},
-    "tasks.document_tasks.extract_triplets": {"queue": "documents"},
+    "worker.tasks.document_processing_tasks.process_document": {"queue": "documents"},
 }
 
 if __name__ == "__main__":

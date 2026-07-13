@@ -42,7 +42,7 @@ def get_or_create_infrastructures():
         
         _nlp_extractor_cache = NLPTripletExtractor(
             vncorenlp_dir=settings.vncorenlp_model_path,
-            phonlp_dir=settings.phonlp_path,
+            phonlp_dir=settings.phonlp_model_path,
         )
         
         logger.info("NLP models initialized successfully")
@@ -99,8 +99,7 @@ def process_document(self, document_id: str, file_paths: List[str], metadata: Di
         processor = create_document_processor(db)
         
         # Run async pipeline in sync context (Celery workers are sync)
-        loop = asyncio.get_event_loop()
-        result = loop.run_until_complete(
+        result = asyncio.run(
             processor.process_document_pipeline(
                 document_id=document_id,
                 file_paths=file_paths,
