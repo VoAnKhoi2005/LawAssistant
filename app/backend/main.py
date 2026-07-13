@@ -142,7 +142,15 @@ async def lifespan(app: FastAPI):
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(lifespan=lifespan)
+    app = FastAPI(
+        title="LawAssistant Backend API",
+        description="FastAPI backend for the LawAssistant application.",
+        version="1.0.0",
+        openapi_url="/openapi.json",
+        docs_url="/docs",
+        redoc_url="/redoc",
+        lifespan=lifespan,
+    )
     app.add_exception_handler(AppException, app_exception_handler)
     app.add_exception_handler(Exception, general_exception_handler)
     

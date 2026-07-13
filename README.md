@@ -1,131 +1,142 @@
 # LawAssistant
 
-LawAssistant is an end-to-end Vietnamese legal document assistant with:
+LawAssistant is a Vietnamese legal assistant application with:
 - a FastAPI backend in `app/backend`
-- a Celery worker for document processing
 - a Flutter frontend in `app/frontend`
-- retrieval and knowledge-graph pipelines under `src/`
+- an optional Celery worker for backend document-processing jobs
 
-## Architecture
-- Frontend: Flutter web/desktop client calling the backend with `API_BASE_URL`
-- Backend API: FastAPI app with manual dependency injection via `app.state`
-- Worker: Celery queue for OCR, sentence simplification, and triplet extraction
-- Storage:
-  - MongoDB for users, documents, concepts, relations, triplets
-  - Redis for auth state and Celery broker/backend
+`src/` is kept as the original experimental codebase used during feature development. It is not the main production app surface.
 
-## Repository Layout
+## Main App Structure
 ```text
 app/
-  backend/    FastAPI API, Celery worker, Docker assets
-  frontend/   Flutter application
-src/
-  retrieval/          retrieval pipeline
-  triplet_extraction/ knowledge graph extraction code
-  update_pipeline/    batch document ingestion tools
-data/         raw and processed legal datasets
-docs/         diagrams and project documentation
-scripts/      experiments and one-off utilities
+  backend/    FastAPI backend
+    routers/        API routes
+    controllers/    request handling
+    services/       business logic
+    repositories/   data access
+    models/         backend models
+    dto/            request/response schemas
+    core/           config, security, celery, shared runtime
+    infrastructure/ concrete DB and processing implementations
+    pipeline/       backend retrieval pipeline
+    knowledge_graph/ backend ingestion and KG processing
+    worker/         Celery worker and tasks
+  frontend/   Flutter web/desktop client
+src/          original experimental and research code
+docs/         diagrams and documentation
+data/         datasets and local artifacts
+scripts/      one-off utilities and experiments
 ```
 
-## Prerequisites
+## Backend
+
+### Requirements
 - Python 3.10+
-- MongoDB running locally or reachable by connection string
-- Redis running locally or reachable by host/port
-- Flutter 3+ if you want to run the frontend
-- Required external assets for document processing:
+- MongoDB
+- Redis
+- Optional external services for worker flows:
   - OpenAI API key
-  - Google Cloud service-account JSON for Vision/Storage
+  - Google Cloud service-account JSON
   - VNCoreNLP model directory
   - PhoNLP model directory
 
-## Run The Backend Server
-
-### 1. Install backend dependencies
+### Local Run
 ```bash
 cd app/backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-On Windows PowerShell:
+Windows PowerShell:
 ```powershell
 cd app\backend
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### 2. Create `app/backend/.env`
-The backend reads settings from `app/backend/.env` through `core/config.py`.
+### Backend Environment
+Create `app/backend/.env`:
 
 ```env
-# Database
 MONGO_URI=mongodb://localhost:27017
-DB_NAME=lawassistant
+DB_NAME=law_assistant
 
-# Auth / JWT
 JWT_SECRET_KEY=change-me
 JWT_REFRESH_SECRET_KEY=change-me-too
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 REFRESH_TOKEN_EXPIRE_DAYS=7
 
-# Redis used by the FastAPI app
 REDIS_HOST=localhost
 REDIS_PORT=6379
 REDIS_PASSWORD=
-
-# Redis used by Celery / Flower
 REDIS_URL=redis://localhost:6379/0
 
-# External services
 OPENAI_API_KEY=your-openai-key
 OPENAI_MODEL=gpt-4o-mini
 GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/service-account.json
 GOOGLE_CLOUD_STORAGE_BUCKET=your-bucket
-
-# Local NLP assets
-VNCORENLP_MODEL_PATH=/absolute/path/to/vncorenlp
+VNCORENLP_MODEL_PATH=/absolute/path/to/VnCoreNLP-1.2
 PHONLP_MODEL_PATH=/absolute/path/to/phonlp
 ```
 
-### 3. Start supporting services
-Start MongoDB and Redis before the API.
+### Backend Endpoints
+When running locally:
+- API root: `http://localhost:8000`
+- OpenAPI schema: `http://localhost:8000/openapi.json`
+- Swagger: `http://localhost:8000/docs`
+- ReDoc: `http://localhost:8000/redoc`
 
-Example with Docker:
-```bash
-docker run -d --name lawassistant-mongo -p 27017:27017 mongo:7
-docker run -d --name lawassistant-redis -p 6379:6379 redis:7-alpine
-```
+### Worker
+Run the worker only if you need background document-processing tasks:
 
-### 4. Start the FastAPI server
 ```bash
 cd app/backend
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+python worker/worker.py
 ```
 
-If startup succeeds, the server is available at:
-- `http://localhost:8000`
-- `http://localhost:8000/docs` for Swagger UI
-- `http://localhost:8000/redoc` for ReDoc
+Optional Flower dashboard:
+```bash
+cd app/backend
+celery --app=core.celery_app flower --port=5555
+```
 
-API routers are mounted under:
-- `/api/auth`
-- `/api/users`
-- `/api/documents`
-- `/api/upload-files`
-- `/api/concepts`
-- `/api/relations`
-- `/api/triplets`
-- `/api/legal-sections`
-- `/api/section-relations`
+## Frontend
 
-## Run With Docker
-The repository now includes a root-level `docker-compose.yml` for local development.
+### Local Run
+```bash
+cd app/frontend
+flutter pub get
+flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:8000
+```
 
-Start the local stack:
+Useful commands:
+```bash
+flutter analyze
+flutter test
+flutter build web --dart-define=API_BASE_URL=https://api.yourdomain.com
+```
+
+### Frontend Environment
+The frontend primarily reads `API_BASE_URL` from `--dart-define`.
+
+If you use the local dotenv setup, create `app/frontend/.env`:
+
+```env
+API_BASE_URL=http://localhost:8000
+API_TIMEOUT=30000
+```
+
+## Docker
+
+The root `docker-compose.yml` is the main local container setup for backend + frontend.
+
+Start the stack:
 ```bash
 docker compose up --build
 ```
@@ -133,105 +144,29 @@ docker compose up --build
 This starts:
 - MongoDB on `localhost:27017`
 - Redis on `localhost:6379`
-- FastAPI backend on `http://localhost:8000`
-- Flutter web frontend on `http://localhost:3000`
+- Backend on `http://localhost:8000`
+- Frontend on `http://localhost:3000`
+
+Start the optional worker profile:
+```bash
+docker compose --profile worker up --build
+```
 
 Stop the stack:
 ```bash
 docker compose down
 ```
 
-If you also want document-processing jobs, start the optional worker profile:
-```bash
-docker compose --profile worker up --build
-```
+## Experimental Code
 
-### Docker environment overrides
-The Docker stack provides safe local defaults for the API, but you can override them from your shell before running Compose:
-
-```bash
-export DOCKER_OPENAI_API_KEY=your-key
-export DOCKER_OPENAI_MODEL=gpt-4o-mini
-export DOCKER_GOOGLE_APPLICATION_CREDENTIALS=/opt/credentials/google-service-account.json
-export DOCKER_GOOGLE_CLOUD_STORAGE_BUCKET=your-bucket
-export DOCKER_VNCORENLP_MODEL_PATH=/opt/models/VnCoreNLP-1.2
-export DOCKER_PHONLP_MODEL_PATH=/opt/models/phonlp
-export FRONTEND_API_BASE_URL=http://localhost:8000
-docker compose up --build
-```
-
-The compose file mounts these local folders into the containers:
-- `docker/credentials` -> `/opt/credentials`
-- `docker/models` -> `/opt/models`
-
-For the worker profile, place your files at:
-- `docker/credentials/google-service-account.json`
-- `docker/models/VnCoreNLP-1.2/`
-- `docker/models/phonlp/`
-
-Use the worker profile only after those files exist and the OpenAI / bucket settings are valid.
-
-## Run Background Processing
-Document ingestion and triplet extraction require the Celery worker in addition to the API.
-
-Start the worker from `app/backend`:
-```bash
-python worker/worker.py
-```
-
-Optional Flower dashboard:
-```bash
-celery --app=core.celery_app flower --port=5555
-```
-
-Flower will be available at `http://localhost:5555`.
-
-## Run The Frontend
-```bash
-cd app/frontend
-flutter pub get
-flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:8000
-```
-
-Useful frontend commands:
-```bash
-flutter analyze
-flutter test
-flutter build web --dart-define=API_BASE_URL=https://api.yourdomain.com
-```
-
-## Document Ingestion Pipeline
-The repository also includes a standalone ingestion flow in `src/update_pipeline`.
-
-Run the GUI mode:
-```bash
-python src/update_pipeline/add_document_pipeline.py --gui
-```
-
-Run the CLI mode:
-```bash
-python src/update_pipeline/add_document_pipeline.py --cli
-```
-
-## Docker Notes
-The older `app/backend/docker-compose.yml` is backend-only and incomplete for the full application. Prefer the root `docker-compose.yml` for local work with both backend and frontend.
+`src/` contains the original experimental retrieval, extraction, and pipeline code used while developing features. Keep using `app/backend` and `app/frontend` as the main application entry points.
 
 ## Diagrams
-### System context
+### System Context
 ![System context diagram](docs/c4/System_context_diagram.png)
 
 ### Container
 ![Container diagram](docs/c4/Container_diagram.png)
 
-### Backend components
-![Component diagram](docs/c4/Component_diagram_BE.svg)
-
-### Processing overview
-![Document processing pipeline](docs/process.png)
-
-### Pipeline illustration
-![Pipeline UI/Chatbot](docs/Pipeline%20UIT%20Chatbot.png)
-
-## Testing
-- Frontend: `flutter test`
-- Backend: no maintained automated test suite is documented in the repository yet
+### Backend Components
+![Backend component diagram](docs/c4/Component_diagram_BE.svg)
