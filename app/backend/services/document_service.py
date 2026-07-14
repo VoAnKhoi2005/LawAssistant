@@ -74,6 +74,22 @@ class DocumentService:
         """
         Create a document with file references and start processing
         """
+        existing_document_dict = await self.document_repository.find_by_so_hieu(so_hieu)
+        if existing_document_dict and existing_document_dict.get("user_id") == user_id:
+            existing_document = self._dict_to_document(existing_document_dict)
+            return {
+                "document_id": existing_document.id,
+                "task_id": existing_document.task_id,
+                "status": existing_document.status or "created",
+                "message": "Document already exists; reusing existing processing state",
+                "file_refs": [
+                    {"file_id": file_ref.file_id, "filename": file_ref.filename}
+                    for file_ref in (existing_document.files or [])
+                ],
+                "metadata": existing_document.model_dump(by_alias=True),
+                "reused_existing": True,
+            }
+
         # Validate that all file IDs exist and are uploaded
         file_refs = []
         file_paths = []
@@ -169,6 +185,17 @@ class DocumentService:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"Failed to queue document processing: {str(e)}"
             )
+
+    async def recover_pending_documents(self) -> int:
+        resumable_statuses = ["created", "queued", "extracting_triplets"]
+        pending_documents = await self.document_repository.find_by_statuses(resumable_statuses)
+        recovered_count = 0
+
+        for document_dict in pending_documents:
+            if await self._requeue_existing_document(document_dict):
+                recovered_count += 1
+
+        return recovered_count
     
     async def update_document(self, document_id: str, document: Document, user_id: str = None) -> Document:
         """Update document with optional user authorization check"""
@@ -201,3 +228,41 @@ class DocumentService:
         # Convert MongoDB dict to Document model
         document_dict["_id"] = str(document_dict["_id"])
         return Document(**document_dict)
+
+    async def _requeue_existing_document(self, document_dict: dict) -> bool:
+        document_id = str(document_dict["_id"])
+        files = document_dict.get("files") or document_dict.get("source_files") or []
+        if not files:
+            return False
+
+        file_paths = []
+        file_ids = []
+        for file_ref in files:
+            file_id = file_ref.get("file_id") if isinstance(file_ref, dict) else getattr(file_ref, "file_id", None)
+            if not file_id:
+                continue
+
+            file_record = await self.upload_file_repository.find_by_id(file_id)
+            if not file_record or not file_record.get("storage_path"):
+                continue
+
+            file_ids.append(file_id)
+            file_paths.append(file_record["storage_path"])
+
+        if not file_paths:
+            return False
+
+        for file_id in file_ids:
+            await self.upload_file_repository.update_status(file_id, "processing")
+
+        task = process_document.delay(
+            document_id=document_id,
+            file_paths=file_paths,
+            metadata=self._dict_to_document(document_dict).model_dump(by_alias=True),
+        )
+
+        await self.document_repository.update_from_dict(document_id, {
+            "task_id": task.id,
+            "status": "queued",
+        })
+        return True

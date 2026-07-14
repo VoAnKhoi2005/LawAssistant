@@ -32,7 +32,7 @@ scripts/      one-off utilities and experiments
 ## Backend
 
 ### Requirements
-- Python 3.10+
+- Python 3.13.14
 - MongoDB
 - Redis
 - Optional external services for worker flows:
@@ -44,7 +44,7 @@ scripts/      one-off utilities and experiments
 ### Local Run
 ```bash
 cd app/backend
-python -m venv .venv
+python3.13 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
@@ -53,7 +53,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 Windows PowerShell:
 ```powershell
 cd app\backend
-python -m venv .venv
+py -3.13 -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000

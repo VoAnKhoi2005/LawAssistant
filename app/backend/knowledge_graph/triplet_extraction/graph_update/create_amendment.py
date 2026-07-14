@@ -1,6 +1,10 @@
 from typing import Set
-from src.db import build_tree_downward, init_mongo
-from src.triplet_extraction.graph_update.amendment_detection import add_amendment_ref_to_nodes, resolve_full_path
+
+from knowledge_graph.mongo_helpers import build_tree_downward, init_mongo
+from knowledge_graph.triplet_extraction.graph_update.amendment_detection import (
+    add_amendment_ref_to_nodes,
+    resolve_full_path,
+)
 
 
 def main():

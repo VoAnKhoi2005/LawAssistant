@@ -1,8 +1,10 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from bson import ObjectId
+from pymongo import ReturnDocument
 
 from models.triplet_model import Triplet
+from models.common import DocumentRef
 
 
 class TripletRepository:
@@ -65,3 +67,26 @@ class TripletRepository:
             {"documents.section_id": document_id}
         ).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
+
+    async def count_by_document(self, document_id: str) -> int:
+        return await self.collection.count_documents({"documents.section_id": document_id})
+
+    async def upsert_graph_triplet(self, triplet: Triplet, document_ref: DocumentRef) -> Triplet:
+        triplet_dict = await self.collection.find_one_and_update(
+            {
+                "subject_id": triplet.subject_id,
+                "relation_id": triplet.relation_id,
+                "object_id": triplet.object_id,
+            },
+            {
+                "$addToSet": {"documents": document_ref.model_dump()},
+                "$setOnInsert": {
+                    "subject_name": triplet.subject_name,
+                    "relation_name": triplet.relation_name,
+                    "object_name": triplet.object_name,
+                },
+            },
+            upsert=True,
+            return_document=ReturnDocument.AFTER,
+        )
+        return Triplet(**triplet_dict)

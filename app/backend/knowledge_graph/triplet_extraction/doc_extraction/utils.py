@@ -1,13 +1,16 @@
 import hashlib
-import os
 import re
 from pathlib import Path
 
-import win32com.client as win32
 from bson import ObjectId
 
 
 def convert_doc_to_docx(input_path, output_path=None):
+    try:
+        import win32com.client as win32
+    except ImportError as exc:
+        raise RuntimeError("DOC to DOCX conversion requires win32com on Windows") from exc
+
     input_path = Path(input_path)
 
     word = win32.Dispatch("Word.Application")

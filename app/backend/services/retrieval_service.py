@@ -86,8 +86,11 @@ class RetrievalService:
         if self._mongo_client is None:
             self._mongo_client = MongoClient(settings.mongo_uri)
 
-        vncorenlp_client = init_vncorenlp(settings.vncorenlp_model_path)
-        phonlp_model = phonlp.load(save_dir=settings.phonlp_model_path)
+        vncorenlp_client = None
+        phonlp_model = None
+        if request.use_graph_retrieval:
+            vncorenlp_client = init_vncorenlp(settings.vncorenlp_model_path)
+            phonlp_model = phonlp.load(save_dir=settings.phonlp_model_path)
 
         return RetrievalPipeline(
             openai_api_key=settings.openai_api_key,

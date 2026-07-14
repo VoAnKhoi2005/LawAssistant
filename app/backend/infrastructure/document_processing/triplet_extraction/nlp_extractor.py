@@ -1,3 +1,5 @@
+import contextlib
+import io
 from typing import List, Tuple
 import os
 import logging
@@ -53,7 +55,7 @@ class NLPTripletExtractor(ITripletExtractor):
         if self._logger is None:
             self._logger, _, _ = setup_logger(
                 name="triplet_extraction",
-                level=logging.DEBUG,
+                level=logging.INFO,
                 log_to_file=False
             )
     
@@ -68,14 +70,16 @@ class NLPTripletExtractor(ITripletExtractor):
                 continue
             
             try:
-                triplets = triplet_extraction(
-                    text=sentence,
-                    vncorenlp_client=self._vncorenlp_client,
-                    phoNLP_model=self._phoNLP_model,
-                    stopwords=self._stopwords,
-                    logger=self._logger,
-                    max_depth=3,
-                )
+                # Suppress third-party progress bars written to stderr.
+                with contextlib.redirect_stderr(io.StringIO()):
+                    triplets = triplet_extraction(
+                        text=sentence,
+                        vncorenlp_client=self._vncorenlp_client,
+                        phoNLP_model=self._phoNLP_model,
+                        stopwords=self._stopwords,
+                        logger=self._logger,
+                        max_depth=3,
+                    )
                 
                 # Filter and convert to list of tuples
                 for (c1, r, c2) in triplets:
@@ -83,7 +87,7 @@ class NLPTripletExtractor(ITripletExtractor):
                         all_triplets.append((c1, r, c2))
                         
             except Exception as e:
-                print(f"Error extracting triplets from sentence: {str(e)}")
+                self._logger.warning("Error extracting triplets from sentence: %s", str(e))
                 continue
         
         return all_triplets

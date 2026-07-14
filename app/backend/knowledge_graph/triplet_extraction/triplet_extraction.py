@@ -1,5 +1,5 @@
-from src.triplet_extraction.pos_taging import parsing_result
-from src.utils import clean_text
+from knowledge_graph.triplet_extraction.pos_taging import parsing_result, init_vncorenlp
+from knowledge_graph.triplet_extraction.utils import clean_text, load_stopwords, setup_logger
 
 def parse_dataframe_to_tokens(df):
     """Convert DataFrame to a list of token dicts"""
@@ -510,11 +510,8 @@ def triplet_extraction(text, vncorenlp_client, phoNLP_model, stopwords, logger, 
 
 def main():
     import logging
-    from src.utils import load_stopwords
-    from src.triplet_extraction.pos_taging import init_vncorenlp
     import phonlp
     import os
-    from src.utils import setup_logger
     import re
 
     current_dir = os.getcwd()

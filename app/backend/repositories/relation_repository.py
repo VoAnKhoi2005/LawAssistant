@@ -1,8 +1,10 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from bson import ObjectId
+from pymongo import ReturnDocument
 
 from models.relation_model import Relation
+from models.common import DocumentRef
 
 
 class RelationRepository:
@@ -18,7 +20,12 @@ class RelationRepository:
         return await self.collection.find_one({"_id": ObjectId(relation_id)})
     
     async def find_by_relation_name(self, relation_name: str, skip: int = 0, limit: int = 100) -> List[dict]:
-        cursor = self.collection.find({"relation_name": relation_name}).skip(skip).limit(limit)
+        cursor = self.collection.find({
+            "$or": [
+                {"name": relation_name},
+                {"relation_name": relation_name},
+            ]
+        }).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
     
     async def create(self, relation: Relation) -> Relation:
@@ -50,7 +57,7 @@ class RelationRepository:
             return existing_list[0]
         
         relation = Relation(
-            relation_name=relation_name,
+            name=relation_name,
             subject_name=subject_name,
             object_name=object_name
         )
@@ -58,3 +65,27 @@ class RelationRepository:
         relation_dict = created.model_dump(by_alias=True)
         relation_dict["_id"] = created.id
         return relation_dict
+
+    async def find_or_create_with_document(self, relation_name: str, document_ref: DocumentRef) -> str:
+        relation_dict = await self.collection.find_one_and_update(
+            {
+                "$or": [
+                    {"name": relation_name},
+                    {"relation_name": relation_name},
+                ]
+            },
+            {
+                "$addToSet": {"documents": document_ref.model_dump()},
+                "$setOnInsert": {
+                    "name": relation_name,
+                    "description": None,
+                    "synonym": [],
+                },
+                "$unset": {
+                    "relation_name": "",
+                },
+            },
+            upsert=True,
+            return_document=ReturnDocument.AFTER,
+        )
+        return str(relation_dict["_id"])

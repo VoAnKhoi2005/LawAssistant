@@ -5,8 +5,7 @@ from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 
-from src.db import init_mongo
-
+from knowledge_graph.mongo_helpers import init_mongo
 from knowledge_graph.triplet_extraction.doc_extraction.google_pdf_extraction import extract_text_from_pdf_google_vision
 from knowledge_graph.triplet_extraction.doc_extraction.ms_word_extraction import extract_text_from_docx
 from knowledge_graph.triplet_extraction.doc_extraction.parse_text_to_section import parse_document

@@ -9,9 +9,9 @@ from models.common import DocumentRef
 class Concept(BaseModel):
     id: Optional[str] = Field(None, alias="_id")
     description: Optional[str] = None
-    documents: List[DocumentRef] = []
+    documents: List[DocumentRef] = Field(default_factory=list)
     name: str
-    synonym: List[str] = []
+    synonym: List[str] = Field(default_factory=list)
 
     @field_validator('id', mode='before')
     @classmethod

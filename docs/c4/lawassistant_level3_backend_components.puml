@@ -1,129 +1,92 @@
 @startuml
 !includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-title LawAssistant - Backend Components (C4 Level 3)
+title LawAssistant - UI → Backend connections (actions to implement) (C4 Level 3)
 
-Person(user, "End user", "Logs in, uploads legal documents, views extracted knowledge graph")
-Container_Ext(frontend, "Frontend", "Flutter (Web/Desktop)", "UI")
+Person(user, "End user", "Uses the app")
+
+' FE exists but is not wired to BE yet: all relations below are PLANNED actions.
+Container_Boundary(frontend, "Frontend (Flutter)") {
+  Component(loginUi, "Login UI", "LoginPage", "TODO: call Auth APIs")
+  Component(documentsUi, "Documents UI", "DocumentsPage", "TODO: list/create documents")
+  Component(sectionsUi, "Sections UI", "SectionsPage", "TODO: load/search legal sections")
+  Component(knowledgeGraphUi, "Knowledge Graph UI", "KnowledgeGraphPage", "TODO: load graph data")
+}
 
 System_Boundary(law, "LawAssistant") {
 
   Container_Boundary(api, "Backend API (FastAPI)") {
-    Component(fastapiApp, "FastAPI app", "Python/FastAPI", "Manual DI, registers routers, exception handlers")
-    Component(security, "Security & JWT", "core/security.py", "Password hashing, JWT encode/decode, get_current_user")
-    Component(errorHandler, "Error handlers", "core/error_handler.py", "Formats AppException and unexpected errors")
-    Component(apiResponse, "API response helper", "utils/api_response_helper.py", "success_response / paginated_success_response")
+    Component(signInApi, "Sign In API", "Issue JWT access/refresh")
+    Component(refreshApi, "Refresh Token API", "Refresh access token")
+    Component(logoutApi, "Logout API", "Invalidate refresh token")
 
-    Component(authRouter, "Auth router", "routers/auth_router.py", "/api/auth")
-    Component(userRouter, "User router", "routers/user_router.py", "/api/users")
-    Component(documentRouter, "Document router", "routers/document_router.py", "/api/documents")
-    Component(uploadRouter, "UploadFile router", "routers/upload_file_router.py", "/api/upload-files")
-    Component(kgRouters, "Knowledge Graph routers", "routers/*_router.py", "concepts/relations/triplets/sections")
+    Component(accountsApi, "User API", "Return current user profile")
 
-    Component(authController, "AuthController", "controllers/auth_controller.py", "Auth endpoints")
-    Component(userController, "UserController", "controllers/user_controller.py", "User endpoints")
-    Component(documentController, "DocumentController", "controllers/document_controller.py", "Document endpoints")
-    Component(uploadController, "UploadFileController", "controllers/upload_file_controller.py", "Upload endpoints")
-    Component(kgControllers, "KG controllers", "controllers/*_controller.py", "KG endpoints")
+    Component(documentsApi, "Documents API", "CRUD documents + queue processing")
+    Component(uploadFilesApi, "Upload Files API", "Upload/download; manage file metadata")
 
-    Component(authService, "AuthService", "services/auth_service.py", "Register/login/refresh/logout")
-    Component(userService, "UserService", "services/user_service.py", "User queries")
-    Component(documentService, "DocumentService", "services/document_service.py", "Document CRUD + queue processing")
-    Component(uploadService, "UploadFileService", "services/upload_file_service.py", "Save files to uploads/<userId>/")
-    Component(kgServices, "KG services", "services/*_service.py", "Concepts/relations/triplets/legal sections")
+    Component(legalSectionsApi, "Legal Sections API", "Browse/search legal sections")
+    Component(conceptsApi, "Concepts API", "Concept nodes")
+    Component(relationsApi, "Relations API", "Relation edges")
+    Component(tripletsApi, "Triplets API", "Triplet facts")
+    Component(sectionRelationsApi, "Section Relations API", "Section-to-section relations")
 
-    Component(userRepo, "UserRepository", "repositories/user_repository.py", "MongoDB users collection")
-    Component(documentRepo, "DocumentRepository", "repositories/document_repository.py", "MongoDB documents collection")
-    Component(uploadRepo, "UploadFileRepository", "repositories/upload_file_repository.py", "MongoDB uploaded_files collection")
-    Component(kgRepos, "KG repositories", "repositories/*_repository.py", "MongoDB collections")
-
-    Component(mongoClient, "MongoDB client", "infrastructure/db/database.py", "Motor connection + get_database")
-    Component(redisClient, "Redis client", "core/redis_client.py", "Async Redis connection + get_redis")
-
-    Component(celeryProducer, "Celery task producer", "worker/tasks/document_processing_tasks.py", "process_document.delay(...)")
-    Component(localUploads, "Uploads folder", "Local filesystem", "Stored uploaded documents")
+    Component(authMiddleware, "JWT auth dependency", "get_current_user")
+    Component(exceptionHandling, "Exception handling", "Consistent errors")
   }
 
   Container_Boundary(worker, "Document Worker (Celery)") {
-    Component(workerEntry, "Worker entrypoint", "worker/worker.py", "Starts Celery worker (queue: documents)")
-    Component(docTask, "process_document task", "worker/tasks/document_processing_tasks.py", "Orchestrates pipeline")
-    Component(docProcessor, "DocumentProcessor", "worker/document_processor.py", "Extract → Simplify → Extract triplets")
-
-    Component(docExtractor, "Document extractor", "GoogleCloudDocumentExtractor", "PDF OCR (GCP) + doc extraction")
-    Component(textSimplifier, "Text simplifier", "OpenAITextSimplifier", "Simplifies Vietnamese legal sentences")
-    Component(tripletExtractor, "Triplet extractor", "NLPTripletExtractor", "VnCoreNLP + PhoNLP")
-
-    Component(localModels, "Model files", "Local filesystem", "VNCoreNLP/PhoNLP directories")
+    Component(documentProcessingWorker, "Document Processing Worker", "Celery task: process_document", "Extract → simplify → extract triplets")
   }
 
-  ContainerDb(mongo, "MongoDB", "MongoDB", "Users, documents, concepts, relations, triplets")
-  ContainerDb(redis, "Redis", "Redis", "Celery broker/backend + refresh token store")
+  ContainerDb(mongo, "MongoDB", "MongoDB", "Users, documents, KG entities")
+  ContainerDb(redis, "Redis", "Redis", "Refresh tokens + Celery broker/backend")
 
   System_Ext(openai, "OpenAI API", "Text simplification")
-  System_Ext(gcp, "Google Cloud Vision + Storage", "OCR for PDFs + bucket storage")
+  System_Ext(gcp, "Google Cloud Vision + Storage", "OCR for PDFs")
+  System_Ext(nlpModels, "Local NLP models", "VnCoreNLP + PhoNLP")
 }
 
-' Frontend -> Backend
-Rel(user, frontend, "Uses")
-Rel(frontend, authRouter, "POST /api/auth/*", "JSON/HTTP")
-Rel(frontend, documentRouter, "CRUD /api/documents", "JSON/HTTP")
-Rel(frontend, uploadRouter, "Upload/download files", "multipart/HTTP")
-Rel(frontend, kgRouters, "Query KG endpoints", "JSON/HTTP")
+' --- UI usage ---
+Rel(user, loginUi, "Uses")
+Rel(user, documentsUi, "Uses")
+Rel(user, sectionsUi, "Uses")
+Rel(user, knowledgeGraphUi, "Uses")
 
-' Request handling
-Rel(fastapiApp, errorHandler, "Registers")
-Rel(fastapiApp, authRouter, "Includes")
-Rel(fastapiApp, userRouter, "Includes")
-Rel(fastapiApp, documentRouter, "Includes")
-Rel(fastapiApp, uploadRouter, "Includes")
-Rel(fastapiApp, kgRouters, "Includes")
+' --- UI actions → BE APIs (PLANNED) ---
+Rel(loginUi, signInApi, "Action: Sign in (TODO)", "JSON/HTTP")
+Rel(loginUi, registerApi, "Action: Register (TODO)", "JSON/HTTP")
+Rel(loginUi, refreshApi, "Action: Refresh session (TODO)", "JSON/HTTP")
+Rel(loginUi, logoutApi, "Action: Logout (TODO)", "JSON/HTTP")
+Rel(loginUi, accountsApi, "Action: Load current user (TODO)", "JSON/HTTP")
 
-Rel(authRouter, authController, "Delegates (via app.state)")
-Rel(userRouter, userController, "Delegates (via app.state)")
-Rel(documentRouter, documentController, "Delegates (via app.state)")
-Rel(uploadRouter, uploadController, "Delegates (via app.state)")
-Rel(kgRouters, kgControllers, "Delegates (via app.state)")
+Rel(documentsUi, documentsApi, "Action: List documents (TODO)", "JSON/HTTP")
+Rel(documentsUi, documentsApi, "Action: Create document (queue processing) (TODO)", "JSON/HTTP")
+Rel(documentsUi, uploadFilesApi, "Action: Upload file(s) (TODO)", "multipart/HTTP")
+Rel(documentsUi, uploadFilesApi, "Action: Track file status / download (TODO)", "JSON/HTTP")
 
-Rel(security, userService, "Loads user for get_current_user")
-Rel(authController, authService, "Calls")
-Rel(userController, userService, "Calls")
-Rel(documentController, documentService, "Calls")
-Rel(uploadController, uploadService, "Calls")
-Rel(kgControllers, kgServices, "Calls")
+Rel(sectionsUi, legalSectionsApi, "Action: List/search sections (TODO)", "JSON/HTTP")
 
-Rel(authService, userRepo, "Reads/Writes")
-Rel(authService, redisClient, "Stores refresh tokens")
-Rel(userService, userRepo, "Reads")
+Rel(knowledgeGraphUi, tripletsApi, "Action: Load triplets (TODO)", "JSON/HTTP")
+Rel(knowledgeGraphUi, conceptsApi, "Action: Load concepts (TODO)", "JSON/HTTP")
+Rel(knowledgeGraphUi, relationsApi, "Action: Load relations (TODO)", "JSON/HTTP")
+Rel(knowledgeGraphUi, sectionRelationsApi, "Action: Load section relations (TODO)", "JSON/HTTP")
 
-Rel(documentService, documentRepo, "Reads/Writes")
-Rel(documentService, uploadRepo, "Reads/Writes file status")
-Rel(documentService, celeryProducer, "Enqueues processing")
+' --- Key backend dependencies (kept minimal) ---
+Rel(signInApi, mongo, "Read user", "MongoDB")
+Rel(signInApi, redis, "Store refresh token", "Redis")
+Rel(refreshApi, redis, "Validate refresh token", "Redis")
+Rel(logoutApi, redis, "Delete refresh token", "Redis")
 
-Rel(uploadService, uploadRepo, "Reads/Writes metadata")
-Rel(uploadService, localUploads, "Stores files")
+Rel(documentsApi, mongo, "Read/write documents", "MongoDB")
+Rel(documentsApi, redis, "Enqueue processing", "Celery/Redis")
+Rel(uploadFilesApi, mongo, "Read/write file metadata", "MongoDB")
 
-Rel(kgServices, kgRepos, "Reads/Writes")
-
-Rel(userRepo, mongoClient, "Uses")
-Rel(documentRepo, mongoClient, "Uses")
-Rel(uploadRepo, mongoClient, "Uses")
-Rel(kgRepos, mongoClient, "Uses")
-
-Rel(mongoClient, mongo, "Connects")
-Rel(redisClient, redis, "Connects")
-Rel(celeryProducer, redis, "Publishes tasks", "Celery/Redis")
-
-' Worker pipeline
-Rel(workerEntry, redis, "Consumes tasks", "Celery/Redis")
-Rel(docTask, docProcessor, "Runs")
-Rel(docProcessor, mongo, "Updates document + writes triplets", "MongoDB")
-Rel(docProcessor, docExtractor, "Extracts text")
-Rel(docProcessor, textSimplifier, "Simplifies")
-Rel(docProcessor, tripletExtractor, "Extracts triplets")
-
-Rel(docExtractor, gcp, "OCR PDFs", "HTTPS")
-Rel(textSimplifier, openai, "LLM call", "HTTPS")
-Rel(tripletExtractor, localModels, "Loads")
+Rel(documentProcessingWorker, redis, "Consume tasks", "Celery/Redis")
+Rel(documentProcessingWorker, mongo, "Write KG entities", "MongoDB")
+Rel(documentProcessingWorker, gcp, "OCR PDFs", "HTTPS")
+Rel(documentProcessingWorker, openai, "Simplify text", "HTTPS")
+Rel(documentProcessingWorker, nlpModels, "Triplet extraction", "Local FS")
 
 SHOW_LEGEND()
 @enduml

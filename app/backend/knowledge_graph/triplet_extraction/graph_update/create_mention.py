@@ -1,6 +1,10 @@
 from typing import Set, Dict, Any, Optional
-from src.db import init_mongo
-from src.triplet_extraction.graph_update.amendment_detection import resolve_full_path, parse_amendment_reference
+
+from knowledge_graph.mongo_helpers import init_mongo
+from knowledge_graph.triplet_extraction.graph_update.amendment_detection import (
+    parse_amendment_reference,
+    resolve_full_path,
+)
 
 
 def get_section_so_hieu(sections_col, section_id) -> Optional[str]:

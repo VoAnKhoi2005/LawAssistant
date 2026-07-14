@@ -18,35 +18,30 @@ services:
 
   backend:
     build:
-      context: ./app/backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/backend.Dockerfile
+      args:
+        PYTHON_VERSION: 3.13.14
+        TORCH_VERSION: 2.7.0
     container_name: lawassistant-backend
     depends_on:
       - mongodb
       - redis
+    env_file:
+      - app/backend/.env
     environment:
       MONGO_URI: mongodb://mongodb:27017
-      DB_NAME: law_assistant
-      JWT_SECRET_KEY: change-me
-      JWT_REFRESH_SECRET_KEY: change-me-too
-      ALGORITHM: HS256
-      ACCESS_TOKEN_EXPIRE_MINUTES: 60
-      REFRESH_TOKEN_EXPIRE_DAYS: 7
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ""
       REDIS_URL: redis://redis:6379/0
-      OPENAI_API_KEY: ${DOCKER_OPENAI_API_KEY:-local-dev-placeholder}
-      OPENAI_MODEL: ${DOCKER_OPENAI_MODEL:-gpt-4o-mini}
+      WORKER_CONCURRENCY: ${DOCKER_WORKER_CONCURRENCY:-2}
+      AUTO_START_WORKER: ${DOCKER_AUTO_START_WORKER:-true}
       GOOGLE_APPLICATION_CREDENTIALS: ${DOCKER_GOOGLE_APPLICATION_CREDENTIALS:-/opt/credentials/google-service-account.json}
-      GOOGLE_CLOUD_STORAGE_BUCKET: ${DOCKER_GOOGLE_CLOUD_STORAGE_BUCKET:-local-dev-bucket}
-      VNCORENLP_MODEL_PATH: ${DOCKER_VNCORENLP_MODEL_PATH:-/opt/models/VnCoreNLP-1.2}
-      PHONLP_MODEL_PATH: ${DOCKER_PHONLP_MODEL_PATH:-/opt/models/phonlp}
+      VNCORENLP_MODEL_PATH: ${DOCKER_VNCORENLP_MODEL_PATH:-/app/infrastructure/document_processing/nlp_models/VnCoreNLP-1.2}
+      PHONLP_MODEL_PATH: ${DOCKER_PHONLP_MODEL_PATH:-/app/infrastructure/document_processing/nlp_models/phonlp}
     ports:
       - "8000:8000"
-    volumes:
-      - ./docker/credentials:/opt/credentials:ro
-      - ./docker/models:/opt/models:ro
     command: uvicorn main:app --host 0.0.0.0 --port 8000
 
   frontend:
@@ -63,33 +58,28 @@ services:
 
   worker:
     build:
-      context: ./app/backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/backend.Dockerfile
+      args:
+        PYTHON_VERSION: 3.13.14
+        TORCH_VERSION: 2.7.0
     container_name: lawassistant-worker
     depends_on:
       - mongodb
       - redis
+    env_file:
+      - app/backend/.env
     environment:
       MONGO_URI: mongodb://mongodb:27017
-      DB_NAME: law_assistant
-      JWT_SECRET_KEY: change-me
-      JWT_REFRESH_SECRET_KEY: change-me-too
-      ALGORITHM: HS256
-      ACCESS_TOKEN_EXPIRE_MINUTES: 60
-      REFRESH_TOKEN_EXPIRE_DAYS: 7
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ""
       REDIS_URL: redis://redis:6379/0
-      OPENAI_API_KEY: ${DOCKER_OPENAI_API_KEY:-local-dev-placeholder}
-      OPENAI_MODEL: ${DOCKER_OPENAI_MODEL:-gpt-4o-mini}
+      WORKER_CONCURRENCY: ${DOCKER_WORKER_CONCURRENCY:-2}
+      AUTO_START_WORKER: ${DOCKER_AUTO_START_WORKER:-false}
       GOOGLE_APPLICATION_CREDENTIALS: ${DOCKER_GOOGLE_APPLICATION_CREDENTIALS:-/opt/credentials/google-service-account.json}
-      GOOGLE_CLOUD_STORAGE_BUCKET: ${DOCKER_GOOGLE_CLOUD_STORAGE_BUCKET:-local-dev-bucket}
-      VNCORENLP_MODEL_PATH: ${DOCKER_VNCORENLP_MODEL_PATH:-/opt/models/VnCoreNLP-1.2}
-      PHONLP_MODEL_PATH: ${DOCKER_PHONLP_MODEL_PATH:-/opt/models/phonlp}
-    volumes:
-      - ./docker/credentials:/opt/credentials:ro
-      - ./docker/models:/opt/models:ro
+      VNCORENLP_MODEL_PATH: ${DOCKER_VNCORENLP_MODEL_PATH:-/app/infrastructure/document_processing/nlp_models/VnCoreNLP-1.2}
+      PHONLP_MODEL_PATH: ${DOCKER_PHONLP_MODEL_PATH:-/app/infrastructure/document_processing/nlp_models/phonlp}
     command: python worker/worker.py
     profiles:
       - worker

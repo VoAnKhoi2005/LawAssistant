@@ -8,7 +8,7 @@ from models.common import DocumentRef
 class Triplet(BaseModel):
     id: Optional[str] = Field(None, alias="_id")
 
-    documents: List[DocumentRef] = []
+    documents: List[DocumentRef] = Field(default_factory=list)
 
     object_id: Optional[str] = None
     object_name: str

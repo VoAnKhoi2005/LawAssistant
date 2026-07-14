@@ -20,6 +20,10 @@ class LegalSectionRepository:
     async def find_by_so_hieu(self, so_hieu: str, skip: int = 0, limit: int = 100) -> List[dict]:
         cursor = self.collection.find({"so_hieu": so_hieu}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
+
+    async def find_all_by_so_hieu(self, so_hieu: str) -> List[dict]:
+        cursor = self.collection.find({"so_hieu": so_hieu})
+        return await cursor.to_list(length=None)
     
     async def search_by_title(self, title: str, skip: int = 0, limit: int = 100) -> List[dict]:
         cursor = self.collection.find({"title": {"$regex": title, "$options": "i"}}).skip(skip).limit(limit)
@@ -46,3 +50,15 @@ class LegalSectionRepository:
     async def delete(self, section_id: str) -> bool:
         result = await self.collection.delete_one({"_id": ObjectId(section_id)})
         return result.deleted_count > 0
+
+    async def delete_by_so_hieu(self, so_hieu: str) -> int:
+        result = await self.collection.delete_many({"so_hieu": so_hieu})
+        return result.deleted_count
+
+    async def upsert_from_dict(self, section_id: str, section_data: dict) -> dict:
+        await self.collection.update_one(
+            {"_id": section_id},
+            {"$set": section_data},
+            upsert=True,
+        )
+        return await self.collection.find_one({"_id": section_id})

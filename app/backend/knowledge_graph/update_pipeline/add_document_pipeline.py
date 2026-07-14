@@ -23,25 +23,32 @@ from typing import List, Dict, Any
 import pandas as pd
 from dotenv import load_dotenv
 from openai import OpenAI
-from pymongo import MongoClient
+import phonlp
 from transformers.integrations import tiktoken
 
-# Import required modules from existing codebase
-try:
-    from src.db import init_mongo, insert_triplet_batch_mongo
-    from src.triplet_extraction.doc_extraction.google_pdf_extraction import extract_text_from_pdf_google_vision
-    from src.triplet_extraction.doc_extraction.ms_word_extraction import extract_text_from_docx
-    from src.triplet_extraction.doc_extraction.parse_text_to_section import parse_document
-    from src.triplet_extraction.doc_extraction.utils import convert_doc_to_docx, strip_markdown_formatting, clean_title
-    from src.triplet_extraction.pos_taging import init_vncorenlp
-    from src.triplet_extraction.triplet_extraction import triplet_extraction
-    from src.triplet_extraction.utils import load_synonym_dict, load_stopwords, setup_logger
-    from src.utils import clean_text
-    import phonlp
-except ImportError as e:
-    print(f"Error importing required modules: {e}")
-    print("Make sure you're running this from the project root directory")
-    sys.exit(1)
+from knowledge_graph.mongo_helpers import init_mongo, insert_triplet_batch_mongo
+from knowledge_graph.triplet_extraction.doc_extraction.google_pdf_extraction import (
+    extract_text_from_pdf_google_vision,
+)
+from knowledge_graph.triplet_extraction.doc_extraction.ms_word_extraction import (
+    extract_text_from_docx,
+)
+from knowledge_graph.triplet_extraction.doc_extraction.parse_text_to_section import (
+    parse_document,
+)
+from knowledge_graph.triplet_extraction.doc_extraction.utils import (
+    clean_title,
+    convert_doc_to_docx,
+    strip_markdown_formatting,
+)
+from knowledge_graph.triplet_extraction.pos_taging import init_vncorenlp
+from knowledge_graph.triplet_extraction.triplet_extraction import triplet_extraction
+from knowledge_graph.triplet_extraction.utils import (
+    load_stopwords,
+    load_synonym_dict,
+    setup_logger,
+)
+from knowledge_graph.utils.text_utils import clean_text
 
 # Load environment variables
 load_dotenv()

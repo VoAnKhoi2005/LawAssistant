@@ -24,6 +24,10 @@ class DocumentRepository:
         """Find all documents belonging to a specific user"""
         cursor = self.collection.find({"user_id": user_id}).skip(skip).limit(limit)
         return await cursor.to_list(length=limit)
+
+    async def find_by_statuses(self, statuses: List[str], limit: int = 100) -> List[dict]:
+        cursor = self.collection.find({"status": {"$in": statuses}}).limit(limit)
+        return await cursor.to_list(length=limit)
     
     async def create(self, document: Document) -> Document:
         document_dict = document.model_dump(by_alias=True, exclude={"id"})

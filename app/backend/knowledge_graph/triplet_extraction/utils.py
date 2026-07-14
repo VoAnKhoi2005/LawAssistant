@@ -101,6 +101,7 @@ def setup_logger(
     """
     logger = logging.getLogger(name)
     logger.setLevel(level)
+    logger.propagate = False
 
     # Prevent duplicate handlers
     if logger.hasHandlers():
@@ -127,4 +128,3 @@ def setup_logger(
         logger.info(f"Logging to files: {file_path}")
 
     return logger, console_handler, file_handler
-

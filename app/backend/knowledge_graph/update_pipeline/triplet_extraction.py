@@ -7,8 +7,11 @@ import phonlp
 from bson import ObjectId
 from tqdm import tqdm
 
-from src.db import init_mongo, extract_all_from_mongo_collection, insert_triplet_batch_mongo
-
+from knowledge_graph.mongo_helpers import (
+    extract_all_from_mongo_collection,
+    init_mongo,
+    insert_triplet_batch_mongo,
+)
 from knowledge_graph.triplet_extraction.pos_taging.my_vncorenlp import init_vncorenlp
 from knowledge_graph.triplet_extraction.triplet_extraction import triplet_extraction
 from knowledge_graph.triplet_extraction.utils import load_synonym_dict, load_stopwords, setup_logger

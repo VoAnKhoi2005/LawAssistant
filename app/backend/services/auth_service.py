@@ -92,9 +92,18 @@ class AuthService:
         return f"refresh_token:{user_id}"
 
     @staticmethod
-    def _sanitize_user(user_doc: User) -> dict:
+    def _sanitize_user(user_doc: User | dict) -> dict:
+        if isinstance(user_doc, dict):
+            user_id = user_doc.get("_id", user_doc.get("id"))
+            username = user_doc.get("username")
+            email = user_doc.get("email")
+        else:
+            user_id = user_doc.id
+            username = user_doc.username
+            email = user_doc.email
+
         return {
-            "id": str(user_doc.id),
-            "username": user_doc.username,
-            "email": user_doc.email,
+            "id": str(user_id),
+            "username": username,
+            "email": email,
         }

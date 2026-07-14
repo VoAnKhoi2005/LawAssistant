@@ -310,7 +310,7 @@ for filename in sorted(os.listdir(INPUT_SECTIONS_JSONL_FOLDER)):
     except Exception:
         continue
 
-from src.db import init_mongo
+from knowledge_graph.mongo_helpers import init_mongo
 from pathlib import Path
 import json
 from tqdm import tqdm

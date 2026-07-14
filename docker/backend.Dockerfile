@@ -6,29 +6,24 @@ ARG TORCH_VERSION
 
 WORKDIR /app
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
+    default-jdk-headless \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better caching
-COPY requirements.txt .
+COPY app/backend/requirements.txt ./requirements.txt
 
 # Install CPU-only PyTorch first so downstream NLP packages do not pull CUDA wheels.
 RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==${TORCH_VERSION}
 
-# Install remaining Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY . .
+COPY app/backend/ ./
+COPY docker/credentials /opt/credentials
 
-# Create uploads directory
 RUN mkdir -p uploads logs
 
-# Expose port
 EXPOSE 8000
 
-# Default command (can be overridden in docker-compose)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

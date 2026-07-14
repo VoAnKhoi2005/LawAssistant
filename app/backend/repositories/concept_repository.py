@@ -1,8 +1,10 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from bson import ObjectId
+from pymongo import ReturnDocument
 
 from models.concept_model import Concept
+from models.common import DocumentRef
 
 
 class ConceptRepository:
@@ -57,3 +59,19 @@ class ConceptRepository:
         concept_dict = created.model_dump(by_alias=True)
         concept_dict["_id"] = created.id
         return concept_dict
+
+    async def find_or_create_with_document(self, name: str, document_ref: DocumentRef) -> str:
+        concept_dict = await self.collection.find_one_and_update(
+            {"name": name},
+            {
+                "$addToSet": {"documents": document_ref.model_dump()},
+                "$setOnInsert": {
+                    "name": name,
+                    "description": None,
+                    "synonym": [],
+                },
+            },
+            upsert=True,
+            return_document=ReturnDocument.AFTER,
+        )
+        return str(concept_dict["_id"])

@@ -2,7 +2,11 @@
 
 import re
 from typing import List
-from underthesea import word_tokenize
+
+try:
+    from underthesea import word_tokenize
+except ImportError:
+    word_tokenize = None
 
 
 class TextProcessor:
@@ -53,6 +57,8 @@ class TextProcessor:
             return []
 
         try:
+            if word_tokenize is None:
+                raise ImportError("underthesea is not installed")
             tokens = word_tokenize(text, format="text").split()
             return tokens
         except Exception:

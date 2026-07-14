@@ -78,8 +78,7 @@ async def lifespan(app: FastAPI):
     worker_process = None
 
     if settings.auto_start_worker:
-        worker_script = os.path.join(os.path.dirname(__file__), "worker", "worker.py")
-        worker_process = subprocess.Popen([sys.executable, worker_script])
+        worker_process = subprocess.Popen([sys.executable, "-m", "worker.worker"])
         print(f"Started Celery worker with concurrency={settings.worker_concurrency}")
 
     # startup
@@ -142,6 +141,10 @@ async def lifespan(app: FastAPI):
     app.state.triplet_controller = triplet_controller
     app.state.auth_controller = auth_controller
     app.state.upload_file_controller = upload_file_controller
+
+    recovered_documents = await document_service.recover_pending_documents()
+    if recovered_documents:
+        print(f"Requeued {recovered_documents} pending document(s) for processing recovery")
 
     yield
 

@@ -63,7 +63,7 @@ def create_upload_file_router_with_state() -> APIRouter:
         files = await req.app.state.upload_file_controller.get_by_status(status, skip, limit, user_id)
         return success_response(files, message=f"Files with status '{status}' retrieved successfully")
 
-    @router.post("/upload", response_model=UploadFileResponse)
+    @router.post("/upload")
     async def upload_file(
         req: Request,
         file: UploadFile = File(...),
@@ -85,7 +85,7 @@ def create_upload_file_router_with_state() -> APIRouter:
         result = await req.app.state.upload_file_controller.upload_multiple_files(files, user_id)
         return success_response(result, message="Files upload completed")
 
-    @router.put("/{file_id}/status", response_model=UploadFileResponse)
+    @router.put("/{file_id}/status")
     async def update_file_status(
         file_id: str,
         request: UpdateFileStatusRequest,

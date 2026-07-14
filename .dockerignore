@@ -1,0 +1,24 @@
+.git
+.gitignore
+
+# Local environments and editor state
+**/.venv
+**/.idea
+**/.vscode
+**/__pycache__
+**/.pytest_cache
+**/*.pyc
+**/*.pyo
+
+# Local runtime/output artifacts
+app/backend/uploads
+app/backend/logs
+app/frontend/build
+app/frontend/.dart_tool
+
+# Repo areas not needed for backend/worker Docker builds
+app/frontend
+data
+src
+scripts
+docs
